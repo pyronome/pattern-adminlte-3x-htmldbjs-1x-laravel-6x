@@ -1,6 +1,3 @@
-**Pyronome** is an online platform that allows software developers to develop sustainable and scalable software solutions really fast.
-For further information, please visit https://pyronome.com.
-
 **AdminLTE** is a fully responsive administration template. Based on Bootstrap 4 framework. Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops. For further information about **AdminLTE**, please visit https://adminlte.io/.
 
 **HTMLDB.js** is a simple HTML data & template engine. **HTMLDB.js** is written in pure JavaScript so that it can be used with different backend and frontend frameworks. For further information about **HTMLDB.js**, please visit https://github.com/htmldbjs/.
