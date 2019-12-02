@@ -1,2 +1,25 @@
-# pattern-adminlte-3x-htmldbjs-1x
-Pyronome Pattern for AdminLTE 3.x Bootstrap Admin Dashboard Template on HTMLDB.js 1.x Frontend Library
+**Pyronome** is an online platform that allows software developers to develop sustainable and scalable software solutions really fast.
+For further information, please visit https://pyronome.com.
+
+**AdminLTE** is a fully responsive administration template. Based on Bootstrap 4 framework. Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops. For further information about **AdminLTE**, please visit https://adminlte.io/.
+
+**HTMLDB.js** is a simple HTML data & template engine. **HTMLDB.js** is written in pure JavaScript so that it can be used with different backend and frontend frameworks. For further information about **HTMLDB.js**, please visit https://github.com/htmldbjs/.
+
+This repository contains Pyronome **AdminLTE 3.x on HTMLDB.js 1.x** pattern basic information, documentation and issue tracker. For further information about this pattern, please visit https://pyronome.com/pyronome/adminlte-3x-htmldbjs-1x. In order to generate source code using this pattern, please visit [Pyronome Sign Up Page](https://pyronome.com/builder/signup), and create an account.
+
+## Contributing
+
+Please use the [issue tracker](https://github.com/pyronome/pattern-adminlte-3x-htmldbjs-1x/issues) to report any bugs/typos or requests.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see releases section of the [pattern overview page](https://pyronome.com/pyronome/adminlte-3x-htmldbjs-1x#Overview). 
+
+## Authors
+
+* **Aykut Aydınlı** - [@aykutaydinli](https://github.com/aykutaydinli)
+* **Hakan Erdal** - [@hakanerdal](https://github.com/hakanerdal)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/pyronome/pattern-adminlte-3x-htmldbjs-1x/blob/master/LICENSE) file for details
