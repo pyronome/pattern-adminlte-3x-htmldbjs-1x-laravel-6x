@@ -68,7 +68,7 @@
     </div>
 
     <div class="divDialogContent divLoader" id="divLoader" >
-        <img class="center-block" src="assets/img/loader.svg" width="70" height="70" />
+        <img class="center-block" src="/assets/admin/img/loader.svg" width="70" height="70" />
         <div id="divLoaderText" class="" data-default-text="{{ __('Loading...') }}"></div>
     </div>
     
@@ -82,16 +82,16 @@
     <div id="divSaveMessage" class="d-none">{{ __('Your new password was sent to your email.') }}</div>
     
     <!-- jQuery -->
-    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Toastr -->
-    <script src="../plugins/toastr/toastr.min.js"></script>
+    <script src="/assets/admin/plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="assets/js/adminlte.min.js"></script>
-    <script src="assets/js/global.js"></script>
-    <script src="assets/js/htmldb.js"></script>
-    <script src="assets/js/adminlte.htmldb.js"></script>
-    <script src="assets/js/forgotpassword.js"></script>
+    <script src="/assets/admin/js/adminlte.min.js"></script>
+    <script src="/assets/admin/js/global.js"></script>
+    <script src="/assets/admin/js/htmldb.js"></script>
+    <script src="/assets/admin/js/adminlte.htmldb.js"></script>
+    <script src="/assets/admin/js/forgotpassword.js"></script>
 </body>
 </html>

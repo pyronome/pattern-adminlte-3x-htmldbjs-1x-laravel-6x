@@ -39,7 +39,7 @@
                                                             <p class="text-muted text-sm">{{OS_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="assets/img/{{OS_icon_src}}" src="" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/admin/img/{{OS_icon_src}}" src="" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -57,7 +57,7 @@
                                                             <p class="text-muted text-sm">{{WEB_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="assets/img/{{WEB_icon_src}}" src="" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/admin/img/{{WEB_icon_src}}" src="" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +75,7 @@
                                                             <p class="text-muted text-sm">{{APP_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="assets/img/{{APP_icon_src}}" src="" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/admin/img/{{APP_icon_src}}" src="" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -93,7 +93,7 @@
                                                             <p class="text-muted text-sm">{{DB_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="assets/img/{{DB_icon_src}}" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/admin/img/{{DB_icon_src}}" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,24 +118,24 @@
     </div>
 
     <!-- jQuery -->
-    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/admin/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
     $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     
     <!-- Toastr -->
-    <script src="../plugins/toastr/toastr.min.js"></script>
+    <script src="/assets/admin/plugins/toastr/toastr.min.js"></script>
 
     <!-- AdminLTE App -->
-    <script src="assets/js/adminlte.js"></script>
-    <script src="assets/js/global.js"></script>
-    <script src="assets/js/htmldb.js"></script>
-    <script src="assets/js/adminlte.htmldb.js"></script>
-    <script src="assets/js/server_information.js"></script>    
+    <script src="/assets/admin/js/adminlte.js"></script>
+    <script src="/assets/admin/js/global.js"></script>
+    <script src="/assets/admin/js/htmldb.js"></script>
+    <script src="/assets/admin/js/adminlte.htmldb.js"></script>
+    <script src="/assets/admin/js/server_information.js"></script>    
 </body>
 </html>
