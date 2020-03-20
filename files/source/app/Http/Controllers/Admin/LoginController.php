@@ -12,12 +12,12 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 
-        $viewName = 'admin.login.default';
+        $viewName = 'admin.login';
 
-        if (view()->exists('admin.login'))
+        if (view()->exists('admin.custom.login'))
         {
-            $viewName = 'admin.login';
-        } // if (view()->exists('admin.login'))
+            $viewName = 'admin.custom.login';
+        } // if (view()->exists('admin.custom.login'))
 
         return view($viewName);
     }
