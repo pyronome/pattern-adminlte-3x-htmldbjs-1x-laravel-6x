@@ -15,7 +15,7 @@
 </div>
 
 <div class="divDialogContent divLoader" id="divLoader" >
-    <img class="center-block" src="/assets/admin/img/loader.svg" width="70" height="70" />
+    <img class="center-block" src="/assets/adminlte/img/loader.svg" width="70" height="70" />
     <div id="divLoaderText" class="" data-default-text="{{ __('Loading...') }}"></div>
 </div>
     

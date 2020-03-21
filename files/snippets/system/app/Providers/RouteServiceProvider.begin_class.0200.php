@@ -1,2 +1,2 @@
 
-use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AdminLTEMiddleware;

@@ -297,27 +297,27 @@
     </script>
 
     <!-- jQuery -->
-    <script src="/assets/admin/plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="/assets/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
     $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
-    <script src="/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     
     <!-- Toastr -->
-    <script src="/assets/admin/plugins/toastr/toastr.min.js"></script>
+    <script src="/assets/adminlte/plugins/toastr/toastr.min.js"></script>
     
     <!-- Select2 -->
-    <script src="/assets/admin/plugins/select2/js/select2.full.min.js"></script>
+    <script src="/assets/adminlte/plugins/select2/js/select2.full.min.js"></script>
 
     <!-- AdminLTE App -->
-    <script src="/assets/admin/js/adminlte.js"></script>
-    <script src="/assets/admin/js/global.js"></script>
-    <script src="/assets/admin/js/htmldb.js"></script>
-    <script src="/assets/admin/js/adminlte.htmldb.js"></script>
-    <script src="/assets/admin/js/languages.js"></script>    
+    <script src="/assets/adminlte/js/adminlte.js"></script>
+    <script src="/assets/adminlte/js/global.js"></script>
+    <script src="/assets/adminlte/js/htmldb.js"></script>
+    <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
+    <script src="/assets/adminlte/js/languages.js"></script>    
 </body>
 </html>

@@ -1,22 +1,22 @@
 
     /**
-     * Define the "admin" routes for the application.
+     * Define the "adminlte" routes for the application.
      *
      * These routes are typically stateless.
      *
      * @return void
      */
-    protected function mapAdminRoutes()
+    protected function mapAdminLTERoutes()
     {
-        $adminFolder = getenv('ADMIN_FOLDER');
+        $adminLTEFolder = getenv('ADMINLTE_FOLDER');
 
-        if ($adminFolder === false)
+        if ($adminLTEFolder === false)
         {
-            $adminFolder = 'admin';
-        } // if ($adminFolder === false) {
+            $adminLTEFolder = 'adminlte';
+        } // if ($adminLTEFolder === false) {
 
-        Route::prefix($adminFolder)
-             ->middleware(AdminMiddleware::class)
-             ->namespace('App\Http\Controllers\Admin')
-             ->group(base_path('routes/admin.php'));
+        Route::prefix($adminLTEFolder)
+             ->middleware(AdminLTEMiddleware::class)
+             ->namespace('App\Http\Controllers\AdminLTE')
+             ->group(base_path('routes/adminlte.php'));
     }

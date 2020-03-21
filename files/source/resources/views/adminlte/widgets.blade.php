@@ -519,7 +519,7 @@
 
         <div class="input-group-append labelSearchBar">
             <button type="button" class="btn btn-default ">
-                <img class="imgLoader" src="/assets/admin/img/loader.svg" width="14" height="14"/>
+                <img class="imgLoader" src="/assets/adminlte/img/loader.svg" width="14" height="14"/>
                 <i class="fas fa-search text-primary"></i>
             </button>
         </div>
@@ -561,7 +561,7 @@
             data-htmldb-table-defaults='{"page":0}'>
             <span>__COLUMN__</span>&nbsp;
             <span class="sorting sorting-loading">
-                <img class="imgLoader" src="/assets/admin/img/loader.svg" width="14" height="14"/>
+                <img class="imgLoader" src="/assets/adminlte/img/loader.svg" width="14" height="14"/>
             </span>
             <span class="sorting sorting-default text-muted">
                 <i class="fa fa-caret-down"></i>
@@ -779,10 +779,10 @@
 @include('admin.footer')
 
 <!-- jQuery -->
-<script src="/assets/admin/plugins/jquery/jquery.min.js"></script>
+<script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
 
 <!-- jQuery UI 1.11.4 -->
-<script src="/assets/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -790,24 +790,24 @@
 </script>
 
 <!-- Bootstrap 4 -->
-<script src="/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Bootstrap Icon Picker -->
-<script src="/assets/admin/plugins/bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min.js"></script>
-<script src="/assets/admin/plugins/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js"></script>
+<script src="/assets/adminlte/plugins/bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min.js"></script>
+<script src="/assets/adminlte/plugins/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js"></script>
 
 <!-- bootstrap color picker -->
-<script src="/assets/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="/assets/adminlte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
 <!-- Toastr -->
-<script src="/assets/admin/plugins/toastr/toastr.min.js"></script>
+<script src="/assets/adminlte/plugins/toastr/toastr.min.js"></script>
 
 <!-- AdminLTE App -->
-<script src="/assets/admin/js/adminlte.js"></script>
-<script src="/assets/admin/js/global.js"></script>
-<script src="/assets/admin/js/htmldb.js"></script>
-<script src="/assets/admin/js/adminlte.htmldb.js"></script>
+<script src="/assets/adminlte/js/adminlte.js"></script>
+<script src="/assets/adminlte/js/global.js"></script>
+<script src="/assets/adminlte/js/htmldb.js"></script>
+<script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
 <!-- Menu Editor -->
-<script src="/assets/admin/js/widget_editor.js"></script>
-<script src="/assets/admin/js/main.js"></script>
-<script src="/assets/admin/js/adminlte.htmldb.js"></script>
+<script src="/assets/adminlte/js/widget_editor.js"></script>
+<script src="/assets/adminlte/js/main.js"></script>
+<script src="/assets/adminlte/js/adminlte.htmldb.js"></script>

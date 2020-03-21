@@ -25,6 +25,6 @@
         </div>
     </div>
     @include('admin.widgets')
-    <script src="/assets/admin/js/home.js"></script>
+    <script src="/assets/adminlte/js/home.js"></script>
 </body>
 </html>

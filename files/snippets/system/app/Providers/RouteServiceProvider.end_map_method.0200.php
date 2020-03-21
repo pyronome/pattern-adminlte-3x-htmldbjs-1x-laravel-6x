@@ -1,2 +1,2 @@
 
-        $this->mapAdminRoutes();
+        $this->mapAdminLTERoutes();

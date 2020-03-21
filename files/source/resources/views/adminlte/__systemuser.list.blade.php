@@ -26,6 +26,6 @@
         </div>
     </div>
     @include('admin.widgets')
-    <script src="/assets/admin/js/__systemuser.list.js"></script>
+    <script src="/assets/adminlte/js/__systemuser.list.js"></script>
 </body>
 </html>
