@@ -8,7 +8,14 @@
      */
     protected function mapAdminRoutes()
     {
-        Route::prefix('admin')
+        $adminFolder = getenv('ADMIN_FOLDER');
+
+        if ($adminFolder === false)
+        {
+            $adminFolder = 'admin';
+        } // if ($adminFolder === false) {
+
+        Route::prefix($adminFolder)
              ->middleware(AdminMiddleware::class)
              ->namespace('App\Http\Controllers\Admin')
              ->group(base_path('routes/admin.php'));
