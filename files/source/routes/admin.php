@@ -11,4 +11,6 @@
 |
 */
 
+Route::get('/', 'HomeController@index');
 Route::get('/login', 'LoginController@index');
+Route::get('/forgotpassword', 'ForgotPasswordController@index');
