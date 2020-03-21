@@ -1,6 +1,6 @@
-@include('admin.head')
+@include('adminlte.head')
 <body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="__systemuser">
-    @include('admin.header')
+    @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid htmldb-section" data-htmldb-table="__SystemUserHTMLDB">
@@ -186,7 +186,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyMenuPermission">
-                                                        @include('admin.__systemuser_permissions_edit')
+                                                        @include('adminlte.__systemuser_permissions_edit')
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -350,7 +350,7 @@
             </div>
         </div>
     </div>
-    @include('admin.footer')
+    @include('adminlte.footer')
     <div id="__SystemUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="0"

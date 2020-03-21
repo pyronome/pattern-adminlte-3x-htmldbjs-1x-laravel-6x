@@ -776,7 +776,7 @@
     </div>
 </div>
 
-@include('admin.footer')
+@include('adminlte.footer')
 
 <!-- jQuery -->
 <script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>

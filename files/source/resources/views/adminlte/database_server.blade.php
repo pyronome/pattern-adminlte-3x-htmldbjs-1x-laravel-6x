@@ -1,6 +1,6 @@
-@include('admin.head')
+@include('adminlte.head')
 <body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="database_server">
-    @include('admin.header')
+    @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
@@ -114,7 +114,7 @@
             </section>
         </div>
     </div>
-    @include('admin.footer')
+    @include('adminlte.footer')
     <div id="CheckFTPConnectionHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"

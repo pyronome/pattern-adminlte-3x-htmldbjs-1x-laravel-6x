@@ -30,4 +30,4 @@
 
             <!-- Sidebar -->
             <div class="sidebar">
-                @include('admin.divmenulayer')
+                @include('adminlte.divmenulayer')

@@ -1,4 +1,4 @@
-@include('admin.head')
+@include('adminlte.head')
 <body class="hold-transition login-page" data-url-prefix=""  data-page-url="login">
     <div class="login-box">
         <div class="login-logo">

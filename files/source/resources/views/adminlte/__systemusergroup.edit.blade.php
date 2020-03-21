@@ -1,6 +1,6 @@
-@include('admin.head')
+@include('adminlte.head')
 <body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="__systemusergroup">
-    @include('admin.header')
+    @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid htmldb-section" data-htmldb-table="__SystemUserGroupHTMLDB">
@@ -125,7 +125,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyMenuPermission">
-                                                        @include('admin.__systemusergroup_permissions_edit')
+                                                        @include('adminlte.__systemusergroup_permissions_edit')
                                                     </tbody>
                                                 </table>        
                                             </div>
@@ -256,7 +256,7 @@
             </div>
         </div>
     </div>
-    @include('admin.footer')
+    @include('adminlte.footer')
     <div id="directoryHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="0"

@@ -1,10 +1,10 @@
-@include('admin.head')
+@include('adminlte.head')
 <body class="hold-transition sidebar-mini layout-fixed text-sm"
         data-url-prefix=""
         data-page-initializing="1"
         data-translation-copied="0"
         data-page-url="languages">
-    @include('admin.header')
+    @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
@@ -221,7 +221,7 @@
             </div>
         </div>
     </div>
-    @include('admin.footer')
+    @include('adminlte.footer')
     <div id="LanguageCodeHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"

@@ -1,6 +1,6 @@
-@include('admin.head')
+@include('adminlte.head')
 <body class="hold-transition sidebar-mini layout-fixed" data-url-prefix="" data-page-url="profile">
-    @include('admin.header')
+    @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
@@ -88,7 +88,7 @@
             </section>
         </div>
     </div>
-    @include('admin.footer')
+    @include('adminlte.footer')
     <div id="ProfileHTMLDB"
         class="htmldb-table"
         data-htmldb-read-url="htmldb/__root/get"
