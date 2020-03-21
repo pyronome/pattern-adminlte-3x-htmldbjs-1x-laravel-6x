@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Admin
+class AdminLTE
 {
 
 }
