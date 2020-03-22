@@ -16,7 +16,7 @@
         } // if ($adminLTEFolder === false) {
 
         Route::prefix($adminLTEFolder)
-             ->middleware(AdminLTEMiddleware::class)
+             ->middleware(['web', AdminLTEMiddleware::class])
              ->namespace('App\Http\Controllers\AdminLTE')
              ->group(base_path('routes/adminlte.php'));
     }
