@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/login', 'LoginController@index');
 Route::get('/forgotpassword', 'ForgotPasswordController@index');
 
+
 Route::prefix('htmldb')->group(function () {
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'HTMLDB/LoginController@getHTMLDB');
