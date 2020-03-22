@@ -24,6 +24,6 @@ Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
 
     Route::prefix('forgotpassword')->group(function () {
 	    Route::get('/get', 'ForgotPasswordController@get');
-        Route::get('/post', 'ForgotPasswordController@post');
+        Route::post('/post', 'ForgotPasswordController@post');
     });
 });
