@@ -20,4 +20,8 @@ Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'LoginController@get');
     });
+
+    Route::prefix('forgotpassword')->group(function () {
+	    Route::get('/get', 'ForgotPasswordController@get');
+    });
 });
