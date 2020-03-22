@@ -14,3 +14,16 @@
 Route::get('/', 'HomeController@index');
 Route::get('/login', 'LoginController@index');
 Route::get('/forgotpassword', 'ForgotPasswordController@index');
+
+$adminLTEFolder = getenv('ADMINLTE_FOLDER');
+
+if ($adminLTEFolder === false)
+{
+    $adminLTEFolder = 'adminlte';
+} // if ($adminLTEFolder === false) {
+
+Route::prefix($adminLTEFolder)->group(function () {
+    Route::prefix('login')->group(function () {
+	    Route::get('/get', 'HTMLDB/LoginController@getHTMLDB');
+    });
+});
