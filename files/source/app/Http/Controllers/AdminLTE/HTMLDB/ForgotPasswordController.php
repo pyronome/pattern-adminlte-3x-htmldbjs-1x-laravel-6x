@@ -21,4 +21,9 @@ class ForgotPasswordController extends Controller
         $objectHTMLDB->printHTMLDBList();
         return;
     }
+
+    public function post(Request $request)
+    {
+
+    }
 }

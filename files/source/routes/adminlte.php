@@ -19,9 +19,11 @@ Route::get('/forgotpassword', 'ForgotPasswordController@index');
 Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'LoginController@get');
+        Route::post('/post', 'LoginController@post');
     });
 
     Route::prefix('forgotpassword')->group(function () {
 	    Route::get('/get', 'ForgotPasswordController@get');
+        Route::get('/post', 'ForgotPasswordController@post');
     });
 });
