@@ -34,9 +34,9 @@ class ForgotPasswordController extends Controller
 
         $this->row = $objectHTMLDB->requestPOSTRow(
                 $request->all(),
-                'htmldb_row0',
                 $this->columns,
                 $this->protectedColumns,
+                0,
                 true);
 
         $result = $this->check();
