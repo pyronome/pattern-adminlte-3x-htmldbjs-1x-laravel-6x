@@ -112,7 +112,7 @@
     <div id="ServerInformationHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/server_information/get"
+        data-htmldb-read-url="htmldb/server_information/get?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>

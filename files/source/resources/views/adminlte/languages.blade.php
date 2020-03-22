@@ -225,29 +225,29 @@
     <div id="LanguageCodeHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/languages/get_languages"
+        data-htmldb-read-url="htmldb/languages/get_languages?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
     <div id="PageHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/languages/get_pages"
+        data-htmldb-read-url="htmldb/languages/get_pages?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
     <div id="TranslationCopyHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="3"
-        data-htmldb-read-url="htmldb/languages/get_copiedtranslation"
-        data-htmldb-write-url="htmldb/languages/post_copiedtranslation"
+        data-htmldb-read-url="htmldb/languages/get_copiedtranslation?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/languages/post_copiedtranslation?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     <div id="TranslationHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="4"
-        data-htmldb-read-url="htmldb/languages/get_translation/en/adminlte"
-        data-htmldb-write-url="htmldb/languages/post_translation"
+        data-htmldb-read-url="htmldb/languages/get_translation/en/adminlte?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/languages/post_translation?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     <script type="text/html" 

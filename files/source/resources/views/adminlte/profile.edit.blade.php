@@ -113,8 +113,8 @@
     @include('adminlte.footer')
     <div id="ProfileHTMLDB"
         class="htmldb-table"
-        data-htmldb-read-url="htmldb/profile/get_form_values"
-        data-htmldb-write-url="htmldb/profile/post"
+        data-htmldb-read-url="htmldb/profile/get_form_values?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/profile/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     

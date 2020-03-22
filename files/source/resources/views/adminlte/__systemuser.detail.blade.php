@@ -164,7 +164,7 @@
     <div id="__SystemUserHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__systemuser/get/{{$URL.-1}}"
+        data-htmldb-read-url="htmldb/__systemuser/get/{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>

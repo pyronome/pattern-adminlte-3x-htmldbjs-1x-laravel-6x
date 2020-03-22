@@ -118,7 +118,7 @@
     <div id="CheckFTPConnectionHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/ftp_server/checkconnection"
+        data-htmldb-read-url="htmldb/ftp_server/checkconnection?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
@@ -126,8 +126,8 @@
     <div id="ConfigurationHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/database_server/get"
-        data-htmldb-write-url="htmldb/database_server/post"
+        data-htmldb-read-url="htmldb/database_server/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/database_server/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
 

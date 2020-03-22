@@ -344,15 +344,15 @@
 <div id="CheckFTPConnectionHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="9000"
-    data-htmldb-read-url="htmldb/ftp_server/checkconnection"
+    data-htmldb-read-url="htmldb/ftp_server/checkconnection?_token={{ csrf_token() }}"
     data-htmldb-read-only="1">
 </div>
 
 <div id="ConfigurationHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="1001"
-    data-htmldb-read-url="htmldb/__layout/get_widgetconfig/<?php echo $controller->controller; ?>"
-    data-htmldb-write-url="htmldb/__layout/post_widgetconfig/<?php echo $controller->controller; ?>"
+    data-htmldb-read-url="htmldb/__layout/get_widgetconfig/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
+    data-htmldb-write-url="htmldb/__layout/post_widgetconfig/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
     data-htmldb-loader="divLoader">
 </div>
 
@@ -376,7 +376,7 @@
 <div id="AttributeHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="1002"
-    data-htmldb-read-url="htmldb/__layout/get_attributes"
+    data-htmldb-read-url="htmldb/__layout/get_attributes?_token={{ csrf_token() }}"
     data-htmldb-read-only="1">
 </div>
 
@@ -401,7 +401,7 @@
 <div id="WidgetHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="1003"
-    data-htmldb-read-url="htmldb/__widgets/get/<?php echo $controller->controller; ?>"
+    data-htmldb-read-url="htmldb/__widgets/get/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
     data-htmldb-read-only="1">
 </div>
 <script type="text/html" 
@@ -467,7 +467,7 @@
     <div id="__MODEL__InfoboxHTMLDB"
         class="__HTMLDBCLASS__ infobox-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_infoboxvalue/<?php echo $controller->controller; ?>"
+        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_infoboxvalue/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
 </script>
@@ -483,21 +483,21 @@
     <div id="__MODEL__HTMLDB"
         class="__HTMLDBCLASS__ recordlist-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_recordlist/<?php echo $controller->controller; ?>"
+        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_recordlist/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
     <div id="Session__MODEL__HTMLDB"
         class="__HTMLDBCLASS__"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_session/<?php echo $controller->controller; ?>"
-        data-htmldb-write-url="htmldb/__MODEL_LOWERCASE__/write_session/<?php echo $controller->controller; ?>"
+        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_session/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/__MODEL_LOWERCASE__/write_session/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     <div id="Delete__MODEL__HTMLDB"
         class="__HTMLDBCLASS__ delete-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_form_delete/<?php echo $controller->controller; ?>"
-        data-htmldb-write-url="htmldb/__MODEL_LOWERCASE__/delete/<?php echo $controller->controller; ?>"
+        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_form_delete/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/__MODEL_LOWERCASE__/delete/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
 </script>

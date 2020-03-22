@@ -74,8 +74,8 @@
     
     <div id="ResetPasswordHTMLDB"
         class="htmldb-table"
-        data-htmldb-read-url="htmldb/forgotpassword/get"
-        data-htmldb-write-url="htmldb/forgotpassword/post"
+        data-htmldb-read-url="htmldb/forgotpassword/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/forgotpassword/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     

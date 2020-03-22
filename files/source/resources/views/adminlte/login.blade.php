@@ -101,8 +101,8 @@
     
     <div id="loginHTMLDB"
         class="htmldb-table"
-        data-htmldb-read-url="htmldb/login/get"
-        data-htmldb-write-url="htmldb/login/post"
+        data-htmldb-read-url="htmldb/login/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/login/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     

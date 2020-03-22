@@ -260,7 +260,7 @@
     <div id="directoryHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="0"
-        data-htmldb-read-url="htmldb/__services/get_directories"
+        data-htmldb-read-url="htmldb/__services/get_directories?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
     <script type="text/html" 
@@ -286,7 +286,7 @@
     <div id="fileHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__services/get"
+        data-htmldb-read-url="htmldb/__services/get?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
     <script type="text/html" 
@@ -354,8 +354,8 @@
     <div id="__SystemUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/__systemusergroup/get/{{$URL.-1}}"
-        data-htmldb-write-url="htmldb/__systemusergroup/post"
+        data-htmldb-read-url="htmldb/__systemusergroup/get/{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/__systemusergroup/post?_token={{ csrf_token() }}"
         data-htmldb-redirect="__systemusergroup/last"
         data-htmldb-loader="divLoader">
     </div>

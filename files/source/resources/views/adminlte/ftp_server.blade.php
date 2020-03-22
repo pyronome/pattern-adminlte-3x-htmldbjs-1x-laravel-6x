@@ -121,8 +121,8 @@
     <div id="ConfigurationHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/ftp_server/get"
-        data-htmldb-write-url="htmldb/ftp_server/post"
+        data-htmldb-read-url="htmldb/ftp_server/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/ftp_server/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
 
