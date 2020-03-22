@@ -66,10 +66,25 @@ class LoginController extends Controller
 
         /* {{snippet:begin_check_values}} */
 
-        if (($rootUserName !== false)
-                && ($rootPassword !== false)) {
+        if ('' == $this->row['email'])
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-        } // if (($rootUserName !== false)
+            $result['lastError'] .= __('Please specify your email address.');
+        } // if ('' == $this->row['email'])
+
+        if ('' == $this->row['password'])
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Please specify your password.');
+        } // if ('' == $this->row['password'])
 
         /* {{snippet:end_check_values}} */
 
