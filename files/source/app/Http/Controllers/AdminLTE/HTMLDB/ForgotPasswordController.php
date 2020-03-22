@@ -50,7 +50,7 @@ class ForgotPasswordController extends Controller
 
     }
 
-    public function check(Request $request)
+    public function check()
     {
 
         $result = [
