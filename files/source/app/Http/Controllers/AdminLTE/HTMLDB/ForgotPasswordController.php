@@ -60,6 +60,8 @@ class ForgotPasswordController extends Controller
             'messageCount' => 0
         ];
 
+        $adminLTE = new AdminLTE();
+
         /* {{snippet:begin_check_values}} */
 
         if ('' == $this->row['email'])
@@ -71,7 +73,7 @@ class ForgotPasswordController extends Controller
 
             $result['lastError'] .= __('Please specify your email address.');
         }
-        else if (!AdminLTE::validateEmailAddress($this->row['email']))
+        else if (!$adminLTE->validateEmailAddress($this->row['email']))
         {
             $result['errorCount']++;
             if ($result['lastError'] != '') {
