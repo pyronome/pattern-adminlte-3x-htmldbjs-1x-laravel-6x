@@ -32,7 +32,7 @@ class ForgotPasswordController extends Controller
 
         $objectHTMLDB = new HTMLDB();
 
-        $this->row = $objectHTMLDB->request(
+        $this->row = $objectHTMLDB->requestPOSTRow(
                 $request->all(),
                 'htmldb_row0',
                 $this->columns,
