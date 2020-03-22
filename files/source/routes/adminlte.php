@@ -18,6 +18,6 @@ Route::get('/forgotpassword', 'ForgotPasswordController@index');
 
 Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
     Route::prefix('login')->group(function () {
-	    Route::get('/get', 'LoginController@getHTMLDB');
+	    Route::get('/get', 'LoginController@get');
     });
 });
