@@ -84,6 +84,25 @@ class LoginController extends Controller
             $result['lastError'] .= __('Please specify your password.');
         } // if ('' == $this->row['password'])
 
+        if (0 == $result['errorCount']) {
+
+            $adminLTEUser = AdminLTEUser::where([
+                    'email', $this->row['email'],
+                    'password', Hash::make($this->row['password'])
+                    ])->first();
+
+            if (null == $adminLTEUser)
+            {
+                $result['errorCount']++;
+                if ($result['lastError'] != '') {
+                    $result['lastError'] .= '<br>';
+                } // if ($result['lastError'] != '') {
+
+                $result['lastError'] .= __('Your e-mail address or password is not correct. Please check and try again.');
+            } // if (null == $adminLTEUser)
+
+        }
+
         /* {{snippet:end_check_values}} */
 
         return $result;
