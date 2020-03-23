@@ -35,7 +35,7 @@
                                         name="formLanuage-id"
                                         class="htmldb-field"
                                         data-htmldb-field="id"
-                                        data-htmldb-value="{{id}}"
+                                        data-htmldb-value="@{{id}}"
                                         data-htmldb-reset-value="0"
                                         value="">
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12 d-inline-block float-left">
@@ -45,10 +45,10 @@
                                             name="formLanuage-code"
                                             class="form-control htmldb-select2 htmldb-field htmldb-select"
                                             data-htmldb-option-table="LanguageCodeHTMLDB"
-                                            data-htmldb-option-value="{{code}}"
-                                            data-htmldb-option-title="{{name}}"
+                                            data-htmldb-option-value="@{{code}}"
+                                            data-htmldb-option-title="@{{name}}"
                                             data-htmldb-field="code"
-                                            data-htmldb-value="{{code}}"
+                                            data-htmldb-value="@{{code}}"
                                             style="width: 100%;">
                                             <option></option>
                                         </select>
@@ -60,10 +60,10 @@
                                             name="formLanuage-page"
                                             class="form-control htmldb-select2 htmldb-field htmldb-select"
                                             data-htmldb-option-table="PageHTMLDB"
-                                            data-htmldb-option-value="{{id}}"
-                                            data-htmldb-option-title="{{name}}"
+                                            data-htmldb-option-value="@{{id}}"
+                                            data-htmldb-option-title="@{{name}}"
                                             data-htmldb-field="page"
-                                            data-htmldb-value="{{page}}"
+                                            data-htmldb-value="@{{page}}"
                                             style="width: 100%;">
                                             <option></option>
                                         </select>
@@ -164,10 +164,10 @@
                                     name="formCopyTranslations-page"
                                     class="form-control htmldb-select2 htmldb-field htmldb-select"
                                     data-htmldb-option-table="PageHTMLDB"
-                                    data-htmldb-option-value="{{id}}"
-                                    data-htmldb-option-title="{{name}}"
+                                    data-htmldb-option-value="@{{id}}"
+                                    data-htmldb-option-title="@{{name}}"
                                     data-htmldb-field="page"
-                                    data-htmldb-value="{{page}}"
+                                    data-htmldb-value="@{{page}}"
                                     style="width: 100%;">
                                     <option></option>
                                 </select>
@@ -179,10 +179,10 @@
                                     name="formCopyTranslations-fromLanguage"
                                     class="form-control htmldb-select2 htmldb-field htmldb-select"
                                     data-htmldb-option-table="LanguageCodeHTMLDB"
-                                    data-htmldb-option-value="{{code}}"
-                                    data-htmldb-option-title="{{name}}"
+                                    data-htmldb-option-value="@{{code}}"
+                                    data-htmldb-option-title="@{{name}}"
                                     data-htmldb-field="fromLanguage"
-                                    data-htmldb-value="{{fromLanguage}}"
+                                    data-htmldb-value="@{{fromLanguage}}"
                                     style="width: 100%;">
                                     <option></option>
                                 </select>
@@ -194,10 +194,10 @@
                                     name="formCopyTranslations-toLanguage"
                                     class="form-control htmldb-select2 htmldb-field htmldb-select"
                                     data-htmldb-option-table="LanguageCodeHTMLDB"
-                                    data-htmldb-option-value="{{code}}"
-                                    data-htmldb-option-title="{{name}}"
+                                    data-htmldb-option-value="@{{code}}"
+                                    data-htmldb-option-title="@{{name}}"
                                     data-htmldb-field="toLanguage"
-                                    data-htmldb-value="{{toLanguage}}"
+                                    data-htmldb-value="@{{toLanguage}}"
                                     style="width: 100%;">
                                     <option></option>
                                 </select>
@@ -250,6 +250,7 @@
         data-htmldb-write-url="htmldb/languages/post_translation?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
+    @verbatim
     <script type="text/html" 
         id="divTranslationsTemplate"
         class="htmldb-template"
@@ -288,6 +289,7 @@
             </div>
         </div> 
     </script>
+    @endverbatim
     <script type="text/html" id="translationsPlaceholderTemplate">
         <div class="card bg-light">
             <div class="card-body">

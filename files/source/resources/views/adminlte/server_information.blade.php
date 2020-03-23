@@ -35,11 +35,11 @@
                                                 <div class="card-body pt-0">
                                                     <div class="row">
                                                         <div class="col-7">
-                                                            <h2 class="lead"><b>{{OS_header}}</b></h2>
-                                                            <p class="text-muted text-sm">{{OS_detail}}</p>
+                                                            <h2 class="lead"><b>@{{OS_header}}</b></h2>
+                                                            <p class="text-muted text-sm">@{{OS_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="/assets/adminlte/img/{{OS_icon_src}}" src="" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/adminlte/img/@{{OS_icon_src}}" src="" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -53,11 +53,11 @@
                                                 <div class="card-body pt-0">
                                                     <div class="row">
                                                         <div class="col-7">
-                                                            <h2 class="lead"><b>{{WEB_header}}</b></h2>
-                                                            <p class="text-muted text-sm">{{WEB_detail}}</p>
+                                                            <h2 class="lead"><b>@{{WEB_header}}</b></h2>
+                                                            <p class="text-muted text-sm">@{{WEB_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="/assets/adminlte/img/{{WEB_icon_src}}" src="" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/adminlte/img/@{{WEB_icon_src}}" src="" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -71,11 +71,11 @@
                                                 <div class="card-body pt-0">
                                                     <div class="row">
                                                         <div class="col-7">
-                                                            <h2 class="lead"><b>{{APP_header}}</b></h2>
-                                                            <p class="text-muted text-sm">{{APP_detail}}</p>
+                                                            <h2 class="lead"><b>@{{APP_header}}</b></h2>
+                                                            <p class="text-muted text-sm">@{{APP_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="/assets/adminlte/img/{{APP_icon_src}}" src="" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/adminlte/img/@{{APP_icon_src}}" src="" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -89,11 +89,11 @@
                                                 <div class="card-body pt-0">
                                                     <div class="row">
                                                         <div class="col-7">
-                                                            <h2 class="lead"><b>{{DB_header}}</b></h2>
-                                                            <p class="text-muted text-sm">{{DB_detail}}</p>
+                                                            <h2 class="lead"><b>@{{DB_header}}</b></h2>
+                                                            <p class="text-muted text-sm">@{{DB_detail}}</p>
                                                         </div>
                                                         <div class="col-5 text-right">
-                                                            <img data-htmldb-content="/assets/adminlte/img/{{DB_icon_src}}" alt="" class="img-fluid">
+                                                            <img data-htmldb-content="/assets/adminlte/img/@{{DB_icon_src}}" alt="" class="img-fluid">
                                                         </div>
                                                     </div>
                                                 </div>

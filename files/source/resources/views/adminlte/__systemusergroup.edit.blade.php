@@ -12,8 +12,8 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
                                 <li class="breadcrumb-item"><a href="__systemusergroup/list">{{ __('User Group List') }}</a></li>
-                                <li class="breadcrumb-item itemeditpage-hide{{id}}">
-                                    <a href="__systemusergroup/detail/{{id}}">
+                                <li class="breadcrumb-item itemeditpage-hide@{{id}}">
+                                    <a href="__systemusergroup/detail/@{{id}}">
                                         {{ __('User Group Detail') }}
                                     </a>
                                 </li>
@@ -57,7 +57,7 @@
                                                     name="formUserGroup-enabled"
                                                     class="htmldb-field"
                                                     data-htmldb-field="enabled"
-                                                    data-htmldb-value="{{enabled}}"
+                                                    data-htmldb-value="@{{enabled}}"
                                                     data-htmldb-reset-value="1">
                                                 <label for="formUserGroup-enabled" class="detail-label">
                                                     {{ __('Enabled') }}
@@ -73,7 +73,7 @@
                                                     name="formUserGroup-widget_permission"
                                                     class="htmldb-field"
                                                     data-htmldb-field="widget_permission"
-                                                    data-htmldb-value="{{widget_permission}}"
+                                                    data-htmldb-value="@{{widget_permission}}"
                                                     data-htmldb-reset-value="1">
                                                 <label for="formUserGroup-widget_permission" class="detail-label">
                                                     {{ __('Edit Widget Permission') }}
@@ -89,7 +89,7 @@
                                                 id="formUserGroup-title"
                                                 name="formUserGroup-title"
                                                 data-htmldb-field="title"
-                                                data-htmldb-value="{{title}}">
+                                                data-htmldb-value="@{{title}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -181,7 +181,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyServicePermission"></tbody>
-                                                </table>        
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +225,7 @@
                                     class="form-control float-right inputSearchBar"
                                     placeholder="{{ __('Search') }}">
                                 <div class="input-group-append labelSearchBar">
-                                    <button type="button" class="btn btn-default">                                        
+                                    <button type="button" class="btn btn-default">
                                         <i class="fas fa-search text-primary"></i>
                                     </button>
                                 </div>
@@ -263,6 +263,7 @@
         data-htmldb-read-url="htmldb/__services/get_directories?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
+    @verbatim
     <script type="text/html" 
         id="ulDirectoryTemplate"
         class="htmldb-template"
@@ -282,13 +283,14 @@
             <ul id="{{title}}Services" class="ul-permission-services"></ul>
         </li>
     </script>
-
+    @endverbatim
     <div id="fileHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
         data-htmldb-read-url="htmldb/__services/get?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
+    @verbatim
     <script type="text/html" 
         id="ulServiceTemplate"
         class="htmldb-template"
@@ -308,7 +310,6 @@
             </div>
         </li>
     </script>
-
     <script type="text/html" id="trServicePermissionInputs">
         <tr>
             <td scope="row">__DIRECTORY__/__SERVICE__</td>
@@ -350,11 +351,11 @@
             </td>
         </tr>
     </script>
-
+    @endverbatim
     <div id="__SystemUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/__systemusergroup/get/{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="htmldb/__systemusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-write-url="htmldb/__systemusergroup/post?_token={{ csrf_token() }}"
         data-htmldb-redirect="__systemusergroup/last"
         data-htmldb-loader="divLoader">

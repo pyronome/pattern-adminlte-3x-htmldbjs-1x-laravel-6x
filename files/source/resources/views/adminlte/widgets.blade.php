@@ -14,13 +14,13 @@
                         name="id"
                         class="htmldb-field"
                         data-htmldb-field="id"
-                        data-htmldb-value="{{id}}">
+                        data-htmldb-value="@{{id}}">
                     <input type="hidden"
                         id="widget_json"
                         name="widget_json"
                         class="htmldb-field"
                         data-htmldb-field="widget_json"
-                        data-htmldb-value="{{widget_json}}">
+                        data-htmldb-value="@{{widget_json}}">
                 </form>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
@@ -409,6 +409,7 @@
     class="htmldb-template"
     data-htmldb-table="WidgetHTMLDB"
     data-htmldb-template-target="widgetContainer">
+    @verbatim
     <div class="empty-widget empty-widget-{{type}}">
     </div>
     <div class="{{size}} infobox-{{type}} widget-visible{{visibility}}">
@@ -438,29 +439,32 @@
         </div>
         <div id="{{model}}GraphHTMLDBTableContainer" class="recordgraph-htmldb-table-container" data-row-id="{{id}}"></div>
     </div>
-    <div class="{{size}} recordlist-{{type}} widget-visible{{visibility}}">
+    @endverbatim
+    <div class="@{{size}} recordlist-@{{type}} widget-visible@{{visibility}}">
         <div class="card collapsed-card">
             <div class="card-header">
-                <h3 class="card-title">{{text}}</h3>
+                <h3 class="card-title">@{{text}}</h3>
 
                 <div class="card-tools">
-                    <button type="button" id="buttonSHRecords-{{model}}" class="btn btn-tool buttonSHWidget" data-display="no" data-card-widget="collapse">
+                    <button type="button" id="buttonSHRecords-@{{model}}" class="btn btn-tool buttonSHWidget" data-display="no" data-card-widget="collapse">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body" style="display:none;">
-                <div id="{{model}}RecordListSearchContainer" class="recordlist-search-container" data-row-id="{{id}}"></div>
-                <div id="{{model}}RecordListContainer" class="recordlist-container" data-row-id="{{id}}"></div>
-                <div id="{{model}}RecordListPaginationContainer" class="recordlist-pagination-container" data-row-id="{{id}}"></div>
+                <div id="@{{model}}RecordListSearchContainer" class="recordlist-search-container" data-row-id="@{{id}}"></div>
+                <div id="@{{model}}RecordListContainer" class="recordlist-container" data-row-id="@{{id}}"></div>
+                <div id="@{{model}}RecordListPaginationContainer" class="recordlist-pagination-container" data-row-id="@{{id}}"></div>
                 <div class="showAllRecordContainer">
-                    <a class="showAllRecord{{onlylastrecord}}" href="{{href}}">{{ __('View All Records') }}</a>
+                    <a class="showAllRecord@{{onlylastrecord}}" href="@{{href}}">{{ __('View All Records') }}</a>
                 </div>
             </div>
         </div>
+        @verbatim
         <div id="{{model}}RecordListHTMLDBTableContainer" class="recordlist-htmldb-table-container" data-row-id="{{id}}"></div>
         <div id="{{model}}RecordListHTMLDBTemplateContainer" class="recordlist-htmldb-template-container" data-row-id="{{id}}"></div>
         <div id="{{model}}RecordListModalContainer" class="recordlist-modal-container" data-row-id="{{id}}"></div>
+        @endverbatim
     </div>
 </script>
 <script type="text/html" id="modelInfoboxHTMLBTableTemplate">
@@ -514,7 +518,7 @@
             data-htmldb-input-field="searchText"
             data-htmldb-refresh-table="__MODEL__HTMLDB"
             data-htmldb-table-defaults='{"page":0}'
-            data-htmldb-value="{{searchText}}"
+            data-htmldb-value="@{{searchText}}"
             data-htmldb-save-delay="1000">
 
         <div class="input-group-append labelSearchBar">
@@ -590,7 +594,7 @@
         </button>
         <button type="button"
             id="buttonDelete__MODEL__"
-            href="javascript:void(0);"            
+            href="javascript:void(0);"
             class="btn btn-danger btn-xs btn-on-table button-model-delete show_by_permission"
             data-target-input="formDelete__MODEL__-idcsv"
             data-tbody-id="tbody__MODEL__RecordList"
@@ -613,11 +617,11 @@
     <td class="text-center show_by_permission">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="tbody__MODEL__RecordList-select_row{{id}}"
+                id="tbody__MODEL__RecordList-select_row@{{id}}"
                 data-model="__MODEL__"
-                data-object-id="{{id}}"
+                data-object-id="@{{id}}"
                 class="select_row">
-            <label for="tbody__MODEL__RecordList-select_row{{id}}"></label>
+            <label for="tbody__MODEL__RecordList-select_row@{{id}}"></label>
         </div>
     </td>
 </script>
@@ -634,6 +638,7 @@
         </a>
     </td>
 </script>
+@verbatim
 <script type="text/html" id="modelRecordListPaginationTemplate">
     <ul class="pagination pagination-sm float-right htmldb-pagination htmldb-secondary-pagination"
         data-htmldb-table="Session__MODEL__HTMLDB"
@@ -668,7 +673,7 @@
         </li>
     </ul>
 </script>
-
+@endverbatim
 <script type="text/html" id="modelRecordListModalTemplate">
     <div class="modal fade" id="modal-formDelete__MODEL__">
         <div class="modal-dialog modal-md">

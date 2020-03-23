@@ -29,7 +29,7 @@
                                         name="id"
                                         class="htmldb-field"
                                         data-htmldb-field="id"
-                                        data-htmldb-value="{{id}}">
+                                        data-htmldb-value="@{{id}}">
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="database_type" class="detail-label">{{ __('Database Type') }}</label>
@@ -38,7 +38,7 @@
                                                 name="database_type"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="database_type"
-                                                data-htmldb-value="{{database_type}}"
+                                                data-htmldb-value="@{{database_type}}"
                                                 style="width: 100%;">
                                                 <option value="0">{{ __('MySQL') }}</option>
                                             </select>
@@ -52,7 +52,7 @@
                                                 id="mysql_db_server"
                                                 name="mysql_db_server"
                                                 data-htmldb-field="mysql_db_server"
-                                                data-htmldb-value="{{mysql_db_server}}">
+                                                data-htmldb-value="@{{mysql_db_server}}">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="mysql_db_port" class="detail-label">{{ __('MySQL Port') }}</label>
@@ -61,7 +61,7 @@
                                                 id="mysql_db_port"
                                                 name="mysql_db_port"
                                                 data-htmldb-field="mysql_db_port"
-                                                data-htmldb-value="{{mysql_db_port}}">
+                                                data-htmldb-value="@{{mysql_db_port}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -72,7 +72,7 @@
                                                 id="mysql_db_name"
                                                 name="mysql_db_name"
                                                 data-htmldb-field="mysql_db_name"
-                                                data-htmldb-value="{{mysql_db_name}}">
+                                                data-htmldb-value="@{{mysql_db_name}}">
                                         </div>
                                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                             <label for="mysql_db_username" class="detail-label">{{ __('MySQL Username') }}</label>
@@ -81,7 +81,7 @@
                                                 id="mysql_db_username"
                                                 name="mysql_db_username"
                                                 data-htmldb-field="mysql_db_username"
-                                                data-htmldb-value="{{mysql_db_username}}">
+                                                data-htmldb-value="@{{mysql_db_username}}">
                                         </div>
                                         <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                             <label for="mysql_db_password" class="detail-label">{{ __('MySQL Password') }}</label>
@@ -90,7 +90,7 @@
                                                 id="mysql_db_password"
                                                 name="mysql_db_password"
                                                 data-htmldb-field="mysql_db_password"
-                                                data-htmldb-value="{{mysql_db_password}}"
+                                                data-htmldb-value="@{{mysql_db_password}}"
                                                 autocomplete="new-password">
                                         </div>
                                     </div>

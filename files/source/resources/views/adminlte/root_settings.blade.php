@@ -38,7 +38,7 @@
                                                 id="formProfile-username"
                                                 name="formProfile-username"
                                                 data-htmldb-field="username"
-                                                data-htmldb-value="{{username}}">
+                                                data-htmldb-value="@{{username}}">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label for="formProfile-password0" class="detail-label">{{ __('Current Password') }}</label>

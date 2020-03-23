@@ -39,27 +39,27 @@
                                             <div class="text-muted text-sm">
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Fullname') }}</label>
-                                                    <div data-htmldb-content="{{fullname}}"></div>
+                                                    <div data-htmldb-content="@{{fullname}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Username') }}</label>
-                                                    <div data-htmldb-content="{{username}}"></div>
+                                                    <div data-htmldb-content="@{{username}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Email') }}</label>
-                                                    <div data-htmldb-content="{{email}}"></div>
+                                                    <div data-htmldb-content="@{{email}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('User Group') }}</label>
-                                                    <div data-htmldb-content="{{__systemusergroup_idDisplayText}}"></div>
+                                                    <div data-htmldb-content="@{{__systemusergroup_idDisplayText}}"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <input type="hidden" id="group_menu_permission" value="{{group_menu_permission}}">
-                                            <input type="hidden" id="menu_permission" value="{{menu_permission}}">
+                                            <input type="hidden" id="group_menu_permission" value="@{{group_menu_permission}}">
+                                            <input type="hidden" id="menu_permission" value="@{{menu_permission}}">
                                             <label>{{ __('Menu Permissions') }}</label>
                                             <div class="divPermissionContainer">
                                                 <table class="table table-bordered table-permission">
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <input type="hidden" id="group_service_permission" value="{{group_service_permission}}">
+                                            <input type="hidden" id="group_service_permission" value="@{{group_service_permission}}">
                                             <label>{{ __('Group Service Permissions') }}</label>
                                             <div class="divPermissionContainer">
                                                 <table class="table table-bordered table-permission">
@@ -117,11 +117,11 @@
                                                     </thead>
                                                     <tbody id="tbodyGroupServicePermission">
                                                     </tbody>
-                                                </table>        
+                                                </table>
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <input type="hidden" id="service_permission" value="{{service_permission}}">
+                                            <input type="hidden" id="service_permission" value="@{{service_permission}}">
                                             <label>{{ __('User Service Permissions') }}</label>
                                             <div class="divPermissionContainer">
                                                 <table class="table table-bordered table-permission">
@@ -143,7 +143,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyUserServicePermission"></tbody>
-                                                </table>        
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

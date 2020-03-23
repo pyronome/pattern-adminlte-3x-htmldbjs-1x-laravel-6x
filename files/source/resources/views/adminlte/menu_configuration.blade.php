@@ -29,13 +29,13 @@
                                         name="id"
                                         class="htmldb-field"
                                         data-htmldb-field="id"
-                                        data-htmldb-value="{{id}}">
+                                        data-htmldb-value="@{{id}}">
                                     <input type="hidden"
                                         id="menu_json"
                                         name="menu_json"
                                         class="htmldb-field"
                                         data-htmldb-field="menu_json"
-                                        data-htmldb-value="{{menu_json}}">
+                                        data-htmldb-value="@{{menu_json}}">
                                 </form>
                                 <div class="card-body">
                                     <div class="row mb-10 show_by_permission">

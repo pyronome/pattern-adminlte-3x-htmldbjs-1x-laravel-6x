@@ -29,7 +29,7 @@
                                         name="id"
                                         class="htmldb-field"
                                         data-htmldb-field="id"
-                                        data-htmldb-value="{{id}}">
+                                        data-htmldb-value="@{{id}}">
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="email_type" class="detail-label">{{ __('Email Type') }}</label>
@@ -38,7 +38,7 @@
                                                 name="email_type"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="email_type"
-                                                data-htmldb-value="{{email_type}}"
+                                                data-htmldb-value="@{{email_type}}"
                                                 style="width: 100%;">
                                                 <option value="0">{{ __('Standart Mail') }}</option>
                                                 <option value="1">{{ __('SMTP') }}</option>
@@ -53,7 +53,7 @@
                                                 id="email_from_name"
                                                 name="email_from_name"
                                                 data-htmldb-field="email_from_name"
-                                                data-htmldb-value="{{email_from_name}}">
+                                                data-htmldb-value="@{{email_from_name}}">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="email_reply_to" class="detail-label">{{ __('Email Reply To') }}</label>
@@ -62,7 +62,7 @@
                                                 id="email_reply_to"
                                                 name="email_reply_to"
                                                 data-htmldb-field="email_reply_to"
-                                                data-htmldb-value="{{email_reply_to}}">
+                                                data-htmldb-value="@{{email_reply_to}}">
                                         </div>
                                     </div>
                                     <div class="htmldb-toggle" data-htmldb-filter="email_type/eq/1" style="display:none;">
@@ -74,7 +74,7 @@
                                                     id="email_smtp_host"
                                                     name="email_smtp_host"
                                                     data-htmldb-field="email_smtp_host"
-                                                    data-htmldb-value="{{email_smtp_host}}">
+                                                    data-htmldb-value="@{{email_smtp_host}}">
                                             </div>
                                             <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                                 <label for="email_smtp_user" class="detail-label">{{ __('SMTP User') }}</label>
@@ -83,7 +83,7 @@
                                                     id="email_smtp_user"
                                                     name="email_smtp_user"
                                                     data-htmldb-field="email_smtp_user"
-                                                    data-htmldb-value="{{email_smtp_user}}">
+                                                    data-htmldb-value="@{{email_smtp_user}}">
                                             </div>
                                             <div class="form-group col-md-4 col-sm-4 col-xs-12">
                                                 <label for="email_smtp_password" class="detail-label">{{ __('SMTP Password') }}</label>
@@ -92,7 +92,7 @@
                                                     id="email_smtp_password"
                                                     name="email_smtp_password"
                                                     data-htmldb-field="email_smtp_password"
-                                                    data-htmldb-value="{{email_smtp_password}}"
+                                                    data-htmldb-value="@{{email_smtp_password}}"
                                                     autocomplete="new-password">
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                                     name="email_smtp_encryption"
                                                     class="form-control htmldb-select2 htmldb-field select-has-option"
                                                     data-htmldb-field="email_smtp_encryption"
-                                                    data-htmldb-value="{{email_smtp_encryption}}"
+                                                    data-htmldb-value="@{{email_smtp_encryption}}"
                                                     style="width: 100%;">
                                                     <option value="0">{{ __('TLS') }}</option>
                                                     <option value="1">{{ __('SSL') }}</option>
@@ -117,7 +117,7 @@
                                                     id="email_smtp_port"
                                                     name="email_smtp_port"
                                                     data-htmldb-field="email_smtp_port"
-                                                    data-htmldb-value="{{email_smtp_port}}">
+                                                    data-htmldb-value="@{{email_smtp_port}}">
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                                 name="email_format"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="email_format"
-                                                data-htmldb-value="{{email_format}}"
+                                                data-htmldb-value="@{{email_format}}"
                                                 style="width: 100%;">
                                                 <option value="0">{{ __('HTML') }}</option>
                                                 <option value="1">{{ __('Text') }}</option>

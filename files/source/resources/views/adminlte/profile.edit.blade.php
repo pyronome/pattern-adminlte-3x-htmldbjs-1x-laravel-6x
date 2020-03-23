@@ -38,7 +38,7 @@
                                                 id="formProfile-fullname"
                                                 name="formProfile-fullname"
                                                 data-htmldb-field="fullname"
-                                                data-htmldb-value="{{fullname}}">
+                                                data-htmldb-value="@{{fullname}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -49,7 +49,7 @@
                                                 id="formProfile-username"
                                                 name="formProfile-username"
                                                 data-htmldb-field="username"
-                                                data-htmldb-value="{{username}}">
+                                                data-htmldb-value="@{{username}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -60,7 +60,7 @@
                                                 id="formProfile-email"
                                                 name="formProfile-email"
                                                 data-htmldb-field="email"
-                                                data-htmldb-value="{{email}}">
+                                                data-htmldb-value="@{{email}}">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-12">

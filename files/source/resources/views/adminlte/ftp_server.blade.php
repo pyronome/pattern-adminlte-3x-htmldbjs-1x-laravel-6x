@@ -29,7 +29,7 @@
                                         name="id"
                                         class="htmldb-field"
                                         data-htmldb-field="id"
-                                        data-htmldb-value="{{id}}">
+                                        data-htmldb-value="@{{id}}">
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="ftp_secure_enabled" class="detail-label">{{ __('FTP Security') }}</label>
@@ -38,7 +38,7 @@
                                                 name="ftp_secure_enabled"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="ftp_secure_enabled"
-                                                data-htmldb-value="{{ftp_secure_enabled}}"
+                                                data-htmldb-value="@{{ftp_secure_enabled}}"
                                                 style="width: 100%;">
                                                 <option value="0">{{ __('Standart FTP') }}</option>
                                                 <option value="1">{{ __('Secure FTP') }}</option>
@@ -53,7 +53,7 @@
                                                 id="ftp_host_name"
                                                 name="ftp_host_name"
                                                 data-htmldb-field="ftp_host_name"
-                                                data-htmldb-value="{{ftp_host_name}}">
+                                                data-htmldb-value="@{{ftp_host_name}}">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="ftp_port" class="detail-label">{{ __('FTP Port') }}</label>
@@ -62,7 +62,7 @@
                                                 id="ftp_port"
                                                 name="ftp_port"
                                                 data-htmldb-field="ftp_port"
-                                                data-htmldb-value="{{ftp_port}}">
+                                                data-htmldb-value="@{{ftp_port}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -73,7 +73,7 @@
                                                 id="ftp_user_name"
                                                 name="ftp_user_name"
                                                 data-htmldb-field="ftp_user_name"
-                                                data-htmldb-value="{{ftp_user_name}}">
+                                                data-htmldb-value="@{{ftp_user_name}}">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="ftp_password" class="detail-label">{{ __('FTP Password') }}</label>
@@ -82,7 +82,7 @@
                                                 id="ftp_password"
                                                 name="ftp_password"
                                                 data-htmldb-field="ftp_password"
-                                                data-htmldb-value="{{ftp_password}}"
+                                                data-htmldb-value="@{{ftp_password}}"
                                                 autocomplete="new-password">
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                                 id="ftp_home"
                                                 name="ftp_home"
                                                 data-htmldb-field="ftp_home"
-                                                data-htmldb-value="{{ftp_home}}">
+                                                data-htmldb-value="@{{ftp_home}}">
                                         </div>
                                     </div>
                                 </form>

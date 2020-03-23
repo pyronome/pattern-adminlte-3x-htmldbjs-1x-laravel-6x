@@ -29,13 +29,13 @@
                                         name="id"
                                         class="htmldb-field"
                                         data-htmldb-field="id"
-                                        data-htmldb-value="{{id}}">
+                                        data-htmldb-value="@{{id}}">
                                     <input type="hidden"
                                         id="debug_mode"
                                         name="debug_mode"
                                         class="htmldb-field"
                                         data-htmldb-field="debug_mode"
-                                        data-htmldb-value="{{debug_mode}}">
+                                        data-htmldb-value="@{{debug_mode}}">
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="project_title" class="detail-label">{{ __('Project Title') }}</label>
@@ -44,7 +44,7 @@
                                                 id="project_title"
                                                 name="project_title"
                                                 data-htmldb-field="project_title"
-                                                data-htmldb-value="{{project_title}}">
+                                                data-htmldb-value="@{{project_title}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -55,7 +55,7 @@
                                                 id="default_page"
                                                 name="default_page"
                                                 data-htmldb-field="default_page"
-                                                data-htmldb-value="{{default_page}}">
+                                                data-htmldb-value="@{{default_page}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -66,7 +66,7 @@
                                                 id="url_prefix"
                                                 name="url_prefix"
                                                 data-htmldb-field="url_prefix"
-                                                data-htmldb-value="{{url_prefix}}">
+                                                data-htmldb-value="@{{url_prefix}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -77,7 +77,7 @@
                                                 id="url_directory"
                                                 name="url_directory"
                                                 data-htmldb-field="url_directory"
-                                                data-htmldb-value="{{url_directory}}">
+                                                data-htmldb-value="@{{url_directory}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -88,10 +88,10 @@
                                                 name="default_language"
                                                 class="form-control htmldb-select2 htmldb-field htmldb-select"
                                                 data-htmldb-option-table="LanguageHTMLDB"
-                                                data-htmldb-option-value="{{id}}"
-                                                data-htmldb-option-title="{{name}}"
+                                                data-htmldb-option-value="@{{id}}"
+                                                data-htmldb-option-title="@{{name}}"
                                                 data-htmldb-field="default_language"
-                                                data-htmldb-value="{{default_language}}"
+                                                data-htmldb-value="@{{default_language}}"
                                                 style="width: 100%;">
                                                 <option></option>
                                             </select>
@@ -105,10 +105,10 @@
                                                 name="timezone"
                                                 class="form-control htmldb-select2 htmldb-field htmldb-select"
                                                 data-htmldb-option-table="TimezoneHTMLDB"
-                                                data-htmldb-option-value="{{timezone}}"
-                                                data-htmldb-option-title="{{timezone}}"
+                                                data-htmldb-option-value="@{{timezone}}"
+                                                data-htmldb-option-title="@{{timezone}}"
                                                 data-htmldb-field="timezone"
-                                                data-htmldb-value="{{timezone}}"
+                                                data-htmldb-value="@{{timezone}}"
                                                 style="width: 100%;">
                                                 <option></option>
                                             </select>
@@ -122,7 +122,7 @@
                                                 name="date_format"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="date_format"
-                                                data-htmldb-value="{{date_format}}"
+                                                data-htmldb-value="@{{date_format}}"
                                                 style="width: 100%;">
                                                 <option value="d/m/Y">15/06/1981</option>
                                                 <option value="j/n/Y">15/6/1981</option>
@@ -177,7 +177,7 @@
                                                 name="yearmonth_format"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="yearmonth_format"
-                                                data-htmldb-value="{{yearmonth_format}}"
+                                                data-htmldb-value="@{{yearmonth_format}}"
                                                 style="width: 100%;">
                                                 <option value="m/Y">06/1981</option>
                                                 <option value="n/Y">6/1981</option>
@@ -218,7 +218,7 @@
                                                 name="time_format"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="time_format"
-                                                data-htmldb-value="{{time_format}}"
+                                                data-htmldb-value="@{{time_format}}"
                                                 style="width: 100%;">
                                                 <option value="H:i">17:00</option>
                                                 <option value="h:i a">05:00 pm</option>
@@ -235,7 +235,7 @@
                                                 name="number_format"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
                                                 data-htmldb-field="number_format"
-                                                data-htmldb-value="{{number_format}}"
+                                                data-htmldb-value="@{{number_format}}"
                                                 style="width: 100%;">
                                                 <option value="tr">1.000.000,00</option>
                                                 <option value="en">1,000,000.00</option>
@@ -250,7 +250,7 @@
                                                 id="google_maps_api_key"
                                                 name="google_maps_api_key"
                                                 data-htmldb-field="google_maps_api_key"
-                                                data-htmldb-value="{{google_maps_api_key}}">
+                                                data-htmldb-value="@{{google_maps_api_key}}">
                                         </div>
                                     </div>
                                 </form>

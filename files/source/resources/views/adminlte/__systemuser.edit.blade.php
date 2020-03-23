@@ -12,8 +12,8 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
                                 <li class="breadcrumb-item"><a href="__systemuser/list">{{ __('User List') }}</a></li>
-                                <li class="breadcrumb-item itemeditpage-hide{{id}}">
-                                    <a href="__systemuser/detail/{{id}}">
+                                <li class="breadcrumb-item itemeditpage-hide@{{id}}">
+                                    <a href="__systemuser/detail/@{{id}}">
                                         {{ __('User Detail') }}
                                     </a>
                                 </li>
@@ -57,7 +57,7 @@
                                                     name="formUser-enabled"
                                                     class="htmldb-field"
                                                     data-htmldb-field="enabled"
-                                                    data-htmldb-value="{{enabled}}"
+                                                    data-htmldb-value="@{{enabled}}"
                                                     data-htmldb-reset-value="1">
                                                 <label for="formUser-enabled" class="detail-label">
                                                     {{ __('Enabled') }}
@@ -73,10 +73,10 @@
                                                 name="formUser-__systemusergroup_id"
                                                 class="form-control htmldb-select2 htmldb-field htmldb-select"
                                                 data-htmldb-option-table="__SystemUserGroupHTMLDB"
-                                                data-htmldb-option-value="{{id}}"
-                                                data-htmldb-option-title="{{title}}"
+                                                data-htmldb-option-value="@{{id}}"
+                                                data-htmldb-option-title="@{{title}}"
                                                 data-htmldb-field="__systemusergroup_id"
-                                                data-htmldb-value="{{__systemusergroup_id}}"
+                                                data-htmldb-value="@{{__systemusergroup_id}}"
                                                 style="width: 100%;">
                                                 <option></option>
                                             </select>
@@ -90,7 +90,7 @@
                                                 id="formUser-fullname"
                                                 name="formUser-fullname"
                                                 data-htmldb-field="fullname"
-                                                data-htmldb-value="{{fullname}}"
+                                                data-htmldb-value="@{{fullname}}"
                                                 placeholder="{{ __('Enter user fullname') }}">
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
                                                 id="formUser-username"
                                                 name="formUser-username"
                                                 data-htmldb-field="username"
-                                                data-htmldb-value="{{username}}"
+                                                data-htmldb-value="@{{username}}"
                                                 placeholder="{{ __('Enter user username') }}">
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                                                 id="formUser-email"
                                                 name="formUser-email"
                                                 data-htmldb-field="email"
-                                                data-htmldb-value="{{email}}"
+                                                data-htmldb-value="@{{email}}"
                                                 placeholder="{{ __('Enter user email address') }}">
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                                 id="formUser-password"
                                                 name="formUser-password"
                                                 data-htmldb-field="password"
-                                                data-htmldb-value="{{password}}"
+                                                data-htmldb-value="@{{password}}"
                                                 placeholder="{{ __('Enter user password') }}"
                                                 autocomplete="new-password">
                                         </div>
@@ -276,7 +276,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyUserServicePermission"></tbody>
-                                                </table>        
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -319,7 +319,7 @@
                                     class="form-control float-right inputSearchBar"
                                     placeholder="{{ __('Search') }}">
                                 <div class="input-group-append labelSearchBar">
-                                    <button type="button" class="btn btn-default">                                        
+                                    <button type="button" class="btn btn-default">
                                         <i class="fas fa-search text-primary"></i>
                                     </button>
                                 </div>
@@ -379,6 +379,7 @@
         data-htmldb-read-url="htmldb/__services/get_directories?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
+    @verbatim
     <script type="text/html" 
         id="ulDirectoryTemplate"
         class="htmldb-template"
@@ -398,13 +399,14 @@
             <ul id="{{title}}Services" class="ul-permission-services"></ul>
         </li>
     </script>
-
+    @endverbatim
     <div id="fileHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
         data-htmldb-read-url="htmldb/__services/get?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
+    @verbatim
     <script type="text/html" 
         id="ulServiceTemplate"
         class="htmldb-template"
@@ -424,7 +426,7 @@
             </div>
         </li>
     </script>
-
+    @endverbatim
     <script type="text/html" id="trServicePermissionInputs">
         <tr>
             <td scope="row">__DIRECTORY__/__SERVICE__</td>
@@ -482,7 +484,7 @@
     <div id="__SystemUserHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="3"
-        data-htmldb-read-url="htmldb/__systemuser/get/{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="htmldb/__systemuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-write-url="htmldb/__systemuser/post?_token={{ csrf_token() }}"
         data-htmldb-redirect="__systemuser/last"
         data-htmldb-loader="divLoader">

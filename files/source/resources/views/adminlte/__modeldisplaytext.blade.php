@@ -200,6 +200,7 @@
         data-htmldb-write-url="htmldb/__modeldisplaytext/post_model_display_texts?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
+    @verbatim
     <script type="text/html" 
         id="tbodyModelListTemplate"
         class="htmldb-template"
@@ -211,6 +212,7 @@
             </td>
         </tr>
     </script>
+    @endverbatim
     <div id="ModelRenderHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
@@ -218,6 +220,7 @@
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
+    @verbatim
     <script type="text/html" 
         id="ulModelListTemplate"
         class="htmldb-template"
@@ -236,7 +239,6 @@
             <ul class="ulModelPropertyList" id="ul{{model}}PropertyList"></ul>
         </div>
     </script>
-
     <script type="text/html" id="trEditDisplayTextTemplate">
         <td id="property___INDEX__">__PROPERTY__</td>
         <td><span class="span-display_text" id="display_text___INDEX__">__DISPLAY_TEXT__</span></td>
@@ -245,12 +247,13 @@
             <i class="fas fa-ban nav-icon text-red __ANTI_SH_CLASS__"></i>
         </td>
     </script>
-
+    @endverbatim
     <div id="PropertyListHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
         data-htmldb-read-url="htmldb/__modeldisplaytext/get_model_property_list?_token={{ csrf_token() }}">
     </div>
+    @verbatim
     <script type="text/html" 
         id="ulModelPropertyListTemplate"
         class="htmldb-template"
@@ -260,7 +263,7 @@
             {{property}}
         </li>
     </script>
-
+    @endverbatim
 
     <div id="divSaveMessage" class="d-none">{{ __('Model display texts saved.') }}</div>
     
@@ -285,6 +288,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/__modeldisplaytext.js"></script>    
+    <script src="/assets/adminlte/js/__modeldisplaytext.js"></script>
 </body>
 </html>

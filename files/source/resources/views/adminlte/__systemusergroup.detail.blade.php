@@ -29,7 +29,7 @@
                                 <div class="card-header show_by_permission">
                                     <div class="card-tools">
                                         <a  class="btn btn-primary btn-xs btn-on-table text-white"
-                                            href="__systemusergroup/edit/{{id}}">
+                                            href="__systemusergroup/edit/@{{id}}">
                                             <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span>{{ __('Edit') }}</span>
                                         </a>
                                     </div>
@@ -40,21 +40,21 @@
                                             <div class="text-muted text-sm">
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Enabled') }}</label>
-                                                    <div data-htmldb-content="{{enabled/display_text}}"></div>
+                                                    <div data-htmldb-content="@{{enabled/display_text}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Edit Widget Permission') }}</label>
-                                                    <div data-htmldb-content="{{widget_permission/display_text}}"></div>
+                                                    <div data-htmldb-content="@{{widget_permission/display_text}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Title') }}</label>
-                                                    <div data-htmldb-content="{{title/display_text}}"></div>
+                                                    <div data-htmldb-content="@{{title/display_text}}"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <input type="hidden" id="menu_permission" value="{{menu_permission}}">
+                                        <input type="hidden" id="menu_permission" value="@{{menu_permission}}">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label>{{ __('Menu Permissions') }}</label>
                                             <div class="divPermissionContainer">
@@ -78,7 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <input type="hidden" id="service_permission" value="{{service_permission}}">
+                                        <input type="hidden" id="service_permission" value="@{{service_permission}}">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label>{{ __('Service Permissions') }}</label>
                                             <div class="divPermissionContainer">
@@ -99,7 +99,7 @@
                                                     </thead>
                                                     <tbody id="tbodyGroupServicePermission">
                                                     </tbody>
-                                                </table>        
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
     <div id="__SystemUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__systemusergroup/get/{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="htmldb/__systemusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>

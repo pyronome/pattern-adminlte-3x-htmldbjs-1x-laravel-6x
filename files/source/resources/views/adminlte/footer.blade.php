@@ -26,6 +26,7 @@
     data-htmldb-read-only="1"
     data-htmldb-loader="divLoader">
 </div>
+@verbatim
 <script type="text/html" 
     id="editPermissionTemplate"
     class="htmldb-template"
@@ -33,6 +34,7 @@
     data-htmldb-template-target="editPermission">
     <input type="hidden" id="{{input_id}}" value="{{edit_permission}}">
 </script>
+@endverbatim
 <div id="editPermission" class="d-none"></div>
 <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
