@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\AdminLTE;
 use App\AdminLTEUser;
 use App\HTMLDB;
