@@ -111,9 +111,9 @@ class LoginController extends Controller
             
             $confirmed = false;
 
-            if ($adminLTEUser->id != null)
+            if ($adminLTEUser != null)
             {
-                if (password_verify($this->row['email'], $adminLTEUser->password))
+                if (password_verify($this->row['password'], $adminLTEUser->password))
                 {
                     $confirmed = true;
                 }
