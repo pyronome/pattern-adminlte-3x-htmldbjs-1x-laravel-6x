@@ -11,6 +11,13 @@ class AdminLTEUserGroup extends Model
 
 	/* {{snippet:begin_properties}} */
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'adminlteusergroup';
+
 	protected $fillable = [
 		'enabled',
 		'title',

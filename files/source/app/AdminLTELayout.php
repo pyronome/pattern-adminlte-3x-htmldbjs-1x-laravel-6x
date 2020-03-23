@@ -10,6 +10,13 @@ class AdminLTELayout extends Model
 {
 	/* {{snippet:begin_properties}} */
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'adminltelayout';
+
 	protected $fillable = [
 		'pagename',
 		'widgets'

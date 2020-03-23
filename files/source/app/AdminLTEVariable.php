@@ -11,6 +11,13 @@ class AdminLTEVariable extends Model
 
 	/* {{snippet:begin_properties}} */
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'adminltevariable';
+
 	protected $fillable = [
 		'title',
 		'group',

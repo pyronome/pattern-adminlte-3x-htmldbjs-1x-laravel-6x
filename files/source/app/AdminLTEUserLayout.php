@@ -11,6 +11,13 @@ class AdminLTEUserLayout extends Model
 
 	/* {{snippet:begin_properties}} */
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'adminlteuserlayout';
+
 	protected $fillable = [
 		'adminlteuser_id',
 		'pagename',
