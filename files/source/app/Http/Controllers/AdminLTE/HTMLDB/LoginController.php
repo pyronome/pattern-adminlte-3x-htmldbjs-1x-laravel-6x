@@ -88,10 +88,9 @@ class LoginController extends Controller
 
         if (0 == $result['errorCount']) {
 
-            $adminLTEUser = AdminLTEUser::where([
-                    'email', $this->row['email'],
-                    'password', Hash::make($this->row['password'])
-                    ])->first();
+            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
+                    ->where('password', Hash::make($this->row['password']))
+                    ->first();
 
             if (null == $adminLTEUser)
             {
