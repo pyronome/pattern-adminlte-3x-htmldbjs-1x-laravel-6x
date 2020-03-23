@@ -25,7 +25,7 @@ class CreateAdminLTEUserGroupTable extends Migration
 
         /* {{snippet:begin_up_method}} */
 
-        Schema::create('adminlteusergroup', function (Blueprint $table) {
+        Schema::create('adminlteusergrouptable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted');
@@ -50,7 +50,7 @@ class CreateAdminLTEUserGroupTable extends Migration
 
         /* {{snippet:begin_down_method}} */
 
-        Schema::dropIfExists('adminlteusergroup');
+        Schema::dropIfExists('adminlteusergrouptable');
 
         /* {{snippet:end_down_method}} */
     }

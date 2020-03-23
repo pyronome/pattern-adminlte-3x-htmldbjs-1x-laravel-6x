@@ -16,7 +16,7 @@ class AdminLTEModelDisplayText extends Model
      *
      * @var string
      */
-    protected $table = 'adminltemodeldisplaytext';
+    protected $table = 'adminltemodeldisplaytexttable';
 
 	protected $fillable = [
 		'model',

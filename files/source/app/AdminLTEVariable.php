@@ -16,7 +16,7 @@ class AdminLTEVariable extends Model
      *
      * @var string
      */
-    protected $table = 'adminltevariable';
+    protected $table = 'adminltevariabletable';
 
 	protected $fillable = [
 		'title',

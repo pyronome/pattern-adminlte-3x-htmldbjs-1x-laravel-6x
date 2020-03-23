@@ -16,7 +16,7 @@ class AdminLTEUserLayout extends Model
      *
      * @var string
      */
-    protected $table = 'adminlteuserlayout';
+    protected $table = 'adminlteuserlayouttable';
 
 	protected $fillable = [
 		'adminlteuser_id',

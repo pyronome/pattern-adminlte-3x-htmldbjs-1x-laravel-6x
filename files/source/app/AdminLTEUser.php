@@ -18,7 +18,7 @@ class AdminLTEUser extends Authenticatable
      *
      * @var string
      */
-    protected $table = 'adminlteuser';
+    protected $table = 'adminlteusertable';
 
     protected $fillable = [
 		'adminlteusergroup_id',

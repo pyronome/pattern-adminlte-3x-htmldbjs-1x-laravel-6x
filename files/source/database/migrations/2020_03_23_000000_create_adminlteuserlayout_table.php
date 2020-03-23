@@ -25,7 +25,7 @@ class CreateAdminLTEUserLayoutTable extends Migration
 
         /* {{snippet:begin_up_method}} */
 
-        Schema::create('adminlteuserlayout', function (Blueprint $table) {
+        Schema::create('adminlteuserlayouttable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted');
@@ -48,7 +48,7 @@ class CreateAdminLTEUserLayoutTable extends Migration
 
         /* {{snippet:begin_down_method}} */
 
-        Schema::dropIfExists('adminlteuserlayout');
+        Schema::dropIfExists('adminlteuserlayouttable');
 
         /* {{snippet:end_down_method}} */
     }

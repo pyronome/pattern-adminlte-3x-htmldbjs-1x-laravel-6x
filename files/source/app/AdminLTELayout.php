@@ -15,7 +15,7 @@ class AdminLTELayout extends Model
      *
      * @var string
      */
-    protected $table = 'adminltelayout';
+    protected $table = 'adminltelayouttable';
 
 	protected $fillable = [
 		'pagename',

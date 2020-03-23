@@ -25,7 +25,7 @@ class CreateAdminLTEModelDisplayTextTable extends Migration
 
         /* {{snippet:begin_up_method}} */
 
-        Schema::create('adminltemodeldisplaytext', function (Blueprint $table) {
+        Schema::create('adminltemodeldisplaytexttable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted');
@@ -47,7 +47,7 @@ class CreateAdminLTEModelDisplayTextTable extends Migration
 
         /* {{snippet:begin_down_method}} */
 
-        Schema::dropIfExists('adminltemodeldisplaytext');
+        Schema::dropIfExists('adminltemodeldisplaytexttable');
 
         /* {{snippet:end_down_method}} */
 
