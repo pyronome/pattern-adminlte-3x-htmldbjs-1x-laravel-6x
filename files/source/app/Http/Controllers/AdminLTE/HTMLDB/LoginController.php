@@ -48,7 +48,6 @@ class LoginController extends Controller
         if (0 == $result['errorCount'])
         {
             $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->where('password', Hash::make($this->row['password']))
                     ->first();
 
             auth()->guard('adminlteuser')->login($adminLTEUser);
@@ -108,10 +107,19 @@ class LoginController extends Controller
         if (0 == $result['errorCount']) {
 
             $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->where('password', Hash::make($this->row['password']))
                     ->first();
+            
+            $confirmed = false;
 
-            if (null == $adminLTEUser)
+            if ($adminLTEUser->id != null)
+            {
+                if (password_verify($this->row['email'], $adminLTEUser->password))
+                {
+                    $confirmed = true;
+                }
+            } // if (null == $adminLTEUser)
+
+            if (!$confirmed)
             {
                 $result['errorCount']++;
                 if ($result['lastError'] != '') {
@@ -121,7 +129,7 @@ class LoginController extends Controller
                 $result['lastError'] .= __('Your e-mail address or password is not correct. Please check and try again.');
 
                 sleep(2);
-            } // if (null == $adminLTEUser)
+            } // if (!$confirmed)
 
         }
 

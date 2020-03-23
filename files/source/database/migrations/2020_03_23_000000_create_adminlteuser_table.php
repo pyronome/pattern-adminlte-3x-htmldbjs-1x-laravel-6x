@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Hash;
 
 /* {{snippet:begin_class}} */
 
@@ -53,7 +52,7 @@ class CreateAdminLTEUserTable extends Migration
                 'fullname' => 'AdminLTE Root',
                 'username' => 'root',
                 'email' => 'root',
-                'password' => Hash::make('adminlte'),
+                'password' => bcrypt('adminlte'),
                 'menu_permission' => '',
                 'service_permission' => ''
             )
