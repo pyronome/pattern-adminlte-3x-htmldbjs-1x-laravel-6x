@@ -45,6 +45,25 @@ class LoginController extends Controller
 
         $result = $this->check();
 
+        if (0 == $result['errorCount'])
+        {
+            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
+                    ->where('password', Hash::make($this->row['password']))
+                    ->first();
+
+            auth()->guard('adminlteuser')->login($adminLTEUser);
+
+            $landingPage = getenv('ADMINLTE_LANDING_PAGE');
+
+            if ($landingPage === false)
+            {
+                $landingPage = 'home';
+            } // if ($landingPage === false)
+
+            $result['messageCount'] = 1;
+            $result['lastMessage'] = $landingPage;
+        } // if (0 == $result['errorCount'])
+
         $objectHTMLDB->errorCount = $result['errorCount'];
         $objectHTMLDB->messageCount = $result['messageCount'];
         $objectHTMLDB->lastError = $result['lastError'];
