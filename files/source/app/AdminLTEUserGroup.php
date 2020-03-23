@@ -14,10 +14,8 @@ class AdminLTEUserGroup extends Model
     protected $fillable = [
 		'enabled',
 		'title',
-        'menu_permission',
-        'service_permission',
-        'widget_permission'
+		'menu_permission',
+		'service_permission',
+		'widget_permission'
     ];
 }
-
-?>

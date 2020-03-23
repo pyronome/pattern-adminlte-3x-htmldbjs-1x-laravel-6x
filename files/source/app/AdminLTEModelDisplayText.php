@@ -16,5 +16,3 @@ class AdminLTEModelDisplayText extends Model
 		'display_texts'
     ];
 }
-
-?>

@@ -14,8 +14,6 @@ class AdminLTEUserLayout extends Model
     protected $fillable = [
 		'adminlteuser_id',
 		'pagename',
-        'widgets'
+		'widgets'
     ];
 }
-
-?>

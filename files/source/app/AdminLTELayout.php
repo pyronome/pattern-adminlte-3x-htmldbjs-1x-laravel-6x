@@ -16,5 +16,3 @@ class AdminLTELayout extends Model
 		'widgets'
     ];
 }
-
-?>
