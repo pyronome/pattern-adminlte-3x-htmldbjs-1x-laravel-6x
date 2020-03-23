@@ -46,6 +46,7 @@ class CreateAdminLTEUserTable extends Migration
                 'id' => 1,
                 'deleted' => 0,
                 'adminlteusergroup_id' => 0,
+                'profile_img' => '',
                 'enabled' => 1,
                 'fullname' => 'AdminLTE Root',
                 'username' => 'root',
