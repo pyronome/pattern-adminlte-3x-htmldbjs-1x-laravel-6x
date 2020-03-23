@@ -13,7 +13,7 @@ class CreateAdminLTEUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('adminlteusertable', function (Blueprint $table) {
+        Schema::create('adminlteuser', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted');
@@ -36,6 +36,6 @@ class CreateAdminLTEUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adminlteusertable');
+        Schema::dropIfExists('adminlteuser');
     }
 }

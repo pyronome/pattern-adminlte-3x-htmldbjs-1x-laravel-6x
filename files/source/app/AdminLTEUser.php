@@ -8,11 +8,6 @@ use Illuminate\Notifications\Notifiable;
 
 class AdminLTEUser extends Authenticatable
 {
-    const CREATED_AT = 'creationdate';
-    const UPDATED_AT = 'lastupdate';
-
-    protected $table = 'adminlteusertable';
-
     protected $fillable = [
 		'adminlteusergroup_id',
 		'profile_img',

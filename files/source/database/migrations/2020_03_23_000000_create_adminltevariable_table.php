@@ -13,7 +13,7 @@ class CreateAdminLTEVariableTable extends Migration
      */
     public function up()
     {
-        Schema::create('adminltevariabletable', function (Blueprint $table) {
+        Schema::create('adminltevariable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted');
@@ -33,6 +33,6 @@ class CreateAdminLTEVariableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adminltevariabletable');
+        Schema::dropIfExists('adminltevariable');
     }
 }

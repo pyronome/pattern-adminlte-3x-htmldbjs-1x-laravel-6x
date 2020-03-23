@@ -13,7 +13,7 @@ class CreateAdminLTEModelDisplayTextTable extends Migration
      */
     public function up()
     {
-        Schema::create('adminltemodeldisplaytexttable', function (Blueprint $table) {
+        Schema::create('adminltemodeldisplaytext', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted');
@@ -29,6 +29,6 @@ class CreateAdminLTEModelDisplayTextTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adminltemodeldisplaytexttable');
+        Schema::dropIfExists('adminltemodeldisplaytext');
     }
 }
