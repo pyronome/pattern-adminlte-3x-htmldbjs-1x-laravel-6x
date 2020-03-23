@@ -36,6 +36,7 @@ class LoginController extends Controller
 
         $this->row = $objectHTMLDB->requestPOSTRow(
                 $request->all(),
+                $this->columns,
                 $this->protectedColumns,
                 0,
                 true);
@@ -60,9 +61,6 @@ class LoginController extends Controller
             'lastMessage' => '',
             'messageCount' => 0
         ];
-
-        $rootUserName = getenv('ADMINLTE_ROOT_USERNAME');
-        $rootPassword = getenv('ADMINLTE_ROOT_PASSWORD');
 
         /* {{snippet:begin_check_values}} */
 
