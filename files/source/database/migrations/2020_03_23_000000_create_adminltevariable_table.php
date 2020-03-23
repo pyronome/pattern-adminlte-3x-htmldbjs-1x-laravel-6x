@@ -4,8 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/* {{snippet:begin_class}} */
+
 class CreateAdminLTEVariableTable extends Migration
 {
+
+    /* {{snippet:begin_properties}} */
+
+    /* {{snippet:end_properties}} */
+
+    /* {{snippet:begin_methods}} */
+
     /**
      * Run the migrations.
      *
@@ -13,6 +22,9 @@ class CreateAdminLTEVariableTable extends Migration
      */
     public function up()
     {
+
+        /* {{snippet:begin_up_method}} */
+
         Schema::create('adminltevariable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
@@ -24,6 +36,9 @@ class CreateAdminLTEVariableTable extends Migration
             $table->string('value3');
             $table->bigInteger('__order', false, true);
         });
+
+        /* {{snippet:end_up_method}} */
+
     }
 
     /**
@@ -33,6 +48,16 @@ class CreateAdminLTEVariableTable extends Migration
      */
     public function down()
     {
+
+        /* {{snippet:begin_down_method}} */
+
         Schema::dropIfExists('adminltevariable');
+
+        /* {{snippet:end_down_method}} */
+
     }
+
+    /* {{snippet:end_methods}} */
 }
+
+/* {{snippet:end_class}} */

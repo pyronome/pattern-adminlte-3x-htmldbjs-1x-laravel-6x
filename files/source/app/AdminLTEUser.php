@@ -6,8 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/* {{snippet:begin_class}} */
+
 class AdminLTEUser extends Authenticatable
 {
+
+	/* {{snippet:begin_properties}} */
+
     protected $fillable = [
 		'adminlteusergroup_id',
 		'profile_img',
@@ -29,4 +34,12 @@ class AdminLTEUser extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+	/* {{snippet:end_properties}} */
+
+	/* {{snippet:begin_methods}} */
+
+	/* {{snippet:end_methods}} */
 }
+
+/* {{snippet:begin_class}} */

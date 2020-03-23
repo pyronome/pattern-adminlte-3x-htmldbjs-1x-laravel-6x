@@ -4,8 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/* {{snippet:begin_class}} */
+
 class CreateAdminLTEUserGroupTable extends Migration
 {
+
+    /* {{snippet:begin_properties}} */
+
+    /* {{snippet:end_properties}} */
+
+    /* {{snippet:begin_methods}} */
+
     /**
      * Run the migrations.
      *
@@ -13,6 +22,9 @@ class CreateAdminLTEUserGroupTable extends Migration
      */
     public function up()
     {
+
+        /* {{snippet:begin_up_method}} */
+
         Schema::create('adminlteusergroup', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
@@ -23,6 +35,9 @@ class CreateAdminLTEUserGroupTable extends Migration
 			$table->text('service_permission');
 			$table->boolean('widget_permission');
         });
+
+        /* {{snippet:end_up_method}} */
+
     }
 
     /**
@@ -32,6 +47,16 @@ class CreateAdminLTEUserGroupTable extends Migration
      */
     public function down()
     {
+
+        /* {{snippet:begin_down_method}} */
+
         Schema::dropIfExists('adminlteusergroup');
+
+        /* {{snippet:end_down_method}} */
     }
+
+    /* {{snippet:end_methods}} */
+
 }
+
+/* {{snippet:end_class}} */
