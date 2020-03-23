@@ -45,6 +45,8 @@ class CreateAdminLTEUserTable extends Migration
             array(
                 'id' => 1,
                 'deleted' => 0,
+                'created_at' => time(),
+                'updated_at' => time(),
                 'adminlteusergroup_id' => 0,
                 'profile_img' => '',
                 'enabled' => 1,
