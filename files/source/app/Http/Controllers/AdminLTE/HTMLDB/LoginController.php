@@ -119,9 +119,13 @@ class LoginController extends Controller
                 } // if ($result['lastError'] != '') {
 
                 $result['lastError'] .= __('Your e-mail address or password is not correct. Please check and try again.');
+
+                sleep(2);
             } // if (null == $adminLTEUser)
 
         }
+
+
 
         /* {{snippet:end_check_values}} */
 
