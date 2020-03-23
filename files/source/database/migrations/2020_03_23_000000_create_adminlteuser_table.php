@@ -51,7 +51,9 @@ class CreateAdminLTEUserTable extends Migration
                 'fullname' => 'AdminLTE Root',
                 'username' => 'root',
                 'email' => 'root',
-                'password' => Hash::make('adminlte')
+                'password' => Hash::make('adminlte'),
+                'menu_permission' => '',
+                'service_permission' => ''
             )
         );
 
