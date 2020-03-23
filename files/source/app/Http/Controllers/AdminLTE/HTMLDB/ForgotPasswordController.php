@@ -84,6 +84,18 @@ class ForgotPasswordController extends Controller
             $result['lastError'] .= __('Please specify a valid email address.');
         } // if ('' == $this->row['email']) {
 
+        $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])->first();
+
+        if (null == $adminLTEUser)
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Your email address is not recognized. Please check your email address and try again.');
+        } // if (null == $adminLTEUser)
+
         /* {{snippet:end_check_values}} */
 
         return $result;
