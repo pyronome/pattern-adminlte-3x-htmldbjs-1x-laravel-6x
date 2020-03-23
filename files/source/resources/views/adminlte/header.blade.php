@@ -24,8 +24,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="profile/detail" class="brand-link">
-                <img src="../" alt="User Image" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">{{{ isset(Auth::adminlteuser()->username) ? Auth::adminlteuser()->username : Auth::adminlteuser()->email }}}</span>
+                <img src="{{ $userImageURL }}" alt="User Image" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">{{ $userName }}</span>
             </a>
 
             <!-- Sidebar -->

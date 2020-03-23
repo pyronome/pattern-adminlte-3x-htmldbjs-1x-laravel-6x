@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\AdminLTEUser;
+
 /* {{snippet:begin_class}} */
 
 class AdminLTE
@@ -74,6 +76,18 @@ class AdminLTE
 
 		return $isValid;
 
+	}
+
+	public function getUserVariables()
+	{
+        $adminLTEUser = auth()->guard('adminlteuser')->user();
+
+        $variables = [
+            'userName' => ($adminLTEUser->username != '' ? $adminLTEUser->username : $adminLTEUser->email),
+            'userImageURL' => ''
+        ];
+
+		return $variables;
 	}
 
 	/* {{snippet:end_methods}} */

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\AdminLTEUser;
 
 /* {{snippet:begin_class}} */
 
@@ -25,6 +26,13 @@ class AdminLTEMiddleware
     public function handle($request, Closure $next)
     {
         /* {{snippet:begin_handle_method}} */
+
+        $adminLTEUser = auth()->guard('adminlteuser')->user();
+
+        if (null == $adminLTEUser)
+        {
+            return redirect()->route('login');
+        } // if (null == $adminLTEUser)
 
         return $next($request);
 
