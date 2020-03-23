@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
 
 /* {{snippet:begin_class}} */
 
@@ -39,6 +40,19 @@ class CreateAdminLTEUserTable extends Migration
             $table->text('menu_permission');
             $table->text('service_permission');
         });
+
+        DB::table('adminlteusertable')->insert(
+            array(
+                'id' => 1,
+                'deleted' => 0,
+                'adminlteusergroup_id' => 0,
+                'enabled' => 1,
+                'fullname' => 'AdminLTE Root',
+                'username' => 'root',
+                'email' => 'root',
+                'password' => Hash::make('adminlte')
+            )
+        );
 
         /* {{snippet:end_up_method}} */
     }
