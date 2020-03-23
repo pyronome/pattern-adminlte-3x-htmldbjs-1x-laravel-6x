@@ -1,4 +1,5 @@
-    'adminlteuser' => [
-        'driver' => 'session',
-        'provider' => 'adminlteusers',
-    ],
+
+		'adminlteuser' => [
+			'driver' => 'session',
+			'provider' => 'adminlteusers',
+		],
