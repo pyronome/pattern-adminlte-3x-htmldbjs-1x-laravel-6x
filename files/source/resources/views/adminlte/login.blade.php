@@ -110,6 +110,8 @@
     <script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="/assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Toastr -->
+    <script src="/assets/adminlte/plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/adminlte/js/adminlte.min.js"></script>
     <script src="/assets/adminlte/js/global.js"></script>
