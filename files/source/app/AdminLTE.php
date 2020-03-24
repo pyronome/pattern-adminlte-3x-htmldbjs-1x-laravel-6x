@@ -428,6 +428,178 @@ class AdminLTE
 		return base64_encode(serialize($arrayData));
 	}
 
+	public function getModelList()
+	{
+		$Models = array();
+		$index = 0;
+
+		$path = dirname(__FILE__);
+		if (is_dir($path))
+		{ 
+			$files = scandir($path);
+
+			foreach ($files as $file)
+			{ 
+				if (($file != ".") && ($file != ".."))
+				{
+					$current_path = ($path . "/" . $file);
+
+					if (is_dir($current_path))
+					{
+						continue;
+					} // if (is_dir($current_path))
+
+					$file_name = basename($current_path);
+
+					$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+					$extension = '.' . $extension;
+
+					$file_name = str_replace($extension, '', $file_name);
+					
+					if (!in_array($file_name, $exceptions))
+					{
+						$Models[] = $file_name;
+					} // if (!in_array($file_name, $exceptions))
+				} // if (($file != ".") && ($file != "..")) {
+			} // foreach ($files as $file) {
+		} // if (is_dir($path))
+
+		return $Models;
+	}
+
+	public function getPageLayout($pagename)
+	{
+
+		$Widgets = array();
+
+		$users = App\User::where('deleted', false)->where('pagename', $pagename)->get();
+
+		foreach ($users as $user) {
+			echo $user->name;
+		}
+
+		includeModel('__SystemLayout');
+		$list__SystemLayout = new __SystemLayout();
+		$list__SystemLayout->bufferSize = 0;
+		$list__SystemLayout->page = 0;
+		$list__SystemLayout->addFilter('deleted','==', false);
+		$list__SystemLayout->addFilter('pagename','==', $pagename);
+		$list__SystemLayout->sortByProperty('id', false);
+		$list__SystemLayout->find();
+		
+		if (0 == $list__SystemLayout->listCount) {
+			return $Widgets;
+		}
+
+		$object__SystemLayout = $list__SystemLayout->list[0];
+		$defaultWidgets = json_decode($object__SystemLayout->widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+
+		includeLibrary('adminlte/getUserWidgetsFormatted');
+		$userWidgetsFormatted = getUserWidgetsFormatted($pagename);
+
+		$countWidgets = count($defaultWidgets);
+		$emptyIndex = 0;
+		$emptyIndexHistory = array();
+
+		for ($i=0; $i < $countWidgets; $i++) { 
+			$defaultWidget = $defaultWidgets[$i];
+
+			$type = $defaultWidget['type'];
+			$model = $defaultWidget['model'];
+
+			if ('empty' == $type) {
+				$userWidgetIndex = $type.$emptyIndex;
+				$emptyIndex++;
+
+				$emptyIndexHistory[] = $userWidgetIndex;
+			} else {
+				$userWidgetIndex = $type.$model;
+			}
+			
+			if (!isset($userWidgetsFormatted[$userWidgetIndex])) {
+				/*if ('empty' != $type) {*/
+					$Widgets[] = $defaultWidget;
+				/*}*/
+			} else {
+				/*if ('empty' != $type) {*/
+					$Widgets[] = $userWidgetsFormatted[$userWidgetIndex];
+				/*}*/
+			}
+		} // for ($i=0; $i < $countWidgets; $i++) {
+
+		// Add User Empty Widgets
+		$keys = array_keys($userWidgetsFormatted);
+		$countKeys = count($keys);
+
+		for ($i=0; $i < $countKeys; $i++) { 
+			$key = $keys[$i];
+
+			if (false === strpos($key, 'empty'))
+			{
+				continue;
+			}
+			
+			if (in_array($key, $emptyIndexHistory))
+			{
+				continue;
+			}
+
+			$Widgets[] = $userWidgetsFormatted[$key];
+		}
+
+		$Widgets = $this->sortListByKey($Widgets, true, 'order');
+
+		return $Widgets;
+
+	}
+
+	public function sortListByKey($arrList, $sortType, $property) {
+		if ('title' == $property) {
+			usort($arrList, $this->tr_build_sorter($property));
+		} else {
+			usort($arrList, $this->build_sorter($property));
+		}
+
+
+		if (!$sortType) {
+			$arrList = array_reverse($arrList);
+		}
+
+		return $arrList;
+	}
+
+	private function build_sorter($key) {
+		return function ($a, $b) use ($key) {
+			return strnatcmp($a[$key], $b[$key]);
+		};
+	}
+
+	private function tr_build_sorter($key) {
+		return function ($a, $b) use ($key) {
+			return $this->tr_strcmp($a[$key], $b[$key]);
+		};
+	}
+
+	private function tr_strcmp ($a , $b) {
+		$lcases = array( 'a' , 'b' , 'c' , 'ç' , 'd' , 'e' , 'f' , 'g' , 'ğ' , 'h' , 'ı' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'ö' , 'p' , 'q' , 'r' , 's' , 'ş' , 't' , 'u' , 'ü' , 'w' , 'v' , 'y' , 'z' );
+		$ucases = array ( 'A' , 'B' , 'C' , 'Ç' , 'D' , 'E' , 'F' , 'G' , 'Ğ' , 'H' , 'I' , 'İ' , 'J' , 'K' , 'L' , 'M' , 'N' , 'O' , 'Ö' , 'P' , 'Q' , 'R' , 'S' , 'Ş' , 'T' , 'U' , 'Ü' , 'W' , 'V' , 'Y' , 'Z' );
+		$am = mb_strlen ( $a , 'UTF-8' );
+		$bm = mb_strlen ( $b , 'UTF-8' );
+		$maxlen = $am > $bm ? $bm : $am;
+		for ( $ai = 0; $ai < $maxlen; $ai++ ) {
+			$aa = mb_substr ( $a , $ai , 1 , 'UTF-8' );
+			$ba = mb_substr ( $b , $ai , 1 , 'UTF-8' );
+			if ( $aa != $ba ) {
+				$apos = in_array ( $aa , $lcases ) ? array_search ( $aa , $lcases ) : array_search ( $aa , $ucases );
+				$bpos = in_array ( $ba , $lcases ) ? array_search ( $ba , $lcases ) : array_search ( $ba , $ucases );
+				if ( $apos !== $bpos ) {
+					return $apos > $bpos ? 1 : -1;
+				}
+			}
+		}
+		return 0;
+	}
+
 	/* {{snippet:end_methods}} */
 }
 
