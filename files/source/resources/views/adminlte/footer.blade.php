@@ -22,7 +22,7 @@
 <div id="__pagepermissionHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="9999"
-    data-htmldb-read-url="htmldb/__pagepermission/get/<?php echo $controller->controller; ?>?_token={{ csrf_token() }}"
+    data-htmldb-read-url="htmldb/__pagepermission/get/{{ $controllerName }}?_token={{ csrf_token() }}"
     data-htmldb-read-only="1"
     data-htmldb-loader="divLoader">
 </div>

@@ -9,6 +9,9 @@ use App\Action1;
 
 class LoginController extends Controller
 {
+
+    public $controllerName = 'login';
+
     public function index(Request $request)
     {
         $viewName = 'adminlte.login';
@@ -18,6 +21,9 @@ class LoginController extends Controller
             $viewName = 'adminlte.custom.login';
         } // if (view()->exists('adminlte.custom.login'))
 
-        return view($viewName);
+        $viewData['controllerName'] = $this->controllerName;
+
+        return view($viewName, $viewData);
     }
+
 }

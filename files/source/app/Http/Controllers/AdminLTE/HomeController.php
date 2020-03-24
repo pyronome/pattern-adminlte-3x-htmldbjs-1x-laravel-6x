@@ -10,6 +10,9 @@ use App\Action1;
 
 class HomeController extends Controller
 {
+
+    public $controllerName = 'home';
+
     public function index(Request $request)
     {
         $viewName = 'adminlte.home';
@@ -21,7 +24,10 @@ class HomeController extends Controller
 
         $adminLTE = new AdminLTE();
 
+        $viewData['controllerName'] = $this->controllerName;
         $viewData['user'] = $adminLTE->getUserData();
+
         return view($viewName, $viewData);
     }
+
 }

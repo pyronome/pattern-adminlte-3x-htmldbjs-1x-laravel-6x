@@ -9,6 +9,9 @@ use App\Action1;
 
 class LogoutController extends Controller
 {
+
+    public $controllerName = 'logout';
+
     public function index(Request $request)
     {
         auth()->guard('adminlteuser')->logout();
@@ -18,4 +21,5 @@ class LogoutController extends Controller
         $adminLTE->getAdminLTEFolder() . 'login';
         return redirect($adminLTE->getAdminLTEFolder() . 'login');
     }
+
 }

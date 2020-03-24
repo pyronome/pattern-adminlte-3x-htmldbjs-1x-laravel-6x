@@ -9,6 +9,9 @@ use App\Action1;
 
 class ForgotPasswordController extends Controller
 {
+
+    public $controllerName = 'forgotpassword';
+
     public function index(Request $request)
     {
         $viewName = 'adminlte.forgotpassword';
@@ -18,6 +21,9 @@ class ForgotPasswordController extends Controller
             $viewName = 'adminlte.custom.forgotpassword';
         } // if (view()->exists('adminlte.custom.forgotpassword'))
 
-        return view($viewName);
+        $viewData['controllerName'] = $this->controllerName;
+
+        return view($viewName, $viewData);
     }
+
 }
