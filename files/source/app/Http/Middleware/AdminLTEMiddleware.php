@@ -30,8 +30,7 @@ class AdminLTEMiddleware
 
         $adminLTE = new AdminLTE();
 
-        if (!$this->isLogin($request)
-                && !$this->isLogout($request))
+        if (!$this->isPagePublic($request))
         {
             $adminLTEUser = auth()->guard('adminlteuser')->user();
 
@@ -48,22 +47,21 @@ class AdminLTEMiddleware
         /* {{snippet:end_handle_method}} */
     }
 
-    private function isLogin($request) {
-        if (strpos($request, '/login') !== false)
-        {
-            return true;
-        } else {
-            return false;
-        } // if (strpos($request, '/login') !== false)
-    }
+    private function isPagePublic($request) {
 
-    private function isLogout($request) {
-        if (strpos($request, '/logout') !== false)
+        $publicPages = [
+            '/login',
+            '/logout',
+            '/forgotpassword'
+        ];
+
+        if (preg_match('(' . implode('|', $publicPages) . ')', $request->path()) === 1)
         {
             return true;
         } else {
             return false;
-        } // if (strpos($request, '/logout') !== false)
+        } // if (preg_match('(' . implode('|', $publicPages) . ')', $request->path()) === 1)
+
     }
 
     /* {{snippet:end_methods}} */
