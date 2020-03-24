@@ -93,7 +93,7 @@ class AdminLTE
 			'menu_permission' => '',
 			'service_permission' => '',
 			'widget_permission' => '',
-			'image' => 'user_images/default.jpg'
+			'image' => 'img/default_user_image.jpg'
 		];
 
 		if ($adminLTEUser != null) {
@@ -112,7 +112,8 @@ class AdminLTE
 				'name' => $adminLTEUser->fullname,
 				'menu_permission' => $this->getUserMenuPermission($adminLTEUser),
 				'service_permission' => $this->getUserServicePermission($adminLTEUser),
-				'widget_permission' => ''
+				'widget_permission' => '',
+				'image' => 'img/default_user_image.jpg'
 			];
 
             $adminLTEUserGroup = \App\AdminLTEUserGroup::find(
