@@ -110,13 +110,87 @@ class AdminLTE
 		if (!$forceDefault
 				&& Storage::disk('local')->exists('adminlte_menu.json'))
 		{
-			$menuJSON = Storage::disk('local')->get('adminlte_menu.json');
-			return json_decode($menuJSON, true);
+			$menuArray = json_decode(Storage::disk('local')->get('adminlte_menu.json'),
+					(JSON_HEX_QUOT
+					| JSON_HEX_TAG
+					| JSON_HEX_AMP
+					| JSON_HEX_APOS));
 		}
 		else
 		{
-			return config('adminlte_menu');
+			$menuArray = config('adminlte_menu');
 		} // if (!$forceDefault
+
+		$Menu = array();
+		$main_index = 0;
+
+		$countMenuArray = count($menuArray);
+
+		for ($i=0; $i < $countMenuArray; $i++) { 
+			if (1 == $menuArray[$i]['visibility']) {
+				if (!isset($menuArray[$i]['children'])) {
+					$Menu[$main_index]['id'] = 'p' . $i;
+					$Menu[$main_index]['permission_token'] = $menuArray[$i]['href'];
+					$Menu[$main_index]['url'] = $menuArray[$i]['href'];
+					$Menu[$main_index]['href'] = $_SPRIT['ADMINLTE_URL_PREFIX'] . $menuArray[$i]['href'];
+					$Menu[$main_index]['title'] = $menuArray[$i]['text'];
+					
+					$icon = $menuArray[$i]['icon'];
+					if ('empty' == $icon) {
+						$icon = 'far fa-circle';
+					}
+
+					$Menu[$main_index]['icon'] = $icon;
+					$Menu[$main_index]['children'] = array();
+					$main_index++;
+				} else {
+					$Menu[$main_index]['id'] = 'p' . $i;
+					$Menu[$main_index]['permission_token'] = '';
+					$Menu[$main_index]['url'] = '';
+					$Menu[$main_index]['href'] = '';
+					$Menu[$main_index]['title'] = $menuArray[$i]['text'];
+					
+					$icon = $menuArray[$i]['icon'];
+					if ('empty' == $icon) {
+						$icon = 'fas fa-list';
+					}
+
+					$Menu[$main_index]['icon'] = $icon;
+					$Menu[$main_index]['children'] = array();
+					$parentPermissionToken = '';
+					$childrenMenu = array();
+					$sub_index = 0;
+
+					$subMenuArray = $menuArray[$i]['children'];
+					$countSubmenuArray = count($subMenuArray);
+					for ($j=0; $j < $countSubmenuArray; $j++) {
+						$parentPermissionToken .= $subMenuArray[$j]['href'];
+						if (1 == $subMenuArray[$j]['visibility']) {
+							$childrenMenu[$sub_index]['id'] = 'c' . $j;
+							$childrenMenu[$sub_index]['permission_token'] = $subMenuArray[$j]['href'];
+							$childrenMenu[$sub_index]['url'] = $subMenuArray[$j]['href'];
+							$childrenMenu[$sub_index]['href'] = $_SPRIT['ADMINLTE_URL_PREFIX'] . $subMenuArray[$j]['href'];
+							$childrenMenu[$sub_index]['title'] = $subMenuArray[$j]['text'];
+
+							$icon = $subMenuArray[$j]['icon'];
+							if ('empty' == $icon) {
+								$icon = 'far fa-circle';
+							}
+
+							$childrenMenu[$sub_index]['icon'] = $icon;
+							$childrenMenu[$sub_index]['children'] = array();
+							$sub_index++;
+						} // if($subMenus[$j]['visibility']) {
+					} // for ($j=0; $j < $countSubmenuArray; $j++) {
+
+					$Menu[$main_index]['children'] = $childrenMenu;
+					$Menu[$main_index]['permission_token'] = $parentPermissionToken;
+					$main_index++;
+				} // if (0 == count($menuArray[$i]['subMenus'])) {
+			} // if ($menuArray[$i]['visibility']) {
+		} // for ($i=0; $i < $countMenuArray; $i++) { 
+
+		return $Menu;
 
 	}
 
