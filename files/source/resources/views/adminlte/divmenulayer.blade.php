@@ -1,7 +1,8 @@
         <?php
             // Menu
-            includeLibrary('adminlte/getSideMenu');
-            $menu = getSideMenu();
+            $adminLTE = new AdminLTE();
+
+            $menu = $adminLTE->getSideMenu();
             
             // Current User
             $user_data = $controller->user_data;
