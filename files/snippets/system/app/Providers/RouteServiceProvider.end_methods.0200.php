@@ -10,10 +10,13 @@
     {
         $adminLTEFolder = getenv('ADMINLTE_FOLDER');
 
-        if ($adminLTEFolder === false)
+        if ($adminLTEFolder === false
+				|| ('' == $adminLTEFolder))
         {
             $adminLTEFolder = 'adminlte';
         } // if ($adminLTEFolder === false) {
+
+		$adminLTEFolder = rtrim($adminLTEFolder, '/');
 
         Route::prefix($adminLTEFolder)
              ->middleware(['web', AdminLTEMiddleware::class])

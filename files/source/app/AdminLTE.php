@@ -90,6 +90,20 @@ class AdminLTE
 		return $variables;
 	}
 
+	public function getAdminLTEFolder() {
+        $adminLTEFolder = getenv('ADMINLTE_FOLDER');
+
+        if ($adminLTEFolder === false
+				|| ('' == $adminLTEFolder))
+        {
+            $adminLTEFolder = 'adminlte';
+        } // if ($adminLTEFolder === false) {
+
+		$adminLTEFolder = rtrim($adminLTEFolder, '/') . '/';
+
+		return $adminLTEFolder; 
+	}
+
 	/* {{snippet:end_methods}} */
 }
 
