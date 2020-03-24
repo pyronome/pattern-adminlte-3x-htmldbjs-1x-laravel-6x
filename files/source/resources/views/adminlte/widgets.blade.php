@@ -633,7 +633,7 @@
 </script>
 <script type="text/html" id="tdButtonTemplate">
     <td class="text-center">
-        <a class="btn btn-outline-primary btn-xs btn-on-table" href="__MODEL_LOWERCASE__/detail/{{id}}">
+        <a class="btn btn-outline-primary btn-xs btn-on-table" href="__MODEL_LOWERCASE__/detail/@{{id}}">
             <i class="fa fa-info-circle"></i> <span class="hidden-xxs">{{ __('Detail') }}</span>
         </a>
     </td>
