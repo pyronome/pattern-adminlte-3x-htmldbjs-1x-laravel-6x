@@ -132,7 +132,7 @@ class AdminLTE
 					$Menu[$main_index]['id'] = 'p' . $i;
 					$Menu[$main_index]['permission_token'] = $menuArray[$i]['href'];
 					$Menu[$main_index]['url'] = $menuArray[$i]['href'];
-					$Menu[$main_index]['href'] = $_SPRIT['ADMINLTE_URL_PREFIX'] . $menuArray[$i]['href'];
+					$Menu[$main_index]['href'] = $menuArray[$i]['href'];
 					$Menu[$main_index]['title'] = $menuArray[$i]['text'];
 					
 					$icon = $menuArray[$i]['icon'];
@@ -169,7 +169,7 @@ class AdminLTE
 							$childrenMenu[$sub_index]['id'] = 'c' . $j;
 							$childrenMenu[$sub_index]['permission_token'] = $subMenuArray[$j]['href'];
 							$childrenMenu[$sub_index]['url'] = $subMenuArray[$j]['href'];
-							$childrenMenu[$sub_index]['href'] = $_SPRIT['ADMINLTE_URL_PREFIX'] . $subMenuArray[$j]['href'];
+							$childrenMenu[$sub_index]['href'] = $subMenuArray[$j]['href'];
 							$childrenMenu[$sub_index]['title'] = $subMenuArray[$j]['text'];
 
 							$icon = $subMenuArray[$j]['icon'];
