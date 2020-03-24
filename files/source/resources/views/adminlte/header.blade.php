@@ -24,8 +24,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="profile/detail" class="brand-link">
-                <img src="{{ $userImageURL }}" alt="User Image" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">{{ $userName }}</span>
+                <img src="{{ $user['image'] }}" alt="User Image" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">{{ $user['name'] }}</span>
             </a>
 
             <!-- Sidebar -->

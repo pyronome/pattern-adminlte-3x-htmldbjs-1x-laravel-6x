@@ -92,7 +92,8 @@ class AdminLTE
 			'name' => '',
 			'menu_permission' => '',
 			'service_permission' => '',
-			'widget_permission' => ''
+			'widget_permission' => '',
+			'image' => 'user_images/default.jpg'
 		];
 
 		if ($adminLTEUser != null) {
