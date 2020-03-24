@@ -20,7 +20,6 @@ class HomeController extends Controller
         } // if (view()->exists('adminlte.custom.home'))
 
         $adminLTE = new AdminLTE();
-
-        return view($viewName, $adminLTE->getUserVariables());
+        return view($viewName, $adminLTE->getUserData());
     }
 }
