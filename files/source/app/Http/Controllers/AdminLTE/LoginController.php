@@ -14,16 +14,30 @@ class LoginController extends Controller
 
     public function index(Request $request)
     {
-        $viewName = 'adminlte.login';
 
-        if (view()->exists('adminlte.custom.login'))
+        $adminLTE = new AdminLTE();
+        $adminLTEUser = auth()->guard('adminlteuser')->user();
+
+        if ($adminLTEUser != null)
         {
-            $viewName = 'adminlte.custom.login';
-        } // if (view()->exists('adminlte.custom.login'))
+            return redirect($adminLTE->getAdminLTEFolder() . 'home');
+        }
+        else
+        {
 
-        $viewData['controllerName'] = $this->controllerName;
+            $viewName = 'adminlte.login';
 
-        return view($viewName, $viewData);
+            if (view()->exists('adminlte.custom.login'))
+            {
+                $viewName = 'adminlte.custom.login';
+            } // if (view()->exists('adminlte.custom.login'))
+
+            $viewData['controllerName'] = $this->controllerName;
+
+            return view($viewName, $viewData);
+
+        } // if ($adminLTEUser != null)
+
     }
 
 }
