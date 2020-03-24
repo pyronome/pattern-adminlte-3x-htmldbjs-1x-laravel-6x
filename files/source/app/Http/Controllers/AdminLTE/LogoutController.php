@@ -11,8 +11,7 @@ class LogoutController extends Controller
 {
     public function index(Request $request)
     {
-        // auth()->guard('adminlteuser')->user();
-        $this->guard('adminlteuser')->logout();
+        auth()->guard('adminlteuser')->logout();
         $request->session()->invalidate();
 
         $adminLTE = new AdminLTE();
