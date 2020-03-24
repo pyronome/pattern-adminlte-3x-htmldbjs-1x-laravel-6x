@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Storage;
 use App\AdminLTEUser;
 
 /* {{snippet:begin_class}} */
@@ -102,6 +103,21 @@ class AdminLTE
 		$adminLTEFolder = rtrim($adminLTEFolder, '/') . '/';
 
 		return $adminLTEFolder; 
+	}
+
+	public function getSideMenu($forceDefault = false) {
+
+		if (!$forceDefault
+				&& Storage::disk('local')->exists('adminlte_menu.json'))
+		{
+			$menuJSON = Storage::disk('local')->get('adminlte_menu.json');
+			return json_decode($menuJSON, true);
+		}
+		else
+		{
+			return config('adminlte_menu');
+		} // if (!$forceDefault
+
 	}
 
 	/* {{snippet:end_methods}} */
