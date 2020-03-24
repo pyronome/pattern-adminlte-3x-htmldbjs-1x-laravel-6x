@@ -5,7 +5,7 @@
             $menu = $adminLTE->getSideMenu();
             
             // Current User
-            $user_data = $controller->user_data;
+            $user_data = $adminLTE->getUserData();
             $is_admin = false;
             $permissions = array();
 
