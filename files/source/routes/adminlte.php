@@ -29,7 +29,7 @@ Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
     });
 
     Route::prefix('__layout')->group(function () {
-        Route::get('/get_widgetconfig/{pagename}', 'AdminLTELayoutController@get_widgetconfig');
+        Route::get('/get_widgetconfig/{pageName}', 'AdminLTELayoutController@get_widgetconfig');
         Route::get('/get_attributes', 'AdminLTELayoutController@get_attributes');
         Route::post('/post_widgetconfig', 'AdminLTELayoutController@post_widgetconfig');
     });

@@ -87,13 +87,13 @@ class AdminLTELayoutController extends Controller
 
         $parameters = $request->route()->parameters();
 
-        $pagename = isset($parameters['pagename'])
-                ? htmlspecialchars($parameters['pagename'])
+        $pageName = isset($parameters['pageName'])
+                ? htmlspecialchars($parameters['pageName'])
                 : '';
 
         $adminLTE = new AdminLTE();
 
-        $Widgets = $adminLTE->getPageLayout($pagename);
+        $Widgets = $adminLTE->getPageLayout($pageName);
 
         $list[0]['id'] = 1;
         $list[0]['widget_json'] = json_encode($Widgets,

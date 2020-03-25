@@ -469,13 +469,13 @@ class AdminLTE
 		return $Models;
 	}
 
-	public function getPageLayout($pagename)
+	public function getPageLayout($pageName)
 	{
 
 		$Widgets = array();
 
 		$layout = AdminLTELayout::where('deleted', false)
-				->where('pagename', $pagename)
+				->where('pagename', $pageName)
 				->orderBy('id', 'DESC')
 				->first();
 		
@@ -491,7 +491,7 @@ class AdminLTE
 				| JSON_HEX_AMP
 				| JSON_HEX_APOS));
 
-		$userWidgetsFormatted = $this->getUserWidgetsFormatted($pagename);
+		$userWidgetsFormatted = $this->getUserWidgetsFormatted($pageName);
 
 		$countWidgets = count($defaultWidgets);
 		$emptyIndex = 0;
@@ -596,14 +596,14 @@ class AdminLTE
 		return 0;
 	}
 
-	public function getUserWidgetsFormatted($pagename) {
+	public function getUserWidgetsFormatted($pageName) {
 		$userWidgetsFormatted = array();
 		
 		$currentUser = $this->getUserData();
 
 		$layout = AdminLTELayout::where('deleted', false)
 				->where('adminlteuser_id', $currentUser['id'])
-				->where('pagename', $pagename)
+				->where('pagename', $pageName)
 				->orderBy('id', 'DESC')
 				->first();
 		
