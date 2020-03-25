@@ -26,6 +26,10 @@ Route::get('/menu_configuration', 'MenuConfigurationController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/root_settings', 'RootSettingsController@index');
 Route::get('/server_information', 'ServerInformationController@index');
+Route::get('/adminlte_users', 'AdminLTEUserController@index');
+Route::get('/adminlte_user_groups', 'AdminLTEUserGroupController@index');
+Route::get('/adminlte_model_display_texts', 'AdminLTEModelDisplayTextController@index');
+
 Route::get('/setup', 'SetupController@index');
 
 Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
