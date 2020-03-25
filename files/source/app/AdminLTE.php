@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Support\Facades\Storage;
 use App\AdminLTEUser;
+use App\AdminLTELayout;
+use App\AdminLTEUserGroup;
 
 /* {{snippet:begin_class}} */
 
@@ -116,7 +118,7 @@ class AdminLTE
 				'image' => 'img/default_user_image.jpg'
 			];
 
-            $adminLTEUserGroup = \App\AdminLTEUserGroup::find(
+            $adminLTEUserGroup = AdminLTEUserGroup::find(
 					$adminLTEUser->adminlteusergroup_id);
 
 			if ($adminLTEUserGroup != null)
@@ -243,7 +245,7 @@ class AdminLTE
 		// group permissions
 		// add group permissions
 
-		$adminLTEUserGroup = \App\AdminLTEUserGroup::find(
+		$adminLTEUserGroup = AdminLTEUserGroup::find(
 				$adminLTEUser->adminlteusergroup_id);
 		
 		$decodedPermission = '';
@@ -325,7 +327,7 @@ class AdminLTE
 		// group permissions
 		// add group permissions
 
-		$adminLTEUserGroup = \App\AdminLTEUserGroup::find(
+		$adminLTEUserGroup = AdminLTEUserGroup::find(
 				$adminLTEUser->adminlteusergroup_id);
 		
 		$decodedPermission = '';
@@ -472,30 +474,24 @@ class AdminLTE
 
 		$Widgets = array();
 
-		$users = App\User::where('deleted', false)->where('pagename', $pagename)->get();
-
-		foreach ($users as $user) {
-			echo $user->name;
-		}
-
-		includeModel('__SystemLayout');
-		$list__SystemLayout = new __SystemLayout();
-		$list__SystemLayout->bufferSize = 0;
-		$list__SystemLayout->page = 0;
-		$list__SystemLayout->addFilter('deleted','==', false);
-		$list__SystemLayout->addFilter('pagename','==', $pagename);
-		$list__SystemLayout->sortByProperty('id', false);
-		$list__SystemLayout->find();
+		$layout = AdminLTELayout::where('deleted', false)
+				->where('pagename', $pagename)
+				->orderBy('id', 'DESC')
+				->first();
 		
-		if (0 == $list__SystemLayout->listCount) {
+		if (null == $layout)
+		{
 			return $Widgets;
-		}
+		} // if (null == $layout)
 
-		$object__SystemLayout = $list__SystemLayout->list[0];
-		$defaultWidgets = json_decode($object__SystemLayout->widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+		$defaultWidgets = json_decode(
+				$layout->widgets,
+				(JSON_HEX_QUOT
+				| JSON_HEX_TAG
+				| JSON_HEX_AMP
+				| JSON_HEX_APOS));
 
-		includeLibrary('adminlte/getUserWidgetsFormatted');
-		$userWidgetsFormatted = getUserWidgetsFormatted($pagename);
+		$userWidgetsFormatted = $this->getUserWidgetsFormatted($pagename);
 
 		$countWidgets = count($defaultWidgets);
 		$emptyIndex = 0;
@@ -598,6 +594,76 @@ class AdminLTE
 			}
 		}
 		return 0;
+	}
+
+	public function getUserWidgetsFormatted($pagename) {
+		$userWidgetsFormatted = array();
+		
+		$currentUser = $this->getUserData();
+
+		$layout = AdminLTELayout::where('deleted', false)
+				->where('adminlteuser_id', $currentUser['id'])
+				->where('pagename', $pagename)
+				->orderBy('id', 'DESC')
+				->first();
+		
+		if (null == $layout)
+		{
+			return $userWidgetsFormatted;
+		} // if (null == $layout)
+
+		$userwidgets = json_decode(
+				$layout->widgets,
+				(JSON_HEX_QUOT
+				| JSON_HEX_TAG
+				| JSON_HEX_AMP
+				| JSON_HEX_APOS));
+
+		$countWidgets = count($userwidgets);
+		$emptyIndex = 0;
+
+		for ($i=0; $i < $countWidgets; $i++)
+		{ 
+			$widget = $userwidgets[$i];
+			
+			$type = $widget['type'];
+			$model = $widget['model'];
+			$userWidgetIndex = $type.$model;
+
+			if ('empty' == $type)
+			{
+				$userWidgetIndex = 'empty' . $emptyIndex;
+				$emptyIndex++;
+			} // if ('empty' == $type)
+
+			if (!isset($userWidgetsFormatted[$userWidgetIndex]))
+			{
+				$userWidgetsFormatted[$userWidgetIndex] = array();
+				$userWidgetsFormatted[$userWidgetIndex]['type'] = $widget['type'];
+				$userWidgetsFormatted[$userWidgetIndex]['model'] = $widget['model'];
+			} // if (!isset($userWidgetsFormatted[$userWidgetIndex]))
+
+			$userWidgetsFormatted[$userWidgetIndex]['text'] = $widget['text'];
+			$userWidgetsFormatted[$userWidgetIndex]['href'] = $widget['href'];
+			$userWidgetsFormatted[$userWidgetIndex]['size'] = $widget['size'];
+			$userWidgetsFormatted[$userWidgetIndex]['visibility'] = $widget['visibility'];
+			$userWidgetsFormatted[$userWidgetIndex]['order'] = $i;
+			$userWidgetsFormatted[$userWidgetIndex]['icon'] = $widget['icon'];
+			$userWidgetsFormatted[$userWidgetIndex]['iconbackground'] = $widget['iconbackground'];
+
+			$userWidgetsFormatted[$userWidgetIndex]['value'] = 0;
+			
+			$userWidgetsFormatted[$userWidgetIndex]['limit'] = $widget['limit'];
+			$userWidgetsFormatted[$userWidgetIndex]['onlylastrecord'] = $widget['onlylastrecord'];
+			$userWidgetsFormatted[$userWidgetIndex]['columns'] = $widget['columns'];
+			$userWidgetsFormatted[$userWidgetIndex]['values'] = $widget['values'];
+			$userWidgetsFormatted[$userWidgetIndex]['graphtype'] = $widget['graphtype'];
+			$userWidgetsFormatted[$userWidgetIndex]['graphperiod'] = $widget['graphperiod'];
+
+			$userWidgetIndex++;
+		} // for ($i=0; $i < $countWidgets; $i++) { 
+
+		return $userWidgetsFormatted;
 	}
 
 	/* {{snippet:end_methods}} */

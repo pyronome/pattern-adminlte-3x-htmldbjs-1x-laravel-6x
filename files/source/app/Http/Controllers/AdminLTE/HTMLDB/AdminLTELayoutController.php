@@ -87,8 +87,9 @@ class AdminLTELayoutController extends Controller
 
         $pagename = htmlspecialchars($request->segment(1));
 
-        includeLibrary('adminlte/getPageLayout');
-        $Widgets = getPageLayout($pagename);
+        $adminLTE = new AdminLTE();
+
+        $Widgets = $adminLTE->getPageLayout($pagename);
 
         $list[0]['id'] = 1;
         $list[0]['widget_json'] = json_encode($Widgets,
@@ -206,8 +207,6 @@ class AdminLTELayoutController extends Controller
             } // if (!$confirmed)
 
         }
-
-
 
         /* {{snippet:end_check_values}} */
 
