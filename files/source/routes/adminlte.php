@@ -28,7 +28,7 @@ Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
         Route::post('/post', 'ForgotPasswordController@post');
     });
 
-    Route:prefix('__layout')->group(function () {
+    Route::prefix('__layout')->group(function () {
         Route::get('/get_widgetconfig', 'AdminLTELayoutController@get_widgetconfig');
         Route::get('/get_attributes', 'AdminLTELayoutController@get_attributes');
         Route::post('/post_widgetconfig', 'AdminLTELayoutController@post_widgetconfig');
