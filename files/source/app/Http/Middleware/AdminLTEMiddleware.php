@@ -50,9 +50,9 @@ class AdminLTEMiddleware
     private function isPagePublic($request) {
 
         $publicPages = [
-            '/login',
-            '/logout',
-            '/forgotpassword'
+            'login',
+            'logout',
+            'forgotpassword'
         ];
 
         return $request->is('*/('
