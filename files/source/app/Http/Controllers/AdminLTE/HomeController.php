@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\AdminLTE;
 use App\AdminLTEUser;
-use App\Action1;
 
 class HomeController extends Controller
 {
@@ -15,12 +14,12 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $viewName = 'adminlte.home';
+        $viewName = 'adminlte.' . $this->controllerName;
 
-        if (view()->exists('adminlte.custom.home'))
+        if (view()->exists('adminlte.custom.' . $this->controllerName))
         {
-            $viewName = 'adminlte.custom.home';
-        } // if (view()->exists('adminlte.custom.home'))
+            $viewName = 'adminlte.custom.' . $this->controllerName;
+        } // if (view()->exists('adminlte.custom.' . $this->controllerName))
 
         $adminLTE = new AdminLTE();
 
