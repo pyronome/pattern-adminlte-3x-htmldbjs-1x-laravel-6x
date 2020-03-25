@@ -85,7 +85,11 @@ class AdminLTELayoutController extends Controller
 
         $list = array();
 
-        $pagename = htmlspecialchars($request->segment(1));
+        $parameters = $request->route()->parameters();
+
+        $pagename = isset($parameters['pagename'])
+                ? htmlspecialchars($parameters['pagename'])
+                : '';
 
         $adminLTE = new AdminLTE();
 

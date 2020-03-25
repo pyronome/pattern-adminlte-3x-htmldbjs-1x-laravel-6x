@@ -55,12 +55,9 @@ class AdminLTEMiddleware
             '/forgotpassword'
         ];
 
-        if (preg_match('(' . implode('|', $publicPages) . ')', $request->path()) === 1)
-        {
-            return true;
-        } else {
-            return false;
-        } // if (preg_match('(' . implode('|', $publicPages) . ')', $request->path()) === 1)
+        return $request->is('*/('
+                . implode('|', $publicPages)
+                . ')');
 
     }
 
