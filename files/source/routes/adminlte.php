@@ -17,7 +17,6 @@ Route::get('/login', 'LoginController@index');
 Route::get('/logout', 'LogoutController@index');
 Route::get('/forgotpassword', 'ForgotPasswordController@index');
 
-
 Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'LoginController@get');
@@ -27,5 +26,11 @@ Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
     Route::prefix('forgotpassword')->group(function () {
 	    Route::get('/get', 'ForgotPasswordController@get');
         Route::post('/post', 'ForgotPasswordController@post');
+    });
+
+    Route:prefix('__layout')->group(function () {
+        Route::get('/get_widgetconfig', 'AdminLTELayoutController@get_widgetconfig');
+        Route::get('/get_attributes', 'AdminLTELayoutController@get_attributes');
+        Route::post('/post_widgetconfig', 'AdminLTELayoutController@post_widgetconfig');
     });
 });
