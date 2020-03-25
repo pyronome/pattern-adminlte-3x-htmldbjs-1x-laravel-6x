@@ -50,14 +50,17 @@ class AdminLTEMiddleware
     private function isPagePublic($request) {
 
         $publicPages = [
-            'login',
-            'logout',
-            'forgotpassword'
+            '/login',
+            '/logout',
+            '/forgotpassword'
         ];
 
-        return $request->is('*/('
-                . implode('|', $publicPages)
-                . ')');
+        if (preg_match('(' . implode('|', $publicPages) . ')', $request->path()) === 1)
+        {
+            return true;
+        } else {
+            return false;
+        } // if (preg_match('(' . implode('|', $publicPages) . ')', $request->path()) === 1)
 
     }
 
