@@ -32,7 +32,10 @@ Route::get('/adminlte_model_display_texts', 'AdminLTEModelDisplayTextController@
 
 Route::get('/setup', 'SetupController@index');
 
-Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
+Route::namespace('HTMLDB')
+        ->middleware(\App\Http\Middleware\AdminLTEHTMLDBMiddleware::class)
+        ->prefix('htmldb')
+        ->group(function () {
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'LoginController@get');
         Route::post('/post', 'LoginController@post');
@@ -47,5 +50,9 @@ Route::namespace('HTMLDB')->prefix('htmldb')->group(function () {
         Route::get('/get_widgetconfig/{pageName}', 'AdminLTELayoutController@get_widgetconfig');
         Route::get('/get_attributes', 'AdminLTELayoutController@get_attributes');
         Route::post('/post_widgetconfig', 'AdminLTELayoutController@post_widgetconfig');
+    });
+
+    Route::prefix('server_information')->group(function () {
+        Route::get('/get', 'ServerInformationController@get');
     });
 });
