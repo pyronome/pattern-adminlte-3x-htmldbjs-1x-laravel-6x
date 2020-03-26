@@ -115,7 +115,7 @@ class AdminLTE
 				'menu_permission' => $this->getUserMenuPermission($adminLTEUser),
 				'service_permission' => $this->getUserServicePermission($adminLTEUser),
 				'widget_permission' => '',
-				'image' => 'img/default_user_image.jpg'
+				'image' => 'img/default-user-image.png'
 			];
 
             $adminLTEUserGroup = AdminLTEUserGroup::find(
