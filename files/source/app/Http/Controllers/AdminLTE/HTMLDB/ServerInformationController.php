@@ -63,6 +63,7 @@ class ServerInformationController extends Controller
 
 		// Web Server
 		$WEB_detail = $_SERVER['SERVER_SOFTWARE'];
+		$WEB_header = $_SERVER['SERVER_SOFTWARE'];
 
 		if (strpos(strtolower($WEB_detail), 'apache') !== false) {
 			$WEB_icon_src = 'apache.png';
