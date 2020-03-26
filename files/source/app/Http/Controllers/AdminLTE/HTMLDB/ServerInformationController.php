@@ -87,10 +87,12 @@ class ServerInformationController extends Controller
 		$DB_header = 'MySQL';
 		$DB_detail = '';
 
+		/*
 		$DB_detail = ('MySQL '
 				. $DB_name
 				. ' Database on '
 				. $DB_host);
+		*/
 
 		$list[0]['DB_header'] = $DB_header;
 		$list[0]['DB_detail'] = $DB_detail;
