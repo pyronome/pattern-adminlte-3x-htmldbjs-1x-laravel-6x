@@ -50,7 +50,7 @@ class AdminLTELayoutController extends Controller
             $countProperty = count($property_list);
 
             for ($j=0; $j < $countProperty; $j++) { 
-                $property = $property_list[$j]['property'];
+                $property = $property_list[$j];
 
                 $list[$index]['id'] = ($index + 1);
                 $list[$index]['model'] = $model;
