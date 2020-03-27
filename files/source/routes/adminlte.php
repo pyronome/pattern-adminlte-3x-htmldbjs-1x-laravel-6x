@@ -47,7 +47,7 @@ Route::namespace('HTMLDB')
     });
 
     Route::prefix('__pagepermission')->group(function () {
-        Route::get('/get', 'PagePermissionController@get');
+        Route::get('/get/{pageName}', 'PagePermissionController@get');
     });
 
     Route::prefix('__layout')->group(function () {
