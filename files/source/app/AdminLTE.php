@@ -435,9 +435,13 @@ class AdminLTE
 		if (0 == count($exceptions))
 		{
 			$exceptions = [
-				'AdminLTEModelDisplayText',
+				'AdminLTE',
 				'AdminLTELayout',
-				'AdminLTEUserLayout'
+				'AdminLTEModelDisplayText',
+				'AdminLTEUser',
+				'AdminLTEUserGroup',
+				'AdminLTEUserLayout',
+				'AdminLTEVariable'
 			];
 		} // if (0 == count($exceptions))
 		

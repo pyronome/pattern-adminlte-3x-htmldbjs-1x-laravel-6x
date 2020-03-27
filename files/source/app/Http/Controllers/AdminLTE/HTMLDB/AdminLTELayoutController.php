@@ -26,17 +26,10 @@ class AdminLTELayoutController extends Controller
         ];
 
         $list = array();
-        
-        $exceptions = [
-            'AdminLTEModelDisplayText',
-            'AdminLTELayout',
-            'AdminLTEUserLayout',
-            'HTMLDB'
-        ];
 
         $adminLTE = new AdminLTE();
 
-        $Models = $adminLTE->getModelList($exceptions);
+        $Models = $adminLTE->getModelList();
 
         $countModels = count($Models);
         $index = 0;
