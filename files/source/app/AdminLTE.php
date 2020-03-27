@@ -441,7 +441,8 @@ class AdminLTE
 				'AdminLTEUser',
 				'AdminLTEUserGroup',
 				'AdminLTEUserLayout',
-				'AdminLTEVariable'
+				'AdminLTEVariable',
+				'HTMLDB'
 			];
 		} // if (0 == count($exceptions))
 		
