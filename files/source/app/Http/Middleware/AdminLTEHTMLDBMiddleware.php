@@ -31,13 +31,17 @@ class AdminLTEHTMLDBMiddleware
 
         $permissionResult = [];
 
-        if ($request->isMethod('post'))
+        if ($request->isMethod('delete'))
         {
-            $permissionResult = $this->checkUserGetPermission($request);
+            $permissionResult = $this->checkUserDeletePermission($request);
+        }
+        else if ($request->isMethod('post'))
+        {
+            $permissionResult = $this->checkUserPostPermission($request);
         }
         else
         {
-            $permissionResult = $this->checkUserPostPermission($request);
+            $permissionResult = $this->checkUserGetPermission($request);
         } // if ($request->isMethod('post'))s
 
         if ($permissionResult['error'])
@@ -64,7 +68,7 @@ class AdminLTEHTMLDBMiddleware
 
         $result = array();
         $result['error'] = false;
-        $result['error_msg'] = __('You do not have read permissions for <b>"'
+        $result['error_msg'] = __('You do not have READ permissions for <b>"'
                 . $directoryName
                 . '/'
                 . $fileName
@@ -122,7 +126,7 @@ class AdminLTEHTMLDBMiddleware
 
         $result = array();
         $result['error'] = false;
-        $result['error_msg'] = __('You do not have read permissions for <b>"'
+        $result['error_msg'] = __('You do not have WRITE permissions for <b>"'
                 . $directoryName
                 . '/'
                 . $fileName
@@ -158,6 +162,64 @@ class AdminLTEHTMLDBMiddleware
         $fileName = str_replace($extension, '', $fileName);
 
         $permission_token = $directoryName . '/' . $fileName . '/p';
+
+        $permissions = $user_data['service_permission'];
+
+        if (!in_array($permission_token, $permissions))
+        {
+            $result['error'] = true;
+        } // if (!in_array($permission_token, $permissions))
+
+        return $result;
+
+    }
+
+    public function checkUserDeletePermission($request)
+    {
+
+        $adminLTE = new AdminLTE();
+
+        $directoryName = dirname($request->path());
+        $fileName = basename($request->path());
+
+        $result = array();
+        $result['error'] = false;
+        $result['error_msg'] = __('You do not have DELETE permissions for <b>"'
+                . $directoryName
+                . '/'
+                . $fileName
+                . '"</b> service.<br>Contact your system administrator'
+                . ' for more information.');
+
+        if ($this->isPagePublic($request))
+        {
+            // Public Page
+            $result['error'] = false;
+            $result['error_msg'] = '';
+            return $result;
+        } // if ($this->isPagePublic($request))
+
+        $user_data = $adminLTE->getUserData();
+
+        if (0 == $user_data['id'])
+        {
+            $result['error'] = true;
+            return $result;
+        } // if (0 == $user_data['id'])
+
+        if (1 == $user_data['id'])
+        {
+            // Root User
+            $result['error'] = false;
+            $result['error_msg'] = '';
+            return $result;
+        } // if (1 == $user_data['id'])
+        
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $extension = '.' . $extension;
+        $fileName = str_replace($extension, '', $fileName);
+
+        $permission_token = $directoryName . '/' . $fileName . '/d';
 
         $permissions = $user_data['service_permission'];
 

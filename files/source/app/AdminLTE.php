@@ -666,6 +666,38 @@ class AdminLTE
 		return $userWidgetsFormatted;
 	}
 
+	public function checkUserEditPermission($token, $userData) {
+		if (1 == $userData['id'])
+		{
+			return true;
+		} // if (1 == $userData['id'])
+		
+		$permissions = $userData['menu_permission'];
+		$permission_token = $token . '/e';
+		if (!in_array($permission_token, $permissions))
+		{
+			return false;
+		} // if (!in_array($permission_token, $permissions))
+
+		return true;
+	}
+
+	public function checkUserViewPermission($token, $userData) {
+		if (1 == $userData['id'])
+		{
+			return true;
+		} // if (1 == $userData['id'])
+		
+		$permissions = $userData['menu_permission'];
+		$permission_token = $token . '/v';
+		if (!in_array($permission_token, $permissions))
+		{
+			return false;
+		} // if (!in_array($permission_token, $permissions))
+
+		return true;
+	}
+
 	/* {{snippet:end_methods}} */
 }
 

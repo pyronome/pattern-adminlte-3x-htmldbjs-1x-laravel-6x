@@ -46,6 +46,10 @@ Route::namespace('HTMLDB')
         Route::post('/post', 'ForgotPasswordController@post');
     });
 
+    Route::prefix('__pagepermission')->group(function () {
+        Route::get('/get', 'PagePermissionController@get');
+    });
+
     Route::prefix('__layout')->group(function () {
         Route::get('/get_widgetconfig/{pageName}', 'AdminLTELayoutController@get_widgetconfig');
         Route::get('/get_attributes', 'AdminLTELayoutController@get_attributes');
