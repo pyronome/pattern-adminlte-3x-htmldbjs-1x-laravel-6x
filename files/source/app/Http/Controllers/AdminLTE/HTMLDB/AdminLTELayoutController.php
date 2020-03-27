@@ -46,7 +46,7 @@ class AdminLTELayoutController extends Controller
             $model = ('\\App\\' . $Models[$i]);
             
             $object = new $model;
-            $property_list = $object->get_property_list();
+            $property_list = $object->getFillable();
             $countProperty = count($property_list);
 
             for ($j=0; $j < $countProperty; $j++) { 
