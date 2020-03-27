@@ -430,8 +430,17 @@ class AdminLTE
 		return base64_encode(serialize($arrayData));
 	}
 
-	public function getModelList()
+	public function getModelList($exceptions = [])
 	{
+		if (0 == count($exceptions))
+		{
+			$exceptions = [
+				'AdminLTEModelDisplayText',
+				'AdminLTELayout',
+				'AdminLTEUserLayout'
+			];
+		} // if (0 == count($exceptions))
+		
 		$Models = array();
 		$index = 0;
 
