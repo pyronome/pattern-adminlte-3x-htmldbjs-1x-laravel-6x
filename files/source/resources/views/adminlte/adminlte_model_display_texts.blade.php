@@ -288,6 +288,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/__modeldisplaytext.js"></script>
+    <script src="/assets/adminlte/js/adminlte_model_display_texts.js"></script>
 </body>
 </html>

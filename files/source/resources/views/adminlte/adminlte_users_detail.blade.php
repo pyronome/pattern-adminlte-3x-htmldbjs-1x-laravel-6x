@@ -221,6 +221,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/__systemuser.detail.js"></script>    
+    <script src="/assets/adminlte/js/adminlte_user_detail.js"></script>
 </body>
 </html>

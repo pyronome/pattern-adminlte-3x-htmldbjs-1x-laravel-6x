@@ -512,6 +512,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/__systemuser.edit.js"></script>    
+    <script src="/assets/adminlte/js/adminlte_user_edit.js"></script>
 </body>
 </html>

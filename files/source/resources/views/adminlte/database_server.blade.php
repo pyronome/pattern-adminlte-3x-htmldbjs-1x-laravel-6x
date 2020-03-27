@@ -151,6 +151,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/database_server.js"></script>    
+    <script src="/assets/adminlte/js/database_server.js"></script>
 </body>
 </html>

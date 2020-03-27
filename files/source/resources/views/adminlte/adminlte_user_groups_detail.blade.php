@@ -154,6 +154,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/__systemusergroup.detail.js"></script>    
+    <script src="/assets/adminlte/js/adminlte_user_group_detail.js"></script>
 </body>
 </html>
