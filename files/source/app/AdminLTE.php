@@ -712,6 +712,30 @@ class AdminLTE
 		return true;
 	}
 
+	public function updateDotEnv($key, $newValue, $delimiter='')
+	{
+		$path = base_path('.env');
+		// get old value from current env
+		$oldValue = env($key);
+
+		// was there any change?
+		if ($oldValue === $newValue)
+		{
+			return;
+		} // if ($oldValue === $newValue)
+
+		if (file_exists($path))
+		{
+			file_put_contents(
+				$path, str_replace(
+					$key.'='.$delimiter.$oldValue.$delimiter, 
+					$key.'='.$delimiter.$newValue.$delimiter, 
+					file_get_contents($path)
+				)
+			);
+		} // if (file_exists($path))
+	}
+
 	/* {{snippet:end_methods}} */
 }
 

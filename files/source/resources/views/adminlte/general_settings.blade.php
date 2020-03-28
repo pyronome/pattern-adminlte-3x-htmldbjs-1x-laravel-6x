@@ -49,39 +49,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <label for="default_page" class="detail-label">{{ __('Default Page') }}</label>
-                                            <input type="text"
-                                                class="form-control htmldb-field"
-                                                id="default_page"
-                                                name="default_page"
-                                                data-htmldb-field="default_page"
-                                                data-htmldb-value="@{{default_page}}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <label for="url_prefix" class="detail-label">{{ __('URL Prefix') }}</label>
-                                            <input type="text"
-                                                class="form-control htmldb-field"
-                                                id="url_prefix"
-                                                name="url_prefix"
-                                                data-htmldb-field="url_prefix"
-                                                data-htmldb-value="@{{url_prefix}}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <label for="url_directory" class="detail-label">{{ __('URL Directory') }}</label>
-                                            <input type="text"
-                                                class="form-control htmldb-field"
-                                                id="url_directory"
-                                                name="url_directory"
-                                                data-htmldb-field="url_directory"
-                                                data-htmldb-value="@{{url_directory}}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="default_language" class="detail-label">{{ __('Default Language') }}</label>
                                             <select data-placeholder="{{ __('Please Select') }}"
                                                 id="default_language"
