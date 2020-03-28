@@ -16,22 +16,10 @@ class AdminLTEUserController extends Controller
     public $protectedColumns = [];
     public $row = [];
 
-    public function get(Request $request) {
-        // start: check user get permission
-        $directoryName = basename(dirname(__FILE__));
-        $fileName = basename(__FILE__);
-
-        includeLibrary('adminlte/checkUserGetPermission');
-        $permissionResult = checkUserGetPermission($directoryName, $fileName);
-
-        if ($permissionResult['error']) {
-            $controller->errorCount = 1;
-            $controller->lastError = $permissionResult['error_msg'];
-            return false;
-        }
-        // end: check user get permission
+    public function get(Request $request)
+    {
         
-        $columns = [
+        $this->columns = [
             'id',
             'id/display_text',
             'deleted',
@@ -62,59 +50,60 @@ class AdminLTEUserController extends Controller
             'group_service_permission'
         ];
 
-        $list = array();
+        $list = [];
 
-        // is new ?
-        if (isset($parameters[0]) && ("new" == htmlspecialchars($parameters[0]))) {
+        $parameters = $request->route()->parameters();
+
+        if (isset($parameters['id'])
+                && ('new' == htmlspecialchars($parameters['id']))) {
             return false;
-        } // if (isset($parameters[0]) && ("new" == htmlspecialchars($parameters[0]))) {
+        } // if (isset($parameters['id'])
         
         $id = 0;
-        if (isset($parameters[0])) {
-            $id = (isset($parameters[0]) ? intval($parameters[0]) : 0);
-        } // if (isset($parameters[0])) {
+        if (isset($parameters['id'])) {
+            $id = (isset($parameters['id']) ? intval($parameters['id']) : 0);
+        } // if (isset($parameters['id'])) {
         
-        includeLibrary('adminlte/base64decode');
-        includeLibrary('adminlte/getObjectDisplayTexts');
-        includeModel('__SystemUserGroup');
-        $object__SystemUserGroup = new __SystemUserGroup();
+        $adminLTE = new AdminLTE();
 
-        includeModel('__SystemUser');
-        $list__SystemUser = new __SystemUser();
-        $list__SystemUser->bufferSize = 0;
-        $list__SystemUser->page = 0;
-        $list__SystemUser->addFilter('deleted','==', false);
-        if ($id > 0) {
-            $list__SystemUser->addFilter('id','==', $id);     
-        } else {
-            $list__SystemUser->sortByProperty('creationDate', false);
-        } // if ($id > 0) {
+        $objectAdminLTEUserGroup = null;
+        $objectAdminLTEUsers = null;
+        $objectAdminLTEUser = null;
 
-        $list__SystemUser->find();
+        if ($id > 0)
+        {
+            $objectAdminLTEUsers = App\AdminLTEUser::where('delete', false)
+                    ->where('id', $id)
+                    ->get();
+        }
+        else
+        {
+            $objectAdminLTEUsers = App\AdminLTEUser::where('delete', false)
+                    ->orderBy('created_at', false)
+                    ->get();
+        } // if ($id > 0)
 
-        $count__SystemUser = $list__SystemUser->listCount;
-        $object__SystemUser = NULL;
         $index = 0;
 
-        for ($i = 0; $i < $count__SystemUser; $i++) {
-            $object__SystemUser = $list__SystemUser->list[$i];
-            
-            $list[$index]['id'] = $object__SystemUser->id;
-            $list[$index]['deleted'] = $object__SystemUser->deleted;
-            $list[$index]['creationDate'] = $object__SystemUser->creationDate;
-            $list[$index]['lastUpdate'] = $object__SystemUser->lastUpdate;
-            $list[$index]['enabled'] = $object__SystemUser->enabled;
-            $list[$index]['__systemusergroup_id'] = $object__SystemUser->__systemusergroup_id;
-            $list[$index]['fullname'] = $object__SystemUser->fullname;
-            $list[$index]['username'] = $object__SystemUser->username;
-            $list[$index]['email'] = $object__SystemUser->email;
+        foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+        {
+
+            $list[$index]['id'] = $objectAdminLTEUser->id;
+            $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
+            $list[$index]['creationDate'] = $objectAdminLTEUser->creationDate;
+            $list[$index]['lastUpdate'] = $objectAdminLTEUser->lastUpdate;
+            $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
+            $list[$index]['__systemusergroup_id'] = $objectAdminLTEUser->__systemusergroup_id;
+            $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
+            $list[$index]['username'] = $objectAdminLTEUser->username;
+            $list[$index]['email'] = $objectAdminLTEUser->email;
             $list[$index]['password'] = '';
-            $list[$index]['menu_permission'] = base64decode($object__SystemUser->menu_permission);
-            $list[$index]['service_permission'] = base64decode($object__SystemUser->service_permission);
-            $list[$index]['profile_img'] = $object__SystemUser->profile_img;
+            $list[$index]['menu_permission'] = $adminLTE->base64decode($objectAdminLTEUser->menu_permission);
+            $list[$index]['service_permission'] = $adminLTE->base64decode($objectAdminLTEUser->service_permission);
+            $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
 
             // Display Texts
-            $displayTexts = getObjectDisplayTexts('__SystemUser', $object__SystemUser);
+            $displayTexts = $adminLTE->getObjectDisplayTexts('__SystemUser', $objectAdminLTEUser);
 
             $list[$index]['id/display_text'] = $displayTexts['id'];
             $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
@@ -134,35 +123,37 @@ class AdminLTEUserController extends Controller
             $list[$index]['group_menu_permission'] = '';
             $list[$index]['group_service_permission'] = '';
             
-            if (0 != $object__SystemUser->__systemusergroup_id) {
-                $object__SystemUserGroup->id = $object__SystemUser->__systemusergroup_id;
-                $object__SystemUserGroup->revert();
+            if (0 != $objectAdminLTEUser->__systemusergroup_id) {
+                $objectAdminLTEUserGroup = App\AdminLTEUserGroup::find(
+                        $objectAdminLTEUser->__systemusergroup_id);
+
+                if (null == $objectAdminLTEUserGroup)
+                {
+                    continue;
+                } // if (null == $objectAdminLTEUserGroup)
                 
-                $list[$index]['group_menu_permission'] = base64decode($object__SystemUserGroup->menu_permission);
-                $list[$index]['group_service_permission'] = base64decode($object__SystemUserGroup->service_permission);
+                $list[$index]['group_menu_permission'] = $adminLTE->base64decode(
+                        $objectAdminLTEUserGroup->menu_permission);
+                $list[$index]['group_service_permission'] = $adminLTE->base64decode(
+                        $objectAdminLTEUserGroup->service_permission);
             }
 
             $index++;
-        } // for ($i = 0; $i < $count__SystemUser; $i++) {
+
+        } // foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+
+        $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->list = $list;
+        $objectHTMLDB->columns = $this->columns;
+        $objectHTMLDB->printHTMLDBList();
+        return;
 
     }
 
-    public function get_session(Request $request) {
-        // start: check user get permission
-        $directoryName = basename(dirname(__FILE__));
-        $fileName = basename(__FILE__);
-
-        includeLibrary('adminlte/checkUserGetPermission');
-        $permissionResult = checkUserGetPermission($directoryName, $fileName);
-
-        if ($permissionResult['error']) {
-            $controller->errorCount = 1;
-            $controller->lastError = $permissionResult['error_msg'];
-            return false;
-        }
-        // end: check user get permission
+    public function get_session(Request $request)
+    {
         
-        $columns = [
+        $this->columns = [
             'id',
             'searchText',
             'sortingColumn',
@@ -172,46 +163,48 @@ class AdminLTEUserController extends Controller
             'bufferSize'
         ];
 
+        $adminLTE = new AdminLTE();
+        $parameters = $request->route()->parameters();
+
         $list = [];
 
-        includeLibrary('getModelSessionParameters');
-        $sessionParameters = getModelSessionParameters('__SystemUser');
+        $sessionParameters = $adminLTE->getModelSessionParameters(
+                $request,
+                'AdminLTEUser');
         
         if (!isset($sessionParameters['page'])) {
-            $pagename = '';
-            if (isset($parameters[0])) {
-                $pagename = htmlspecialchars($parameters[0]);
-            } // if (isset($parameters[0])) {
+            $pageName = '';
 
-            includeLibrary('adminlte/getPageLayout');
-            $Widgets = getPageLayout($pagename);
+            if (isset($parameters['pageName'])) {
+                $pageName = htmlspecialchars($parameters['pageName']);
+            } // if (isset($parameters['pageName'])) {
 
-            includeLibrary('adminlte/getRecordListLimit');
-            $bufferSize = getRecordListLimit($Widgets, '__SystemUser');
-            
-            includeModel('__SystemUser');
-            $list__SystemUser = new __SystemUser();
-            $list__SystemUser->bufferSize = 1;
-            $list__SystemUser->page = 0;
-            $list__SystemUser->addFilter('deleted','==', false);
-            $list__SystemUser->addSearchText($sessionParameters['searchText']);
-            $list__SystemUser->find();
+            $Widgets = $adminLTE->getPageLayout($pageName);
+            $bufferSize = $adminLTE->getRecordListLimit(
+                    $request,
+                    $Widgets,
+                    'AdminLTEUser');
 
-            $pageCount = ceil($list__SystemUser->getPageCount() / $bufferSize);
+            $pageCount = ceil(
+                    AdminLTEUser::where('deleted', false)->count()
+                    / $bufferSize);
 
-
-            includeLibrary('setModelSessionParameters');
-            setModelSessionParameters('__SystemUser', [
-                    'searchText' => '',
-                    'sortingColumn' => 'id',
-                    'sortingASC' => 2,
-                    'page' => 0,
-                    'pageCount' => $pageCount,
-                    'bufferSize' => $bufferSize
-            ]);
+            $adminLTE->setModelSessionParameters($request,
+                    'AdminLTEUser',
+                    [
+                        'searchText' => '',
+                        'sortingColumn' => 'id',
+                        'sortingASC' => 2,
+                        'page' => 0,
+                        'pageCount' => $pageCount,
+                        'bufferSize' => $bufferSize
+                    ]
+            );
         }
 
-        $sessionParameters = getModelSessionParameters('__SystemUser');
+        $sessionParameters = $adminLTE->getModelSessionParameters(
+                $request,
+                'AdminLTEUser');
 
         $sessionParameters['id'] = 1;
 
@@ -223,8 +216,10 @@ class AdminLTEUserController extends Controller
                     : '';
         } // for ($i = 0; $i < $columnCount; $i++) {
 
-
-
+        $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->list = $list;
+        $objectHTMLDB->columns = $this->columns;
+        $objectHTMLDB->printHTMLDBList();
         return;
 
     }
@@ -356,7 +351,7 @@ class AdminLTEUserController extends Controller
         includeLibrary('adminlte/getObjectDisplayTexts');
         
         includeModel('__SystemUserGroup');
-        $object__SystemUserGroup = new __SystemUserGroup();
+        $objectAdminLTEUserGroup = new __SystemUserGroup();
 
         includeModel('__SystemUser');
         $list__SystemUser = new __SystemUser();
@@ -368,64 +363,64 @@ class AdminLTEUserController extends Controller
         $list__SystemUser->find();
         
         $count__SystemUser = $list__SystemUser->listCount;
-        $object__SystemUser = NULL;
+        $objectAdminLTEUser = NULL;
         $index = 0;
 
         for ($i = 0; $i < $count__SystemUser; $i++) {
-            $object__SystemUser = $list__SystemUser->list[$i];
+            $objectAdminLTEUser = $list__SystemUser->list[$i];
 
-            $list[$index]['id'] = $object__SystemUser->id;
+            $list[$index]['id'] = $objectAdminLTEUser->id;
 
             if (in_array('deleted', $variables)) {
-                $list[$index]['deleted'] = $object__SystemUser->deleted;
+                $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
             } // if (in_array('deleted', $variables)) {
             
             if (in_array('creationDate', $variables)) {
-                $list[$index]['creationDate'] = $object__SystemUser->creationDate;
+                $list[$index]['creationDate'] = $objectAdminLTEUser->creationDate;
             } // if (in_array('creationDate', $variables)) {
             
             if (in_array('lastUpdate', $variables)) {
-                $list[$index]['lastUpdate'] = $object__SystemUser->lastUpdate;
+                $list[$index]['lastUpdate'] = $objectAdminLTEUser->lastUpdate;
             } // if (in_array('lastUpdate', $variables)) {
 
             if (in_array('enabled', $variables)) {
-                $list[$index]['enabled'] = $object__SystemUser->enabled;
+                $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
             } // if (in_array('enabled', $variables)) {
             
             if (in_array('__systemusergroup_id', $variables)) {
-                $list[$index]['__systemusergroup_id'] = $object__SystemUser->__systemusergroup_id;
+                $list[$index]['__systemusergroup_id'] = $objectAdminLTEUser->__systemusergroup_id;
             } // if (in_array('__systemusergroup_id', $variables)) {
 
             if (in_array('fullname', $variables)) {
-                $list[$index]['fullname'] = $object__SystemUser->fullname;
+                $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
             } // if (in_array('fullname', $variables)) {
 
             if (in_array('username', $variables)) {
-                $list[$index]['username'] = $object__SystemUser->username;
+                $list[$index]['username'] = $objectAdminLTEUser->username;
             } // if (in_array('username', $variables)) {
 
             if (in_array('email', $variables)) {
-                $list[$index]['email'] = $object__SystemUser->email;
+                $list[$index]['email'] = $objectAdminLTEUser->email;
             } // if (in_array('email', $variables)) {
 
             if (in_array('password', $variables)) {
-                $list[$index]['password'] = $object__SystemUser->password;
+                $list[$index]['password'] = $objectAdminLTEUser->password;
             } // if (in_array('password', $variables)) {
 
             if (in_array('menu_permission', $variables)) {
-                $list[$index]['menu_permission'] = base64decode($object__SystemUser->menu_permission);
+                $list[$index]['menu_permission'] = base64decode($objectAdminLTEUser->menu_permission);
             } // if (in_array('menu_permission', $variables)) {
             
             if (in_array('service_permission', $variables)) {
-                $list[$index]['service_permission'] = base64decode($object__SystemUser->service_permission);
+                $list[$index]['service_permission'] = base64decode($objectAdminLTEUser->service_permission);
             } // if (in_array('service_permission', $variables)) {
             
             if (in_array('profile_img', $variables)) {
-                $list[$index]['profile_img'] = $object__SystemUser->profile_img;
+                $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
             } // if (in_array('profile_img', $variables)) {
 
             // Display Texts
-            $displayTexts = getObjectDisplayTexts('__SystemUser', $object__SystemUser);
+            $displayTexts = getObjectDisplayTexts('__SystemUser', $objectAdminLTEUser);
 
             if (in_array('id/display_text', $variables)) {
                 $list[$index]['id/display_text'] = $displayTexts['id'];
@@ -538,13 +533,13 @@ class AdminLTEUserController extends Controller
         $list__SystemUser->find();
         
         $count__SystemUser = $list__SystemUser->listCount;
-        $object__SystemUser = NULL;
+        $objectAdminLTEUser = NULL;
         $index = 0;
             
         if ('daily' == $graphType) {
             for ($i = 0; $i < $count__SystemUser; $i++) {
-                $object__SystemUser = $list__SystemUser->list[$i];
-                $creationDate = date($dateFormat, $object__SystemUser->creationDate);
+                $objectAdminLTEUser = $list__SystemUser->list[$i];
+                $creationDate = date($dateFormat, $objectAdminLTEUser->creationDate);
 
                 if (!isset($graphData[$creationDate])) {
                     $graphData[$creationDate] = 0;
@@ -554,8 +549,8 @@ class AdminLTEUserController extends Controller
             } // for ($i = 0; $i < $count__SystemUser; $i++) {
         } else if ('monthly' == $graphType) {
             for ($i = 0; $i < $count__SystemUser; $i++) {
-                $object__SystemUser = $list__SystemUser->list[$i];
-                $creationDate = date($yearmonthFormat, $object__SystemUser->creationDate);
+                $objectAdminLTEUser = $list__SystemUser->list[$i];
+                $creationDate = date($yearmonthFormat, $objectAdminLTEUser->creationDate);
 
                 if (!isset($graphData[$creationDate])) {
                     $graphData[$creationDate] = 0;
@@ -596,20 +591,6 @@ class AdminLTEUserController extends Controller
 
     public function get_infoboxvalue(Request $request)
     {
-        // start: check user get permission
-        $directoryName = basename(dirname(__FILE__));
-        $fileName = basename(__FILE__);
-
-        includeLibrary('adminlte/checkUserGetPermission');
-        $permissionResult = checkUserGetPermission($directoryName, $fileName);
-
-        if ($permissionResult['error']) {
-            $controller->errorCount = 1;
-            $controller->lastError = $permissionResult['error_msg'];
-            return false;
-        }
-        // end: check user get permission
-        
         $columns = [
             'id',
             'model',
@@ -618,10 +599,15 @@ class AdminLTEUserController extends Controller
 
         $list = array();
         $list[0]['id'] = 1;
-        $list[0]['model'] = '__SystemUser';
+        $list[0]['model'] = 'AdminLTEUser';
         
-        includeLibrary('adminlte/getModelObjectCount');
-        $list[0]['value'] = getModelObjectCount('__SystemUser');
+        $list[0]['value'] = AdminLTEUser::where('deleted', false)->count();
+
+        $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->list = $list;
+        $objectHTMLDB->columns = $columns;
+        $objectHTMLDB->printHTMLDBList();
+        return;
     }
 
     public function get_form_delete(Request $request)
@@ -632,92 +618,93 @@ class AdminLTEUserController extends Controller
         ];
 
         $list = array();
+
+        $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->list = $list;
+        $objectHTMLDB->columns = $columns;
+        $objectHTMLDB->printHTMLDBList();
+        return;
     }
 
-    public function post_session(Request $request) {
-        // start: check user post permission
-        $directoryName = basename(dirname(__FILE__));
-        $fileName = basename(__FILE__);
+    public function post_session(Request $request)
+    {
 
-        includeLibrary('adminlte/checkUserPostPermission');
-        $permissionResult = checkUserPostPermission($directoryName, $fileName);
+        $adminLTE = new AdminLTE();
+        $objectHTMLDB = new HTMLDB();
 
-        if ($permissionResult['error']) {
-            $controller->errorCount = 1;
-            $controller->lastError = $permissionResult['error_msg'];
-            return false;
-        }
-        // end: check user post permission
-        
-        includeLibrary('getModelSessionParameters');
-        $sessionParameters = getModelSessionParameters('__SystemUser');
+        $sessionParameters = $adminLTE->getModelSessionParameters(
+                $request,
+                'AdminLTEUser');
+
+        $this->columns = [
+            'searchText',
+            'sortingColumn',
+            'sortingASC',
+            'page',
+            'bufferSize',
+            'pageCount'
+        ];
+
+        $this->row = $objectHTMLDB->requestPOSTRow(
+                $request->all(),
+                $this->columns,
+                $this->protectedColumns,
+                0,
+                true);
 
         $sessionParameters['searchText']
-                = isset($_REQUEST['htmldb_row0_searchText'])
-                ? htmlspecialchars($_REQUEST['htmldb_row0_searchText'])
+                = isset($this->row['searchText'])
+                ? htmlspecialchars($this->row['searchText'])
                 : $sessionParameters['searchText'];
 
         $sessionParameters['sortingColumn']
-                = isset($_REQUEST['htmldb_row0_sortingColumn'])
-                ? htmlspecialchars($_REQUEST['htmldb_row0_sortingColumn'])
+                = isset($this->row['sortingColumn'])
+                ? htmlspecialchars($this->row['sortingColumn'])
                 : $sessionParameters['sortingColumn'];
 
         $sessionParameters['sortingASC']
-                = isset($_REQUEST['htmldb_row0_sortingASC'])
-                ? intval($_REQUEST['htmldb_row0_sortingASC'])
+                = isset($this->row['sortingASC'])
+                ? intval($this->row['sortingASC'])
                 : $sessionParameters['sortingASC'];
 
         $sessionParameters['page']
-                = isset($_REQUEST['htmldb_row0_page'])
-                ? intval($_REQUEST['htmldb_row0_page'])
+                = isset($this->row['page'])
+                ? intval($this->row['page'])
                 : $sessionParameters['page'];
 
         $sessionParameters['bufferSize']
-                = isset($_REQUEST['htmldb_row0_bufferSize'])
-                ? intval($_REQUEST['htmldb_row0_bufferSize'])
+                = isset($this->row['bufferSize'])
+                ? intval($this->row['bufferSize'])
                 : $sessionParameters['bufferSize'];
-
         
-        if (0 == $sessionParameters['bufferSize']) {
+        if (0 == $sessionParameters['bufferSize'])
+        {
             $sessionParameters['pageCount'] = 0;
-        } else {
-            includeModel('__SystemUser');
-            $list__SystemUser = new __SystemUser();
-            $list__SystemUser->bufferSize = 1;
-            $list__SystemUser->page = 0;
-            $list__SystemUser->addFilter('deleted','==', false);
-            $list__SystemUser->addSearchText($sessionParameters['searchText']);
-            $list__SystemUser->find();
+        }
+        else
+        {
+            $sessionParameters['pageCount'] = ceil(
+                    AdminLTEUser::where('deleted', false)->count()
+                    / $sessionParameters['bufferSize']);
+        } // if (0 == $sessionParameters['bufferSize'])
 
-            $sessionParameters['pageCount'] = ceil($list__SystemUser->getPageCount() / $sessionParameters['bufferSize']);
-        }    
+        $adminLTE->setModelSessionParameters($request,
+                'AdminLTEUser',
+                $sessionParameters);
 
-        includeLibrary('setModelSessionParameters');
-        setModelSessionParameters('__SystemUser', $sessionParameters);
+        $objectHTMLDB->printResponseJSON();
+        return;
 
     }
 
-    public function post(Request $request) {
+    public function post(Request $request)
+    {
         loadLanguageFile('__systemuser', 'adminlte');
         
         $controller->errorCount = 0;
         $controller->messageCount = 0;
         $controller->lastError = '';
         $controller->lastMessage = '';
-
-        // start: check user post permission
-        $directoryName = basename(dirname(__FILE__));
-        $fileName = basename(__FILE__);
-
-        includeLibrary('adminlte/checkUserPostPermission');
-        $permissionResult = checkUserPostPermission($directoryName, $fileName);
-
-        if ($permissionResult['error']) {
-            $controller->errorCount = 1;
-            $controller->lastError = $permissionResult['error_msg'];
-            return false;
-        }
-        // end: check user post permission
 
         $current__SystemUser = null;
 
@@ -849,27 +836,27 @@ class AdminLTEUserController extends Controller
         includeLibrary('adminlte/base64encode');
 
         includeModel('__SystemUser');
-        $object__SystemUser = new __SystemUser();
-        $object__SystemUser->request($_REQUEST, 'htmldb_row0_');
+        $objectAdminLTEUser = new __SystemUser();
+        $objectAdminLTEUser->request($_REQUEST, 'htmldb_row0_');
 
-        $object__SystemUser->username = convertNameToFileName($object__SystemUser->username);
+        $objectAdminLTEUser->username = convertNameToFileName($objectAdminLTEUser->username);
         
-        $object__SystemUser->menu_permission = base64encode($object__SystemUser->menu_permission);
-        $object__SystemUser->service_permission = base64encode($object__SystemUser->service_permission);
+        $objectAdminLTEUser->menu_permission = base64encode($objectAdminLTEUser->menu_permission);
+        $objectAdminLTEUser->service_permission = base64encode($objectAdminLTEUser->service_permission);
 
         $password = isset($_REQUEST['htmldb_row0_password'])
             ? htmlspecialchars($_REQUEST['htmldb_row0_password'])
             : '';
 
         if ('' != $password) {
-            $object__SystemUser->password = $password;
+            $objectAdminLTEUser->password = $password;
         }
 
-        $object__SystemUser->profile_img = 'media/user_images/default.jpg';
+        $objectAdminLTEUser->profile_img = 'media/user_images/default.jpg';
 
-        $object__SystemUser->update();
+        $objectAdminLTEUser->update();
 
-        $_SESSION[sha1('__systemuser_lastid')] = $object__SystemUser->id;
+        $_SESSION[sha1('__systemuser_lastid')] = $objectAdminLTEUser->id;
 
         return;
 
@@ -877,21 +864,6 @@ class AdminLTEUserController extends Controller
 
     public function delete(Request $request)
     {
-
-        // start: check user delete permission
-        $directoryName = basename(dirname(__FILE__));
-        $fileName = basename(__FILE__);
-
-        includeLibrary('adminlte/checkUserDeletePermission');
-        $permissionResult = checkUserDeletePermission($directoryName, $fileName);
-
-        if ($permissionResult['error']) {
-            $controller->errorCount = 1;
-            $controller->lastError = $permissionResult['error_msg'];
-            return false;
-        }
-        // end: check user delete permission
-        
         $idcsv = isset($_REQUEST['htmldb_row0_idcsv'])
             ? htmlspecialchars($_REQUEST['htmldb_row0_idcsv'])
             : '';
@@ -911,13 +883,13 @@ class AdminLTEUserController extends Controller
         $idCount = count($ids);
         
         includeModel('__SystemUser');
-        $object__SystemUser = new __SystemUser();
+        $objectAdminLTEUser = new __SystemUser();
 
         for ($i=0; $i < $idCount; $i++) { 
-            $object__SystemUser->id = $ids[$i];
-            $object__SystemUser->revert();
-            $object__SystemUser->deleted = 1;
-            $object__SystemUser->update();
+            $objectAdminLTEUser->id = $ids[$i];
+            $objectAdminLTEUser->revert();
+            $objectAdminLTEUser->deleted = 1;
+            $objectAdminLTEUser->update();
         }
 
         if ($idCount > 0) {

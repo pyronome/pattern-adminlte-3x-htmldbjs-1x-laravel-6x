@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\AdminLTEUser;
 use App\AdminLTELayout;
 use App\AdminLTEUserGroup;
@@ -563,7 +564,8 @@ class AdminLTE
 
 	}
 
-	public function sortListByKey($arrList, $sortType, $property) {
+	public function sortListByKey($arrList, $sortType, $property)
+	{
 		if ('title' == $property) {
 			usort($arrList, $this->tr_build_sorter($property));
 		} else {
@@ -578,19 +580,22 @@ class AdminLTE
 		return $arrList;
 	}
 
-	private function build_sorter($key) {
+	private function build_sorter($key)
+	{
 		return function ($a, $b) use ($key) {
 			return strnatcmp($a[$key], $b[$key]);
 		};
 	}
 
-	private function tr_build_sorter($key) {
+	private function tr_build_sorter($key)
+	{
 		return function ($a, $b) use ($key) {
 			return $this->tr_strcmp($a[$key], $b[$key]);
 		};
 	}
 
-	private function tr_strcmp ($a , $b) {
+	private function tr_strcmp ($a , $b)
+	{
 		$lcases = array( 'a' , 'b' , 'c' , 'ç' , 'd' , 'e' , 'f' , 'g' , 'ğ' , 'h' , 'ı' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'ö' , 'p' , 'q' , 'r' , 's' , 'ş' , 't' , 'u' , 'ü' , 'w' , 'v' , 'y' , 'z' );
 		$ucases = array ( 'A' , 'B' , 'C' , 'Ç' , 'D' , 'E' , 'F' , 'G' , 'Ğ' , 'H' , 'I' , 'İ' , 'J' , 'K' , 'L' , 'M' , 'N' , 'O' , 'Ö' , 'P' , 'Q' , 'R' , 'S' , 'Ş' , 'T' , 'U' , 'Ü' , 'W' , 'V' , 'Y' , 'Z' );
 		$am = mb_strlen ( $a , 'UTF-8' );
@@ -610,7 +615,8 @@ class AdminLTE
 		return 0;
 	}
 
-	public function getUserWidgetsFormatted($pageName) {
+	public function getUserWidgetsFormatted($pageName)
+	{
 		$userWidgetsFormatted = array();
 		
 		$currentUser = $this->getUserData();
@@ -680,7 +686,8 @@ class AdminLTE
 		return $userWidgetsFormatted;
 	}
 
-	public function checkUserEditPermission($token, $userData) {
+	public function checkUserEditPermission($token, $userData)
+	{
 		if (1 == $userData['id'])
 		{
 			return true;
@@ -696,7 +703,8 @@ class AdminLTE
 		return true;
 	}
 
-	public function checkUserViewPermission($token, $userData) {
+	public function checkUserViewPermission($token, $userData)
+	{
 		if (1 == $userData['id'])
 		{
 			return true;
@@ -734,6 +742,444 @@ class AdminLTE
 				)
 			);
 		} // if (file_exists($path))
+	}
+
+	public function getObjectDisplayTexts($model, $objectCurrent)
+	{
+		$solvedDisplayTexts = array();
+
+		$displayTextDefinitions = $this->getModelDisplayTexts($model);
+		$propertyList = array_keys($displayTextDefinitions);
+		$countProperty = count($propertyList);
+		$property = '';
+		$display_text = '';
+
+		for ($i=0; $i < $countProperty; $i++)
+		{ 
+			$property = $propertyList[$i];
+			$display_text = $displayTextDefinitions[$property]['value'];
+			$type = $displayTextDefinitions[$property]['type'];
+
+			$solvedDisplayTexts[$property] = $this->getPropertyDisplayText(
+					$displayTextDefinitions,
+					$model,
+					$objectCurrent,
+					$property,
+					$display_text,
+					$type);
+		} // for ($i=0; $i < $countProperty; $i++)
+
+		return $solvedDisplayTexts;
+	}
+
+	public function getModelDisplayTexts($model)
+	{
+		$displayTexts = [];
+		
+		$model = ('\\App\\' . $model);
+		$objectTemp = new $model;
+		$property_list = $objectTemp->getFillable();
+		$countProperty = count($property_list);
+
+		for ($j=0; $j < $countProperty; $j++) { 
+			$property = $property_list[$j]['property'];
+
+			$displayTexts[$property]['value'] = '{{' . $model . '/' . $property . '}}';
+			$displayTexts[$property]['type'] = $property_list[$j]['type'];
+		} // for ($j=0; $j < $countProperty; $j++) {
+
+		$adminLTEModelDisplayText = App\AdminLTEModelDisplayText::where('deleted', false)
+				->where('model', $model)
+				->first();
+
+		if ($adminLTEModelDisplayText != null)
+		{
+			$display_texts = $adminLTEModelDisplayText->display_texts;
+
+			if ('' != $display_texts)
+			{
+				$arrDisplayTexts = json_decode(
+						$this->base64decode($display_texts),
+						(JSON_HEX_QUOT
+						| JSON_HEX_TAG
+						| JSON_HEX_AMP
+						| JSON_HEX_APOS));
+				$countDisplayText = count($arrDisplayTexts);
+
+				for ($j=0; $j < $countDisplayText; $j++)
+				{ 
+					$item = $arrDisplayTexts[$j];
+					$keys = array_keys($item);
+					$countKey = count($keys);
+
+					for ($k=0; $k < $countKey; $k++)
+					{ 
+						$property = $keys[$k];
+						$displayTexts[$property]['value'] = $item[$property];
+					} // for ($k=0; $k < $countKey; $k++)
+				} // for ($j=0; $j < $countDisplayText; $j++)
+			} // if ('' != $display_texts)
+		} // if ($adminLTEModelDisplayText != null) {
+	
+		return $displayTexts;
+	}
+
+	public function getPropertyDisplayText(
+			$displayTextDefinitions,
+			$model,
+			$objectCurrent,
+			$property,
+			$display_text,
+			$type)
+	{
+
+		$parsed = $this->getStringBetween($display_text, '{{', '}}');
+
+		while (strlen($parsed) > 0) {
+			$parsedWithMustache = '{{' . $parsed . '}}';
+			$partResult = '';
+
+			$textPart = explode('/', $parsed);
+			$countPart = count($textPart);
+			
+			if ('date' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$time = $objectCurrent->$display_text_Property;
+				} else {
+					$time = time();
+				}
+
+				$format = 'Y-m-d H:i:s';
+
+				if (3 == $countPart) {
+					$format = $textPart[2];
+				}
+
+				$partResult = date($format, $time);
+			} else if ('radio' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$value = $objectCurrent->$display_text_Property;
+
+					$optionTitles = $objectCurrent->getOptionTitles($display_text_Property);
+					$optionIndex = $objectCurrent->getOptionIndex($display_text_Property, $value);
+					
+					$partResult = $optionTitles[$optionIndex];
+				}
+			} else if ('dropdown' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$value = $objectCurrent->$display_text_Property;
+					
+					$optionTitles = $objectCurrent->getOptionTitles($display_text_Property);
+					$selections = explode(',', $value);
+					$selectionCount = count($selections);
+
+					for ($i = 0; $i < $selectionCount; $i++) {
+
+						if ($partResult != '') {
+							$partResult .= ', ';
+						} // if ($partResult != '') {
+
+						$optionIndex = $objectCurrent->getOptionIndex(
+								$display_text_Property,
+								$selections[$i]);
+
+						$partResult .= $optionTitles[$optionIndex];
+
+					} // for ($i = 0; $i < $selectionCount; $i++) {
+				}
+			} else if ('image' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$value = $objectCurrent->$display_text_Property;
+					
+					if (0 != intval($value)) {
+						$partResult = '';
+						$file_ids = explode(',', $value);
+						$fileCount = count($file_ids);
+
+						for ($i = 0; $i < $fileCount; $i++) {
+
+							/*if ($partResult != '') {
+								$partResult .= ', ';
+							} // if ($partResult != '') {*/
+							
+							$fileDetail = $this->getFileData($model, $file_ids[$i]);
+
+							$imageHTML = '<image class="showBigPhoto" src="../'
+									. $fileDetail['path']
+									. '">';
+
+							$partResult .= $imageHTML;
+
+						} // for ($i = 0; $i < $fileCount; $i++) {
+					}
+				}
+			}  else if ('file' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$value = $objectCurrent->$display_text_Property;
+					
+					if (0 != intval($value)) {
+						$partResult = '';
+						$file_ids = explode(',', $value);
+						$fileCount = count($file_ids);
+
+						for ($i = 0; $i < $fileCount; $i++) {
+
+							if ($partResult != '') {
+								$partResult .= '<br>';
+							} // if ($partResult != '') {
+							
+							$fileDetail = $this->getFileData($model, $file_ids[$i]);
+
+							$fileHTML = '<a class="btn-link text-secondary" target="_blank" href="../'
+								. $fileDetail['path']
+								. '">'
+								. '<img class="extension_icon" src="assets/img/'
+								. $fileDetail['extension']
+								. '.png">' 
+								. $fileDetail['file_name']
+								. '</a>';
+
+							$partResult .= $fileHTML;
+
+						} // for ($i = 0; $i < $fileCount; $i++) {
+					}
+				}
+			} else {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$partResult = $objectCurrent->$display_text_Property;
+				} else {
+					$externalModel = $textPart[0];
+					$externalModel = ('\\App\\' . $externalModel);
+
+					$objectExternal = new $externalModel;
+					$objectExternalInstance = null;
+
+					$idCSV = $objectCurrent->$property;
+					$ids = explode(',', $idCSV);
+					$count = count($ids);
+
+					for ($i=0; $i < $count; $i++)
+					{ 
+						$objectExternalInstance = $objectExternal->find($ids[$i]);
+
+						if (null == $objectExternalInstance)
+						{
+							continue;
+						} // if (null == $objectExternalInstance)
+
+						if ('' != $partResult) {
+							$partResult .= ', ';
+						}
+						
+						$display_text_Property = $textPart[1];
+						$partResult .= $objectExternalInstance->$display_text_property;
+					} // for ($i=0; $i < $count; $i++)
+				}
+			} // if ('date' == $type) {
+
+			$display_text = str_replace($parsedWithMustache, $partResult, $display_text);
+			$temp_text = $display_text;
+			$parsed = $this->getStringBetween($temp_text, '{{', '}}');
+		} // while (strlen($parsed) > 0) {
+		
+		return $display_text;
+	}
+
+	private function getStringBetween($string, $start, $end)
+	{
+		$string = ' ' . $string;
+		$ini = strpos($string, $start);
+		if ($ini == 0) return '';
+		$ini += strlen($start);
+		$len = strpos($string, $end, $ini) - $ini;
+		return substr($string, $ini, $len);
+	}
+
+	private function getFileData($model, $id) {
+		$fileData = array();
+
+		$tablename = strtolower($model) . "__filetable";
+
+	    $connection = DB::connection()->getPdo();
+	
+		$selectSQL = "SELECT * FROM `". $tablename . "` WHERE `id`=:id;";
+		$objPDO = $connection->prepare($selectSQL);
+		$objPDO->bindParam(':id', $id, PDO::PARAM_INT);
+		/*$objPDO->bindParam(':propertyName', $propertyName, PDO::PARAM_STR);*/
+		$objPDO->execute();
+		$data = $objPDO->fetchAll();
+		
+		foreach ($data as $row)
+		{
+			$fileData["id"] = $row["id"];
+			$fileData["object_property"] = $row["object_property"];
+			$fileData["file_name"] = $row["file_name"];
+			$fileData["path"] = $row["path"];
+			$fileData["media_type"] = $row["media_type"];
+
+			$fileNameTokens = explode('.', $row["file_name"]);
+			$fileData["extension"] = strtolower(end($fileNameTokens));
+		} // foreach ($data as $row)
+
+		return $fileData;
+	}
+
+	public function setModelSessionParameters($request, $modelName, $variables)
+	{
+
+		$sessionHash = sha1($modelName);
+		$variableKeys = array_keys($variables);
+		$variableKeyCount = count($variableKeys);
+		$variableKey = '';
+
+		for ($i = 0; $i < $variableKeyCount; $i++)
+		{
+			$variableKey = $variableKeys[$i];
+			if (null == $variables[$variableKey])
+			{
+				if ($request->session()->has($sessionHash . $variableKey))
+				{
+					$request->session()->forget($sessionHash . $variableKey);
+				}
+			} else {
+				$request->session()->put(
+						($sessionHash . $variableKey),
+						$variables[$variableKey]);
+			} // if (null == $variables[$variableKey])
+		} // for ($i = 0; $i < $variableKeyCount; $i++) {
+
+		$request->session()->flush();
+
+		return;
+
+	}
+
+	public function getModelSessionParameters($request, $modelName)
+	{
+
+		$sessionValues = $request->session()->all();
+		$sessionKeys = array_keys($sessionValues);
+		$sessionKeyCount = count($sessionKeys);
+		$sessionKey = '';
+		$sessionHash = sha1($modelName);
+		$sessionValue = '';
+		$sessionParameters = [];
+
+		for ($i = 0; $i < $sessionKeyCount; $i++) {
+			$sessionKey = $sessionKeys[$i];
+
+			if (strpos($sessionKey, $sessionHash) !== false) {
+				$sessionValue = $sessionValues[$sessionKey];
+				$sessionParameters[
+						substr($sessionKey,
+						strlen($sessionHash))] = $sessionValue;
+			} // if (strpos($sessionKey, $sessionHash) !== false) {
+		} // for ($i = 0; $i < $sessionKeyCount; $i++) {
+
+		$updateSessionParameters = false;
+
+		if (!isset($sessionParameters['searchText'])) {
+			$sessionParameters['searchText'] = '';
+			$updateSessionParameters = true;
+		}
+
+		if (!isset($sessionParameters['sortingColumn'])) {
+			$sessionParameters['sortingColumn'] = 'id';
+			$updateSessionParameters = true;
+		}
+
+		if (!isset($sessionParameters['sortingASC'])) {
+			$sessionParameters['sortingASC'] = 2;
+			$updateSessionParameters = true;
+		}
+
+		if (!isset($sessionParameters['page'])) {
+			$sessionParameters['page'] = 0;
+			$updateSessionParameters = true;
+		}
+
+		if (!isset($sessionParameters['pageCount'])) {
+			$sessionParameters['pageCount'] = 0;
+			$updateSessionParameters = true;
+		}
+
+		if (!isset($sessionParameters['bufferSize'])) {
+			$sessionParameters['bufferSize'] = 50;
+			$updateSessionParameters = true;
+		}
+
+		if ($updateSessionParameters) {
+			$this->setModelSessionParameters(
+					$request,
+					$modelName,
+					$sessionParameters);
+		}
+
+		return $sessionParameters;
+
+	}
+
+	public function getRecordListLimit($request, $Widgets, $modelName) {
+		$limit = 0;
+		$countWidgets = count($Widgets);
+		
+		for ($i=0; $i < $countWidgets; $i++) { 
+			$Widget = $Widgets[$i];
+			
+			if ('recordlist' != $Widget['type']) {
+				continue;
+			}
+			
+			if ($modelName == $Widget['model']) {
+				$limit = $Widget['limit'];
+				break;
+			}            
+		} // for ($i=0; $i < $countWidgets; $i++) {
+
+		$sessionParameters = $this->getModelSessionParameters(
+				$request,
+				$modelName);
+
+		$listCount = 0;
+		$modelNameWithNamespace = '';
+
+		if (!isset($sessionParameters['bufferSize'])
+				|| ($limit != $sessionParameters['bufferSize']))
+		{
+			$searchText = '';
+
+			if (isset($sessionParameters['searchText']))
+			{
+				$searchText = $sessionParameters['searchText'];
+				$sessionParameters['sortingColumn'] = 'id';
+				$sessionParameters['sortingAscending'] = false;
+			} // if (isset($sessionParameters['searchText']))
+
+			$sessionParameters['bufferSize'] = $limit;
+			$sessionParameters['page'] = 0;
+
+			$modelNameWithNamespace = ('\\App\\' . $modelName);
+			$listObject = new $modelNameWithNamespace();
+
+			$listCount = $listObject->where('deleted', false)->count();
+
+			$sessionParameters['pageCount'] = ceil(
+					$listCount
+					/ $sessionParameters['bufferSize']);
+			
+			$this->setModelSessionParameters($request,
+					$modelName,
+					$sessionParameters);
+
+		} // if (!isset($sessionParameters['bufferSize'])
+
+		return $limit;
 	}
 
 	/* {{snippet:end_methods}} */

@@ -49,12 +49,14 @@ Route::namespace('HTMLDB')
         Route::get('/get', 'ServerInformationController@get');
     });
 
-    Route::prefix(['adminlte_users'])->group(function () {
-        Route::get('/get', 'AdminLTEUserController@get');
+    Route::prefix('adminlte_users')->group(function () {
+        Route::get('/get/{id}', 'AdminLTEUserController@get');
+        Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');
     });
 
-    Route::prefix(['adminlteuser'])->group(function () {
-        Route::get('/get', 'AdminLTEUserController@get');
+    Route::prefix('adminlteuser')->group(function () {
+        Route::get('/get/{id}', 'AdminLTEUserController@get');
+        Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');
     });
 
     Route::prefix('__pagepermission')->group(function () {
