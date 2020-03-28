@@ -341,12 +341,6 @@
 </div>
 
 <input type="hidden" id="controller" value="{{ $controllerName }}">
-<div id="CheckFTPConnectionHTMLDB"
-    class="htmldb-table"
-    data-htmldb-priority="9000"
-    data-htmldb-read-url="htmldb/ftp_server/checkconnection?_token={{ csrf_token() }}"
-    data-htmldb-read-only="1">
-</div>
 
 <div id="ConfigurationHTMLDB"
     class="htmldb-table"

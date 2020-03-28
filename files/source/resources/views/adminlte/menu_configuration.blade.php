@@ -159,13 +159,6 @@
         </div>
     </div>
     @include('adminlte.footer')
-    <div id="CheckFTPConnectionHTMLDB"
-        class="htmldb-table"
-        data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/ftp_server/checkconnection?_token={{ csrf_token() }}"
-        data-htmldb-read-only="1"
-        data-htmldb-loader="divLoader">
-    </div>
 
     <div id="ConfigurationHTMLDB"
         class="htmldb-table"
