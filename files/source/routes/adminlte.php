@@ -34,6 +34,7 @@ Route::namespace('HTMLDB')
         ->middleware(\App\Http\Middleware\AdminLTEHTMLDBMiddleware::class)
         ->prefix('htmldb')
         ->group(function () {
+
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'LoginController@get');
         Route::post('/post', 'LoginController@post');
@@ -42,6 +43,18 @@ Route::namespace('HTMLDB')
     Route::prefix('forgotpassword')->group(function () {
 	    Route::get('/get', 'ForgotPasswordController@get');
         Route::post('/post', 'ForgotPasswordController@post');
+    });
+
+    Route::prefix('server_information')->group(function () {
+        Route::get('/get', 'ServerInformationController@get');
+    });
+
+    Route::prefix(['adminlte_users'])->group(function () {
+        Route::get('/get', 'AdminLTEUserController@get');
+    });
+
+    Route::prefix(['adminlteuser'])->group(function () {
+        Route::get('/get', 'AdminLTEUserController@get');
     });
 
     Route::prefix('__pagepermission')->group(function () {
@@ -58,7 +71,4 @@ Route::namespace('HTMLDB')
         Route::get('/get/{pageName}', 'AdminLTEWidgetController@get');
     });
 
-    Route::prefix('server_information')->group(function () {
-        Route::get('/get', 'ServerInformationController@get');
-    });
 });
