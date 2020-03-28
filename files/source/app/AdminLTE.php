@@ -615,7 +615,7 @@ class AdminLTE
 		
 		$currentUser = $this->getUserData();
 
-		$layout = AdminLTELayout::where('deleted', false)
+		$layout = AdminLTEUserLayout::where('deleted', false)
 				->where('adminlteuser_id', $currentUser['id'])
 				->where('pagename', $pageName)
 				->orderBy('id', 'DESC')
