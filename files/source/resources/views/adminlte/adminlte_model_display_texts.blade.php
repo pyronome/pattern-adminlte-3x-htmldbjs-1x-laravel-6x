@@ -1,6 +1,6 @@
 @include('adminlte.head')
 
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="__modeldisplaytext">
+<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="adminlte_model_display_texts">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">

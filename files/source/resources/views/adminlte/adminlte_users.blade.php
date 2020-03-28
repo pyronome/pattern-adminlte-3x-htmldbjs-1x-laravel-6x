@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="__systemuser">
+<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="adminlte_user">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
