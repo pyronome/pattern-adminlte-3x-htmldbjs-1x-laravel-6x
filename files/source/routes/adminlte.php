@@ -56,6 +56,10 @@ Route::namespace('HTMLDB')
         Route::post('/post_widgetconfig', 'AdminLTELayoutController@post_widgetconfig');
     });
 
+    Route::prefix('__widgets')->group(function () {
+        Route::get('/get/{pageName}', 'AdminLTEWidgetController@get');
+    });
+
     Route::prefix('server_information')->group(function () {
         Route::get('/get', 'ServerInformationController@get');
     });
