@@ -782,7 +782,7 @@ class AdminLTE
 		$countProperty = count($property_list);
 
 		for ($j=0; $j < $countProperty; $j++) { 
-			$property = $property_list[$j]['property'];
+			$property = $property_list[$j];
 
 			$displayTexts[$property]['value'] = '{{' . $model . '/' . $property . '}}';
 			$displayTexts[$property]['type'] = $property_list[$j]['type'];
