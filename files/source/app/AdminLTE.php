@@ -1125,7 +1125,8 @@ class AdminLTE
 
 	}
 
-	public function getRecordListLimit($request, $Widgets, $modelName) {
+	public function getRecordListLimit($request, $Widgets, $modelName)
+	{
 		$limit = 0;
 		$countWidgets = count($Widgets);
 		
@@ -1180,6 +1181,97 @@ class AdminLTE
 		} // if (!isset($sessionParameters['bufferSize'])
 
 		return $limit;
+	}
+
+	public function getRecordListValueVariables($Widgets, $modelName)
+	{
+		$arrayValues = array();
+		$countWidgets = count($Widgets);
+		
+		for ($i=0; $i < $countWidgets; $i++) { 
+			$Widget = $Widgets[$i];
+
+			if ('recordlist' != $Widget['type']) {
+				continue;
+			}
+			
+			if ($modelName == $Widget['model']) {
+				$columns_csv = $Widget['columns'];
+
+				if ('' != $columns_csv) {
+					$values_csv = $Widget['values'];
+					$arrayValues = explode(',', $values_csv);
+				}
+				
+				break;
+			}
+		} // for ($i=0; $i < $countWidgets; $i++) {
+
+		return $arrayValues;
+	}
+
+	public function getRecordListType($Widgets, $modelName)
+	{
+		$onlylastrecord = false;
+		$countWidgets = count($Widgets);
+		
+		for ($i=0; $i < $countWidgets; $i++) { 
+			$Widget = $Widgets[$i];
+			
+			if ('recordlist' != $Widget['type']) {
+				continue;
+			}
+			
+			if ($modelName == $Widget['model']) {
+				$onlylastrecord = (1 == intval($Widget['onlylastrecord']));
+				break;
+			}
+		} // for ($i=0; $i < $countWidgets; $i++) {
+
+		return $onlylastrecord;
+	}
+
+	public function getModelForeignSortColumn($model, $identifier)
+	{
+		$dictionary = array();
+		$dictionary['AdminLTEUser']['adminlteusergroup_id'] = 'title';
+		$dictionary['AdminLTEUserLayout']['adminlteuser_id'] = 'fullname';
+		
+		$identifier = str_replace('DisplayText', '', $identifier);
+
+		if (!isset($dictionary[$model])) {
+			return $identifier;
+		}
+
+		if (!isset($dictionary[$model][$identifier])) {
+			return $identifier;
+		}
+
+		return ($identifier . '/' . $dictionary[$model][$identifier]);
+	}
+
+	public function getRecordGraphProperties($Widgets, $modelName) {
+		$result = array();
+		$result['type'] = 'daily';
+		$result['period'] = 1;
+
+		$countWidgets = count($Widgets);
+		
+		for ($i=0; $i < $countWidgets; $i++) { 
+			$widget = $Widgets[$i];
+			
+			if ('recordgraph' != $widget['type']) {
+				continue;
+			}
+			
+			if ($modelName == $widget['model']) {
+				$result['type'] = $widget['graphtype'];
+				$result['period'] = intval($widget['graphperiod']);
+				break;
+			}            
+		} // for ($i=0; $i < $countWidgets; $i++) {
+
+		return $result;
 	}
 
 	/* {{snippet:end_methods}} */
