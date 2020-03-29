@@ -54,7 +54,7 @@ Route::namespace('HTMLDB')
         Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');
         Route::get('/get_recordlist/{pageName}', 'AdminLTEUserController@get_recordlist');
         Route::get('/get_recordgraphdata/{pageName}', 'AdminLTEUserController@get_recordgraphdata');
-        Route::get('/get_infoboxvalue', 'AdminLTEUserController@get_infoboxvalue');
+        Route::get('/get_infoboxvalue/{pageName}', 'AdminLTEUserController@get_infoboxvalue');
         Route::get('/get_form_delete', 'AdminLTEUserController@get_form_delete');
         Route::post('/post_session', 'AdminLTEUserController@post_session');
     });
@@ -64,7 +64,7 @@ Route::namespace('HTMLDB')
         Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');
         Route::get('/get_recordlist/{pageName}', 'AdminLTEUserController@get_recordlist');
         Route::get('/get_recordgraphdata/{pageName}', 'AdminLTEUserController@get_recordgraphdata');
-        Route::get('/get_infoboxvalue', 'AdminLTEUserController@get_infoboxvalue');
+        Route::get('/get_infoboxvalue/{pageName}', 'AdminLTEUserController@get_infoboxvalue');
         Route::get('/get_form_delete', 'AdminLTEUserController@get_form_delete');
         Route::post('/post_session', 'AdminLTEUserController@post_session');
     });
