@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\AdminLTE;
 use App\AdminLTEUser;
+use App\AdminLTEUserGroup;
 use App\HTMLDB;
 
 class AdminLTEUserController extends Controller
@@ -124,7 +125,7 @@ class AdminLTEUserController extends Controller
             $list[$index]['group_service_permission'] = '';
             
             if (0 != $objectAdminLTEUser->adminlteusergroup_id) {
-                $objectAdminLTEUserGroup = App\AdminLTEUserGroup::find(
+                $objectAdminLTEUserGroup = AdminLTEUserGroup::find(
                         $objectAdminLTEUser->adminlteusergroup_id);
 
                 if (null == $objectAdminLTEUserGroup)
@@ -337,9 +338,9 @@ class AdminLTEUserController extends Controller
             } // if (in_array($defaultColumn, $variables)) {
         } // for ($i=0; $i < $countDefaultColumns; $i++) {
         
-        $objectAdminLTEUserGroup = new App\AdminLTEUserGroup();
+        $objectAdminLTEUserGroup = new AdminLTEUserGroup();
 
-        $objectAdminLTEUsers = App\AdminLTEUser::where('deleted', false)
+        $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
                 ->orderBy($sortingColumn, (($sortingAscending) ? 'asc' : 'desc'))
                 ->get();
         $objectAdminLTEUser = NULL;
