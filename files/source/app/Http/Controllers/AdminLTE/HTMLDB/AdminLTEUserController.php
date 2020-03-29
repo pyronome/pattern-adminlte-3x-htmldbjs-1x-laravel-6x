@@ -79,7 +79,7 @@ class AdminLTEUserController extends Controller
         else
         {
             $objectAdminLTEUsers = App\AdminLTEUser::where('delete', false)
-                    ->orderBy('created_at', false)
+                    ->orderBy('created_at', 'desc')
                     ->get();
         } // if ($id > 0)
 
@@ -340,7 +340,7 @@ class AdminLTEUserController extends Controller
         $objectAdminLTEUserGroup = new App\AdminLTEUserGroup();
 
         $objectAdminLTEUsers = App\AdminLTEUser::where('deleted', false)
-                ->orderBy($sortingColumn, $sortingAscending)
+                ->orderBy($sortingColumn, (($sortingAscending) ? 'asc' : 'desc'))
                 ->get();
         $objectAdminLTEUser = NULL;
         $index = 0;
@@ -507,7 +507,7 @@ class AdminLTEUserController extends Controller
 
         $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
                 ->where('creationDate', '>=', $fromDate)
-                ->orderBy('creationDate', true)
+                ->orderBy('creationDate', 'asc')
                 ->get();
 
         $objectAdminLTEUser = NULL;
