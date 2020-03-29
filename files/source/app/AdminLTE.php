@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\AdminLTEUser;
 use App\AdminLTELayout;
 use App\AdminLTEUserGroup;
+use App\AdminLTEModelDisplayText;
 
 /* {{snippet:begin_class}} */
 
@@ -785,10 +786,10 @@ class AdminLTE
 			$property = $property_list[$j];
 
 			$displayTexts[$property]['value'] = '{{' . $model . '/' . $property . '}}';
-			$displayTexts[$property]['type'] = $property_list[$j]['type'];
+			$displayTexts[$property]['type'] = 'text';
 		} // for ($j=0; $j < $countProperty; $j++) {
 
-		$adminLTEModelDisplayText = App\AdminLTEModelDisplayText::where('deleted', false)
+		$adminLTEModelDisplayText = AdminLTEModelDisplayText::where('deleted', false)
 				->where('model', $model)
 				->first();
 
