@@ -24,10 +24,10 @@ class AdminLTEUserController extends Controller
             'id/display_text',
             'deleted',
             'deleted/display_text',
-            'creationDate',
-            'creationDate/display_text',
-            'lastUpdate',
-            'lastUpdate/display_text',
+            'created_at',
+            'created_at/display_text',
+            'updated_at',
+            'updated_at/display_text',
             'enabled',
             'enabled/display_text',
             'adminlteusergroup_id',
@@ -90,8 +90,8 @@ class AdminLTEUserController extends Controller
 
             $list[$index]['id'] = $objectAdminLTEUser->id;
             $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
-            $list[$index]['creationDate'] = $objectAdminLTEUser->creationDate;
-            $list[$index]['lastUpdate'] = $objectAdminLTEUser->lastUpdate;
+            $list[$index]['created_at'] = $objectAdminLTEUser->created_at;
+            $list[$index]['updated_at'] = $objectAdminLTEUser->updated_at;
             $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
             $list[$index]['adminlteusergroup_id'] = $objectAdminLTEUser->adminlteusergroup_id;
             $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
@@ -107,8 +107,8 @@ class AdminLTEUserController extends Controller
 
             $list[$index]['id/display_text'] = $displayTexts['id'];
             $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
-            $list[$index]['creationDate/display_text'] = $displayTexts['creationDate'];
-            $list[$index]['lastUpdate/display_text'] = $displayTexts['lastUpdate'];
+            $list[$index]['created_at/display_text'] = $displayTexts['created_at'];
+            $list[$index]['updated_at/display_text'] = $displayTexts['updated_at'];
             $list[$index]['enabled/display_text'] = $displayTexts['enabled'];
             $list[$index]['adminlteusergroup_id/display_text'] = $displayTexts['adminlteusergroup_id'];
             $list[$index]['fullname/display_text'] = $displayTexts['fullname'];
@@ -301,10 +301,10 @@ class AdminLTEUserController extends Controller
             'id/display_text',
             'deleted',
             'deleted/display_text',
-            'creationDate',
-            'creationDate/display_text',
-            'lastUpdate',
-            'lastUpdate/display_text',
+            'created_at',
+            'created_at/display_text',
+            'updated_at',
+            'updated_at/display_text',
             'enabled',
             'enabled/display_text',
             'adminlteusergroup_id',
@@ -353,13 +353,13 @@ class AdminLTEUserController extends Controller
                 $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
             } // if (in_array('deleted', $variables)) {
             
-            if (in_array('creationDate', $variables)) {
-                $list[$index]['creationDate'] = $objectAdminLTEUser->creationDate;
-            } // if (in_array('creationDate', $variables)) {
+            if (in_array('created_at', $variables)) {
+                $list[$index]['created_at'] = $objectAdminLTEUser->created_at;
+            } // if (in_array('created_at', $variables)) {
             
-            if (in_array('lastUpdate', $variables)) {
-                $list[$index]['lastUpdate'] = $objectAdminLTEUser->lastUpdate;
-            } // if (in_array('lastUpdate', $variables)) {
+            if (in_array('updated_at', $variables)) {
+                $list[$index]['updated_at'] = $objectAdminLTEUser->updated_at;
+            } // if (in_array('updated_at', $variables)) {
 
             if (in_array('enabled', $variables)) {
                 $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
@@ -409,13 +409,13 @@ class AdminLTEUserController extends Controller
                 $list[$index]['id/display_text'] = $displayTexts['id'];
             } // if (in_array('id/display_text', $variables)) {
             
-            if (in_array('creationDate/display_text', $variables)) {
-                $list[$index]['creationDate/display_text'] = $displayTexts['creationDate'];
-            } // if (in_array('creationDate/display_text', $variables)) {
+            if (in_array('created_at/display_text', $variables)) {
+                $list[$index]['created_at/display_text'] = $displayTexts['created_at'];
+            } // if (in_array('created_at/display_text', $variables)) {
 
-            if (in_array('lastUpdate/display_text', $variables)) {
-                $list[$index]['lastUpdate/display_text'] = $displayTexts['lastUpdate'];
-            } // if (in_array('lastUpdate/display_text', $variables)) {
+            if (in_array('updated_at/display_text', $variables)) {
+                $list[$index]['updated_at/display_text'] = $displayTexts['updated_at'];
+            } // if (in_array('updated_at/display_text', $variables)) {
 
             if (in_array('deleted/display_text', $variables)) {
                 $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
@@ -506,8 +506,8 @@ class AdminLTEUserController extends Controller
         $graphData = array();
 
         $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
-                ->where('creationDate', '>=', $fromDate)
-                ->orderBy('creationDate', 'asc')
+                ->where('created_at', '>=', $fromDate)
+                ->orderBy('created_at', 'asc')
                 ->get();
 
         $objectAdminLTEUser = NULL;
@@ -516,24 +516,24 @@ class AdminLTEUserController extends Controller
         if ('daily' == $graphType) {
             foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
             {
-                $creationDate = date($dateFormat, $objectAdminLTEUser->creationDate);
+                $created_at = date($dateFormat, $objectAdminLTEUser->created_at);
 
-                if (!isset($graphData[$creationDate])) {
-                    $graphData[$creationDate] = 0;
+                if (!isset($graphData[$created_at])) {
+                    $graphData[$created_at] = 0;
                 }
 
-                $graphData[$creationDate]++;
+                $graphData[$created_at]++;
             } // for ($i = 0; $i < $count__SystemUser; $i++) {
         } else if ('monthly' == $graphType) {
             foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
             {
-                $creationDate = date($yearMonthFormat, $objectAdminLTEUser->creationDate);
+                $created_at = date($yearMonthFormat, $objectAdminLTEUser->created_at);
 
-                if (!isset($graphData[$creationDate])) {
-                    $graphData[$creationDate] = 0;
+                if (!isset($graphData[$created_at])) {
+                    $graphData[$created_at] = 0;
                 }
 
-                $graphData[$creationDate]++;
+                $graphData[$created_at]++;
             } // for ($i = 0; $i < $count__SystemUser; $i++) {
         } // if ('daily' == $graphType) {
         
@@ -546,15 +546,15 @@ class AdminLTEUserController extends Controller
 
         $graphJSON = '';
         for ($i=0; $i < $countKeys; $i++) {
-            $creationDate = $keys[$i];
-            $countRecord = $graphData[$creationDate];
+            $created_at = $keys[$i];
+            $countRecord = $graphData[$created_at];
 
             if ($graphJSON != '') {
                 $graphJSON .= ',';
             } // if ($graphJSON != '') {
 
             $graphJSON .= '{';
-            $graphJSON .= ('"date":"' . $creationDate . '",');
+            $graphJSON .= ('"date":"' . $created_at . '",');
             $graphJSON .= ('"record":' . $countRecord . '');
             $graphJSON .= '}';
         }
