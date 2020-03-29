@@ -1061,8 +1061,6 @@ class AdminLTE
 			} // if (null == $variables[$variableKey])
 		} // for ($i = 0; $i < $variableKeyCount; $i++) {
 
-		$request->session()->flush();
-
 		return;
 
 	}
