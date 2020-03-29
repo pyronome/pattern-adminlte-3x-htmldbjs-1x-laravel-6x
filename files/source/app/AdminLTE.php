@@ -780,6 +780,13 @@ class AdminLTE
 		$modelNameWithNamespace = ('\\App\\' . $model);
 		$objectTemp = new $modelNameWithNamespace;
 		$property_list = $objectTemp->getFillable();
+
+		array_unshift($property_list,
+				'id',
+				'deleted',
+				'created_at',
+				'updated_at');
+
 		$countProperty = count($property_list);
 
 		for ($j=0; $j < $countProperty; $j++) { 
