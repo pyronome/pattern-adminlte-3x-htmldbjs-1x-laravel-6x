@@ -777,8 +777,8 @@ class AdminLTE
 	{
 		$displayTexts = [];
 		
-		$model = ('\\App\\' . $model);
-		$objectTemp = new $model;
+		$modelNameWithNamespace = ('\\App\\' . $model);
+		$objectTemp = new $modelNameWithNamespace;
 		$property_list = $objectTemp->getFillable();
 		$countProperty = count($property_list);
 
@@ -956,9 +956,8 @@ class AdminLTE
 					$partResult = $objectCurrent->$display_text_Property;
 				} else {
 					$externalModel = $textPart[0];
-					$externalModel = ('\\App\\' . $externalModel);
-
-					$objectExternal = new $externalModel;
+					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
+					$objectExternal = new $externalModelNameWithNamespace;
 					$objectExternalInstance = null;
 
 					$idCSV = $objectCurrent->$property;

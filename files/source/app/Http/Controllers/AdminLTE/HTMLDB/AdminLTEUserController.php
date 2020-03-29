@@ -209,11 +209,12 @@ class AdminLTEUserController extends Controller
 
         $sessionParameters['id'] = 1;
 
-        $columnCount = count($columns);
+        $columnCount = count($this->columns);
 
         for ($i = 0; $i < $columnCount; $i++) {
-            $list[0][$columns[$i]] = isset($sessionParameters[$columns[$i]])
-                    ? $sessionParameters[$columns[$i]]
+            $list[0][$this->columns[$i]]
+                    = isset($sessionParameters[$this->columns[$i]])
+                    ? $sessionParameters[$this->columns[$i]]
                     : '';
         } // for ($i = 0; $i < $columnCount; $i++) {
 
