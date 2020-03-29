@@ -90,8 +90,8 @@ class AdminLTEUserController extends Controller
 
             $list[$index]['id'] = $objectAdminLTEUser->id;
             $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
-            $list[$index]['created_at'] = $objectAdminLTEUser->created_at;
-            $list[$index]['updated_at'] = $objectAdminLTEUser->updated_at;
+            $list[$index]['created_at'] = $objectAdminLTEUser->created_at->timestamp;
+            $list[$index]['updated_at'] = $objectAdminLTEUser->updated_at->timestamp;
             $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
             $list[$index]['adminlteusergroup_id'] = $objectAdminLTEUser->adminlteusergroup_id;
             $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
@@ -354,7 +354,7 @@ class AdminLTEUserController extends Controller
             } // if (in_array('deleted', $variables)) {
             
             if (in_array('created_at', $variables)) {
-                $list[$index]['created_at'] = $objectAdminLTEUser->created_at;
+                $list[$index]['created_at'] = $objectAdminLTEUser->created_at->timestamp;
             } // if (in_array('created_at', $variables)) {
             
             if (in_array('updated_at', $variables)) {
@@ -516,7 +516,7 @@ class AdminLTEUserController extends Controller
         if ('daily' == $graphType) {
             foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
             {
-                $created_at = date($dateFormat, $objectAdminLTEUser->created_at);
+                $created_at = $objectAdminLTEUser->created_at->format($dateFormat);
 
                 if (!isset($graphData[$created_at])) {
                     $graphData[$created_at] = 0;
@@ -527,7 +527,7 @@ class AdminLTEUserController extends Controller
         } else if ('monthly' == $graphType) {
             foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
             {
-                $created_at = date($yearMonthFormat, $objectAdminLTEUser->created_at);
+                $created_at = $objectAdminLTEUser->created_at->format($yearMonthFormat);
 
                 if (!isset($graphData[$created_at])) {
                     $graphData[$created_at] = 0;
