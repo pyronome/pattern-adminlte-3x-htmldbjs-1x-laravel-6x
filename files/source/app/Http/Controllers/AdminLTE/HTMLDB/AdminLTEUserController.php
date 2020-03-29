@@ -407,57 +407,70 @@ class AdminLTEUserController extends Controller
                     'AdminLTEUser',
                     $objectAdminLTEUser);
 
+            $list[$index]['id/display_text'] = $list[$index]['id'];
             if (in_array('id/display_text', $variables)) {
                 $list[$index]['id/display_text'] = $displayTexts['id'];
             } // if (in_array('id/display_text', $variables)) {
             
+            $list[$index]['created_at/display_text'] = $list[$index]['created_at'];
             if (in_array('created_at/display_text', $variables)) {
                 $list[$index]['created_at/display_text'] = $displayTexts['created_at'];
             } // if (in_array('created_at/display_text', $variables)) {
 
+            $list[$index]['updated_at/display_text'] = $list[$index]['updated_at'];
             if (in_array('updated_at/display_text', $variables)) {
                 $list[$index]['updated_at/display_text'] = $displayTexts['updated_at'];
             } // if (in_array('updated_at/display_text', $variables)) {
 
+            $list[$index]['deleted/display_text'] = $list[$index]['deleted'];
             if (in_array('deleted/display_text', $variables)) {
                 $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
             } // if (in_array('deleted/display_text', $variables)) {
 
+            $list[$index]['enabled/display_text'] = $list[$index]['enabled'];
             if (in_array('enabled/display_text', $variables)) {
                 $list[$index]['enabled/display_text'] = $displayTexts['enabled'];
             } // if (in_array('enabled/display_text', $variables)) {
 
+            $list[$index]['adminlteusergroup_id/display_text'] = $list[$index]['adminlteusergroup_id'];
             if (in_array('adminlteusergroup_id/display_text', $variables)) {
                 $list[$index]['adminlteusergroup_id/display_text']
                         = $displayTexts['adminlteusergroup_id'];
             } // if (in_array('adminlteusergroup_id/display_text', $variables)) {
 
+            $list[$index]['fullname/display_text'] = $list[$index]['fullname'];
             if (in_array('fullname/display_text', $variables)) {
                 $list[$index]['fullname/display_text'] = $displayTexts['fullname'];
             } // if (in_array('fullname/display_text', $variables)) {
 
+            $list[$index]['username/display_text'] = $list[$index]['username'];
             if (in_array('username/display_text', $variables)) {
                 $list[$index]['username/display_text'] = $displayTexts['username'];
             } // if (in_array('username/display_text', $variables)) {
 
+            $list[$index]['email/display_text'] = $list[$index]['email'];
             if (in_array('email/display_text', $variables)) {
                 $list[$index]['email/display_text'] = $displayTexts['email'];
             } // if (in_array('email/display_text', $variables)) {
 
+            $list[$index]['password/display_text'] = $list[$index]['password'];
             if (in_array('password/display_text', $variables)) {
                 $list[$index]['password/display_text'] = $displayTexts['password'];
             } // if (in_array('password/display_text', $variables)) {
 
+            $list[$index]['menu_permission/display_text'] = $list[$index]['menu_permission'];
             if (in_array('menu_permission/display_text', $variables)) {
                 $list[$index]['menu_permission/display_text']
                         = $displayTexts['menu_permission'];
             } // if (in_array('menu_permission/display_text', $variables)) {
 
+            $list[$index]['service_permission/display_text'] = $list[$index]['service_permission'];
             if (in_array('service_permission/display_text', $variables)) {
                 $list[$index]['service_permission/display_text']
                         = $displayTexts['service_permission'];
             } // if (in_array('service_permission/display_text', $variables)) {
 
+            $list[$index]['profile_img/display_text'] = $list[$index]['profile_img'];
             if (in_array('profile_img/display_text', $variables)) {
                 $list[$index]['profile_img/display_text']
                         = $displayTexts['profile_img'];
