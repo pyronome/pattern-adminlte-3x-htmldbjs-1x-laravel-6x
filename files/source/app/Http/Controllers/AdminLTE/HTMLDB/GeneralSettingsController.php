@@ -25,7 +25,7 @@ class GeneralSettingsController extends Controller
             'default_language',
             'timezone',
             'date_format',
-            'yearmonth_format',
+            'year_month_format',
             'time_format',
             'number_format',
             'google_maps_api_key'
