@@ -77,7 +77,7 @@
                                                 name="default_language"
                                                 class="form-control htmldb-select2 htmldb-field htmldb-select"
                                                 data-htmldb-option-table="LanguageHTMLDB"
-                                                data-htmldb-option-value="@{{id}}"
+                                                data-htmldb-option-value="@{{iso}}"
                                                 data-htmldb-option-title="@{{name}}"
                                                 data-htmldb-field="default_language"
                                                 data-htmldb-value="@{{default_language}}"
