@@ -162,7 +162,7 @@
 
     <div id="ConfigurationHTMLDB"
         class="htmldb-table"
-        data-htmldb-priority="2"
+        data-htmldb-priority="0"
         data-htmldb-read-url="htmldb/menu_configuration/get?_token={{ csrf_token() }}"
         data-htmldb-write-url="htmldb/menu_configuration/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
