@@ -49,6 +49,13 @@ Route::namespace('HTMLDB')
         Route::get('/get', 'ServerInformationController@get');
     });
 
+    Route::prefix('general_settings')->group(function () {
+        Route::get('/get_languages', 'GeneralSettingsController@get_languages');
+        Route::get('/get_timezones', 'GeneralSettingsController@get_timezones');
+        Route::get('/get', 'GeneralSettingsController@get');
+        Route::post('/post', 'GeneralSettingsController@post');
+    });
+
     Route::prefix('adminlte_users')->group(function () {
         Route::get('/get/{id}', 'AdminLTEUserController@get');
         Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');

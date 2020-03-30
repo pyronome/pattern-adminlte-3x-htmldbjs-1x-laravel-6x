@@ -52,7 +52,7 @@ class LoginController extends Controller
 
             auth()->guard('adminlteuser')->login($adminLTEUser);
 
-            $landingPage = getenv('ADMINLTE_LANDING_PAGE');
+            $landingPage = config('adminlte.landing_page');
 
             if ($landingPage === false)
             {

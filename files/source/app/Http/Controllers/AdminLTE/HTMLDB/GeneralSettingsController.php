@@ -4,100 +4,104 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\AdminLTE;
 use App\AdminLTEUser;
 use App\HTMLDB;
 
-class AdminLTELayoutController extends Controller
+class GeneralSettingsController extends Controller
 {
-
     public $columns = [];
     public $protectedColumns = [];
     public $row = [];
 
-    public function get_attributes(Request $request)
+    public function get(Request $request)
     {
 
-        $this->columns = [
+        $columns = [
             'id',
-            'model',
-            'attribute'
+            'debug_mode',
+            'project_title',
+            'main_folder',
+            'default_language',
+            'timezone',
+            'date_format',
+            'yearmonth_format',
+            'time_format',
+            'number_format',
+            'google_maps_api_key'
         ];
 
-        $list = array();
+        $list = [];
 
-        $adminLTE = new AdminLTE();
-
-        $Models = $adminLTE->getModelList();
-
-        $countModels = count($Models);
-        $index = 0;
-
-        for ($i=0; $i < $countModels; $i++)
-        {
-            $model = ('\\App\\' . $Models[$i]);
-            
-            $object = new $model;
-            $property_list = $object->getFillable();
-            $countProperty = count($property_list);
-
-            for ($j=0; $j < $countProperty; $j++) { 
-                $property = $property_list[$j];
-
-                $list[$index]['id'] = ($index + 1);
-                $list[$index]['model'] = $model;
-                $list[$index]['attribute'] = $property;
-
-                $index++;
-
-                $list[$index]['id'] = ($index + 1);
-                $list[$index]['model'] = $model;
-                $list[$index]['attribute'] = $property . '/display_text';
-
-                $index++;
-
-            } // for ($j=0; $j < $countProperty; $j++) { 
-        } // for ($i=0; $i < $countModels; $i++) {
+        $list[0]['id'] = 1;
+        $list[0]['debug_mode'] = (config('app.debug') ? 1 : 0);
+        $list[0]['project_title'] = config('adminlte.project_title');
+        $list[0]['main_folder'] = config('adminlte.main_folder');
+        $list[0]['landing_page'] = config('adminlte.landing_page');
+        $list[0]['default_language'] = config('adminlte.default_language');
+        $list[0]['timezone'] = config('adminlte.timezone');
+        $list[0]['date_format'] = config('adminlte.date_format');
+        $list[0]['time_format'] = config('adminlte.time_format');
+        $list[0]['year_month_format'] = config('adminlte.year_month_format');
+        $list[0]['number_format'] = config('adminlte.number_format');
+        $list[0]['google_maps_api_key'] = config('adminlte.google_maps_api_key');
 
         $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->columns = $columns;
         $objectHTMLDB->list = $list;
-        $objectHTMLDB->columns = $this->columns;
         $objectHTMLDB->printHTMLDBList();
         return;
 
     }
 
-    public function get_widgetconfig(Request $request)
+    public function get_languages(Request $request)
     {
 
-        $this->columns = [
+        $columns = [
             'id',
-            'widget_json'
+            'name',
+            'iso'
         ];
 
         $list = array();
-
-        $parameters = $request->route()->parameters();
-
-        $pageName = isset($parameters['pageName'])
-                ? htmlspecialchars($parameters['pageName'])
-                : '';
-
-        $adminLTE = new AdminLTE();
-
-        $Widgets = $adminLTE->getPageLayout($pageName);
+        $index = 0;
 
         $list[0]['id'] = 1;
-        $list[0]['widget_json'] = json_encode($Widgets,
-                JSON_HEX_QUOT |
-                JSON_HEX_TAG |
-                JSON_HEX_AMP |
-                JSON_HEX_APOS);
+        $list[0]['name'] = 'English';
+        $list[0]['iso'] = 'en';
+        $index++;
 
         $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->columns = $columns;
         $objectHTMLDB->list = $list;
-        $objectHTMLDB->columns = $this->columns;
+        $objectHTMLDB->printHTMLDBList();
+        return;
+
+    }
+
+    public function get_timezones(Request $request)
+    {
+
+        $columns = [
+            'id',
+            'timezone'
+        ];
+
+        $list = array();
+        $index = 0;
+        
+        $timezones = DateTimeZone::listIdentifiers();
+        $countTimezone = count($timezones);
+
+        for ($i = 0; $i < $countTimezone; $i++) {
+            $list[$index]['id'] = $i;
+            $list[$index]['timezone'] = $timezones[$i];
+            $index++;
+        } // for ($i = 0; $i < $countTimezone; $i++) {
+
+        $objectHTMLDB = new HTMLDB();
+        $objectHTMLDB->columns = $columns;
+        $objectHTMLDB->list = $list;
         $objectHTMLDB->printHTMLDBList();
         return;
 
@@ -204,6 +208,8 @@ class AdminLTELayoutController extends Controller
             } // if (!$confirmed)
 
         }
+
+
 
         /* {{snippet:end_check_values}} */
 

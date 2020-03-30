@@ -136,7 +136,7 @@ class AdminLTE
 
 	public function getAdminLTEFolder()
 	{
-        $adminLTEFolder = getenv('ADMINLTE_FOLDER');
+        $adminLTEFolder = config('adminlte.main_folder');
 
         if ($adminLTEFolder === false
 				|| ('' == $adminLTEFolder))
