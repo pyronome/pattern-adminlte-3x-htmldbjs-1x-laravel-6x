@@ -15,6 +15,7 @@ class GeneralSettingsController extends Controller
         'debug_mode',
         'project_title',
         'main_folder',
+        'landing_page',
         'default_language',
         'timezone',
         'date_format',

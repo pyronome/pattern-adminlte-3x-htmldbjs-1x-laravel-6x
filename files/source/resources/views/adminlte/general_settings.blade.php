@@ -60,6 +60,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                            <label for="landing_page" class="detail-label">{{ __('Landing Page') }}</label>
+                                            <input type="text"
+                                                class="form-control htmldb-field"
+                                                id="landing_page"
+                                                name="landing_page"
+                                                data-htmldb-field="landing_page"
+                                                data-htmldb-value="@{{landing_page}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="default_language" class="detail-label">{{ __('Default Language') }}</label>
                                             <select data-placeholder="{{ __('Please Select') }}"
                                                 id="default_language"
