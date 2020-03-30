@@ -126,53 +126,43 @@ class GeneralSettingsController extends Controller
             $adminLTE = new AdminLTE();
             $adminLTE->updateDotEnv(
                     'ADMINLTE_PROJECT_TITLE',
-                    $this->row['project_title'],
-                    '"');
+                    $this->row['project_title']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_MAIN_FOLDER',
-                    $this->row['main_folder'],
-                    '"');
+                    $this->row['main_folder']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_LANDING_PAGE',
-                    $this->row['landing_page'],
-                    '"');
+                    $this->row['landing_page']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_DEFAULT_LANGUAGE',
-                    $this->row['default_language'],
-                    '"');
+                    $this->row['default_language']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_TIMEZONE',
-                    $this->row['timezone'],
-                    '"');
+                    $this->row['timezone']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_DATE_FORMAT',
-                    $this->row['date_format'],
-                    '"');
+                    $this->row['date_format']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_TIME_FORMAT',
-                    $this->row['time_format'],
-                    '"');
+                    $this->row['time_format']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_YEAR_MONTH_FORMAT',
-                    $this->row['year_month_format'],
-                    '"');
+                    $this->row['year_month_format']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_NUMBER_FORMAT',
-                    $this->row['number_format'],
-                    '"');
+                    $this->row['number_format']);
 
             $adminLTE->updateDotEnv(
                     'ADMINLTE_GOOGLE_MAPS_API_KEY',
-                    $this->row['google_maps_api_key'],
-                    '"');
+                    $this->row['google_maps_api_key']);
 
         } // if (0 == $result['errorCount'])
 
