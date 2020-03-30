@@ -90,7 +90,7 @@ class GeneralSettingsController extends Controller
         $list = array();
         $index = 0;
         
-        $timezones = DateTimeZone::listIdentifiers();
+        $timezones = \DateTimeZone::listIdentifiers();
         $countTimezone = count($timezones);
 
         for ($i = 0; $i < $countTimezone; $i++) {
