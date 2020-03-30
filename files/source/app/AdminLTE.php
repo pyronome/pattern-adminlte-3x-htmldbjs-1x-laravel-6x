@@ -163,7 +163,12 @@ class AdminLTE
 		}
 		else
 		{
-			$menuArray = config('adminlte_menu');
+			$menuArray = json_decode(config('adminlte_menu_json'),
+					(JSON_HEX_QUOT
+					| JSON_HEX_TAG
+					| JSON_HEX_AMP
+					| JSON_HEX_APOS));
+
 		} // if (!$forceDefault
 
 		$Menu = array();
