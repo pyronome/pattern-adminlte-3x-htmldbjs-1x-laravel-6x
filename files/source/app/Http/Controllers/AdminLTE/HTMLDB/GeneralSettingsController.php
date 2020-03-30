@@ -66,7 +66,7 @@ class GeneralSettingsController extends Controller
         $index = 0;
 
         $list[0]['id'] = 1;
-        $list[0]['name'] = 'English';
+        $list[0]['name'] = 'en';
         $list[0]['iso'] = 'en';
         $index++;
 

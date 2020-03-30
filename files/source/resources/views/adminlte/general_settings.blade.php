@@ -160,13 +160,13 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                            <label for="yearmonth_format" class="detail-label">{{ __('Year Month Format') }}</label>
+                                            <label for="year_month_format" class="detail-label">{{ __('Year Month Format') }}</label>
                                             <select data-placeholder="{{ __('Please Select') }}"
-                                                id="yearmonth_format"
-                                                name="yearmonth_format"
+                                                id="year_month_format"
+                                                name="year_month_format"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
-                                                data-htmldb-field="yearmonth_format"
-                                                data-htmldb-value="@{{yearmonth_format}}"
+                                                data-htmldb-field="year_month_format"
+                                                data-htmldb-value="@{{year_month_format}}"
                                                 style="width: 100%;">
                                                 <option value="m/Y">06/1981</option>
                                                 <option value="n/Y">6/1981</option>
