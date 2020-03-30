@@ -10,26 +10,24 @@ use App\HTMLDB;
 
 class GeneralSettingsController extends Controller
 {
-    public $columns = [];
+    public $columns = [
+        'id',
+        'debug_mode',
+        'project_title',
+        'main_folder',
+        'default_language',
+        'timezone',
+        'date_format',
+        'year_month_format',
+        'time_format',
+        'number_format',
+        'google_maps_api_key'
+    ];
     public $protectedColumns = [];
     public $row = [];
 
     public function get(Request $request)
     {
-
-        $columns = [
-            'id',
-            'debug_mode',
-            'project_title',
-            'main_folder',
-            'default_language',
-            'timezone',
-            'date_format',
-            'year_month_format',
-            'time_format',
-            'number_format',
-            'google_maps_api_key'
-        ];
 
         $list = [];
 
@@ -47,7 +45,7 @@ class GeneralSettingsController extends Controller
         $list[0]['google_maps_api_key'] = config('adminlte.google_maps_api_key');
 
         $objectHTMLDB = new HTMLDB();
-        $objectHTMLDB->columns = $columns;
+        $objectHTMLDB->columns = $this->columns;
         $objectHTMLDB->list = $list;
         $objectHTMLDB->printHTMLDBList();
         return;
@@ -123,21 +121,64 @@ class GeneralSettingsController extends Controller
 
         if (0 == $result['errorCount'])
         {
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->first();
 
-            auth()->guard('adminlteuser')->login($adminLTEUser);
+            $adminLTE = new AdminLTE();
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_PROJECT_TITLE',
+                    $this->row['project_title'],
+                    '"');
 
-            $landingPage = config('adminlte.landing_page');
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_MAIN_FOLDER',
+                    $this->row['main_folder'],
+                    '"');
 
-            if ($landingPage === false)
-            {
-                $landingPage = 'home';
-            } // if ($landingPage === false)
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_LANDING_PAGE',
+                    $this->row['landing_page'],
+                    '"');
 
-            $result['messageCount'] = 1;
-            $result['lastMessage'] = $landingPage;
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_DEFAULT_LANGUAGE',
+                    $this->row['default_language'],
+                    '"');
+
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_TIMEZONE',
+                    $this->row['timezone'],
+                    '"');
+
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_DATE_FORMAT',
+                    $this->row['date_format'],
+                    '"');
+
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_TIME_FORMAT',
+                    $this->row['time_format'],
+                    '"');
+
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_YEAR_MONTH_FORMAT',
+                    $this->row['year_month_format'],
+                    '"');
+
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_NUMBER_FORMAT',
+                    $this->row['number_format'],
+                    '"');
+
+            $adminLTE->updateDotEnv(
+                    'ADMINLTE_GOOGLE_MAPS_API_KEY',
+                    $this->row['google_maps_api_key'],
+                    '"');
+
         } // if (0 == $result['errorCount'])
+
+        if (0 == $result['errorCount']) {
+            $result['messageCount'] = 1;
+            $result['lastMessage'] = 'UPDATED';
+        } // if (0 == $result['errorCount']) {
 
         $objectHTMLDB->errorCount = $result['errorCount'];
         $objectHTMLDB->messageCount = $result['messageCount'];
@@ -159,57 +200,6 @@ class GeneralSettingsController extends Controller
         ];
 
         /* {{snippet:begin_check_values}} */
-
-        if ('' == $this->row['email'])
-        {
-            $result['errorCount']++;
-            if ($result['lastError'] != '') {
-                $result['lastError'] .= '<br>';
-            } // if ($result['lastError'] != '') {
-
-            $result['lastError'] .= __('Please specify your email address.');
-        } // if ('' == $this->row['email'])
-
-        if ('' == $this->row['password'])
-        {
-            $result['errorCount']++;
-            if ($result['lastError'] != '') {
-                $result['lastError'] .= '<br>';
-            } // if ($result['lastError'] != '') {
-
-            $result['lastError'] .= __('Please specify your password.');
-        } // if ('' == $this->row['password'])
-
-        if (0 == $result['errorCount']) {
-
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->first();
-            
-            $confirmed = false;
-
-            if ($adminLTEUser != null)
-            {
-                if (password_verify($this->row['password'], $adminLTEUser->password))
-                {
-                    $confirmed = true;
-                }
-            } // if (null == $adminLTEUser)
-
-            if (!$confirmed)
-            {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
-
-                $result['lastError'] .= __('Your e-mail address or password is not correct. Please check and try again.');
-
-                sleep(2);
-            } // if (!$confirmed)
-
-        }
-
-
 
         /* {{snippet:end_check_values}} */
 
