@@ -61,6 +61,11 @@ Route::namespace('HTMLDB')
         Route::post('/post', 'EmailServerController@post');
     });
 
+    Route::prefix('menu_configuration')->group(function () {
+        Route::get('/get', 'MenuConfigurationController@get');
+        Route::post('/post', 'MenuConfigurationController@post');
+    });
+
     Route::prefix('adminlte_users')->group(function () {
         Route::get('/get/{id}', 'AdminLTEUserController@get');
         Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');
