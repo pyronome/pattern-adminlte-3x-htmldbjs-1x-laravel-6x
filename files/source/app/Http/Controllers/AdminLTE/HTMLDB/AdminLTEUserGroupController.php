@@ -480,7 +480,6 @@ class AdminLTEUserGroupController extends Controller
         }
         $graphJSON = ('[' . $graphJSON . ']');
 
-
         $list[0]['id'] = 1;
         $list[0]['data'] = rawurlencode($graphJSON);
 

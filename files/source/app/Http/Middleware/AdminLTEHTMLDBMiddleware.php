@@ -50,7 +50,7 @@ class AdminLTEHTMLDBMiddleware
             $objectHTMLDB->errorCount = 1;
             $objectHTMLDB->lastError = $permissionResult['error_msg'];
             $objectHTMLDB->printResponseJSON();
-            return false;
+            return;
         } // if ($permissionResult['error'])
 
         return $next($request);
