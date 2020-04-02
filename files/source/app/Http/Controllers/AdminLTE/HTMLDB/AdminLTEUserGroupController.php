@@ -43,11 +43,6 @@ class AdminLTEUserGroupController extends Controller
         $list = [];
 
         $parameters = $request->route()->parameters();
-
-        if (isset($parameters['id'])
-                && ('new' == htmlspecialchars($parameters['id']))) {
-            return false;
-        } // if (isset($parameters['id'])
         
         $id = 0;
         if (isset($parameters['id'])) {
@@ -460,10 +455,6 @@ class AdminLTEUserGroupController extends Controller
         $keys = array_keys($graphData);
         $countKeys = count($keys);
         
-        if (0 == $countKeys) {
-            return false;
-        } // if (0 == $countKeys) {
-
         $graphJSON = '';
         for ($i=0; $i < $countKeys; $i++) {
             $created_at = $keys[$i];
@@ -729,10 +720,6 @@ class AdminLTEUserGroupController extends Controller
             $controller->lastError .= __('Please specify password.');
         }
 
-        if ($controller->errorCount > 0) {
-            return false;
-        } // if ($controller->errorCount > 0) {
-
         includeLibrary('convertNameToFileName');
         includeLibrary('adminlte/base64encode');
 
@@ -777,7 +764,6 @@ class AdminLTEUserGroupController extends Controller
             } // if ($controller->lastError != '') {
 
             $controller->lastError .= __('Please select records.');
-            return false;
         } // if ('' == $idcsv) {
 
         $ids = explode(',', $idcsv);

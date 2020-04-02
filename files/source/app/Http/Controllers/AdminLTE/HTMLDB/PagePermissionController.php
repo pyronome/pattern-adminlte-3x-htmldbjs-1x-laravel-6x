@@ -29,10 +29,6 @@ class PagePermissionController extends Controller
                 ? htmlspecialchars($parameters['pageName'])
                 : '';
 
-        if ('' == $pageName) {
-            return false;
-        } // if (0 == $id) {
-
         $list = array();
 
         $adminLTE = new AdminLTE();
