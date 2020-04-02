@@ -493,7 +493,7 @@ class AdminLTEUserGroupController extends Controller
         $list[0]['id'] = 1;
         $list[0]['model'] = 'AdminLTEUserGroup';
         
-        $list[0]['value'] = \App\AdminLTEUser::where('deleted', false)->count();
+        $list[0]['value'] = \App\AdminLTEUserGroup::where('deleted', false)->count();
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
