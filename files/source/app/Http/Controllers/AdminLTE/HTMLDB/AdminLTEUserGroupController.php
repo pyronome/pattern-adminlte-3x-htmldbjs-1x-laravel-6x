@@ -10,7 +10,7 @@ use App\AdminLTEUser;
 use App\AdminLTEUserGroup;
 use App\HTMLDB;
 
-class AdminLTEUserController extends Controller
+class AdminLTEUserGroupController extends Controller
 {
 
     public $columns = [];
@@ -19,7 +19,6 @@ class AdminLTEUserController extends Controller
 
     public function get(Request $request)
     {
-        
         $this->columns = [
             'id',
             'id/display_text',
@@ -31,24 +30,14 @@ class AdminLTEUserController extends Controller
             'updated_at/display_text',
             'enabled',
             'enabled/display_text',
-            'adminlteusergroup_id',
-            'adminlteusergroup_id/display_text',
-            'fullname',
-            'fullname/display_text',
-            'username',
-            'username/display_text',
-            'email',
-            'email/display_text',
-            'password',
-            'password/display_text',
+            'title',
+            'title/display_text',
             'menu_permission',
             'menu_permission/display_text',
             'service_permission',
             'service_permission/display_text',
-            'profile_img',
-            /*'profile_img/display_text',*/
-            'group_menu_permission',
-            'group_service_permission'
+            'widget_permission',
+            'widget_permission/display_text'
         ];
 
         $list = [];
@@ -67,81 +56,57 @@ class AdminLTEUserController extends Controller
         
         $adminLTE = new AdminLTE();
 
+        $objectAdminLTEUserGroups = null;
         $objectAdminLTEUserGroup = null;
-        $objectAdminLTEUsers = null;
-        $objectAdminLTEUser = null;
 
         if ($id > 0)
         {
-            $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
+            $objectAdminLTEUsers = \App\AdminLTEUserGroup::where('deleted', false)
                     ->where('id', $id)
                     ->get();
         }
         else
         {
-            $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
+            $objectAdminLTEUsers = \App\AdminLTEUserGroup::where('deleted', false)
                     ->orderBy('created_at', 'desc')
                     ->get();
         } // if ($id > 0)
 
         $index = 0;
 
-        foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+        foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
         {
 
-            $list[$index]['id'] = $objectAdminLTEUser->id;
-            $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
-            $list[$index]['created_at'] = $objectAdminLTEUser->created_at->timestamp;
-            $list[$index]['updated_at'] = $objectAdminLTEUser->updated_at->timestamp;
-            $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
-            $list[$index]['adminlteusergroup_id'] = $objectAdminLTEUser->adminlteusergroup_id;
-            $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
-            $list[$index]['username'] = $objectAdminLTEUser->username;
-            $list[$index]['email'] = $objectAdminLTEUser->email;
-            $list[$index]['password'] = '';
-            $list[$index]['menu_permission'] = $adminLTE->base64decode($objectAdminLTEUser->menu_permission);
-            $list[$index]['service_permission'] = $adminLTE->base64decode($objectAdminLTEUser->service_permission);
-            $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
+            $list[$index]['id'] = $objectAdminLTEUserGroup->id;
+            $list[$index]['deleted'] = $objectAdminLTEUserGroup->deleted;
+            $list[$index]['creationDate'] = $objectAdminLTEUserGroup->creationDate;
+            $list[$index]['lastUpdate'] = $objectAdminLTEUserGroup->lastUpdate;
+            $list[$index]['enabled'] = $objectAdminLTEUserGroup->enabled;
+            $list[$index]['title'] = $objectAdminLTEUserGroup->title;
+            $list[$index]['menu_permission'] = $adminLTE->base64decode(
+                    $objectAdminLTEUserGroup->menu_permission);
+            $list[$index]['service_permission'] = $adminLTE->base64decode(
+                    $objectAdminLTEUserGroup->service_permission);
+            $list[$index]['widget_permission'] = $objectAdminLTEUserGroup->widget_permission;
 
             // Display Texts
-            $displayTexts = $adminLTE->getObjectDisplayTexts('__SystemUser', $objectAdminLTEUser);
+            $displayTexts = $adminLTE->getObjectDisplayTexts(
+                    '__SystemUserGroup',
+                    $objectAdminLTEUserGroup);
 
             $list[$index]['id/display_text'] = $displayTexts['id'];
+            $list[$index]['creationDate/display_text'] = $displayTexts['creationDate'];
+            $list[$index]['lastUpdate/display_text'] = $displayTexts['lastUpdate'];
             $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
-            $list[$index]['created_at/display_text'] = $displayTexts['created_at'];
-            $list[$index]['updated_at/display_text'] = $displayTexts['updated_at'];
             $list[$index]['enabled/display_text'] = $displayTexts['enabled'];
-            $list[$index]['adminlteusergroup_id/display_text'] = $displayTexts['adminlteusergroup_id'];
-            $list[$index]['fullname/display_text'] = $displayTexts['fullname'];
-            $list[$index]['username/display_text'] = $displayTexts['username'];
-            $list[$index]['email/display_text'] = $displayTexts['email'];
-            $list[$index]['password/display_text'] = $displayTexts['password'];
+            $list[$index]['title/display_text'] = $displayTexts['title'];
             $list[$index]['menu_permission/display_text'] = $displayTexts['menu_permission'];
             $list[$index]['service_permission/display_text'] = $displayTexts['service_permission'];
-            /*$list[$index]['profile_img/display_text'] = $displayTexts['profile_img'];*/
-            
-            // Other Configuration
-            $list[$index]['group_menu_permission'] = '';
-            $list[$index]['group_service_permission'] = '';
-            
-            if (0 != $objectAdminLTEUser->adminlteusergroup_id) {
-                $objectAdminLTEUserGroup = AdminLTEUserGroup::find(
-                        $objectAdminLTEUser->adminlteusergroup_id);
-
-                if (null == $objectAdminLTEUserGroup)
-                {
-                    continue;
-                } // if (null == $objectAdminLTEUserGroup)
-                
-                $list[$index]['group_menu_permission'] = $adminLTE->base64decode(
-                        $objectAdminLTEUserGroup->menu_permission);
-                $list[$index]['group_service_permission'] = $adminLTE->base64decode(
-                        $objectAdminLTEUserGroup->service_permission);
-            }
+            $list[$index]['widget_permission/display_text'] = $displayTexts['widget_permission'];
 
             $index++;
 
-        } // foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+        } // foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
@@ -171,7 +136,7 @@ class AdminLTEUserController extends Controller
 
         $sessionParameters = $adminLTE->getModelSessionParameters(
                 $request,
-                'AdminLTEUser');
+                'AdminLTEUserGroup');
         
         if (!isset($sessionParameters['page'])) {
             $pageName = '';
@@ -184,14 +149,14 @@ class AdminLTEUserController extends Controller
             $bufferSize = $adminLTE->getRecordListLimit(
                     $request,
                     $Widgets,
-                    'AdminLTEUser');
+                    'AdminLTEUserGroup');
 
             $pageCount = ceil(
-                    AdminLTEUser::where('deleted', false)->count()
+                    \App\AdminLTEUserGroup::where('deleted', false)->count()
                     / $bufferSize);
 
             $adminLTE->setModelSessionParameters($request,
-                    'AdminLTEUser',
+                    'AdminLTEUserGroup',
                     [
                         'searchText' => '',
                         'sortingColumn' => 'id',
@@ -205,7 +170,7 @@ class AdminLTEUserController extends Controller
 
         $sessionParameters = $adminLTE->getModelSessionParameters(
                 $request,
-                'AdminLTEUser');
+                'AdminLTEUserGroup');
 
         $sessionParameters['id'] = 1;
 
@@ -244,7 +209,7 @@ class AdminLTEUserController extends Controller
         $adminLTE = new AdminLTE();
 
         $Widgets = $adminLTE->getPageLayout($pageName);
-        $variables = $adminLTE->getRecordListValueVariables($Widgets, 'AdminLTEUser');
+        $variables = $adminLTE->getRecordListValueVariables($Widgets, 'AdminLTEUserGroup');
 
         if (0 == count($variables)) {
             $variables = array();
@@ -253,10 +218,10 @@ class AdminLTEUserController extends Controller
         $bufferSize = $adminLTE->getRecordListLimit(
                 $request,
                 $Widgets,
-                'AdminLTEUser');
+                'AdminLTEUserGroup');
         $showLastRecord = $adminLTE->getRecordListType(
                 $Widgets,
-                'AdminLTEUser');
+                'AdminLTEUserGroup');
 
         if (0 == $bufferSize) {
             $bufferSize = 10;
@@ -270,7 +235,7 @@ class AdminLTEUserController extends Controller
         } else {
             $sessionParameters = $adminLTE->getModelSessionParameters(
                     $request,
-                    'AdminLTEUser');
+                    'AdminLTEUserGroup');
 
             $sortingColumn = isset($sessionParameters['sortingColumn'])
                     ? htmlspecialchars($sessionParameters['sortingColumn'])
@@ -278,7 +243,7 @@ class AdminLTEUserController extends Controller
 
             if (false !== strpos($sortingColumn, 'DisplayText')) {
                 $sortingColumn = $adminLTE->getModelForeignSortColumn(
-                        'AdminLTEUser',
+                        'AdminLTEUserGroup',
                         $sortingColumn);
             }
 
@@ -309,22 +274,14 @@ class AdminLTEUserController extends Controller
             'updated_at/display_text',
             'enabled',
             'enabled/display_text',
-            'adminlteusergroup_id',
-            'adminlteusergroup_id/display_text',
-            'fullname',
-            'fullname/display_text',
-            'username',
-            'username/display_text',
-            'email',
-            'email/display_text',
-            'password',
-            'password/display_text',
+            'title',
+            'title/display_text',
             'menu_permission',
             'menu_permission/display_text',
             'service_permission',
             'service_permission/display_text',
-            'profile_img',
-            'profile_img/display_text'
+            'widget_permission',
+            'widget_permission/display_text'
         ];
         
         $countDefaultColumns = count($defaultColumns);
@@ -338,74 +295,55 @@ class AdminLTEUserController extends Controller
                 $columns[] = $defaultColumns[$i];
             } // if (in_array($defaultColumn, $variables)) {
         } // for ($i=0; $i < $countDefaultColumns; $i++) {
-        
-        $objectAdminLTEUserGroup = new AdminLTEUserGroup();
 
-        $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
+        $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
                 ->orderBy($sortingColumn, (($sortingAscending) ? 'asc' : 'desc'))
                 ->get();
         $objectAdminLTEUser = NULL;
         $index = 0;
 
-        foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+        foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
         {
-            $list[$index]['id'] = $objectAdminLTEUser->id;
+            $list[$index]['id'] = $objectAdminLTEUserGroup->id;
 
             if (in_array('deleted', $variables)) {
-                $list[$index]['deleted'] = $objectAdminLTEUser->deleted;
+                $list[$index]['deleted'] = $objectAdminLTEUserGroup->deleted;
             } // if (in_array('deleted', $variables)) {
             
             if (in_array('created_at', $variables)) {
-                $list[$index]['created_at'] = $objectAdminLTEUser->created_at->timestamp;
+                $list[$index]['created_at'] = $objectAdminLTEUserGroup->created_at;
             } // if (in_array('created_at', $variables)) {
             
             if (in_array('updated_at', $variables)) {
-                $list[$index]['updated_at'] = $objectAdminLTEUser->updated_at;
+                $list[$index]['updated_at'] = $objectAdminLTEUserGroup->updated_at;
             } // if (in_array('updated_at', $variables)) {
 
             if (in_array('enabled', $variables)) {
-                $list[$index]['enabled'] = $objectAdminLTEUser->enabled;
+                $list[$index]['enabled'] = $objectAdminLTEUserGroup->enabled;
             } // if (in_array('enabled', $variables)) {
-            
-            if (in_array('adminlteusergroup_id', $variables)) {
-                $list[$index]['adminlteusergroup_id']
-                        = $objectAdminLTEUser->adminlteusergroup_id;
-            } // if (in_array('adminlteusergroup_id', $variables)) {
 
-            if (in_array('fullname', $variables)) {
-                $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
-            } // if (in_array('fullname', $variables)) {
-
-            if (in_array('username', $variables)) {
-                $list[$index]['username'] = $objectAdminLTEUser->username;
-            } // if (in_array('username', $variables)) {
-
-            if (in_array('email', $variables)) {
-                $list[$index]['email'] = $objectAdminLTEUser->email;
-            } // if (in_array('email', $variables)) {
-
-            if (in_array('password', $variables)) {
-                $list[$index]['password'] = $objectAdminLTEUser->password;
-            } // if (in_array('password', $variables)) {
+            if (in_array('title', $variables)) {
+                $list[$index]['title'] = $objectAdminLTEUserGroup->title;
+            } // if (in_array('title', $variables)) {
 
             if (in_array('menu_permission', $variables)) {
                 $list[$index]['menu_permission'] = $adminLTE->base64decode(
-                        $objectAdminLTEUser->menu_permission);
+                        $objectAdminLTEUserGroup->menu_permission);
             } // if (in_array('menu_permission', $variables)) {
-            
+
             if (in_array('service_permission', $variables)) {
                 $list[$index]['service_permission'] = $adminLTE->base64decode(
-                        $objectAdminLTEUser->service_permission);
-            } // if (in_array('service_permission', $variables)) {
-            
-            if (in_array('profile_img', $variables)) {
-                $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
-            } // if (in_array('profile_img', $variables)) {
+                        $objectAdminLTEUserGroup->service_permission);
+            } // if (in_array('service_permission', $variables)) { 
 
+            if (in_array('widget_permission', $variables)) {
+                $list[$index]['widget_permission'] = $objectAdminLTEUserGroup->widget_permission;
+            } // if (in_array('widget_permission', $variables)) {
+            
             // Display Texts
             $displayTexts = $adminLTE->getObjectDisplayTexts(
-                    'AdminLTEUser',
-                    $objectAdminLTEUser);
+                    '__SystemUserGroup',
+                    $objectAdminLTEUserGroup);
 
             if (in_array('id/display_text', $variables)) {
                 $list[$index]['id/display_text'] = $displayTexts['id'];
@@ -426,42 +364,22 @@ class AdminLTEUserController extends Controller
             if (in_array('enabled/display_text', $variables)) {
                 $list[$index]['enabled/display_text'] = $displayTexts['enabled'];
             } // if (in_array('enabled/display_text', $variables)) {
-
-            if (in_array('adminlteusergroup_id/display_text', $variables)) {
-                $list[$index]['adminlteusergroup_id/display_text']
-                        = $displayTexts['adminlteusergroup_id'];
-            } // if (in_array('adminlteusergroup_id/display_text', $variables)) {
-
-            if (in_array('fullname/display_text', $variables)) {
-                $list[$index]['fullname/display_text'] = $displayTexts['fullname'];
-            } // if (in_array('fullname/display_text', $variables)) {
-
-            if (in_array('username/display_text', $variables)) {
-                $list[$index]['username/display_text'] = $displayTexts['username'];
-            } // if (in_array('username/display_text', $variables)) {
-
-            if (in_array('email/display_text', $variables)) {
-                $list[$index]['email/display_text'] = $displayTexts['email'];
-            } // if (in_array('email/display_text', $variables)) {
-
-            if (in_array('password/display_text', $variables)) {
-                $list[$index]['password/display_text'] = $displayTexts['password'];
-            } // if (in_array('password/display_text', $variables)) {
-
+            
+            if (in_array('title/display_text', $variables)) {
+                $list[$index]['title/display_text'] = $displayTexts['title'];
+            } // if (in_array('title/display_text', $variables)) {
+            
             if (in_array('menu_permission/display_text', $variables)) {
-                $list[$index]['menu_permission/display_text']
-                        = $displayTexts['menu_permission'];
+                $list[$index]['menu_permission/display_text'] = $displayTexts['menu_permission'];
             } // if (in_array('menu_permission/display_text', $variables)) {
 
             if (in_array('service_permission/display_text', $variables)) {
-                $list[$index]['service_permission/display_text']
-                        = $displayTexts['service_permission'];
+                $list[$index]['service_permission/display_text'] = $displayTexts['service_permission'];
             } // if (in_array('service_permission/display_text', $variables)) {
 
-            if (in_array('profile_img/display_text', $variables)) {
-                $list[$index]['profile_img/display_text']
-                        = $displayTexts['profile_img'];
-            } // if (in_array('profile_img/display_text', $variables)) {
+            if (in_array('widget_permission/display_text', $variables)) {
+                $list[$index]['widget_permission/display_text'] = $displayTexts['widget_permission'];
+            } // if (in_array('widget_permission/display_text', $variables)) {
 
             $index++;
         } // foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
@@ -498,7 +416,7 @@ class AdminLTEUserController extends Controller
         $Widgets = $adminLTE->getPageLayout($pageName);
         $graphProperties = $adminLTE->getRecordGraphProperties(
                 $Widgets,
-                'AdminLTEUser');
+                'AdminLTEUserGroup');
         
         $graphType = $graphProperties['type'];
 
@@ -507,18 +425,18 @@ class AdminLTEUserController extends Controller
 
         $graphData = array();
 
-        $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
+        $objectAdminLTEUsers = \App\AdminLTEUserGroup::where('deleted', false)
                 ->where('created_at', '>=', $fromDate)
                 ->orderBy('created_at', 'asc')
                 ->get();
 
-        $objectAdminLTEUser = NULL;
+        $objectAdminLTEUserGroup = NULL;
         $index = 0;
             
         if ('daily' == $graphType) {
-            foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+            foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
             {
-                $created_at = $objectAdminLTEUser->created_at->format($dateFormat);
+                $created_at = $objectAdminLTEUserGroup->created_at->format($dateFormat);
 
                 if (!isset($graphData[$created_at])) {
                     $graphData[$created_at] = 0;
@@ -527,9 +445,9 @@ class AdminLTEUserController extends Controller
                 $graphData[$created_at]++;
             } // for ($i = 0; $i < $count__SystemUser; $i++) {
         } else if ('monthly' == $graphType) {
-            foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+            foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
             {
-                $created_at = $objectAdminLTEUser->created_at->format($yearMonthFormat);
+                $created_at = $objectAdminLTEUserGroup->created_at->format($yearMonthFormat);
 
                 if (!isset($graphData[$created_at])) {
                     $graphData[$created_at] = 0;
@@ -583,7 +501,7 @@ class AdminLTEUserController extends Controller
 
         $list = array();
         $list[0]['id'] = 1;
-        $list[0]['model'] = 'AdminLTEUser';
+        $list[0]['model'] = 'AdminLTEUserGroup';
         
         $list[0]['value'] = \App\AdminLTEUser::where('deleted', false)->count();
 
@@ -618,7 +536,7 @@ class AdminLTEUserController extends Controller
 
         $sessionParameters = $adminLTE->getModelSessionParameters(
                 $request,
-                'AdminLTEUser');
+                'AdminLTEUserGroup');
 
         $this->columns = [
             'searchText',
@@ -668,12 +586,12 @@ class AdminLTEUserController extends Controller
         else
         {
             $sessionParameters['pageCount'] = ceil(
-                    \App\AdminLTEUser::where('deleted', false)->count()
+                    \App\AdminLTEUserGroup::where('deleted', false)->count()
                     / $sessionParameters['bufferSize']);
         } // if (0 == $sessionParameters['bufferSize'])
 
         $adminLTE->setModelSessionParameters($request,
-                'AdminLTEUser',
+                'AdminLTEUserGroup',
                 $sessionParameters);
 
         $objectHTMLDB->printResponseJSON();

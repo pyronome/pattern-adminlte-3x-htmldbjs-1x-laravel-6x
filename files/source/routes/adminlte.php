@@ -86,6 +86,26 @@ Route::namespace('HTMLDB')
         Route::post('/post_session', 'AdminLTEUserController@post_session');
     });
 
+    Route::prefix('adminlte_user_groups')->group(function () {
+        Route::get('/get/{id}', 'AdminLTEUserGroupController@get');
+        Route::get('/get_session/{pageName}', 'AdminLTEUserGroupController@get_session');
+        Route::get('/get_recordlist/{pageName}', 'AdminLTEUserGroupController@get_recordlist');
+        Route::get('/get_recordgraphdata/{pageName}', 'AdminLTEUserGroupController@get_recordgraphdata');
+        Route::get('/get_infoboxvalue/{pageName}', 'AdminLTEUserGroupController@get_infoboxvalue');
+        Route::get('/get_form_delete/{pageName}', 'AdminLTEUserGroupController@get_form_delete');
+        Route::post('/post_session', 'AdminLTEUserGroupController@post_session');
+    });
+
+    Route::prefix('adminlteusergroup')->group(function () {
+        Route::get('/get/{id}', 'AdminLTEUserGroupController@get');
+        Route::get('/get_session/{pageName}', 'AdminLTEUserGroupController@get_session');
+        Route::get('/get_recordlist/{pageName}', 'AdminLTEUserGroupController@get_recordlist');
+        Route::get('/get_recordgraphdata/{pageName}', 'AdminLTEUserGroupController@get_recordgraphdata');
+        Route::get('/get_infoboxvalue/{pageName}', 'AdminLTEUserGroupController@get_infoboxvalue');
+        Route::get('/get_form_delete/{pageName}', 'AdminLTEUserGroupController@get_form_delete');
+        Route::post('/post_session', 'AdminLTEUserGroupController@post_session');
+    });
+
     Route::prefix('__pagepermission')->group(function () {
         Route::get('/get/{pageName}', 'PagePermissionController@get');
     });
