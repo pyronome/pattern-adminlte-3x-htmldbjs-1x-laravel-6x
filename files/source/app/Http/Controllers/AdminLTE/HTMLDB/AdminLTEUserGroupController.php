@@ -425,7 +425,7 @@ class AdminLTEUserGroupController extends Controller
 
         $graphData = array();
 
-        $objectAdminLTEUsers = \App\AdminLTEUserGroup::where('deleted', false)
+        $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
                 ->where('created_at', '>=', $fromDate)
                 ->orderBy('created_at', 'asc')
                 ->get();
