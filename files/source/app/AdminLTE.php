@@ -2,6 +2,8 @@
 
 namespace App;
 
+/* Deneme 123 */
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\AdminLTEUser;
