@@ -94,7 +94,7 @@ class AdminLTEModelDisplayTextController extends Controller
                 $list[$index]['id'] = ($index + 1);
                 $list[$index]['model'] = $model;
                 $list[$index]['property'] = $property_list[$j]['property'];
-                $list[$index]['type'] = $property_list[$j]['type'];
+                $list[$index]['type'] = 'text';
 
                 $index++;
             } // for ($j=0; $j < $countProperty; $j++) { 
