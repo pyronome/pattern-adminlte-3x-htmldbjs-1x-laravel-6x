@@ -1297,9 +1297,16 @@ class AdminLTE
 
 		$displayTexts = [];
 		
-		$exceptions = ['AdminLTEModelDisplayText',
-				'AdminLTELayout',
-				'AdminLTEUserLayout'];
+		$exceptions = [
+			'AdminLTE',
+			'AdminLTELayout',
+			'AdminLTEModelDisplayText',
+			'AdminLTEUser',
+			'AdminLTEUserGroup',
+			'AdminLTEUserLayout',
+			'AdminLTEVariable',
+			'HTMLDB'
+		];
 
 		$Models = $this->getModelList($exceptions);
 		$countModels = count($Models);

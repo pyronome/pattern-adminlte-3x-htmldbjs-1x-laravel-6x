@@ -26,12 +26,8 @@ class AdminLTEModelDisplayTextController extends Controller
 
         $adminLTE = new AdminLTE();
         $list = array();
-        
-        $exceptions = ['AdminLTEModelDisplayText',
-                'AdminLTELayout',
-                'AdminLTEUserLayout'];
 
-        $Models = $adminLTE->getModelList($exceptions);
+        $Models = $adminLTE->getModelList();
         $displayTexts = $adminLTE->getAllModelDisplayTexts();
 
         $countModels = count($Models);
@@ -70,12 +66,8 @@ class AdminLTEModelDisplayTextController extends Controller
 
         $adminLTE = new AdminLTE();
         $list = array();
-        
-        $exceptions = ['AdminLTEModelDisplayText',
-                'AdminLTELayout',
-                'AdminLTEUserLayout'];
 
-        $Models = $adminLTE->getModelList($exceptions);
+        $Models = $adminLTE->getModelList();
 
         $countModels = count($Models);
         $index = 0;
