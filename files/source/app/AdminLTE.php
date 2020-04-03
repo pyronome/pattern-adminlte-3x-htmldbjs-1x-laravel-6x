@@ -1314,7 +1314,7 @@ class AdminLTE
 			$countProperty = count($property_list);
 
 			for ($j=0; $j < $countProperty; $j++) { 
-				$property = $property_list[$j]['property'];
+				$property = $property_list[$j];
 				$displayTexts[$model][$property] = '{{' . $model . '/' . $property . '}}';
 			} // for ($j=0; $j < $countProperty; $j++) { 
 		} // for ($i=0; $i < $countModels; $i++) {
