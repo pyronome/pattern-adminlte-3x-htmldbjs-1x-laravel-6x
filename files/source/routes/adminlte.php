@@ -120,4 +120,10 @@ Route::namespace('HTMLDB')
         Route::get('/get/{pageName}', 'AdminLTEWidgetController@get');
     });
 
+    Route::prefix('__modeldisplaytext')->group(function () {
+        Route::get('/get_model_display_texts', 'AdminLTEModelDisplayTextController@get_model_display_texts');
+        Route::get('/get_model_property_list', 'AdminLTEModelDisplayTextController@get_model_property_list');
+        Route::post('/post_model_display_texts', 'AdminLTELayoutController@post_model_display_texts');
+    });
+
 });

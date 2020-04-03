@@ -784,14 +784,7 @@ class AdminLTE
 		
 		$modelNameWithNamespace = ('\\App\\' . $model);
 		$objectTemp = new $modelNameWithNamespace;
-		$property_list = $objectTemp->getFillable();
-
-		array_unshift($property_list,
-				'id',
-				'deleted',
-				'created_at',
-				'updated_at');
-
+		$property_list = $this->getModelPropertyList($objectTemp);
 		$countProperty = count($property_list);
 
 		for ($j=0; $j < $countProperty; $j++) { 
@@ -1013,7 +1006,8 @@ class AdminLTE
 		return substr($string, $ini, $len);
 	}
 
-	private function getFileData($model, $id) {
+	private function getFileData($model, $id)
+	{
 		$fileData = array();
 
 		$tablename = strtolower($model) . "__filetable";
@@ -1150,7 +1144,7 @@ class AdminLTE
 			if ($modelName == $Widget['model']) {
 				$limit = $Widget['limit'];
 				break;
-			}            
+			}
 		} // for ($i=0; $i < $countWidgets; $i++) {
 
 		$sessionParameters = $this->getModelSessionParameters(
@@ -1260,7 +1254,8 @@ class AdminLTE
 		return ($identifier . '/' . $dictionary[$model][$identifier]);
 	}
 
-	public function getRecordGraphProperties($Widgets, $modelName) {
+	public function getRecordGraphProperties($Widgets, $modelName)
+	{
 		$result = array();
 		$result['type'] = 'daily';
 		$result['period'] = 1;
@@ -1282,6 +1277,84 @@ class AdminLTE
 		} // for ($i=0; $i < $countWidgets; $i++) {
 
 		return $result;
+	}
+
+	public function getModelPropertyList($object)
+	{
+		$propertyList = $object->getFillable();
+
+		array_unshift($propertyList,
+				'id',
+				'deleted',
+				'created_at',
+				'updated_at');
+
+		return $propertyList;
+	}
+
+	public function getAllModelDisplayTexts()
+	{
+
+		$displayTexts = [];
+		
+		$exceptions = ['AdminLTEModelDisplayText',
+				'AdminLTELayout',
+				'AdminLTEUserLayout'];
+
+		$Models = $this->getModelList($exceptions);
+		$countModels = count($Models);
+		$modelNameWithNamespace = '';
+
+		// get default display texts
+		for ($i=0; $i < $countModels; $i++) {
+			$model = $Models[$i];
+			$modelNameWithNamespace = ('\\App\\' . $model);
+			$object = new $modelNameWithNamespace;
+			$property_list = $this->getModelPropertyList($object);
+			$countProperty = count($property_list);
+
+			for ($j=0; $j < $countProperty; $j++) { 
+				$property = $property_list[$j]['property'];
+				$displayTexts[$model][$property] = '{{' . $model . '/' . $property . '}}';
+			} // for ($j=0; $j < $countProperty; $j++) { 
+		} // for ($i=0; $i < $countModels; $i++) {
+
+		$adminLTEModelDisplayText = null;
+		$adminLTEModelDisplayTexts = \App\AdminLTEModelDisplayText::where('deleted', false)
+				->get();
+
+		foreach ($adminLTEModelDisplayTexts as $adminLTEModelDisplayText)
+		{
+			$model = $adminLTEModelDisplayText->model;
+			$display_texts = $adminLTEModelDisplayText->display_texts;
+
+			if ('' != $display_texts)
+			{
+				$arrDisplayTexts = json_decode(
+						$this->base64Decode($display_texts),
+						(JSON_HEX_QUOT
+						| JSON_HEX_TAG
+						| JSON_HEX_AMP
+						| JSON_HEX_APOS));
+				$countDisplayText = count($arrDisplayTexts);
+
+				for ($j=0; $j < $countDisplayText; $j++)
+				{
+					$item = $arrDisplayTexts[$j];
+					$keys = array_keys($item);
+					$countKey = count($keys);
+
+					for ($k=0; $k < $countKey; $k++)
+					{
+						$property = $keys[$k];
+						$displayTexts[$model][$property] = $item[$property];
+					} // for ($k=0; $k < $countKey; $k++)
+				} // for ($j=0; $j < $countDisplayText; $j++)
+			} // if ('' != $display_texts)
+		} // foreach ($adminLTEModelDisplayTexts as $adminLTEModelDisplayText)
+
+		return $displayTexts;
+
 	}
 
 	/* {{snippet:end_methods}} */
