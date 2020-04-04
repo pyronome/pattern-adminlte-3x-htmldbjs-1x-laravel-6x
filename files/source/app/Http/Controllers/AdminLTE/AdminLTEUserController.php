@@ -31,7 +31,32 @@ class AdminLTEUserController extends Controller
 
     }
 
-    public function edit(Request $request)
+    public function showDetailPage(Request $request)
+    {
+
+        $viewName = ('adminlte.'
+                . $this->controllerName
+                . '_detail');
+
+        if (view()->exists('adminlte.custom.'
+                . $this->controllerName
+                . '_detail'))
+        {
+            $viewName = 'adminlte.custom.'
+                    . $this->controllerName
+                    . '_detail';
+        } // if (view()->exists('adminlte.custom.'
+
+        $adminLTE = new AdminLTE();
+
+        $viewData['controllerName'] = $this->controllerName;
+        $viewData['user'] = $adminLTE->getUserData();
+
+        return view($viewName, $viewData);
+
+    }
+
+    public function showEditPage(Request $request)
     {
 
         $viewName = ('adminlte.'
