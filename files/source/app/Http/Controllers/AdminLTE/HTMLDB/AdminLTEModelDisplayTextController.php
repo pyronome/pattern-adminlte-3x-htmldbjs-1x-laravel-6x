@@ -101,44 +101,48 @@ class AdminLTEModelDisplayTextController extends Controller
 
     public function post_model_display_texts(Request $request)
     {
-        $controller->errorCount = 0;
-        $controller->messageCount = 0;
-        $controller->lastError = '';
-        $controller->lastMessage = '';
+
+        $objectHTMLDB = new HTMLDB();
+        $adminLTE = new AdminLTE();
+
+        $this->row = $objectHTMLDB->requestPOSTRow(
+                $request->all(),
+                ['model', 'display_text_json'],
+                $this->protectedColumns,
+                0,
+                true);
+
+        if ('' == $this->row['display_text_json'])
+        {
+            $this->row['display_text_json'] = '[]';
+        } // if ('' == $this->row['display_text_json'])
+
+        $display_texts = $adminLTE->base64Encode($display_text_json);
         
-        $model = isset($_REQUEST['htmldb_row0_model'])
-            ? htmlspecialchars($_REQUEST['htmldb_row0_model'])
-            : '';
+        $modelDisplayText = \App\AdminLTEModelDisplayText::where('deleted', false)
+                ->where('model', $model)
+                ->first();
 
-        $display_text_json = isset($_REQUEST['htmldb_row0_display_text_json'])
-            ? $_REQUEST['htmldb_row0_display_text_json']
-            : '[]';
-
-        includeLibrary('adminlte/base64encode');
-        $display_texts = base64encode($display_text_json);
-        
-        includeModel('__ModelDisplayText');
-        $list__ModelDisplayText = new __ModelDisplayText();
-        $list__ModelDisplayText->addFilter('deleted', '==', false);
-        $list__ModelDisplayText->addFilter('model', '==', $model);
-        $list__ModelDisplayText->bufferSize = 1;
-        $list__ModelDisplayText->page = 0;
-        $list__ModelDisplayText->find();
-
-        if ($list__ModelDisplayText->listCount > 0) {
-            $object__ModelDisplayText = $list__ModelDisplayText->list[0];
-            $object__ModelDisplayText->display_texts = $display_texts;
-            $object__ModelDisplayText->update();
+        if ($modelDisplayText != null) {
+            $modelDisplayText->display_texts = $display_texts;
+            $modelDisplayText->update();
         } else {
-            $object__ModelDisplayText = new __ModelDisplayText();;
-            $object__ModelDisplayText->model = $model;
-            $object__ModelDisplayText->display_texts = $display_texts;
-            $object__ModelDisplayText->insert();
-        } // if ($list__ModelDisplayText->listCount > 0) {
+            $modelDisplayText = new \App\AdminLTEModelDisplayText;
+            $modelDisplayText->model = $model;
+            $modelDisplayText->display_texts = $display_texts;
+            $modelDisplayText->insert();
+        } // if ($modelDisplayText != null) {
 
-        $controller->messageCount = 1;
-        $controller->lastMessage = 'UPDATED';
-        return true;
+        $result['messageCount'] = 1;
+        $result['lastMessage'] = 'UPDATED';
+
+        $objectHTMLDB->errorCount = $result['errorCount'];
+        $objectHTMLDB->messageCount = $result['messageCount'];
+        $objectHTMLDB->lastError = $result['lastError'];
+        $objectHTMLDB->lastMessage = $result['lastMessage'];
+        $objectHTMLDB->printResponseJSON();
+        return;
+
     }
 
 }
