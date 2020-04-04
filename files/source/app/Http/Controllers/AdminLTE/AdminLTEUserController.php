@@ -14,6 +14,7 @@ class AdminLTEUserController extends Controller
 
     public function index(Request $request)
     {
+
         $viewName = 'adminlte.' . $this->controllerName;
 
         if (view()->exists('adminlte.custom.' . $this->controllerName))
@@ -27,6 +28,32 @@ class AdminLTEUserController extends Controller
         $viewData['user'] = $adminLTE->getUserData();
 
         return view($viewName, $viewData);
+
+    }
+
+    public function edit(Request $request)
+    {
+
+        $viewName = ('adminlte.'
+                . $this->controllerName
+                . '_edit');
+
+        if (view()->exists('adminlte.custom.'
+                . $this->controllerName
+                . '_edit'))
+        {
+            $viewName = 'adminlte.custom.'
+                    . $this->controllerName
+                    . '_edit';
+        } // if (view()->exists('adminlte.custom.'
+
+        $adminLTE = new AdminLTE();
+
+        $viewData['controllerName'] = $this->controllerName;
+        $viewData['user'] = $adminLTE->getUserData();
+
+        return view($viewName, $viewData);
+
     }
 
 }
