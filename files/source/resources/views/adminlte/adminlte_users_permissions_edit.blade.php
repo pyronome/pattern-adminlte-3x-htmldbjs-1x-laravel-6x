@@ -231,44 +231,44 @@
 <tr>
     <td scope="row"><i class="fas fa-cog permission-icon"></i> {{ __('Configuration') }}</td>
     <td class="text-left border-left-grey group-permission-part">
-        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left group-permission-part">
-        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left border-left-grey">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v"
-                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v"
+                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v"
+                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v"
                 class="input-menu-permission input-view"
-                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v"
+                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v"
                 value="1">
-            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v" class="detail-label">
+            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e"
-                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e"
+                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e"
+                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e"
                 class="input-menu-permission input-edit"
-                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e"
+                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e"
                 value="1">
-            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e" class="detail-label">
+            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/l"
-                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/l"
+                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/l"
+                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/l"
                 class="input-menu-permission input-lockgroup"
-                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/l"
+                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/l"
                 value="1">
-            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/l" class="detail-label">
+            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/l" class="detail-label">
             </label>
         </div>
     </td>
@@ -645,44 +645,44 @@
 <tr>
     <td scope="row"><i class="fas fa-users-cog permission-icon"></i> {{ __('User Groups') }}</td>
     <td class="text-left border-left-grey group-permission-part">
-        <span id="groupmenupermission-__systemusergroup/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteusergroup/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left group-permission-part">
-        <span id="groupmenupermission-__systemusergroup/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteusergroup/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left border-left-grey">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemusergroup/v"
-                name="input-__systemusergroup/v"
+                id="input-adminlteusergroup/v"
+                name="input-adminlteusergroup/v"
                 class="input-menu-permission input-view"
-                data-permission-token="__systemusergroup/v"
+                data-permission-token="adminlteusergroup/v"
                 value="1">
-            <label for="input-__systemusergroup/v" class="detail-label">
+            <label for="input-adminlteusergroup/v" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemusergroup/e"
-                name="input-__systemusergroup/e"
+                id="input-adminlteusergroup/e"
+                name="input-adminlteusergroup/e"
                 class="input-menu-permission input-edit"
-                data-permission-token="__systemusergroup/e"
+                data-permission-token="adminlteusergroup/e"
                 value="1">
-            <label for="input-__systemusergroup/e" class="detail-label">
+            <label for="input-adminlteusergroup/e" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemusergroup/l"
-                name="input-__systemusergroup/l"
+                id="input-adminlteusergroup/l"
+                name="input-adminlteusergroup/l"
                 class="input-menu-permission input-lockgroup"
-                data-permission-token="__systemusergroup/l"
+                data-permission-token="adminlteusergroup/l"
                 value="1">
-            <label for="input-__systemusergroup/l" class="detail-label">
+            <label for="input-adminlteusergroup/l" class="detail-label">
             </label>
         </div>
     </td>
@@ -691,44 +691,44 @@
 <tr>
     <td scope="row"><i class="fas fa-user-cog permission-icon"></i> {{ __('Users') }}</td>
     <td class="text-left border-left-grey group-permission-part">
-        <span id="groupmenupermission-__systemuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left group-permission-part">
-        <span id="groupmenupermission-__systemuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left border-left-grey">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemuser/v"
-                name="input-__systemuser/v"
+                id="input-adminlteuser/v"
+                name="input-adminlteuser/v"
                 class="input-menu-permission input-view"
-                data-permission-token="__systemuser/v"
+                data-permission-token="adminlteuser/v"
                 value="1">
-            <label for="input-__systemuser/v" class="detail-label">
+            <label for="input-adminlteuser/v" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemuser/e"
-                name="input-__systemuser/e"
+                id="input-adminlteuser/e"
+                name="input-adminlteuser/e"
                 class="input-menu-permission input-edit"
-                data-permission-token="__systemuser/e"
+                data-permission-token="adminlteuser/e"
                 value="1">
-            <label for="input-__systemuser/e" class="detail-label">
+            <label for="input-adminlteuser/e" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemuser/l"
-                name="input-__systemuser/l"
+                id="input-adminlteuser/l"
+                name="input-adminlteuser/l"
                 class="input-menu-permission input-lockgroup"
-                data-permission-token="__systemuser/l"
+                data-permission-token="adminlteuser/l"
                 value="1">
-            <label for="input-__systemuser/l" class="detail-label">
+            <label for="input-adminlteuser/l" class="detail-label">
             </label>
         </div>
     </td>

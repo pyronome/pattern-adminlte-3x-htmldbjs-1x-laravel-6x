@@ -13,7 +13,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="__systemusergroup/list">{{ __('User Group List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="adminlteusergroup/list">{{ __('User Group List') }}</a></li>
                                 <li class="breadcrumb-item enabled">{{ __('User Group Detail') }}</li>
                             </ol>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <section class="content htmldb-section" data-htmldb-table="__SystemUserGroupHTMLDB">
+            <section class="content htmldb-section" data-htmldb-table="AdminLTEUserGroupHTMLDB">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
@@ -29,7 +29,7 @@
                                 <div class="card-header show_by_permission">
                                     <div class="card-tools">
                                         <a  class="btn btn-primary btn-xs btn-on-table text-white"
-                                            href="__systemusergroup/edit/@{{id}}">
+                                            href="adminlteusergroup/edit/@{{id}}">
                                             <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span>{{ __('Edit') }}</span>
                                         </a>
                                     </div>
@@ -71,7 +71,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyMenuPermission">
-                                                        @include('adminlte.__systemusergroup_permissions_detail')
+                                                        @include('adminlte.adminlteusergroup_permissions_detail')
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -112,10 +112,10 @@
         </div>
     </div>
     @include('adminlte.footer')
-    <div id="__SystemUserGroupHTMLDB"
+    <div id="AdminLTEUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__systemusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="htmldb/adminlteusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>

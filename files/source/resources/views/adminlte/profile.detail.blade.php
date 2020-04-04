@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('User Group') }}</label>
-                                                    <div data-htmldb-content="@{{__systemusergroup_idDisplayText}}"></div>
+                                                    <div data-htmldb-content="@{{adminlteusergroup_idDisplayText}}"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyPermission">
-                                                        @include('adminlte.__systemuser_permissions_detail')
+                                                        @include('adminlte.adminlteuser_permissions_detail')
                                                     </tbody>
                                                 </table>        
                                             </div>

@@ -13,7 +13,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="__systemuser/list">{{ __('User List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="adminlteuser/list">{{ __('User List') }}</a></li>
                                 <li class="breadcrumb-item enabled">{{ __('User Detail') }}</li>
                             </ol>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <section class="content htmldb-section" data-htmldb-table="__SystemUserHTMLDB">
+            <section class="content htmldb-section" data-htmldb-table="AdminLTEUserHTMLDB">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
@@ -29,7 +29,7 @@
                                 <div class="card-header show_by_permission">
                                     <div class="card-tools">
                                         <a  class="btn btn-primary btn-xs btn-on-table text-white"
-                                            href="__systemuser/edit/@{{id}}">
+                                            href="adminlteuser/edit/@{{id}}">
                                             <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span>{{ __('Edit') }}</span>
                                         </a>
                                     </div>
@@ -56,7 +56,7 @@
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('User Group') }}</label>
-                                                    <div data-htmldb-content="@{{__systemusergroup_id/display_text}}"></div>
+                                                    <div data-htmldb-content="@{{adminlteusergroup_id/display_text}}"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyPermission">
-                                                        @include('adminlte.__systemuser_permissions_detail')
+                                                        @include('adminlte.adminlteuser_permissions_detail')
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -161,10 +161,10 @@
         </div>
     </div>
     @include('adminlte.footer')
-    <div id="__SystemUserHTMLDB"
+    <div id="AdminLTEUserHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__systemuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="htmldb/adminlteuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>

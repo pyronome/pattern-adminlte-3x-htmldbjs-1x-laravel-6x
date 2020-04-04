@@ -3,7 +3,7 @@
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
-                <div class="container-fluid htmldb-section" data-htmldb-table="__SystemUserGroupHTMLDB">
+                <div class="container-fluid htmldb-section" data-htmldb-table="AdminLTEUserGroupHTMLDB">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">{{ __('User Group Edit') }}</h1>
@@ -11,9 +11,9 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="__systemusergroup/list">{{ __('User Group List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="adminlteusergroup/list">{{ __('User Group List') }}</a></li>
                                 <li class="breadcrumb-item itemeditpage-hide@{{id}}">
-                                    <a href="__systemusergroup/detail/@{{id}}">
+                                    <a href="adminlteusergroup/detail/@{{id}}">
                                         {{ __('User Group Detail') }}
                                     </a>
                                 </li>
@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
                             <div class="card card-primary">
-                                <form id="formUserGroup"  onsubmit="return false;" class="card-body text-sm htmldb-form" data-htmldb-table="__SystemUserGroupHTMLDB">
+                                <form id="formUserGroup"  onsubmit="return false;" class="card-body text-sm htmldb-form" data-htmldb-table="AdminLTEUserGroupHTMLDB">
                                     <input type="hidden"
                                         id="formUserGroup-id"
                                         name="formUserGroup-id"
@@ -125,7 +125,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyMenuPermission">
-                                                        @include('adminlte.__systemusergroup_permissions_edit')
+                                                        @include('adminlte.adminlteusergroup_permissions_edit')
                                                     </tbody>
                                                 </table>        
                                             </div>
@@ -352,12 +352,12 @@
         </tr>
     </script>
     @endverbatim
-    <div id="__SystemUserGroupHTMLDB"
+    <div id="AdminLTEUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/__systemusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/__systemusergroup/post?_token={{ csrf_token() }}"
-        data-htmldb-redirect="__systemusergroup/last"
+        data-htmldb-read-url="htmldb/adminlteusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/adminlteusergroup/post?_token={{ csrf_token() }}"
+        data-htmldb-redirect="adminlteusergroup/last"
         data-htmldb-loader="divLoader">
     </div>
 

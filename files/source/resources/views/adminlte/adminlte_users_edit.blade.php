@@ -3,7 +3,7 @@
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
-                <div class="container-fluid htmldb-section" data-htmldb-table="__SystemUserHTMLDB">
+                <div class="container-fluid htmldb-section" data-htmldb-table="AdminLTEUserHTMLDB">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">{{ __('User Edit') }}</h1>
@@ -11,9 +11,9 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="__systemuser/list">{{ __('User List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="adminlteuser/list">{{ __('User List') }}</a></li>
                                 <li class="breadcrumb-item itemeditpage-hide@{{id}}">
-                                    <a href="__systemuser/detail/@{{id}}">
+                                    <a href="adminlteuser/detail/@{{id}}">
                                         {{ __('User Detail') }}
                                     </a>
                                 </li>
@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
                             <div class="card card-primary">
-                                <form id="formUser"  onsubmit="return false;" class="card-body text-sm htmldb-form" data-htmldb-table="__SystemUserHTMLDB">
+                                <form id="formUser"  onsubmit="return false;" class="card-body text-sm htmldb-form" data-htmldb-table="AdminLTEUserHTMLDB">
                                     <input type="hidden"
                                         id="formUser-id"
                                         name="formUser-id"
@@ -67,16 +67,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <label for="formUser-__systemusergroup_id" class="detail-label">{{ __('User Group') }}</label>
+                                            <label for="formUser-adminlteusergroup_id" class="detail-label">{{ __('User Group') }}</label>
                                             <select data-placeholder="Select a user group"
-                                                id="formUser-__systemusergroup_id"
-                                                name="formUser-__systemusergroup_id"
+                                                id="formUser-adminlteusergroup_id"
+                                                name="formUser-adminlteusergroup_id"
                                                 class="form-control htmldb-select2 htmldb-field htmldb-select"
-                                                data-htmldb-option-table="__SystemUserGroupHTMLDB"
+                                                data-htmldb-option-table="AdminLTEUserGroupHTMLDB"
                                                 data-htmldb-option-value="@{{id}}"
                                                 data-htmldb-option-title="@{{title}}"
-                                                data-htmldb-field="__systemusergroup_id"
-                                                data-htmldb-value="@{{__systemusergroup_id}}"
+                                                data-htmldb-field="adminlteusergroup_id"
+                                                data-htmldb-value="@{{adminlteusergroup_id}}"
                                                 style="width: 100%;">
                                                 <option></option>
                                             </select>
@@ -186,7 +186,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyMenuPermission">
-                                                        @include('adminlte.__systemuser_permissions_edit')
+                                                        @include('adminlte.adminlteuser_permissions_edit')
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -351,10 +351,10 @@
         </div>
     </div>
     @include('adminlte.footer')
-    <div id="__SystemUserGroupHTMLDB"
+    <div id="AdminLTEUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="0"
-        data-htmldb-read-url="htmldb/__systemusergroup/get?_token={{ csrf_token() }}"
+        data-htmldb-read-url="htmldb/adminlteusergroup/get?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
@@ -481,12 +481,12 @@
         </tr>
     </script>
 
-    <div id="__SystemUserHTMLDB"
+    <div id="AdminLTEUserHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="3"
-        data-htmldb-read-url="htmldb/__systemuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/__systemuser/post?_token={{ csrf_token() }}"
-        data-htmldb-redirect="__systemuser/last"
+        data-htmldb-read-url="htmldb/adminlteuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="htmldb/adminlteuser/post?_token={{ csrf_token() }}"
+        data-htmldb-redirect="adminlteuser/last"
         data-htmldb-loader="divLoader">
     </div>
 

@@ -96,19 +96,19 @@
 <tr>
     <td scope="row"><i class="fas fa-cog permission-icon"></i> {{ __('Configuration') }}</td>
     <td class="text-left border-left-grey group-permission-part">
-        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left group-permission-part">
-        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left border-left-grey">
-        <span id="usermenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left">
-        <span id="usermenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left">
-        <span id="usermenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/l" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/l" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
 </tr>
 
@@ -267,38 +267,38 @@
 <tr>
     <td scope="row"><i class="fas fa-users-cog permission-icon"></i> {{ __('User Groups') }}</td>
     <td class="text-left border-left-grey group-permission-part">
-        <span id="groupmenupermission-__systemusergroup/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteusergroup/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left group-permission-part">
-        <span id="groupmenupermission-__systemusergroup/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteusergroup/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left border-left-grey">
-        <span id="usermenupermission-__systemusergroup/v" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-adminlteusergroup/v" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left">
-        <span id="usermenupermission-__systemusergroup/e" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-adminlteusergroup/e" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left">
-        <span id="usermenupermission-__systemusergroup/l" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-adminlteusergroup/l" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
 </tr>
 
 <tr>
     <td scope="row"><i class="fas fa-user-cog permission-icon"></i> {{ __('Users') }}</td>
     <td class="text-left border-left-grey group-permission-part">
-        <span id="groupmenupermission-__systemuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteuser/v" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left group-permission-part">
-        <span id="groupmenupermission-__systemuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="groupmenupermission-adminlteuser/e" class="groupMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left border-left-grey">
-        <span id="usermenupermission-__systemuser/v" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-adminlteuser/v" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left">
-        <span id="usermenupermission-__systemuser/e" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-adminlteuser/e" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
     <td class="text-left">
-        <span id="usermenupermission-__systemuser/l" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
+        <span id="usermenupermission-adminlteuser/l" class="userMenuPermissionIcon spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
     </td>
 </tr>
 

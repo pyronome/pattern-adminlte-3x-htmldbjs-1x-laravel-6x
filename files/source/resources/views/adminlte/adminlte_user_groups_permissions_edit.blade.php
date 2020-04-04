@@ -143,24 +143,24 @@
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v"
-                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v"
+                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v"
+                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v"
                 class="input-menu-permission input-view"
-                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v"
+                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v"
                 value="1">
-            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/v" class="detail-label">
+            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/v" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e"
-                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e"
+                id="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e"
+                name="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e"
                 class="input-menu-permission input-edit"
-                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e"
+                data-permission-token="server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e"
                 value="1">
-            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguages__systemusergroup__systemuser/e" class="detail-label">
+            <label for="input-server_informationgeneral_settingsdatabase_serveremail_serverftp_servermenu_configuration__modeldisplaytextlanguagesadminlteusergroupadminlteuser/e" class="detail-label">
             </label>
         </div>
     </td>
@@ -395,24 +395,24 @@
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemusergroup/v"
-                name="input-__systemusergroup/v"
+                id="input-adminlteusergroup/v"
+                name="input-adminlteusergroup/v"
                 class="input-menu-permission input-view"
-                data-permission-token="__systemusergroup/v"
+                data-permission-token="adminlteusergroup/v"
                 value="1">
-            <label for="input-__systemusergroup/v" class="detail-label">
+            <label for="input-adminlteusergroup/v" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemusergroup/e"
-                name="input-__systemusergroup/e"
+                id="input-adminlteusergroup/e"
+                name="input-adminlteusergroup/e"
                 class="input-menu-permission input-edit"
-                data-permission-token="__systemusergroup/e"
+                data-permission-token="adminlteusergroup/e"
                 value="1">
-            <label for="input-__systemusergroup/e" class="detail-label">
+            <label for="input-adminlteusergroup/e" class="detail-label">
             </label>
         </div>
     </td>
@@ -423,24 +423,24 @@
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemuser/v"
-                name="input-__systemuser/v"
+                id="input-adminlteuser/v"
+                name="input-adminlteuser/v"
                 class="input-menu-permission input-view"
-                data-permission-token="__systemuser/v"
+                data-permission-token="adminlteuser/v"
                 value="1">
-            <label for="input-__systemuser/v" class="detail-label">
+            <label for="input-adminlteuser/v" class="detail-label">
             </label>
         </div>
     </td>
     <td class="text-left">
         <div class="icheck-primary d-inline">
             <input type="checkbox"
-                id="input-__systemuser/e"
-                name="input-__systemuser/e"
+                id="input-adminlteuser/e"
+                name="input-adminlteuser/e"
                 class="input-menu-permission input-edit"
-                data-permission-token="__systemuser/e"
+                data-permission-token="adminlteuser/e"
                 value="1">
-            <label for="input-__systemuser/e" class="detail-label">
+            <label for="input-adminlteuser/e" class="detail-label">
             </label>
         </div>
     </td>
