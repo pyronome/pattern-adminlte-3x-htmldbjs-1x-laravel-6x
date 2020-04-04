@@ -186,7 +186,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbodyMenuPermission">
-                                                        @include('adminlte.adminlteuser_permissions_edit')
+                                                        @include('adminlte.adminlte_users_permissions_edit')
                                                     </tbody>
                                                 </table>
                                             </div>

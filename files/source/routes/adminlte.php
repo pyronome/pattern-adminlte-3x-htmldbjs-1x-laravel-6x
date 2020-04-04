@@ -30,6 +30,11 @@ Route::prefix('adminlte_users')->group(function () {
     Route::get('/edit/{id}', 'AdminLTEUserController@edit');
 });
 
+Route::prefix('adminlteuser')->group(function () {
+    Route::get('/', 'AdminLTEUserController@index');
+    Route::get('/edit/{id}', 'AdminLTEUserController@edit');
+});
+
 Route::get('/adminlte_user_groups', 'AdminLTEUserGroupController@index');
 Route::get('/adminlte_model_display_texts', 'AdminLTEModelDisplayTextController@index');
 Route::get('/setup', 'SetupController@index');
