@@ -66,15 +66,6 @@ Route::namespace('HTMLDB')
         Route::post('/post', 'MenuConfigurationController@post');
     });
 
-    Route::prefix('languages')->group(function () {
-        Route::get('/get_copiedtranslation', 'LanguagesController@get_copiedtranslation');
-        Route::get('/get_languages', 'LanguagesController@get_languages');
-        Route::get('/get_pages', 'LanguagesController@get_pages');
-        Route::get('/get_translation', 'LanguagesController@get_translation');
-        Route::post('/post_copiedtranslation', 'LanguagesController@post_copiedtranslation');
-        Route::post('/post_translation', 'LanguagesController@post_translation');
-    });
-
     Route::prefix('adminlte_users')->group(function () {
         Route::get('/get/{id}', 'AdminLTEUserController@get');
         Route::get('/get_session/{pageName}', 'AdminLTEUserController@get_session');
