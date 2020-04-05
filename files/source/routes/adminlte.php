@@ -25,20 +25,22 @@ Route::get('/profile', 'ProfileController@index');
 Route::get('/root_settings', 'RootSettingsController@index');
 Route::get('/server_information', 'ServerInformationController@index');
 
-Route::prefix('adminlte_users')->group(function () {
-    Route::get('/', 'AdminLTEUserController@index');
-    Route::get('/detail/{id}', 'AdminLTEUserController@showDetailPage');
-    Route::get('/edit/{id}', 'AdminLTEUserController@showEditPage');
-});
-
 Route::prefix('adminlteuser')->group(function () {
     Route::get('/', 'AdminLTEUserController@index');
     Route::get('/detail/{id}', 'AdminLTEUserController@showDetailPage');
     Route::get('/edit/{id}', 'AdminLTEUserController@showEditPage');
 });
 
-Route::get('/adminlte_user_groups', 'AdminLTEUserGroupController@index');
-Route::get('/adminlte_model_display_texts', 'AdminLTEModelDisplayTextController@index');
+Route::prefix('adminlteusergroup')->group(function () {
+    Route::get('/', 'AdminLTEUserGroupController@index');
+    Route::get('/detail/{id}', 'AdminLTEUserGroupController@showDetailPage');
+    Route::get('/edit/{id}', 'AdminLTEUserGroupController@showEditPage');
+});
+
+Route::prefix('adminltemodeldisplaytext')->group(function () {
+    Route::get('/', 'AdminLTEModelDisplayTextController@index');
+});
+
 Route::get('/setup', 'SetupController@index');
 
 Route::namespace('HTMLDB')
