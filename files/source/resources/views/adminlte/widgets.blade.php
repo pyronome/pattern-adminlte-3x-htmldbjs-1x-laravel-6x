@@ -345,8 +345,8 @@
 <div id="ConfigurationHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="1001"
-    data-htmldb-read-url="htmldb/__layout/get_widgetconfig/{{ $controllerName }}?_token={{ csrf_token() }}"
-    data-htmldb-write-url="htmldb/__layout/post_widgetconfig/{{ $controllerName }}?_token={{ csrf_token() }}"
+    data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__layout/get_widgetconfig/{{ $controllerName }}?_token={{ csrf_token() }}"
+    data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/__layout/post_widgetconfig/{{ $controllerName }}?_token={{ csrf_token() }}"
     data-htmldb-loader="divLoader">
 </div>
 
@@ -370,7 +370,7 @@
 <div id="AttributeHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="1002"
-    data-htmldb-read-url="htmldb/__layout/get_attributes?_token={{ csrf_token() }}"
+    data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__layout/get_attributes?_token={{ csrf_token() }}"
     data-htmldb-read-only="1">
 </div>
 
@@ -395,7 +395,7 @@
 <div id="WidgetHTMLDB"
     class="htmldb-table"
     data-htmldb-priority="1003"
-    data-htmldb-read-url="htmldb/__widgets/get/{{ $controllerName }}?_token={{ csrf_token() }}"
+    data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__widgets/get/{{ $controllerName }}?_token={{ csrf_token() }}"
     data-htmldb-read-only="1">
 </div>
 <script type="text/html" 

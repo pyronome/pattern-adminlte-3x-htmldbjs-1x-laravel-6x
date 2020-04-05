@@ -164,7 +164,7 @@
     <div id="AdminLTEUserHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/adminlteuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/adminlteuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>

@@ -91,8 +91,8 @@
     @include('adminlte.footer')
     <div id="ProfileHTMLDB"
         class="htmldb-table"
-        data-htmldb-read-url="htmldb/__root/get?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/__root/post?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__root/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/__root/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     

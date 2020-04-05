@@ -196,8 +196,8 @@
     <div id="ModelDisplayTextHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__modeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/__modeldisplaytext/post_model_display_texts?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
+        data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/post_model_display_texts?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     @verbatim
@@ -216,7 +216,7 @@
     <div id="ModelRenderHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/__modeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
@@ -251,7 +251,7 @@
     <div id="PropertyListHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/__modeldisplaytext/get_model_property_list?_token={{ csrf_token() }}">
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/get_model_property_list?_token={{ csrf_token() }}">
     </div>
     @verbatim
     <script type="text/html" 

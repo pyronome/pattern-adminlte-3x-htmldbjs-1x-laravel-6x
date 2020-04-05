@@ -267,7 +267,7 @@
     <div id="LanguageHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="htmldb/general_settings/get_languages?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/general_settings/get_languages?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
@@ -275,7 +275,7 @@
     <div id="TimezoneHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="htmldb/general_settings/get_timezones?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/general_settings/get_timezones?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
@@ -283,8 +283,8 @@
     <div id="ConfigurationHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="5"
-        data-htmldb-read-url="htmldb/general_settings/get?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/general_settings/post?_token={{ csrf_token() }}"
+        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/general_settings/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/general_settings/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     
