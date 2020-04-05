@@ -56,13 +56,13 @@ class AdminLTEUserGroupController extends Controller
 
         if ($id > 0)
         {
-            $objectAdminLTEUsers = \App\AdminLTEUserGroup::where('deleted', false)
+            $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
                     ->where('id', $id)
                     ->get();
         }
         else
         {
-            $objectAdminLTEUsers = \App\AdminLTEUserGroup::where('deleted', false)
+            $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
                     ->orderBy('created_at', 'desc')
                     ->get();
         } // if ($id > 0)
