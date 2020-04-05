@@ -12,8 +12,8 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="adminlteusergroup/list">{{ __('User Group List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/home">{{ __('Home') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/adminlteusergroup/list">{{ __('User Group List') }}</a></li>
                                 <li class="breadcrumb-item enabled">{{ __('User Group Detail') }}</li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                                 <div class="card-header show_by_permission">
                                     <div class="card-tools">
                                         <a  class="btn btn-primary btn-xs btn-on-table text-white"
-                                            href="adminlteusergroup/edit/@{{id}}">
+                                            href="/{{ config('adminlte.main_folder') }}/adminlteusergroup/edit/@{{id}}">
                                             <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span>{{ __('Edit') }}</span>
                                         </a>
                                     </div>

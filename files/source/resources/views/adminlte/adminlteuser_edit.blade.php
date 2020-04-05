@@ -11,9 +11,9 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="adminlteuser/list">{{ __('User List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/adminlteuser/list">{{ __('User List') }}</a></li>
                                 <li class="breadcrumb-item itemeditpage-hide@{{id}}">
-                                    <a href="adminlteuser/detail/@{{id}}">
+                                    <a href="/{{ config('adminlte.main_folder') }}/adminlteuser/detail/@{{id}}">
                                         {{ __('User Detail') }}
                                     </a>
                                 </li>

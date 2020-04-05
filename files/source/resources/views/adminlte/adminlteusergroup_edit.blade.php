@@ -10,10 +10,10 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
-                                <li class="breadcrumb-item"><a href="adminlteusergroup/list">{{ __('User Group List') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/home">{{ __('Home') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/adminlteusergroup/list">{{ __('User Group List') }}</a></li>
                                 <li class="breadcrumb-item itemeditpage-hide@{{id}}">
-                                    <a href="adminlteusergroup/detail/@{{id}}">
+                                    <a href="/{{ config('adminlte.main_folder') }}/adminlteusergroup/detail/@{{id}}">
                                         {{ __('User Group Detail') }}
                                     </a>
                                 </li>
