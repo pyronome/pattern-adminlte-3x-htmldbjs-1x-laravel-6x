@@ -101,8 +101,8 @@
     
     <div id="loginHTMLDB"
         class="htmldb-table"
-        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/login/get?_token={{ csrf_token() }}"
-        data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/login/post?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/login/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/login/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     

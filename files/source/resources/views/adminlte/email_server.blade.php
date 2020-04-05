@@ -162,8 +162,8 @@
     <div id="ConfigurationHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/email_server/get?_token={{ csrf_token() }}"
-        data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/email_server/post?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/email_server/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/email_server/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
 

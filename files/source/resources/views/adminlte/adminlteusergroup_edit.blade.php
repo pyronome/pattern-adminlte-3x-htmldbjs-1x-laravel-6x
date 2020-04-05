@@ -260,7 +260,7 @@
     <div id="directoryHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="0"
-        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__services/get_directories?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__services/get_directories?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
     @verbatim
@@ -287,7 +287,7 @@
     <div id="fileHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/__services/get?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__services/get?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
     @verbatim
@@ -355,8 +355,8 @@
     <div id="AdminLTEUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/post?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/post?_token={{ csrf_token() }}"
         data-htmldb-redirect="adminlteusergroup/last"
         data-htmldb-loader="divLoader">
     </div>
