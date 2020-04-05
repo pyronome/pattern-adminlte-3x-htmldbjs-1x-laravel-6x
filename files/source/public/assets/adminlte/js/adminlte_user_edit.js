@@ -3,7 +3,7 @@ $(function(){
     initializePage();
 });
 function initializePage() {
-	$("#formUser-__systemusergroup_id").on("change", function () {
+	$("#formUser-adminlteusergroup_id").on("change", function () {
         doUserGroupChange(this);
     });
 	
@@ -72,7 +72,7 @@ function initializePage() {
         	return;
         }
 
-        var UserGroup = HTMLDB.get(HTMLDB.e("__SystemUserGroupHTMLDB"), groupId);
+        var UserGroup = HTMLDB.get(HTMLDB.e("AdminLTEUserGroupHTMLDB"), groupId);
         var groupPermissions = UserGroup["menu_permission"];
 
         var permissions = [];

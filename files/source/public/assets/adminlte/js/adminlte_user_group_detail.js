@@ -3,7 +3,7 @@ $(function(){
     initializePage();
 });
 function initializePage() {
-	$("#__SystemUserGroupHTMLDB").on("htmldbread", function (e) {
+	$("#AdminLTEUserGroupHTMLDB").on("htmldbread", function (e) {
 		initializeUserGroupMenuPermissions();
         initializeUserGroupServicePermissions();
 	});

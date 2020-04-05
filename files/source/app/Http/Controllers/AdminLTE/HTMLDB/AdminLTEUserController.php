@@ -99,7 +99,7 @@ class AdminLTEUserController extends Controller
             $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
 
             // Display Texts
-            $displayTexts = $adminLTE->getObjectDisplayTexts('__SystemUser', $objectAdminLTEUser);
+            $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
 
             $list[$index]['id/display_text'] = $displayTexts['id'];
             $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
@@ -520,7 +520,7 @@ class AdminLTEUserController extends Controller
                 }
 
                 $graphData[$created_at]++;
-            } // for ($i = 0; $i < $count__SystemUser; $i++) {
+            } // for ($i = 0; $i < $countAdminLTEUser; $i++) {
         } else if ('monthly' == $graphType) {
             foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
             {
@@ -531,7 +531,7 @@ class AdminLTEUserController extends Controller
                 }
 
                 $graphData[$created_at]++;
-            } // for ($i = 0; $i < $count__SystemUser; $i++) {
+            } // for ($i = 0; $i < $countAdminLTEUser; $i++) {
         } // if ('daily' == $graphType) {
         
         $keys = array_keys($graphData);
@@ -674,23 +674,23 @@ class AdminLTEUserController extends Controller
 
     public function post(Request $request)
     {
-        loadLanguageFile('__systemuser', 'adminlte');
+        loadLanguageFile('adminlteuser', 'adminlte');
         
         $controller->errorCount = 0;
         $controller->messageCount = 0;
         $controller->lastError = '';
         $controller->lastMessage = '';
 
-        $current__SystemUser = null;
+        $currentAdminLTEUser = null;
 
-        includeModel('__SystemUser');
+        includeModel('AdminLTEUser');
         
         $id = isset($_REQUEST['htmldb_row0_id'])
             ? intval($_REQUEST['htmldb_row0_id'])
             : 0;
 
         if (0 != $id) {
-            $current__SystemUser = new __SystemUser($id);
+            $currentAdminLTEUser = new AdminLTEUser($id);
         }
 
         $fullname = isset($_REQUEST['htmldb_row0_fullname'])
@@ -731,17 +731,17 @@ class AdminLTEUserController extends Controller
 
             $controller->lastError .= __('Please specify username.');
         } else {
-            $list__SystemUser = new __SystemUser();
-            $list__SystemUser->addFilter('deleted', '==', false);
-            $list__SystemUser->addFilter('username', '==', $username);
-            if (null !== $current__SystemUser) {
-                $list__SystemUser->addFilter('id', '!=', $current__SystemUser->id);
+            $listAdminLTEUser = new AdminLTEUser();
+            $listAdminLTEUser->addFilter('deleted', '==', false);
+            $listAdminLTEUser->addFilter('username', '==', $username);
+            if (null !== $currentAdminLTEUser) {
+                $listAdminLTEUser->addFilter('id', '!=', $currentAdminLTEUser->id);
             }
-            $list__SystemUser->bufferSize = 1;
-            $list__SystemUser->page = 0;
-            $list__SystemUser->find();
+            $listAdminLTEUser->bufferSize = 1;
+            $listAdminLTEUser->page = 0;
+            $listAdminLTEUser->find();
 
-            if ($list__SystemUser->listCount > 0) {
+            if ($listAdminLTEUser->listCount > 0) {
 
                 $controller->errorCount++;
                 if ($controller->lastError != '') {
@@ -750,7 +750,7 @@ class AdminLTEUserController extends Controller
 
                 $controller->lastError .= __('Username specified belongs to another user. Please specify another username.');
 
-            } // if ($list__SystemUser->listCount > 0) {
+            } // if ($listAdminLTEUser->listCount > 0) {
         } // if ('' == $username) {  
         
         if ('' == $email) {
@@ -771,17 +771,17 @@ class AdminLTEUserController extends Controller
 
                 $controller->lastError .= __('Please specify a valid email address.');
             } else {
-                $list__SystemUser = new __SystemUser();
-                $list__SystemUser->addFilter('deleted', '==', false);
-                $list__SystemUser->addFilter('email', '==', $email);
-                if (null !== $current__SystemUser) {
-                    $list__SystemUser->addFilter('id', '!=', $current__SystemUser->id);
+                $listAdminLTEUser = new AdminLTEUser();
+                $listAdminLTEUser->addFilter('deleted', '==', false);
+                $listAdminLTEUser->addFilter('email', '==', $email);
+                if (null !== $currentAdminLTEUser) {
+                    $listAdminLTEUser->addFilter('id', '!=', $currentAdminLTEUser->id);
                 }
-                $list__SystemUser->bufferSize = 1;
-                $list__SystemUser->page = 0;
-                $list__SystemUser->find();
+                $listAdminLTEUser->bufferSize = 1;
+                $listAdminLTEUser->page = 0;
+                $listAdminLTEUser->find();
 
-                if ($list__SystemUser->listCount > 0) {
+                if ($listAdminLTEUser->listCount > 0) {
 
                     $controller->errorCount++;
                     if ($controller->lastError != '') {
@@ -790,7 +790,7 @@ class AdminLTEUserController extends Controller
 
                     $controller->lastError .= __('E-mail address specified belongs to another user. Please specify another e-mail address.');
 
-                } // if ($list__SystemUser->listCount > 0) {
+                } // if ($listAdminLTEUser->listCount > 0) {
             }
         }
 
@@ -806,8 +806,8 @@ class AdminLTEUserController extends Controller
         includeLibrary('convertNameToFileName');
         includeLibrary('adminlte/base64encode');
 
-        includeModel('__SystemUser');
-        $objectAdminLTEUser = new __SystemUser();
+        includeModel('AdminLTEUser');
+        $objectAdminLTEUser = new AdminLTEUser();
         $objectAdminLTEUser->request($_REQUEST, 'htmldb_row0_');
 
         $objectAdminLTEUser->username = convertNameToFileName($objectAdminLTEUser->username);
@@ -827,7 +827,7 @@ class AdminLTEUserController extends Controller
 
         $objectAdminLTEUser->update();
 
-        $_SESSION[sha1('__systemuser_lastid')] = $objectAdminLTEUser->id;
+        $_SESSION[sha1('adminlteuser_lastid')] = $objectAdminLTEUser->id;
 
         return;
 
@@ -852,8 +852,8 @@ class AdminLTEUserController extends Controller
         $ids = explode(',', $idcsv);
         $idCount = count($ids);
         
-        includeModel('__SystemUser');
-        $objectAdminLTEUser = new __SystemUser();
+        includeModel('AdminLTEUser');
+        $objectAdminLTEUser = new AdminLTEUser();
 
         for ($i=0; $i < $idCount; $i++) { 
             $objectAdminLTEUser->id = $ids[$i];
@@ -864,16 +864,16 @@ class AdminLTEUserController extends Controller
 
         if ($idCount > 0) {
             includeLibrary('getModelSessionParameters');
-            $sessionParameters = getModelSessionParameters('__SystemUser');
+            $sessionParameters = getModelSessionParameters('AdminLTEUser');
 
-            $list__SystemUser = new __SystemUser();
-            $list__SystemUser->bufferSize = 1;
-            $list__SystemUser->page = 0;
-            $list__SystemUser->addFilter('deleted','==', false);
-            $list__SystemUser->addSearchText($sessionParameters['searchText']);
-            $list__SystemUser->find();
+            $listAdminLTEUser = new AdminLTEUser();
+            $listAdminLTEUser->bufferSize = 1;
+            $listAdminLTEUser->page = 0;
+            $listAdminLTEUser->addFilter('deleted','==', false);
+            $listAdminLTEUser->addSearchText($sessionParameters['searchText']);
+            $listAdminLTEUser->find();
 
-            $sessionParameters['pageCount'] = ceil($list__SystemUser->getPageCount() / $sessionParameters['bufferSize']);
+            $sessionParameters['pageCount'] = ceil($listAdminLTEUser->getPageCount() / $sessionParameters['bufferSize']);
             
             if ($sessionParameters['page'] == $sessionParameters['pageCount']) {
                 if ($sessionParameters['page'] > 0) {
@@ -882,7 +882,7 @@ class AdminLTEUserController extends Controller
             }
 
             includeLibrary('setModelSessionParameters');
-            setModelSessionParameters('__SystemUser', $sessionParameters);
+            setModelSessionParameters('AdminLTEUser', $sessionParameters);
         }
 
         $controller->messageCount = 1;
