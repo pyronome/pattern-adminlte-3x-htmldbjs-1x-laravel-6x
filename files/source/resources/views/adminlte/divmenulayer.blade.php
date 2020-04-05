@@ -35,7 +35,7 @@
                             <li class="nav-item">
                                 <a id="pageurl<?php echo $url; ?>" 
                                     class="nav-link"
-                                    href="<?php echo $href; ?>" >
+                                    href="<?php echo ('/' . config('adminlte.main_folder') . '/' . $href); ?>" >
                                     <i class="<?php echo $icon; ?> nav-icon"></i>
                                     <p>
                                         {{ __($title) }}
@@ -75,7 +75,7 @@
 		                                    <li class="nav-item">
 		                                        <a id="pageurl<?php echo $url; ?>"
                                                     class="child_menu nav-link"
-                                                    href="<?php echo $href; ?>"
+                                                    href="<?php echo ('/' . config('adminlte.main_folder') . '/' . $href); ?>"
                                                     data-parent-url="<?php echo $parent_id; ?>">
 		                                            <i class="<?php echo $icon; ?> nav-icon"></i>
 		                                            <p>{{ __($title) }}</p>
