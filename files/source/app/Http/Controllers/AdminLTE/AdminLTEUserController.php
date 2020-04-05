@@ -10,7 +10,7 @@ use App\AdminLTEUser;
 class AdminLTEUserController extends Controller
 {
 
-    public $controllerName = 'adminlte_users';
+    public $controllerName = 'adminlteuser';
 
     public function index(Request $request)
     {

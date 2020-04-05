@@ -10,7 +10,7 @@ use App\AdminLTEUser;
 class AdminLTEModelDisplayTextController extends Controller
 {
 
-    public $controllerName = 'adminlte_model_display_texts';
+    public $controllerName = 'adminltemodeldisplaytext';
 
     public function index(Request $request)
     {

@@ -10,7 +10,7 @@ use App\AdminLTEUser;
 class AdminLTEUserGroupController extends Controller
 {
 
-    public $controllerName = 'adminlte_user_groups';
+    public $controllerName = 'adminlteusergroup';
 
     public function index(Request $request)
     {
