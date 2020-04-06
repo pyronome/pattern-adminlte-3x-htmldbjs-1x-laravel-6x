@@ -66,18 +66,9 @@ class AdminLTEUserController extends Controller
         $objectAdminLTEUsers = null;
         $objectAdminLTEUser = null;
 
-        if ($id > 0)
-        {
-            $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
-                    ->where('id', $id)
-                    ->get();
-        }
-        else
-        {
-            $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-        } // if ($id > 0)
+        $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
+                ->where('id', $id)
+                ->get();
 
         $index = 0;
 

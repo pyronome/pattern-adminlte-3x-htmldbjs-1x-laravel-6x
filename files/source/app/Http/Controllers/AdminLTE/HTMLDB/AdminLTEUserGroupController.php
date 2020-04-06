@@ -54,18 +54,9 @@ class AdminLTEUserGroupController extends Controller
         $objectAdminLTEUserGroups = null;
         $objectAdminLTEUserGroup = null;
 
-        if ($id > 0)
-        {
-            $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
-                    ->where('id', $id)
-                    ->get();
-        }
-        else
-        {
-            $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-        } // if ($id > 0)
+        $objectAdminLTEUserGroups = \App\AdminLTEUserGroup::where('deleted', false)
+                ->where('id', $id)
+                ->get();
 
         $index = 0;
 
