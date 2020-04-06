@@ -121,4 +121,9 @@ Route::namespace('HTMLDB')
         Route::post('/post_model_display_texts', 'AdminLTELayoutController@post_model_display_texts');
     });
 
+    Route::prefix('__services')->group(function () {
+        Route::get('/get', 'AdminLTEServiceController@get');
+        Route::get('/get_directories', 'AdminLTEServiceController@get_directories');
+    });
+
 });
