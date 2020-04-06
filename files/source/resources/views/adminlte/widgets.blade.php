@@ -403,37 +403,35 @@
     class="htmldb-template"
     data-htmldb-table="WidgetHTMLDB"
     data-htmldb-template-target="widgetContainer">
-    @verbatim
-    <div class="empty-widget empty-widget-{{type}}">
+    <div class="empty-widget empty-widget-@{{type}}">
     </div>
-    <div class="{{size}} infobox-{{type}} widget-visible{{visibility}}">
-        <div class="info-box clickable-infobox" data-href="{{href}}">
-            <span class="info-box-icon elevation-1" style="background-color:{{iconbackground}};"><i class="{{icon}}"></i></span>
+    <div class="@{{size}} infobox-@{{type}} widget-visible@{{visibility}}">
+        <div class="info-box clickable-infobox" data-href="/{{ config('adminlte.main_folder') }}/@{{href}}">
+            <span class="info-box-icon elevation-1" style="background-color:@{{iconbackground}};"><i class="@{{icon}}"></i></span>
             <div class="info-box-content">
-                <span class="info-box-text">{{text}}</span>
-                <span class="info-box-number" id="{{model}}InfoboxValue">0</span>
+                <span class="info-box-text">@{{text}}</span>
+                <span class="info-box-number" id="@{{model}}InfoboxValue">0</span>
             </div>
         </div>
-        <div id="{{model}}InfoboxHTMLDBTableContainer" class="infobox-htmldb-table-container" data-row-id="{{id}}"></div>
+        <div id="@{{model}}InfoboxHTMLDBTableContainer" class="infobox-htmldb-table-container" data-row-id="@{{id}}"></div>
     </div>
-    <div class="{{size}} recordgraph-{{type}} widget-visible{{visibility}}">
+    <div class="@{{size}} recordgraph-@{{type}} widget-visible@{{visibility}}">
         <div class="card collapsed-card">
             <div class="card-header">
-                <h3 class="card-title">{{text}}</h3>
+                <h3 class="card-title">@{{text}}</h3>
 
                 <div class="card-tools">
-                    <button type="button" id="buttonSHRecordGraph-{{model}}" class="btn btn-tool buttonSHWidget" data-display="no" data-card-widget="collapse">
+                    <button type="button" id="buttonSHRecordGraph-@{{model}}" class="btn btn-tool buttonSHWidget" data-display="no" data-card-widget="collapse">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body" style="display:none;min-height:250px;">
-                <canvas id="{{model}}RecordGraphContainer"></canvas>
+                <canvas id="@{{model}}RecordGraphContainer"></canvas>
             </div>
         </div>
-        <div id="{{model}}GraphHTMLDBTableContainer" class="recordgraph-htmldb-table-container" data-row-id="{{id}}"></div>
+        <div id="@{{model}}GraphHTMLDBTableContainer" class="recordgraph-htmldb-table-container" data-row-id="@{{id}}"></div>
     </div>
-    @endverbatim
     <div class="@{{size}} recordlist-@{{type}} widget-visible@{{visibility}}">
         <div class="card collapsed-card">
             <div class="card-header">
@@ -450,7 +448,7 @@
                 <div id="@{{model}}RecordListContainer" class="recordlist-container" data-row-id="@{{id}}"></div>
                 <div id="@{{model}}RecordListPaginationContainer" class="recordlist-pagination-container" data-row-id="@{{id}}"></div>
                 <div class="showAllRecordContainer">
-                    <a class="showAllRecord@{{onlylastrecord}}" href="@{{href}}">{{ __('View All Records') }}</a>
+                    <a class="showAllRecord@{{onlylastrecord}}" href="/{{ config('adminlte.main_folder') }}/@{{href}}">{{ __('View All Records') }}</a>
                 </div>
             </div>
         </div>
@@ -582,7 +580,7 @@
     <th class="text-center th-btn-1">
         <button type="button"
             id="buttonNew__MODEL__"
-            data-href="__MODEL_LOWERCASE__/edit/new"
+            data-href="/{{ config('adminlte.main_folder') }}/__MODEL_LOWERCASE__/edit/new"
             class="btn btn-primary btn-xs btn-on-table show_by_permission">
             <i class="fa fa-plus"></i> <span class="hidden-xxs">{{ __('Add') }}</span>
         </button>
@@ -627,7 +625,7 @@
 </script>
 <script type="text/html" id="tdButtonTemplate">
     <td class="text-center">
-        <a class="btn btn-outline-primary btn-xs btn-on-table" href="__MODEL_LOWERCASE__/detail/@{{id}}">
+        <a class="btn btn-outline-primary btn-xs btn-on-table" href="/{{ config('adminlte.main_folder') }}/__MODEL_LOWERCASE__/detail/@{{id}}">
             <i class="fa fa-info-circle"></i> <span class="hidden-xxs">{{ __('Detail') }}</span>
         </a>
     </td>
