@@ -11,6 +11,8 @@
 |
 */
 
+/* {{snippet:begin_routes}} */
+
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('/login', 'LoginController@index');
@@ -52,10 +54,14 @@ Route::prefix('adminltemodeldisplaytext')->group(function () {
 
 Route::get('/setup', 'SetupController@index');
 
+/* {{snippet:end_routes}} */
+
 Route::namespace('HTMLDB')
         ->middleware(\App\Http\Middleware\AdminLTEHTMLDBMiddleware::class)
         ->prefix('htmldb')
         ->group(function () {
+
+    /* {{snippet:begin_htmldb_routes}} */
 
     Route::prefix('login')->group(function () {
 	    Route::get('/get', 'LoginController@get');
@@ -138,5 +144,7 @@ Route::namespace('HTMLDB')
         Route::get('/get', 'AdminLTEServiceController@get');
         Route::get('/get_directories', 'AdminLTEServiceController@get_directories');
     });
+
+    /* {{snippet:end_htmldb_routes}} */
 
 });
