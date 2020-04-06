@@ -27,12 +27,14 @@ Route::get('/server_information', 'ServerInformationController@index');
 
 Route::prefix('adminlteuser')->group(function () {
     Route::get('/', 'AdminLTEUserController@index');
+    Route::get('/list', 'AdminLTEUserController@index');
     Route::get('/detail/{id}', 'AdminLTEUserController@showDetailPage');
     Route::get('/edit/{id}', 'AdminLTEUserController@showEditPage');
 });
 
 Route::prefix('adminlteusergroup')->group(function () {
     Route::get('/', 'AdminLTEUserGroupController@index');
+    Route::get('/list', 'AdminLTEUserGroupController@index');
     Route::get('/detail/{id}', 'AdminLTEUserGroupController@showDetailPage');
     Route::get('/edit/{id}', 'AdminLTEUserGroupController@showEditPage');
 });
