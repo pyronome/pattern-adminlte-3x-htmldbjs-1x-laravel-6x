@@ -90,10 +90,16 @@ class AdminLTE
 
 		$userData = [
 			'id' => 0,
+			'deleted' => false,
+			'created_at' => 0,
+			'updated_at' => 0,
+			'enabled' => true,
+			'adminlteusergroup_id' => 0,
 			'type' => 'user',
 			'email' => '',
 			'username' => '',
 			'name' => '',
+			'fullname' => '',
 			'menu_permission' => '',
 			'service_permission' => '',
 			'widget_permission' => '',
@@ -110,10 +116,16 @@ class AdminLTE
 
 			$userData = [
 				'id' => $adminLTEUser->id,
+				'deleted' => $adminLTEUser->deleted,
+				'created_at' => $adminLTEUser->created_at->timestamp,
+				'updated_at' => $adminLTEUser->updated_at->timestamp,
+				'enabled' => $adminLTEUser->enabled,
+				'adminlteusergroup_id' => $adminLTEUser->adminlteusergroup_id,
 				'type' => $userType,
 				'email' => $adminLTEUser->email,
 				'username' => $adminLTEUser->username,
 				'name' => $adminLTEUser->fullname,
+				'fullname' => $adminLTEUser->fullname,
 				'menu_permission' => $this->getUserMenuPermission($adminLTEUser),
 				'service_permission' => $this->getUserServicePermission($adminLTEUser),
 				'widget_permission' => '',
