@@ -46,7 +46,7 @@ class AdminLTEServiceController extends Controller
             foreach ($files as $file) {
                 if (($file != ".") && ($file != "..")) {
                     $current_path = ($path . "/" . $file);
-                    if (!in_array($file, $exceptions)) {
+                    if (!in_array($file, $this->exceptions)) {
                         if (is_file($current_path)) {
                             $extension = pathinfo($file, PATHINFO_EXTENSION);
                             $extension = '.' . $extension;
