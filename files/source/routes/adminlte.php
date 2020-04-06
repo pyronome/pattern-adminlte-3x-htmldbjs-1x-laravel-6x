@@ -68,9 +68,9 @@ Route::namespace('HTMLDB')
     });
 
     Route::prefix('profile')->group(function () {
-	    Route::get('/get', 'ProfleController@get');
-	    Route::get('/get_form_values', 'ProfleController@get_form_values');
-        Route::post('/post', 'ProfleController@post');
+	    Route::get('/get', 'ProfileController@get');
+	    Route::get('/get_form_values', 'ProfileController@get_form_values');
+        Route::post('/post', 'ProfileController@post');
     });
 
     Route::prefix('server_information')->group(function () {

@@ -60,7 +60,7 @@ class ProfileController extends Controller
                 $list[0]['username'] = $userData['username'];
                 $list[0]['email'] = $userData['email'];
                 $list[0]['password'] = '';
-                $list[0]['profile_img'] = $userData['profile_img'];
+                $list[0]['profile_img'] = $userData['image'];
                 $list[0]['menu_permission'] = $adminLTE->base64Decode(
                         $adminLTEUser->menu_permission);
                 $list[0]['service_permission'] = $adminLTE->base64Decode(
@@ -114,7 +114,7 @@ class ProfileController extends Controller
         $list[0]['fullname'] = $userData['fullname'];
         $list[0]['username'] = $userData['username'];
         $list[0]['email'] = $userData['email'];
-        $list[0]['profile_img'] = $userData['profile_img'];
+        $list[0]['profile_img'] = $userData['image'];
         $list[0]['password0'] = '';
         $list[0]['password1'] = '';
         $list[0]['password2'] = '';
