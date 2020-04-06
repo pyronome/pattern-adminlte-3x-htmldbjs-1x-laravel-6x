@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="home">{{ __('Home') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/home">{{ __('Home') }}</a></li>
                                 <li class="breadcrumb-item enabled">{{ __('Profile Detail') }}</li>
                             </ol>
                         </div>
@@ -28,7 +28,7 @@
                                 <div class="card-header">
                                     <div class="card-tools">
                                         <a  class="btn btn-primary btn-xs btn-on-table text-white"
-                                            href="profile/edit">
+                                            href="/{{ config('adminlte.main_folder') }}/profile/edit">
                                             <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span>{{ __('Edit') }}</span>
                                         </a>
                                     </div>
