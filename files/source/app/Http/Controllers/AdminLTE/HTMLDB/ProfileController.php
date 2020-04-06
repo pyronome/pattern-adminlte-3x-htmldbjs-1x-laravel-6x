@@ -129,6 +129,17 @@ class ProfileController extends Controller
     public function post(Request $request)
     {
 
+        $this->columns = [
+            'id',
+            'fullname',
+            'username',
+            'email',
+            'password0',
+            'password1',
+            'password2',
+            'profile_img'
+        ];
+
         $objectHTMLDB = new HTMLDB();
 
         $this->row = $objectHTMLDB->requestPOSTRow(
@@ -140,23 +151,10 @@ class ProfileController extends Controller
 
         $result = $this->check();
 
-        if (0 == $result['errorCount'])
-        {
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->first();
-
-            auth()->guard('adminlteuser')->login($adminLTEUser);
-
-            $landingPage = config('adminlte.landing_page');
-
-            if ($landingPage === false)
-            {
-                $landingPage = 'home';
-            } // if ($landingPage === false)
-
+        if (0 == $result['errorCount']) {
             $result['messageCount'] = 1;
-            $result['lastMessage'] = $landingPage;
-        } // if (0 == $result['errorCount'])
+            $result['lastMessage'] = 'UPDATED';
+        } // if (0 == $result['errorCount']) {
 
         $objectHTMLDB->errorCount = $result['errorCount'];
         $objectHTMLDB->messageCount = $result['messageCount'];
@@ -179,6 +177,56 @@ class ProfileController extends Controller
 
         /* {{snippet:begin_check_values}} */
 
+        $adminLTE = new AdminLTE();
+        $userData = $adminLTE->getUserData();
+
+        if (0 == $userData['id'])
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('User not found.');
+        }
+
+        if ('' == $this->row['fullname'])
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Please specify your fullname.');
+        } // if ('' == $this->row['fullname'])
+
+        if ('' == $this->row['username'])
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Please specify username.');
+        }
+        else
+        {
+            $otherUser = \App\AdminLTEUser::where('deleted', false)
+                    ->where('username', $this->row['username'])
+                    ->where('id', '!=', $userData['id'])
+                    ->first();
+
+            if ($otherUser != null)
+            {
+                $result['errorCount']++;
+                if ($result['lastError'] != '') {
+                    $result['lastError'] .= '<br>';
+                } // if ($result['lastError'] != '') {
+
+                $result['lastError'] .= __('Username specified belongs to another user. Please specify another username.');
+            } // if ($otherUser != null)
+        } // if ('' == $this->row['username'])
+
         if ('' == $this->row['email'])
         {
             $result['errorCount']++;
@@ -187,48 +235,94 @@ class ProfileController extends Controller
             } // if ($result['lastError'] != '') {
 
             $result['lastError'] .= __('Please specify your email address.');
-        } // if ('' == $this->row['email'])
-
-        if ('' == $this->row['password'])
+        }
+        else
         {
-            $result['errorCount']++;
-            if ($result['lastError'] != '') {
-                $result['lastError'] .= '<br>';
-            } // if ($result['lastError'] != '') {
-
-            $result['lastError'] .= __('Please specify your password.');
-        } // if ('' == $this->row['password'])
-
-        if (0 == $result['errorCount']) {
-
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->first();
-            
-            $confirmed = false;
-
-            if ($adminLTEUser != null)
-            {
-                if (password_verify($this->row['password'], $adminLTEUser->password))
-                {
-                    $confirmed = true;
-                }
-            } // if (null == $adminLTEUser)
-
-            if (!$confirmed)
+            if (!$adminLTE->validateEmailAddress($this->row['email']))
             {
                 $result['errorCount']++;
                 if ($result['lastError'] != '') {
                     $result['lastError'] .= '<br>';
                 } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Your e-mail address or password is not correct. Please check and try again.');
+                $result['lastError'] .= __('Please specify a valid email address.');
+            }
+            else
+            {
+                $otherUser = \App\AdminLTEUser::where('deleted', false)
+                        ->where('email', $this->row['email'])
+                        ->where('id', '!=', $userData['id'])
+                        ->first();
 
-                sleep(2);
-            } // if (!$confirmed)
+                if ($otherUser != null)
+                {
+                    $result['errorCount']++;
+                    if ($result['lastError'] != '') {
+                        $result['lastError'] .= '<br>';
+                    } // if ($result['lastError'] != '') {
 
-        }
+                    $result['lastError'] .= __('E-mail address specified belongs to another user. Please specify another e-mail address.');
+                } // if ($otherUser != null)
+            } // if (!$adminLTE->validateEmailAddress($this->row['email']))
+        } // if ('' == $this->row['fullname'])
+    
+        if (($this->row['password1'] != '') || ($this->row['password2'] != ''))
+        {
+            if ($this->row['password0'])
+            {
+                $result['errorCount']++;
+                if ($result['lastError'] != '') {
+                    $result['lastError'] .= '<br>';
+                } // if ($result['lastError'] != '') {
 
+                $result['lastError'] .= __('Please specify your current password.');
+            }
+            else
+            {
+                $currentUser = \App\AdminLTEUser::find($userData['id']);
 
+                if (!password_verify($this->row['password'],
+                        $currentUser->password))
+                {
+                    $result['errorCount']++;
+                    if ($result['lastError'] != '') {
+                        $result['lastError'] .= '<br>';
+                    } // if ($result['lastError'] != '') {
+
+                    $result['lastError'] .= __('Your current password is wrong.');
+                }
+                else
+                {
+                    if ('' == $this->row['password1'])
+                    {
+                        $result['errorCount']++;
+                        if ($result['lastError'] != '') {
+                            $result['lastError'] .= '<br>';
+                        } // if ($result['lastError'] != '') {
+
+                        $result['lastError'] .= __('Please specify your new password.');
+                    }
+                    else if ('' == $this->row['password2'])
+                    {
+                        $result['errorCount']++;
+                        if ($result['lastError'] != '') {
+                            $result['lastError'] .= '<br>';
+                        } // if ($result['lastError'] != '') {
+
+                        $result['lastError'] .= __('Please re-enter your new password.');
+                    }
+                    else if ($this->row['password1'] != $this->row['password2'])
+                    {
+                        $result['errorCount']++;
+                        if ($result['lastError'] != '') {
+                            $result['lastError'] .= '<br>';
+                        } // if ($result['lastError'] != '') {
+
+                        $result['lastError'] .= __('Your new passwords are not matched. Please check your new passwords and try again.');
+                    }
+                } // if (password_verify($this->row['password'],
+            }
+        } // if ('' == $this->row['fullname'])
 
         /* {{snippet:end_check_values}} */
 
