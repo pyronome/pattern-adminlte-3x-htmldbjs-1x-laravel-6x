@@ -67,6 +67,12 @@ Route::namespace('HTMLDB')
         Route::post('/post', 'ForgotPasswordController@post');
     });
 
+    Route::prefix('profile')->group(function () {
+	    Route::get('/get', 'ProfleController@get');
+	    Route::get('/get_form_values', 'ProfleController@get_form_values');
+        Route::post('/post', 'ProfleController@post');
+    });
+
     Route::prefix('server_information')->group(function () {
         Route::get('/get', 'ServerInformationController@get');
     });
