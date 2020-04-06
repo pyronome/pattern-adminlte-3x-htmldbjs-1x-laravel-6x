@@ -9,7 +9,8 @@ function initializePage() {
 
         	var URLPrefix = document.body.getAttribute("data-url-prefix");
             setTimeout(function () {
-                window.location.href = URLPrefix + "profile/detail";
+                var mainFolder = document.body.getAttribute("data-main-folder");
+                window.location.href = ("/" + mainFolder + "/profile/detail");
             }, 1000);
         }
     });

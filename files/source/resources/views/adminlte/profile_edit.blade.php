@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed" data-url-prefix="" data-page-url="profile">
+<body class="hold-transition sidebar-mini layout-fixed" data-url-prefix="" data-page-url="profile" data-main-folder="{{ config('adminlte.main_folder') }}">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
@@ -143,6 +143,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/profile.edit.js"></script>    
+    <script src="/assets/adminlte/js/profile.edit.js"></script>
 </body>
 </html>
