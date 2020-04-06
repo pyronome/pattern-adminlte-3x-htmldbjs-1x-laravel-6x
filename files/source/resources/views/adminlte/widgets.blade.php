@@ -465,7 +465,7 @@
     <div id="__MODEL__InfoboxHTMLDB"
         class="__HTMLDBCLASS__ infobox-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_infoboxvalue/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_infoboxvalue/{{ $controllerName }}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
 </script>
@@ -473,7 +473,7 @@
     <div id="__MODEL__RecordGraphHTMLDB"
         class="__HTMLDBCLASS__ recordgraph-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_recordgraphdata/{{ $controllerName }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_recordgraphdata/{{ $controllerName }}"
         data-htmldb-read-only="1">
     </div>
 </script>
@@ -481,21 +481,21 @@
     <div id="__MODEL__HTMLDB"
         class="__HTMLDBCLASS__ recordlist-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_recordlist/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_recordlist/{{ $controllerName }}?_token={{ csrf_token() }}"
         data-htmldb-read-only="1">
     </div>
     <div id="Session__MODEL__HTMLDB"
         class="__HTMLDBCLASS__"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_session/{{ $controllerName }}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/__MODEL_LOWERCASE__/write_session/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_session/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/write_session/{{ $controllerName }}?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     <div id="Delete__MODEL__HTMLDB"
         class="__HTMLDBCLASS__ delete-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="htmldb/__MODEL_LOWERCASE__/get_form_delete/{{ $controllerName }}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="htmldb/__MODEL_LOWERCASE__/delete/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_form_delete/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/delete/{{ $controllerName }}?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
 </script>
