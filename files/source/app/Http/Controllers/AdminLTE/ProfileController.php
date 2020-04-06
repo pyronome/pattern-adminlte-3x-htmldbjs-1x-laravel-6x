@@ -14,12 +14,19 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        $viewName = $this->controllerName;
 
-        if (view()->exists('custom.' . $this->controllerName))
+        $viewName = ('adminlte.'
+                . $this->controllerName
+                . '_detail');
+
+        if (view()->exists('adminlte.custom.'
+                . $this->controllerName
+                . '_detail'))
         {
-            $viewName = 'custom.' . $this->controllerName;
-        } // if (view()->exists('custom.' . $this->controllerName))
+            $viewName = 'adminlte.custom.'
+                    . $this->controllerName
+                    . '_detail';
+        } // if (view()->exists('adminlte.custom.'
 
         $adminLTE = new AdminLTE();
 
@@ -27,6 +34,7 @@ class ProfileController extends Controller
         $viewData['user'] = $adminLTE->getUserData();
 
         return view($viewName, $viewData);
+
     }
 
     public function showDetailPage(Request $request)
@@ -37,17 +45,18 @@ class ProfileController extends Controller
     public function showEditPage(Request $request)
     {
 
-        $viewName = ($this->controllerName
+        $viewName = ('adminlte.'
+                . $this->controllerName
                 . '_edit');
 
-        if (view()->exists('custom.'
+        if (view()->exists('adminlte.custom.'
                 . $this->controllerName
                 . '_edit'))
         {
-            $viewName = 'custom.'
+            $viewName = 'adminlte.custom.'
                     . $this->controllerName
                     . '_edit';
-        } // if (view()->exists('custom.'
+        } // if (view()->exists('adminlte.custom.'
 
         $adminLTE = new AdminLTE();
 
