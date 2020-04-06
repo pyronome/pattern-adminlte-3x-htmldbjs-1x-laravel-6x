@@ -22,6 +22,13 @@ Route::get('/languages', 'LanguagesController@index');
 Route::get('/media', 'MediaController@index');
 Route::get('/menu_configuration', 'MenuConfigurationController@index');
 Route::get('/profile', 'ProfileController@index');
+
+Route::prefix('profile')->group(function () {
+    Route::get('/', 'ProfileController@index');
+    Route::get('/detail', 'ProfileController@index');
+    Route::get('/edit', 'ProfileController@showEditPage');
+});
+
 Route::get('/root_settings', 'RootSettingsController@index');
 Route::get('/server_information', 'ServerInformationController@index');
 
