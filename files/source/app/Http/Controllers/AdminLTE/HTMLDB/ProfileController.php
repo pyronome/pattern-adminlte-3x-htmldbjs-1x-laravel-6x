@@ -152,6 +152,28 @@ class ProfileController extends Controller
         $result = $this->check();
 
         if (0 == $result['errorCount']) {
+
+            $adminLTE = new AdminLTE();
+            $userData = $adminLTE->getUserData();
+
+            $adminLTEUser = \App\AdminLTEUser::find($userData['id']);
+
+            if ($adminLTEUser != null)
+            {
+                $adminLTEUser->fullname = $this->row['fullname'];
+                $adminLTEUser->username = $this->row['username'];
+                $adminLTEUser->email = $this->row['email'];
+
+                if (($this->row['password0'] != '')
+                        && ($this->row['password1'] != '')
+                        && ($this->row['password2'] != ''))
+                {
+                    $adminLTEUser->password = bcrypt($this->row['password2']);
+                } // if (($this->row['password0'] != '')
+
+                $adminLTEUser->update();
+            } // if ($adminLTEUser != null)
+
             $result['messageCount'] = 1;
             $result['lastMessage'] = 'UPDATED';
         } // if (0 == $result['errorCount']) {
