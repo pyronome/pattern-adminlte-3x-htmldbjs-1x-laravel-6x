@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder'); }}/home">{{ __('Home') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/home">{{ __('Home') }}</a></li>
                                 <li class="breadcrumb-item enabled">{{ __('Server Information') }}</li>
                             </ol>
                         </div>
