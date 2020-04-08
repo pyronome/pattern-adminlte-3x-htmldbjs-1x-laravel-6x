@@ -290,7 +290,7 @@ class ProfileController extends Controller
     
         if (($this->row['password1'] != '') || ($this->row['password2'] != ''))
         {
-            if ($this->row['password0'])
+            if ('' == $this->row['password0'])
             {
                 $result['errorCount']++;
                 if ($result['lastError'] != '') {
@@ -303,7 +303,7 @@ class ProfileController extends Controller
             {
                 $currentUser = \App\AdminLTEUser::find($userData['id']);
 
-                if (!password_verify($this->row['password'],
+                if (!password_verify($this->row['password0'],
                         $currentUser->password))
                 {
                     $result['errorCount']++;
