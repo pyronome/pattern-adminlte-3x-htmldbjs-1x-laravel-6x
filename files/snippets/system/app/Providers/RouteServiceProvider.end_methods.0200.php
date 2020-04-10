@@ -8,16 +8,7 @@
      */
     protected function mapAdminLTERoutes()
     {
-        $adminLTEFolder = getenv('ADMINLTE_FOLDER');
-
-        if ($adminLTEFolder === false
-				|| ('' == $adminLTEFolder))
-        {
-            $adminLTEFolder = 'adminlte';
-        } // if ($adminLTEFolder === false) {
-
-		$adminLTEFolder = rtrim($adminLTEFolder, '/');
-
+        $adminLTEFolder = config('adminlte.main_folder');
         Route::prefix($adminLTEFolder)
              ->middleware(['web', AdminLTEMiddleware::class])
              ->namespace('App\Http\Controllers\AdminLTE')
