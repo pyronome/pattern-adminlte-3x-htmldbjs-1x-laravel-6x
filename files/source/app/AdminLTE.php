@@ -461,7 +461,8 @@ class AdminLTE
 				'AdminLTEUserGroup',
 				'AdminLTEUserLayout',
 				'AdminLTEVariable',
-				'HTMLDB'
+				'HTMLDB',
+				'User'
 			];
 		} // if (0 == count($exceptions))
 		
@@ -518,7 +519,7 @@ class AdminLTE
 		} // if (null == $layout)
 
 		$defaultWidgets = json_decode(
-				$layout->widgets,
+				$this->base64decode($layout->widgets),
 				(JSON_HEX_QUOT
 				| JSON_HEX_TAG
 				| JSON_HEX_AMP
@@ -1317,7 +1318,8 @@ class AdminLTE
 			'AdminLTEUserGroup',
 			'AdminLTEUserLayout',
 			'AdminLTEVariable',
-			'HTMLDB'
+			'HTMLDB',
+			'User'
 		];
 
 		$Models = $this->getModelList($exceptions);
@@ -1374,6 +1376,99 @@ class AdminLTE
 
 		return $displayTexts;
 
+	}
+
+	public function setAdminLTEDefaultLayout()
+	{
+		$widgets = json_decode(config('adminlte_widget_json'), (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+		$countWidgets = count($widgets);
+		
+		try {
+			$connection = DB::connection()->getPdo();
+		} catch (PDOException $e) {
+			print($e->getMessage());
+		}
+
+		$SQLText = 'TRUNCATE `adminltelayouttable`;';
+		$objPDO = $connection->prepare($SQLText);
+		$objPDO->execute();
+
+		// set widgets order
+		for ($w=0; $w < $countWidgets; $w++) { 
+			$widgets[$w]['order'] = ($w + 1);
+		}
+	
+		// home
+		$temp_widgets = $widgets;
+		for ($w=0; $w < $countWidgets; $w++) { 
+			$temp_widgets[$w]['visibility'] = 1;
+		}
+		
+		$encoded = $this->base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+		$SQLText = "INSERT INTO `adminltelayouttable` (`deleted`, `pagename`, `widgets`) VALUES ('0', 'home', '" . $encoded . "');";
+		$objPDO = $connection->prepare($SQLText);
+		$objPDO->execute();
+
+		// adminlteusergroup
+		$temp_widgets = $widgets;
+		for ($w=0; $w < $countWidgets; $w++) {
+			if ('AdminLTEUserGroup' == $temp_widgets[$w]['model']) {
+				$temp_widgets[$w]['visibility'] = 1;
+			}
+		}
+		
+		$encoded = $this->base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+		$SQLText = "INSERT INTO `adminltelayouttable` (`deleted`, `pagename`, `widgets`) VALUES ('0', 'adminlteusergroup', '" . $encoded . "');";
+		$objPDO = $connection->prepare($SQLText);
+		$objPDO->execute();
+
+		// adminlteuser
+		$temp_widgets = $widgets;
+		for ($w=0; $w < $countWidgets; $w++) {
+			if ('AdminLTEUser' == $temp_widgets[$w]['model']) {
+				$temp_widgets[$w]['visibility'] = 1;
+			}
+		}
+		
+		$encoded = $this->base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+		$SQLText = "INSERT INTO `adminltelayouttable` (`deleted`, `pagename`, `widgets`) VALUES ('0', 'adminlteuser', '" . $encoded . "');";
+		$objPDO = $connection->prepare($SQLText);
+		$objPDO->execute();
+
+		$exceptions = [
+			'AdminLTE',
+			'AdminLTELayout',
+			'AdminLTEModelDisplayText',
+			'AdminLTEUser',
+			'AdminLTEUserGroup',
+			'AdminLTEUserLayout',
+			'AdminLTEVariable',
+			'HTMLDB',
+			'User'
+		];
+
+		$models = $this->getModelList($exceptions);
+		
+		$modelCount = count($models);
+		$SQLText = '';
+
+		for ($m=0; $m < $modelCount; $m++) { 
+			$model = $models[$m];
+			$temp_widgets = $widgets;
+			for ($w=0; $w < $countWidgets; $w++) {
+				if ($model == $temp_widgets[$w]['model']) {
+					$temp_widgets[$w]['visibility'] = 1;
+				}
+			}
+			
+			$pagename = strtolower($model);
+			$encoded = $this->base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+			$SQLText = "INSERT INTO `adminltelayouttable` (`deleted`, `pagename`, `widgets`) VALUES ('0', '" . $pagename . "', '" . $encoded . "');";
+			$objPDO = $connection->prepare($SQLText);
+			$objPDO->execute();
+		}
+
+		return;
 	}
 
 	/* {{snippet:end_methods}} */
