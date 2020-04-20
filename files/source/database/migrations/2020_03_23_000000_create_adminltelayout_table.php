@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\AdminLTE;
 
 /* {{snippet:begin_class}} */
 
@@ -32,6 +33,9 @@ class CreateAdminLTELayoutTable extends Migration
             $table->string('pagename');
             $table->text('widgets');
         });
+
+        $adminLTE = new AdminLTE();
+        $adminLTE->setAdminLTEDefaultLayout();
 
         /* {{snippet:end_up_method}} */
     }
