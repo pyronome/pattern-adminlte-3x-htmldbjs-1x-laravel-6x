@@ -1470,6 +1470,68 @@ class AdminLTE
 
 		return;
 	}
+	
+	public function updateModelFileObject($className, $classId, $propertyName, $fileIdCSV)
+	{
+		// initialize variables
+		$tablename = strtolower($className) . "__filetable";
+		$fileIds = explode(',', $fileIdCSV);
+		
+		// initialize connection
+		try {
+			$connection = DB::connection()->getPdo();
+		} catch (PDOException $e) {
+			print($e->getMessage());
+		}
+		
+		// get existed file objectIds	
+		$existedIds = array();
+		$selectSQL = "SELECT `id` FROM `". $tablename . "` WHERE `object_id`=:classId and `object_property`=:propertyName;";
+		$objPDO = $connection->prepare($selectSQL);
+		$objPDO->bindParam(':classId', $classId, PDO::PARAM_INT);
+		$objPDO->bindParam(':propertyName', $propertyName, PDO::PARAM_STR);
+		$objPDO->execute();
+		$data = $objPDO->fetchAll();
+
+		foreach($data as $row) {
+			$existedIds[] = $row["id"];
+		}
+
+		// delete existed file Objects
+		if (count($existedIds) > 0) {
+			// Delete if necessary
+			$countFileIds = count($fileIds);
+			for ($i=0; $i < $countFileIds; $i++) { 
+				if (($key = array_search($fileIds[$i], $existedIds)) !== false) {
+					unset($existedIds[$key]);
+				}
+			}
+
+			if (count($existedIds) > 0) {
+				$deleteFileSQL = "DELETE FROM `". $tablename . "` WHERE `id` IN (" . implode(',', $existedIds) . ") AND `object_property`=:propertyName;";
+				$objPDO = $connection->prepare($deleteFileSQL);
+				$objPDO->bindParam(':propertyName', $propertyName, PDO::PARAM_STR);
+				$objPDO->execute();
+			}
+		}
+
+		// update file objects
+		if (count($fileIds) > 0) {
+
+			$updateSQL = "UPDATE `" . $tablename . "` SET `object_id`=:classId,`object_property`=:propertyName,`file_index`=:file_index WHERE `id`=:id;";
+			$objPDO = $connection->prepare($updateSQL);
+
+			$countFileIds = count($fileIds);
+			for ($i=0; $i < $countFileIds; $i++) {
+
+				$objPDO->bindParam(':classId', $classId, PDO::PARAM_INT);
+				$objPDO->bindParam(':propertyName', $propertyName, PDO::PARAM_STR);
+				$objPDO->bindParam(':file_index', $i, PDO::PARAM_INT);
+				$objPDO->bindParam(':id', $fileIds[$i], PDO::PARAM_INT);
+				$objPDO->execute();
+			}		
+		}
+	}
 
 	/* {{snippet:end_methods}} */
 }
