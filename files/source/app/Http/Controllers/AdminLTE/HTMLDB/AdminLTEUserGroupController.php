@@ -65,8 +65,8 @@ class AdminLTEUserGroupController extends Controller
 
             $list[$index]['id'] = $objectAdminLTEUserGroup->id;
             $list[$index]['deleted'] = $objectAdminLTEUserGroup->deleted;
-            $list[$index]['creationDate'] = $objectAdminLTEUserGroup->creationDate;
-            $list[$index]['lastUpdate'] = $objectAdminLTEUserGroup->lastUpdate;
+            $list[$index]['created_at'] = $objectAdminLTEUserGroup->created_at;
+            $list[$index]['updated_at'] = $objectAdminLTEUserGroup->updated_at;
             $list[$index]['enabled'] = $objectAdminLTEUserGroup->enabled;
             $list[$index]['title'] = $objectAdminLTEUserGroup->title;
             $list[$index]['menu_permission'] = $adminLTE->base64decode(
@@ -81,8 +81,8 @@ class AdminLTEUserGroupController extends Controller
                     $objectAdminLTEUserGroup);
 
             $list[$index]['id/display_text'] = $displayTexts['id'];
-            $list[$index]['creationDate/display_text'] = $displayTexts['creationDate'];
-            $list[$index]['lastUpdate/display_text'] = $displayTexts['lastUpdate'];
+            $list[$index]['created_at/display_text'] = $displayTexts['created_at'];
+            $list[$index]['updated_at/display_text'] = $displayTexts['updated_at'];
             $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
             $list[$index]['enabled/display_text'] = $displayTexts['enabled'];
             $list[$index]['title/display_text'] = $displayTexts['title'];
