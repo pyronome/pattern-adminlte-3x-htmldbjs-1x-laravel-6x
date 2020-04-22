@@ -325,8 +325,6 @@ class AdminLTEUserController extends Controller
             } // if (in_array($defaultColumn, $variables)) {
         } // for ($i=0; $i < $countDefaultColumns; $i++) {
         
-        $objectAdminLTEUserGroup = new AdminLTEUserGroup();
-
         $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
                 ->orderBy($sortingColumn, (($sortingAscending) ? 'asc' : 'desc'))
                 ->get();
