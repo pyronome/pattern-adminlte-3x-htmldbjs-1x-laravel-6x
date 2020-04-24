@@ -413,7 +413,8 @@ transform: scale(1, 1);
 .note-editable.card-block {
     min-height: 134px;
 }
-.unvisible-input-container {
+.unvisible-input-container,
+.unvisible-property {
     display: none;
 }
 .is-invalid.htmldb-field {
@@ -937,12 +938,36 @@ table p {
 
 .detail-container .showBigPhoto {
     height: 100px;
+    margin-right: 5px;
 }
 
 td .showBigPhoto {
     height: 50px;
+    margin-right: 2.5px;
 }
 
 .extension_icon {
     height: 32px;
+}
+
+#tbodySystemStatus > tr > td {
+    vertical-align: middle;
+}
+
+.spanSystemStatusIcon {
+    display: none;
+}
+
+.spanSystemStatusIcon.spanSystemStatusIconSuccess0 {
+    display: block;
+}
+.spanSystemStatusIcon.spanSystemStatusIconSuccess1 {
+    display: none;
+}
+
+.spanSystemStatusIcon.spanSystemStatusIconError0 {
+    display: none;
+}
+.spanSystemStatusIcon.spanSystemStatusIconError1 {
+    display: block;
 }
