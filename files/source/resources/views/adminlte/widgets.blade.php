@@ -492,8 +492,8 @@
     <div id="Delete__MODEL__HTMLDB"
         class="__HTMLDBCLASS__ delete-htmldb-table"
         data-htmldb-priority="__PRIORITY__"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_form_delete/{{ $controllerName }}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/delete/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_form_delete?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/delete?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
 </script>
