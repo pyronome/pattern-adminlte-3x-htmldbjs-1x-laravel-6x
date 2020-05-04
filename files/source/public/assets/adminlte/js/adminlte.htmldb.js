@@ -661,7 +661,7 @@ var AdminLteHTMLDB = {
 		$(sender).daterangepicker({
 		    singleDatePicker: true,
 		    locale: {
-				format: "DD.MM.YYYY"
+				format: "YYYY-MM-DD"
 			}
 		});
 	},
@@ -671,7 +671,7 @@ var AdminLteHTMLDB = {
 			timePicker: true,
 			timePicker24Hour: true,
 			locale: {
-				format: "DD.MM.YYYY HH:mm"
+				format: "YYYY-MM-DD HH:mm"
 			}
 		});
 	},
