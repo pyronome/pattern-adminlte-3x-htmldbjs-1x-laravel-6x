@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\AdminLTE;
 use App\AdminLTEUser;
+use Storage;
 
 class MediaController extends Controller
 {
@@ -27,6 +28,40 @@ class MediaController extends Controller
         $viewData['user'] = $adminLTE->getUserData();
 
         return view($viewName, $viewData);
+    }
+
+    public function formupload(Request $request)
+    {   
+
+        /* ::must_update:: need validation */
+
+        $target = isset($request['target'])
+            ? htmlspecialchars($request['target'])
+            : '';
+
+        $target_path = 'public/' . $target;
+
+        $media_type = isset($request['media_type'])
+            ? intval($request['media_type'])
+            : 1;
+
+
+        $file = $request->file('file');
+        $fileOriginalName = $file->getClientOriginalName();
+        $extension = $file->extension();
+
+        $fileRealName = str_replace('.' . $extension, '', $fileOriginalName);
+
+        $adminLTE = new AdminLTE();
+        $filename = $adminLTE->convertNameToFileName($fileRealName) . '_' . time()  . '.' . $extension;
+        
+        $path = Storage::putFileAs($target_path, $file, $filename);
+
+        $lastInsertedId = $adminLTE->insertModelPropertyFile($target, $media_type, $filename, $path);
+
+        $lastMessage = $lastInsertedId . '#' . $filename . '#' . $path;
+
+        return response()->json(['lastMessage'=>$lastMessage, 'errorCount'=>0, 'lastError'=>'']);
     }
 
 }
