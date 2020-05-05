@@ -7,9 +7,8 @@ function initializeMediaJS() {
 }
 
 function initializeDropzone() {
-    var URLPrefix = document.body.getAttribute("data-url-prefix");
-    var uploadURL = (URLPrefix + "media/formupload");
-
+    var uploadURL = document.getElementById("dropzone-data").getAttribute("data-action");
+    
     var dropzoneElements = $("div.divDropzone");
     var dropzoneElement = null;
     var dropzoneElementCount = dropzoneElements.length;
@@ -35,6 +34,7 @@ function initializeDropzone() {
         });
     }
 }
+
 function doFileTemplateRender(sender, event) {
     var targets = event.detail.targets;
     var target = null;
