@@ -8,6 +8,7 @@ use App\AdminLTEUser;
 use App\AdminLTELayout;
 use App\AdminLTEUserGroup;
 use App\AdminLTEModelDisplayText;
+use PDO;
 
 /* {{snippet:begin_class}} */
 
@@ -19,7 +20,72 @@ class AdminLTE
 	/* {{snippet:end_properties}} */
 
 	/* {{snippet:begin_methods}} */
+	
+	public function convertNameToFileName($strName) {
 
+	    $urlbrackets    = '\[\]\(\)';
+	    $urlspacebefore = ':;\'_\*%@&?!' . $urlbrackets;
+	    $urlspaceafter  = '\.,:;\'\-_\*@&\/\\\\\?!#' . $urlbrackets;
+	    $urlall         = '\.,:;\'\-_\*%@&\/\\\\\?!#' . $urlbrackets;
+	 
+	    $specialquotes  = '\'"\*<>';
+	 
+	    $fullstop       = '\x{002E}\x{FE52}\x{FF0E}';
+	    $comma          = '\x{002C}\x{FE50}\x{FF0C}';
+	    $arabsep        = '\x{066B}\x{066C}';
+	    $numseparators  = $fullstop . $comma . $arabsep;
+	 
+	    $numbersign     = '\x{0023}\x{FE5F}\x{FF03}';
+	    $percent        = '\x{066A}\x{0025}\x{066A}\x{FE6A}\x{FF05}\x{2030}\x{2031}';
+	    $prime          = '\x{2032}\x{2033}\x{2034}\x{2057}';
+	    $nummodifiers   = $numbersign . $percent . $prime;
+	 
+		$strReturnValue = $strName;
+
+		$strReturnValue = str_replace('<br>', '', $strReturnValue);
+		$strReturnValue = str_replace('<br/>', '', $strReturnValue);
+		$strReturnValue = str_replace('<BR/>', '', $strReturnValue);
+		$strReturnValue = str_replace('<BR>', '', $strReturnValue);
+		$strReturnValue = str_replace('Ç', 'c', $strReturnValue);
+		$strReturnValue = str_replace('ç', 'c', $strReturnValue);
+		$strReturnValue = str_replace('Ý', 'i', $strReturnValue);
+		$strReturnValue = str_replace('ý', 'i', $strReturnValue);
+		$strReturnValue = str_replace('I', 'i', $strReturnValue);
+		$strReturnValue = str_replace('İ', 'i', $strReturnValue);
+		$strReturnValue = str_replace('ı', 'i', $strReturnValue);
+		$strReturnValue = str_replace('Ð', 'g', $strReturnValue);
+		$strReturnValue = str_replace('ð', 'g', $strReturnValue);
+		$strReturnValue = str_replace('Ğ', 'g', $strReturnValue);
+		$strReturnValue = str_replace('ğ', 'g', $strReturnValue);
+		$strReturnValue = str_replace('Ö', 'o', $strReturnValue);
+		$strReturnValue = str_replace('ö', 'o', $strReturnValue);
+		$strReturnValue = str_replace('Þ', 's', $strReturnValue);
+		$strReturnValue = str_replace('þ', 's', $strReturnValue);
+		$strReturnValue = str_replace('ş', 's', $strReturnValue);
+		$strReturnValue = str_replace('Ş', 's', $strReturnValue);
+		$strReturnValue = str_replace('Ü', 'u', $strReturnValue);
+		$strReturnValue = str_replace('ü', 'u', $strReturnValue);
+		$strReturnValue = str_replace('"', '_', $strReturnValue);
+		$strReturnValue = str_replace('\'', '', $strReturnValue);
+		$strReturnValue = str_replace('?', '_', $strReturnValue);
+		$strReturnValue = str_replace(':', '_', $strReturnValue);
+		$strReturnValue = str_replace('/', '_', $strReturnValue);
+		$strReturnValue = str_replace('!', '_', $strReturnValue);
+		$strReturnValue = str_replace(',', '_', $strReturnValue);
+		$strReturnValue = str_replace('(', '_', $strReturnValue);
+		$strReturnValue = str_replace(')', '_', $strReturnValue);
+		$strReturnValue = str_replace('-', '_', $strReturnValue);
+		$strReturnValue = str_replace('.', '_', $strReturnValue);
+		$strReturnValue = str_replace('+', '_', $strReturnValue);
+		$strReturnValue = str_replace('*', '_', $strReturnValue);
+		$strReturnValue = str_replace('#', '_', $strReturnValue);
+		$strReturnValue = str_replace(' ', '_', $strReturnValue);
+		$strReturnValue = str_replace('__', '_', $strReturnValue);
+		$strReturnValue = strtolower($strReturnValue);
+	    
+	    return $strReturnValue;
+	}
+	
 	public function validateEmailAddress($email)
 	{
 
@@ -1531,6 +1597,37 @@ class AdminLTE
 				$objPDO->execute();
 			}		
 		}
+	}
+	
+	public function insertModelPropertyFile($target, $media_type, $file_name, $path) {
+		// initialize connection
+		try {
+			$connection = DB::connection()->getPdo();
+		} catch (PDOException $e) {
+			print($e->getMessage());
+		}
+
+		$arrTemp = explode('/', $target);
+		$className = $arrTemp[0];
+		$tablename = strtolower($className) . "__filetable";
+
+		$object_property = $arrTemp[1];
+
+		$lastInsertId = 0;
+		
+		$SQLText = "INSERT INTO " . $tablename . " (`id`, `object_property`, `file_name`, `path`, `media_type`)"
+			. " VALUES (0, :object_property, :file_name, :path, :media_type);";
+
+		$objPDO = $connection->prepare($SQLText);
+		$objPDO->bindParam(':object_property', $object_property, PDO::PARAM_STR);
+		$objPDO->bindParam(':file_name', $file_name, PDO::PARAM_STR);
+		$objPDO->bindParam(':path', $path, PDO::PARAM_STR);
+		$objPDO->bindParam(':media_type', $media_type, PDO::PARAM_INT);
+		$objPDO->execute();
+
+		$lastInsertId = intval($connection->lastInsertId());
+
+		return $lastInsertId;
 	}
 
 	/* {{snippet:end_methods}} */
