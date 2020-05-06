@@ -168,7 +168,7 @@ function updateFileListUL(targetFileList) {
 }
 
 function getDefaultImageSRC(extension) {
-    return ("assets/img/" + extension + ".png");
+    return (assetsURL + extension + ".png");
 }
 
 function doDeleteFileListItemLinkClick(element) {
