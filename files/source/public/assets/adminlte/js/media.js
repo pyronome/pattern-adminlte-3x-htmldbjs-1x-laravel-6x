@@ -168,7 +168,7 @@ function updateFileListUL(targetFileList) {
 }
 
 function getDefaultImageSRC(extension) {
-    return (adminlteImgBaseURL + extension + ".png");
+    return  (publicAssetsURL + "/adminlte/img/" + extension + ".png");
 }
 
 function doDeleteFileListItemLinkClick(element) {
