@@ -60,5 +60,5 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
         <link rel="stylesheet" href="/assets/adminlte/plugins/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css">
         
-        <script>var assetsURL = "{{ URL::asset('/assets/adminlte/img/') }}/";</script>
+        <script>var adminlteImgBaseURL = "{{ URL::asset('/assets/adminlte/img/') }}/";</script>
     </head>
