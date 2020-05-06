@@ -863,14 +863,15 @@ class AdminLTE
 		
 		$modelNameWithNamespace = ('\\App\\' . $model);
 		$objectTemp = new $modelNameWithNamespace;
-		$property_list = $this->getModelPropertyList($objectTemp);
+		$property_list = $objectTemp->get_property_list();
+
 		$countProperty = count($property_list);
 
 		for ($j=0; $j < $countProperty; $j++) { 
 			$property = $property_list[$j];
 
-			$displayTexts[$property]['value'] = '{{' . $model . '/' . $property . '}}';
-			$displayTexts[$property]['type'] = 'text';
+			$displayTexts[$property['name']]['value'] = '{{' . $model . '/' . $property['name'] . '}}';
+			$displayTexts[$property['name']]['type'] = $property['type'];
 		} // for ($j=0; $j < $countProperty; $j++) {
 
 		$adminLTEModelDisplayText = AdminLTEModelDisplayText::where('deleted', false)
@@ -883,12 +884,7 @@ class AdminLTE
 
 			if ('' != $display_texts)
 			{
-				$arrDisplayTexts = json_decode(
-						$this->base64decode($display_texts),
-						(JSON_HEX_QUOT
-						| JSON_HEX_TAG
-						| JSON_HEX_AMP
-						| JSON_HEX_APOS));
+				$arrDisplayTexts = json_decode($this->base64decode($display_texts), (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
 				$countDisplayText = count($arrDisplayTexts);
 
 				for ($j=0; $j < $countDisplayText; $j++)
@@ -909,15 +905,8 @@ class AdminLTE
 		return $displayTexts;
 	}
 
-	public function getPropertyDisplayText(
-			$displayTextDefinitions,
-			$model,
-			$objectCurrent,
-			$property,
-			$display_text,
-			$type)
+	public function getPropertyDisplayText($displayTextDefinitions, $model, $objectCurrent, $property, $display_text, $type)
 	{
-
 		$parsed = $this->getStringBetween($display_text, '{{', '}}');
 
 		while (strlen($parsed) > 0) {
@@ -930,7 +919,7 @@ class AdminLTE
 			if ('date' == $type) {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
-					$time = $objectCurrent->$display_text_Property;
+					$time = strtotime($objectCurrent->$display_text_Property);
 				} else {
 					$time = time();
 				}
@@ -945,20 +934,44 @@ class AdminLTE
 			} else if ('radio' == $type) {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
-					$value = $objectCurrent->$display_text_Property;
-
-					$optionTitles = $objectCurrent->getOptionTitles($display_text_Property);
-					$optionIndex = $objectCurrent->getOptionIndex($display_text_Property, $value);
+					$radio_value = $objectCurrent->$display_text_Property;
 					
-					$partResult = $optionTitles[$optionIndex];
+					$methodName = 'get_' . $display_text_Property . '_list';
+					$options = $objectCurrent->$methodName();
+			        $option_list = array();
+					$index = 0;
+
+			        foreach ($options as $key => $value)
+			        {
+			            $option_list[$index]['id'] = $index;
+			            $option_list[$index]['value'] = $key;
+			            $option_list[$index]['title'] = $value;
+
+			            $index++;
+			        } // foreach ($options as $key => $value)
+					
+					$partResult = $option_list[$radio_value]['title'];
 				}
 			} else if ('dropdown' == $type) {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
-					$value = $objectCurrent->$display_text_Property;
-					
-					$optionTitles = $objectCurrent->getOptionTitles($display_text_Property);
-					$selections = explode(',', $value);
+					$dropdown_value = $objectCurrent->$display_text_Property;
+
+					$methodName = 'get_' . $display_text_Property . '_list';
+			        $options = $objectCurrent->$methodName();
+			        $option_list = array();
+					$index = 0;
+
+			        foreach ($options as $key => $value)
+			        {
+			            $option_list[$index]['id'] = $index;
+			            $option_list[$index]['value'] = $key;
+			            $option_list[$index]['title'] = $value;
+
+			            $index++;
+			        } // foreach ($options as $key => $value)
+
+					$selections = explode(',', $dropdown_value);
 					$selectionCount = count($selections);
 
 					for ($i = 0; $i < $selectionCount; $i++) {
@@ -967,12 +980,7 @@ class AdminLTE
 							$partResult .= ', ';
 						} // if ($partResult != '') {
 
-						$optionIndex = $objectCurrent->getOptionIndex(
-								$display_text_Property,
-								$selections[$i]);
-
-						$partResult .= $optionTitles[$optionIndex];
-
+						$partResult .= $option_list[$selections[$i]]['title'];
 					} // for ($i = 0; $i < $selectionCount; $i++) {
 				}
 			} else if ('image' == $type) {
@@ -1002,7 +1010,7 @@ class AdminLTE
 						} // for ($i = 0; $i < $fileCount; $i++) {
 					}
 				}
-			}  else if ('file' == $type) {
+			} else if ('file' == $type) {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
 					$value = $objectCurrent->$display_text_Property;
@@ -1034,37 +1042,58 @@ class AdminLTE
 						} // for ($i = 0; $i < $fileCount; $i++) {
 					}
 				}
+			} else if ('class_selection_single' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+					$partResult = $objectCurrent->$display_text_Property;
+				} else {
+					$id = $objectCurrent->$property;
+
+					$externalModel = $textPart[0];
+					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
+					$objectExternal = new $externalModelNameWithNamespace($id);
+
+					$display_text_Property = $textPart[1];
+					$partResult = $objectExternal->$display_text_Property;
+				}
+			} else if ('class_selection_multiple' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$display_text_Property = $textPart[1];
+
+					foreach ($objectCurrent->$property as $externalObject) {
+		                $arr_display_text_Property[] = $externalObject->id;
+		            }
+
+		            if(empty($arr_display_text_Property)){
+		                $current_display_text_Property = '';
+		            } else {
+		                $current_display_text_Property = implode(',', $arr_display_text_Property);
+		            }
+
+		            $partResult = $current_display_text_Property;
+		        } else {
+		        	$externalModel = $textPart[0];
+					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
+					$objectExternal = new $externalModelNameWithNamespace;
+
+					$display_text_Property = $textPart[1];
+
+					foreach ($objectCurrent->$property as $externalObject) {
+						if ('' != $partResult) {
+							$partResult .= ', ';
+						}
+
+						$partResult .= $externalObject->$display_text_Property;
+					}
+		        } // if ($textPart[0] == $model) { // current model
+
 			} else {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
 					$partResult = $objectCurrent->$display_text_Property;
 				} else {
-					$externalModel = $textPart[0];
-					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
-					$objectExternal = new $externalModelNameWithNamespace;
-					$objectExternalInstance = null;
-
-					$idCSV = $objectCurrent->$property;
-					$ids = explode(',', $idCSV);
-					$count = count($ids);
-
-					for ($i=0; $i < $count; $i++)
-					{ 
-						$objectExternalInstance = $objectExternal->find($ids[$i]);
-
-						if (null == $objectExternalInstance)
-						{
-							continue;
-						} // if (null == $objectExternalInstance)
-
-						if ('' != $partResult) {
-							$partResult .= ', ';
-						}
-						
-						$display_text_Property = $textPart[1];
-						$partResult .= $objectExternalInstance->$display_text_property;
-					} // for ($i=0; $i < $count; $i++)
-				}
+					$partResult = 'undefined';
+				} // if ($textPart[0] == $model) { // current model
 			} // if ('date' == $type) {
 
 			$display_text = str_replace($parsedWithMustache, $partResult, $display_text);
