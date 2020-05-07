@@ -985,40 +985,12 @@ class AdminLTE
 				}
 			} else if ('image' == $type) {
 				if ($textPart[0] == $model) { // current model
-					$display_text_Property = $textPart[1];
-					$value = $objectCurrent->$display_text_Property;
-					
-					if (0 != intval($value)) {
+					$methodName = 'get_' . $textPart[1];
+					$arr_files = $objectCurrent->$methodName();
+					$fileCount = count($arr_files);
+
+					if ($fileCount > 0) {
 						$partResult = '';
-						$file_ids = explode(',', $value);
-						$fileCount = count($file_ids);
-
-						for ($i = 0; $i < $fileCount; $i++) {
-
-							/*if ($partResult != '') {
-								$partResult .= ', ';
-							} // if ($partResult != '') {*/
-							
-							$fileDetail = $this->getFileData($model, $file_ids[$i]);
-
-							$imageHTML = '<image class="showBigPhoto" src="../'
-									. $fileDetail['path']
-									. '">';
-
-							$partResult .= $imageHTML;
-
-						} // for ($i = 0; $i < $fileCount; $i++) {
-					}
-				}
-			} else if ('file' == $type) {
-				if ($textPart[0] == $model) { // current model
-					$display_text_Property = $textPart[1];
-					$value = $objectCurrent->$display_text_Property;
-					
-					if (0 != intval($value)) {
-						$partResult = '';
-						$file_ids = explode(',', $value);
-						$fileCount = count($file_ids);
 
 						for ($i = 0; $i < $fileCount; $i++) {
 
@@ -1026,19 +998,43 @@ class AdminLTE
 								$partResult .= '<br>';
 							} // if ($partResult != '') {
 							
-							$fileDetail = $this->getFileData($model, $file_ids[$i]);
+							$fileDetail = $arr_files[$i];
 
-							$fileHTML = '<a class="btn-link text-secondary" target="_blank" href="../'
-								. $fileDetail['path']
+							$imageHTML = '<image class="showBigPhoto" src="'
+									. asset('storage/' . $fileDetail['path'])
+									. '">';
+
+							$partResult .= $imageHTML;
+						} // for ($i = 0; $i < $fileCount; $i++) {
+					}
+				}
+			} else if ('file' == $type) {
+				if ($textPart[0] == $model) { // current model
+					$methodName = 'get_' . $textPart[1];
+					$arr_files = $objectCurrent->$methodName();
+					$fileCount = count($arr_files);
+
+					if ($fileCount > 0) {
+						$partResult = '';
+
+						for ($i = 0; $i < $fileCount; $i++) {
+
+							if ($partResult != '') {
+								$partResult .= '<br>';
+							} // if ($partResult != '') {
+							
+							$fileDetail = $arr_files[$i];
+
+							$fileHTML = '<a class="btn-link text-secondary" target="_blank" href="'
+								. asset('storage/' . $fileDetail['path'])
 								. '">'
-								. '<img class="extension_icon" src="assets/img/'
-								. $fileDetail['extension']
+								. '<img class="extension_icon" src="'
+								. asset('assets/adminlte/img/' . $fileDetail['extension'])
 								. '.png">' 
 								. $fileDetail['file_name']
 								. '</a>';
 
 							$partResult .= $fileHTML;
-
 						} // for ($i = 0; $i < $fileCount; $i++) {
 					}
 				}
@@ -1086,7 +1082,6 @@ class AdminLTE
 						$partResult .= $externalObject->$display_text_Property;
 					}
 		        } // if ($textPart[0] == $model) { // current model
-
 			} else {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
@@ -1657,6 +1652,43 @@ class AdminLTE
 		$lastInsertId = intval($connection->lastInsertId());
 
 		return $lastInsertId;
+	}
+
+	public function get_model_files($model, $object_id, $object_property) {
+	    $tablename = strtolower($model) . "__filetable";
+
+	    // initialize connection
+		try {
+			$connection = DB::connection()->getPdo();
+		} catch (PDOException $e) {
+			print($e->getMessage());
+		}
+	    
+	    $files = array();
+	    $index = 0;
+	    
+	    $selectSQL = "SELECT * FROM `". $tablename . "` WHERE `object_id`=:object_id and `object_property`=:object_property ORDER BY file_index;";
+	    $objPDO = $connection->prepare($selectSQL);
+	    $objPDO->bindParam(':object_id', $object_id, PDO::PARAM_INT);
+	    $objPDO->bindParam(':object_property', $object_property, PDO::PARAM_STR);
+	    
+	    $objPDO->execute();
+	    $data = $objPDO->fetchAll();
+
+	    foreach($data as $row) {
+	        $files[$index]["id"] = $row["id"];
+	        $files[$index]["object_property"] = $row["object_property"];
+	        $files[$index]["file_name"] = $row["file_name"];
+	        $files[$index]["path"] = $row["path"];
+	        $files[$index]["media_type"] = $row["media_type"];
+
+	        $fileNameTokens = explode('.', $row["file_name"]);
+	        $files[$index]["extension"] = strtolower(end($fileNameTokens));
+
+	        $index++;
+	    }
+
+	    return $files;
 	}
 
 	/* {{snippet:end_methods}} */
