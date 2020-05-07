@@ -57,9 +57,11 @@ class MediaController extends Controller
         
         $path = Storage::putFileAs($target_path, $file, $filename);
 
-        $lastInsertedId = $adminLTE->insertModelPropertyFile($target, $media_type, $filename, $path);
+        $real_path = str_replace('public/', '', $path);
 
-        $lastMessage = $lastInsertedId . '#' . $filename . '#' . $path;
+        $lastInsertedId = $adminLTE->insertModelPropertyFile($target, $media_type, $filename, $real_path);
+
+        $lastMessage = $lastInsertedId . '#' . $filename . '#' . $real_path;
 
         return response()->json(['lastMessage'=>$lastMessage, 'errorCount'=>0, 'lastError'=>'']);
     }
