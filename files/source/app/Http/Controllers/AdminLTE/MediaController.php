@@ -39,7 +39,7 @@ class MediaController extends Controller
             ? htmlspecialchars($request['target'])
             : '';
 
-        $target_path = 'public/' . $target;
+        $target_path = 'public/' . strtolower($target);
 
         $media_type = isset($request['media_type'])
             ? intval($request['media_type'])
