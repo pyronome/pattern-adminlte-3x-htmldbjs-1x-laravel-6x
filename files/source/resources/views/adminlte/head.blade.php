@@ -60,6 +60,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
         <link rel="stylesheet" href="/assets/adminlte/plugins/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css">
         
-        <script>var publicAssetsURL = "{{ URL::asset('/assets/') }}";</script>
-        <script>var storageURL = "{{ URL::asset('/storage/') }}";</script>
+        <script>var __publicAssetsURL = "{{ URL::asset('/assets/') }}";</script>
+        <script>var __storageURL = "{{ URL::asset('/storage/') }}";</script>
     </head>
