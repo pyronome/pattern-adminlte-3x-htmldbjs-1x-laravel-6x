@@ -142,13 +142,13 @@ function updateFileListUL(targetFileList) {
         fileExtension = String(fileName.split('.').pop()).toLowerCase();
         
         if (imageFileExtensions.indexOf(fileExtension) != -1) {
-            src = ("../" + filePath);
+            src = (__storageURL + filePath);
         } else {
             src = getDefaultImageSRC(fileExtension);
         }
 
         $(".imgFileListItemFileURL", elementLI).attr("src", src);
-        $(".aFileListItemFileURL", elementLI).attr("href", "../" + filePath);
+        $(".aFileListItemFileURL", elementLI).attr("href", (__storageURL + filePath));
     }
 
     if (elementLIListCount > 0) {
@@ -168,7 +168,7 @@ function updateFileListUL(targetFileList) {
 }
 
 function getDefaultImageSRC(extension) {
-    return  (publicAssetsURL + "/adminlte/img/" + extension + ".png");
+    return  (__publicAssetsURL + "adminlte/img/" + extension + ".png");
 }
 
 function doDeleteFileListItemLinkClick(element) {
