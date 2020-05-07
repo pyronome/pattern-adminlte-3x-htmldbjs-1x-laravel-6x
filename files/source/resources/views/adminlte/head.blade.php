@@ -61,4 +61,5 @@
         <link rel="stylesheet" href="/assets/adminlte/plugins/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css">
         
         <script>var publicAssetsURL = "{{ URL::asset('/assets/') }}";</script>
+        <script>var storageURL = "{{ URL::asset('/storage/') }}";</script>
     </head>
