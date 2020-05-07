@@ -775,6 +775,13 @@ var AdminLteHTMLDB = {
 		} else {
 			$("#buttonWidgetConfig").show();
 		}
+	},	
+	"doShowBigPhotoClick": function(sender) {	
+		if (!sender) {	
+			return;	
+		}	
+		document.getElementById("popup-photo").src = sender.src;	
+		showDialog("galleryModal");	
 	}
 }
 AdminLteHTMLDB.initialize();
