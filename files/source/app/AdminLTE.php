@@ -950,7 +950,7 @@ class AdminLTE
 			            $index++;
 			        } // foreach ($options as $key => $value)
 					
-					$partResult = $option_list[$radio_value]['title'];
+					$partResult = isset($option_list[$radio_value]) ? $option_list[$radio_value]['title'] : '-';
 				}
 			} else if ('dropdown' == $type) {
 				if ($textPart[0] == $model) { // current model
@@ -979,8 +979,8 @@ class AdminLTE
 						if ($partResult != '') {
 							$partResult .= ', ';
 						} // if ($partResult != '') {
-
-						$partResult .= $option_list[$selections[$i]]['title'];
+						
+						$partResult .= (isset($option_list[$selections[$i]]) ? $option_list[$selections[$i]]['title'] : '-');
 					} // for ($i = 0; $i < $selectionCount; $i++) {
 				}
 			} else if ('image' == $type) {
@@ -1092,7 +1092,7 @@ class AdminLTE
 					$display_text_Property = $textPart[1];
 					$partResult = $objectCurrent->$display_text_Property;
 				} else {
-					$partResult = 'undefined';
+					$partResult = '-';
 				} // if ($textPart[0] == $model) { // current model
 			} // if ('date' == $type) {
 
