@@ -45,6 +45,65 @@ class AdminLTEUser extends Authenticatable
 	/* {{snippet:end_properties}} */
 
 	/* {{snippet:begin_methods}} */
+    
+    public function get_property_list() {
+        $property_list = array();
+        $index = 0;
+        
+        $property_list[$index]['name'] = 'id';
+        $property_list[$index]['type'] = 'integer';
+        $index++;
+
+        $property_list[$index]['name'] = 'deleted';
+        $property_list[$index]['type'] = 'checkbox';
+        $index++;
+
+        $property_list[$index]['name'] = 'created_at';
+        $property_list[$index]['type'] = 'date';
+        $index++;
+
+        $property_list[$index]['name'] = 'updated_at';
+        $property_list[$index]['type'] = 'date';
+        $index++;       
+
+        $property_list[$index]['name'] = 'adminlteusergroup_id';
+        $property_list[$index]['type'] = 'class_selection';
+        $index++;
+
+        $property_list[$index]['name'] = 'profile_img';
+        $property_list[$index]['type'] = 'image';
+        $index++;
+
+        $property_list[$index]['name'] = 'enabled';
+        $property_list[$index]['type'] = 'checkbox';
+        $index++;
+
+        $property_list[$index]['name'] = 'fullname';
+        $property_list[$index]['type'] = 'text';
+        $index++;
+
+        $property_list[$index]['name'] = 'username';
+        $property_list[$index]['type'] = 'text';
+        $index++;
+
+        $property_list[$index]['name'] = 'email';
+        $property_list[$index]['type'] = 'text';
+        $index++;
+
+        $property_list[$index]['name'] = 'password';
+        $property_list[$index]['type'] = 'text';
+        $index++;
+
+        $property_list[$index]['name'] = 'menu_permission';
+        $property_list[$index]['type'] = 'text';
+        $index++;
+
+        $property_list[$index]['name'] = 'service_permission';
+        $property_list[$index]['type'] = 'text';
+        $index++;
+
+        return $property_list;
+    }
 
 	/* {{snippet:end_methods}} */
 }
