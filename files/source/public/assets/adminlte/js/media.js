@@ -15,6 +15,10 @@ function initializeMediaJS() {
 }
 
 function initializeDropzone() {
+    if (!document.getElementById("dropzone-data")) {
+        return;
+    }
+    
     var uploadURL = document.getElementById("dropzone-data").getAttribute("data-action");
     
     var dropzoneElements = $("div.divDropzone");
