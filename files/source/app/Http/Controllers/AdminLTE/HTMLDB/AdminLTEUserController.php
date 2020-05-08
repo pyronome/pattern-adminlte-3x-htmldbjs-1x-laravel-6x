@@ -45,8 +45,6 @@ class AdminLTEUserController extends Controller
             'menu_permission/display_text',
             'service_permission',
             'service_permission/display_text',
-            'profile_img',
-            /*'profile_img/display_text',*/
             'group_menu_permission',
             'group_service_permission'
         ];
@@ -87,7 +85,6 @@ class AdminLTEUserController extends Controller
             $list[$index]['password'] = '';
             $list[$index]['menu_permission'] = $adminLTE->base64decode($objectAdminLTEUser->menu_permission);
             $list[$index]['service_permission'] = $adminLTE->base64decode($objectAdminLTEUser->service_permission);
-            $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
 
             // Display Texts
             $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
@@ -104,7 +101,6 @@ class AdminLTEUserController extends Controller
             $list[$index]['password/display_text'] = $displayTexts['password'];
             $list[$index]['menu_permission/display_text'] = $displayTexts['menu_permission'];
             $list[$index]['service_permission/display_text'] = $displayTexts['service_permission'];
-            /*$list[$index]['profile_img/display_text'] = $displayTexts['profile_img'];*/
             
             // Other Configuration
             $list[$index]['group_menu_permission'] = '';
@@ -308,9 +304,7 @@ class AdminLTEUserController extends Controller
             'menu_permission',
             'menu_permission/display_text',
             'service_permission',
-            'service_permission/display_text',
-            'profile_img',
-            'profile_img/display_text'
+            'service_permission/display_text'
         ];
         
         $countDefaultColumns = count($defaultColumns);
@@ -381,10 +375,6 @@ class AdminLTEUserController extends Controller
                 $list[$index]['service_permission'] = $adminLTE->base64decode(
                         $objectAdminLTEUser->service_permission);
             } // if (in_array('service_permission', $variables)) {
-            
-            if (in_array('profile_img', $variables)) {
-                $list[$index]['profile_img'] = $objectAdminLTEUser->profile_img;
-            } // if (in_array('profile_img', $variables)) {
 
             // Display Texts
             $displayTexts = $adminLTE->getObjectDisplayTexts(
@@ -441,11 +431,6 @@ class AdminLTEUserController extends Controller
                 $list[$index]['service_permission/display_text']
                         = $displayTexts['service_permission'];
             } // if (in_array('service_permission/display_text', $variables)) {
-
-            if (in_array('profile_img/display_text', $variables)) {
-                $list[$index]['profile_img/display_text']
-                        = $displayTexts['profile_img'];
-            } // if (in_array('profile_img/display_text', $variables)) {
 
             $index++;
         } // foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
