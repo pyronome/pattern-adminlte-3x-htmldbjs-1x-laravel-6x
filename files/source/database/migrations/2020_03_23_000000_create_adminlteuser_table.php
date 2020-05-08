@@ -30,7 +30,6 @@ class CreateAdminLTEUserTable extends Migration
             $table->timestamps();
             $table->boolean('deleted');
             $table->bigInteger('adminlteusergroup_id', false, true);
-            $table->text('profile_img');
             $table->boolean('enabled');
             $table->string('fullname');
             $table->string('username')->unique();
@@ -47,7 +46,6 @@ class CreateAdminLTEUserTable extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
                 'adminlteusergroup_id' => 0,
-                'profile_img' => '',
                 'enabled' => 1,
                 'fullname' => 'AdminLTE Root',
                 'username' => 'root',
