@@ -4,6 +4,14 @@ function initializeMediaJS() {
     $(".buttonBrowseFile").off("click").on("click", function () {
         doBrowseButtonClick(this);
     });
+
+    $("#modelEditPage_fileTemplate").on("htmldbrender", function (event) {
+        doFileTemplateRender(this, event);
+    });
+
+    $("#modelEditPage_imageTemplate").on("htmldbrender", function (event) {
+        doFileTemplateRender(this, event);
+    });
 }
 
 function initializeDropzone() {
