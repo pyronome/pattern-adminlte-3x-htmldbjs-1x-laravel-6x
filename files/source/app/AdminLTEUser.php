@@ -22,7 +22,6 @@ class AdminLTEUser extends Authenticatable
 
     protected $fillable = [
 		'adminlteusergroup_id',
-		'profile_img',
 		'enabled',
 		'fullname',
 		'username',
@@ -68,10 +67,6 @@ class AdminLTEUser extends Authenticatable
 
         $property_list[$index]['name'] = 'adminlteusergroup_id';
         $property_list[$index]['type'] = 'class_selection';
-        $index++;
-
-        $property_list[$index]['name'] = 'profile_img';
-        $property_list[$index]['type'] = 'image';
         $index++;
 
         $property_list[$index]['name'] = 'enabled';
