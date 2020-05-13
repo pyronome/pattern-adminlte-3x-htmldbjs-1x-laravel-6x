@@ -9,9 +9,9 @@ use App\AdminLTE;
 use App\AdminLTEModelDisplayText;
 use App\HTMLDB;
 
-class ModelDisplayTextsController extends Controller
+class AdminLTEModelDisplayTextController extends Controller
 {
-	public $columns = [
+    public $columns = [
         'id',
         'model',
         'display_text_json'
@@ -36,11 +36,11 @@ class ModelDisplayTextsController extends Controller
         return $result;
     }
 
-	
+    
     
     
 
-	function get_model_display_texts(Request $request)
+    function get_model_display_texts(Request $request)
     {
         $list = array();
         
@@ -70,8 +70,8 @@ class ModelDisplayTextsController extends Controller
         $objectHTMLDB->printHTMLDBList();
         return;
     }
-	
-	public function get_model_property_list(Request $request) {
+    
+    public function get_model_property_list(Request $request) {
         $columns = [
             'id',
             'model',
@@ -113,8 +113,8 @@ class ModelDisplayTextsController extends Controller
         $objectHTMLDB->printHTMLDBList();
         return;
     }
-	
-	public function post_model_display_texts(Request $request)
+    
+    public function post_model_display_texts(Request $request)
     {
         /* ::must_update:: servis izinleri nasıl kontrol ediliyor ?
         // start: check user post permission
