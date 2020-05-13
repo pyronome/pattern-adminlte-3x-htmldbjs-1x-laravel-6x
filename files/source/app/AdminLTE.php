@@ -523,8 +523,6 @@ class AdminLTE
 				'AdminLTE',
 				'AdminLTELayout',
 				'AdminLTEModelDisplayText',
-				'AdminLTEUser',
-				'AdminLTEUserGroup',
 				'AdminLTEUserLayout',
 				'AdminLTEVariable',
 				'HTMLDB',
@@ -1044,8 +1042,10 @@ class AdminLTE
 					$id = $objectCurrent->$property;
 
 					$externalModel = $textPart[0];
+
 					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
-					$objectExternal = new $externalModelNameWithNamespace($id);
+					$objectExternal = new $externalModelNameWithNamespace;
+					$objectExternal = $objectExternal::find($id);
 
 					$display_text_Property = $textPart[1];
 					$partResult = $objectExternal->$display_text_Property;
@@ -1066,18 +1066,15 @@ class AdminLTE
 
 		            $partResult = $current_display_text_Property;
 		        } else {
-		        	$externalModel = $textPart[0];
-					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
-					$objectExternal = new $externalModelNameWithNamespace;
-
+					$objectExternals = $objectCurrent->$property;
 					$display_text_Property = $textPart[1];
 
-					foreach ($objectCurrent->$property as $externalObject) {
+					foreach ($objectExternals as $objectExternal) {
 						if ('' != $partResult) {
 							$partResult .= ', ';
 						}
 
-						$partResult .= $externalObject->$display_text_Property;
+						$partResult .= $objectExternal->$display_text_Property;
 					}
 		        } // if ($textPart[0] == $model) { // current model
 			} else {
@@ -1402,8 +1399,6 @@ class AdminLTE
 			'AdminLTE',
 			'AdminLTELayout',
 			'AdminLTEModelDisplayText',
-			'AdminLTEUser',
-			'AdminLTEUserGroup',
 			'AdminLTEUserLayout',
 			'AdminLTEVariable',
 			'HTMLDB',
@@ -1439,12 +1434,15 @@ class AdminLTE
 
 			if ('' != $display_texts)
 			{
+
+				
 				$arrDisplayTexts = json_decode(
 						$this->base64Decode($display_texts),
 						(JSON_HEX_QUOT
 						| JSON_HEX_TAG
 						| JSON_HEX_AMP
 						| JSON_HEX_APOS));
+
 				$countDisplayText = count($arrDisplayTexts);
 
 				for ($j=0; $j < $countDisplayText; $j++)
@@ -1686,6 +1684,57 @@ class AdminLTE
         }
 
         return $files;
+	}
+
+	public function getModel_DisplayTexts($model) {
+		$displayTexts = array();
+	    
+	    $modelNameWithNamespace = ('\\App\\' . $model);
+	    $objectTemp = new $modelNameWithNamespace;
+	    $property_list = $objectTemp->get_property_list();
+	    $countProperty = count($property_list);
+
+	    for ($j=0; $j < $countProperty; $j++) { 
+	        $property = $property_list[$j]['property'];
+
+	        $displayTexts[$property]['value'] = '{{' . $model . '/' . $property . '}}';
+	        $displayTexts[$property]['type'] = $property_list[$j]['type'];
+	    } // for ($j=0; $j < $countProperty; $j++) {
+		
+		$adminLTEModelDisplayText = null;
+		$adminLTEModelDisplayTexts = \App\AdminLTEModelDisplayText::where('deleted', false)->where('model', $model)->get();
+
+		foreach ($adminLTEModelDisplayTexts as $adminLTEModelDisplayText)
+		{
+
+			$display_texts = $adminLTEModelDisplayText->display_texts;
+
+			if ('' != $display_texts)
+			{
+				$arrDisplayTexts = json_decode(
+						$this->base64Decode($display_texts),
+						(JSON_HEX_QUOT
+						| JSON_HEX_TAG
+						| JSON_HEX_AMP
+						| JSON_HEX_APOS));
+				$countDisplayText = count($arrDisplayTexts);
+
+				for ($j=0; $j < $countDisplayText; $j++)
+				{
+					$item = $arrDisplayTexts[$j];
+					$keys = array_keys($item);
+					$countKey = count($keys);
+
+					for ($k=0; $k < $countKey; $k++)
+					{
+						$property = $keys[$k];
+						$displayTexts[$property]['value'] = $item[$property];
+					} // for ($k=0; $k < $countKey; $k++)
+				} // for ($j=0; $j < $countDisplayText; $j++)
+			} // if ('' != $display_texts)
+		} // foreach ($adminLTEModelDisplayTexts as $adminLTEModelDisplayText)
+	 
+	    return $displayTexts;
 	}
 
 	/* {{snippet:end_methods}} */
