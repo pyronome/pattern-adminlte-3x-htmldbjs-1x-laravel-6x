@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use App\AdminLTE;
 use App\AdminLTEUser;
 
-class ModelDisplayTextsController extends Controller
+class AdminLTEModelDisplayTextController extends Controller
 {
 
-    public $controllerName = 'model_display_texts';
+    public $controllerName = 'adminltemodeldisplaytext';
 
     public function index(Request $request)
     {
