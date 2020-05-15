@@ -28,15 +28,15 @@ class CreateAdminLTEUserTable extends Migration
         Schema::create('adminlteusertable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->boolean('deleted');
+            $table->boolean('deleted')->default(0);
             $table->bigInteger('adminlteusergroup_id', false, true);
-            $table->boolean('enabled');
-            $table->string('fullname');
+            $table->boolean('enabled')->default(0);
+            $table->string('fullname')->nullable();;
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('password');
-            $table->text('menu_permission');
-            $table->text('service_permission');
+            $table->string('password')->nullable();;
+            $table->text('menu_permission')->nullable();;
+            $table->text('service_permission')->nullable();;
         });
 
         DB::table('adminlteusertable')->insert(
