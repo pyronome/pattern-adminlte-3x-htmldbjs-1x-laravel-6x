@@ -28,12 +28,12 @@ class CreateAdminLTEUserGroupTable extends Migration
         Schema::create('adminlteusergrouptable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->boolean('deleted');
-            $table->boolean('enabled');
-            $table->string('title');
-			$table->text('menu_permission');
-			$table->text('service_permission');
-			$table->boolean('widget_permission');
+            $table->boolean('deleted')->default(0);
+            $table->boolean('enabled')->default(0);
+            $table->string('title')->nullable();;
+			$table->text('menu_permission')->nullable();;
+			$table->text('service_permission')->nullable();;
+			$table->boolean('widget_permission')->nullable();;
         });
 
         /* {{snippet:end_up_method}} */
