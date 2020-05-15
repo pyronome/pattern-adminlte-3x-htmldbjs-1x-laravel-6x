@@ -6,15 +6,46 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\AdminLTE;
-use App\AdminLTEUser;
+use App\AdminLTEUserLayout;
 use App\HTMLDB;
 
 class AdminLTELayoutController extends Controller
 {
 
-    public $columns = [];
+    public $columns = [
+        'id',
+        'widget_json'
+    ];
     public $protectedColumns = [];
     public $row = [];
+    
+    public function check()
+    {
+        $result = [
+            'lastError' => '',
+            'errorCount' => 0,
+            'lastMessage' => '',
+            'messageCount' => 0
+        ];
+
+        /* {{@snippet:begin_check_values}} */
+        
+        /*if (0 == $controller->user_data['widget_permission']) {
+            $controller->errorCount++;
+
+            if ($controller->lastError != '') {
+                $controller->lastError .= '<br>';
+            } // if ($controller->lastError != '') {
+
+            $controller->lastError .= __('You have not permission to edit widgets.');
+            
+            return false;
+        } // if (0 == $controller->user_data['widget_permission']) {*/
+
+        /* {{@snippet:end_check_values}} */
+
+        return $result;
+    }
 
     public function get_attributes(Request $request)
     {
@@ -36,9 +67,10 @@ class AdminLTELayoutController extends Controller
 
         for ($i=0; $i < $countModels; $i++)
         {
-            $model = ('\\App\\' . $Models[$i]);
+            $model = $Models[$i];
+            $modelNameWithNamespace = ('\\App\\' . $model);
             
-            $object = new $model;
+            $object = new $modelNameWithNamespace;
             $property_list = $adminLTE->getModelPropertyList($object);
             $countProperty = count($property_list);
 
@@ -70,23 +102,17 @@ class AdminLTELayoutController extends Controller
 
     public function get_widgetconfig(Request $request)
     {
-
-        $this->columns = [
-            'id',
-            'widget_json'
-        ];
-
         $list = array();
 
         $parameters = $request->route()->parameters();
 
-        $pageName = isset($parameters['pageName'])
-                ? htmlspecialchars($parameters['pageName'])
+        $pagename = isset($parameters['pagename'])
+                ? htmlspecialchars($parameters['pagename'])
                 : '';
 
         $adminLTE = new AdminLTE();
 
-        $Widgets = $adminLTE->getPageLayout($pageName);
+        $Widgets = $adminLTE->getPageLayout($pagename);
 
         $list[0]['id'] = 1;
         $list[0]['widget_json'] = json_encode($Widgets,
@@ -103,9 +129,28 @@ class AdminLTELayoutController extends Controller
 
     }
 
-    public function post(Request $request)
-    {
+    public function post_widgetconfig(Request $request) {
+        /* ::must_update:: servis izinleri nasıl kontrol ediliyor ?
+        // start: check user post permission
+        $directoryName = basename(dirname(__FILE__));
+        $fileName = basename(__FILE__);
 
+        includeLibrary('adminlte/checkUserPostPermission');
+        $permissionResult = checkUserPostPermission($directoryName, $fileName);
+
+        if ($permissionResult['error']) {
+            $controller->errorCount = 1;
+            $controller->lastError = $permissionResult['error_msg'];
+            return false;
+        }
+        // end: check user post permission
+        */
+        $parameters = $request->route()->parameters();
+
+        $pagename = isset($parameters['pagename'])
+                ? htmlspecialchars($parameters['pagename'])
+                : '';
+        
         $objectHTMLDB = new HTMLDB();
 
         $this->row = $objectHTMLDB->requestPOSTRow(
@@ -113,102 +158,49 @@ class AdminLTELayoutController extends Controller
                 $this->columns,
                 $this->protectedColumns,
                 0,
-                true);
+                false);
 
         $result = $this->check();
 
         if (0 == $result['errorCount'])
         {
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->first();
+            $widget_json = html_entity_decode(htmlspecialchars($this->row['widget_json']));
 
-            auth()->guard('adminlteuser')->login($adminLTEUser);
-
-            $landingPage = config('adminlte.landing_page');
-
-            if ($landingPage === false)
-            {
-                $landingPage = 'home';
-            } // if ($landingPage === false)
-
-            $result['messageCount'] = 1;
-            $result['lastMessage'] = $landingPage;
-        } // if (0 == $result['errorCount'])
-
-        $objectHTMLDB->errorCount = $result['errorCount'];
-        $objectHTMLDB->messageCount = $result['messageCount'];
-        $objectHTMLDB->lastError = $result['lastError'];
-        $objectHTMLDB->lastMessage = $result['lastMessage'];
-        $objectHTMLDB->printResponseJSON();
-        return;
-
-    }
-
-    public function check()
-    {
-
-        $result = [
-            'lastError' => '',
-            'errorCount' => 0,
-            'lastMessage' => '',
-            'messageCount' => 0
-        ];
-
-        /* {{snippet:begin_check_values}} */
-
-        if ('' == $this->row['email'])
-        {
-            $result['errorCount']++;
-            if ($result['lastError'] != '') {
-                $result['lastError'] .= '<br>';
-            } // if ($result['lastError'] != '') {
-
-            $result['lastError'] .= __('Please specify your email address.');
-        } // if ('' == $this->row['email'])
-
-        if ('' == $this->row['password'])
-        {
-            $result['errorCount']++;
-            if ($result['lastError'] != '') {
-                $result['lastError'] .= '<br>';
-            } // if ($result['lastError'] != '') {
-
-            $result['lastError'] .= __('Please specify your password.');
-        } // if ('' == $this->row['password'])
-
-        if (0 == $result['errorCount']) {
-
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
-                    ->first();
+            if ('' == $widget_json) {
+                $widget_json = '[]';
+            } 
             
-            $confirmed = false;
+            $objectAdminLTE = new AdminLTE();
 
-            if ($adminLTEUser != null)
-            {
-                if (password_verify($this->row['password'], $adminLTEUser->password))
-                {
-                    $confirmed = true;
-                }
-            } // if (null == $adminLTEUser)
+            $widgets = $objectAdminLTE->base64encode($widget_json);
 
-            if (!$confirmed)
-            {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+            $user_data = $objectAdminLTE->getUserData();
 
-                $result['lastError'] .= __('Your e-mail address or password is not correct. Please check and try again.');
+            $adminLTEUserLayout = null;
+            $adminLTEUserLayouts = AdminLTEUserLayout::where('deleted', false)->where('adminlteuser_id', $user_data['id'])->where('pagename', $pagename)->get();
 
-                sleep(2);
-            } // if (!$confirmed)
+            if (count($adminLTEUserLayouts) > 0) {
+                $adminLTEUserLayout = $adminLTEUserLayouts[0];
+            } else {
+                $adminLTEUserLayout = new AdminLTEUserLayout();
+            }
+            
+            $adminLTEUserLayout->adminlteuser_id = $user_data['id'];
+            $adminLTEUserLayout->pagename = $pagename;
+            $adminLTEUserLayout->widgets = $widgets;
+            $adminLTEUserLayout->save(); 
 
+            $result['lastMessage'] = 'UPDATED';
+            $result['messageCount'] = 1;
         }
 
-        /* {{snippet:end_check_values}} */
+        $objectHTMLDB->lastError = $result['lastError'];
+        $objectHTMLDB->errorCount = $result['errorCount'];
+        $objectHTMLDB->lastMessage = $result['lastMessage'];
+        $objectHTMLDB->messageCount = $result['messageCount'];
 
-        return $result;
-
+        $objectHTMLDB->printResponseJSON();
+        return;
     }
 
 }
