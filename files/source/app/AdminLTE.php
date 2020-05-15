@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\AdminLTEUser;
 use App\AdminLTELayout;
+use App\AdminLTEUserLayout;
 use App\AdminLTEUserGroup;
 use App\AdminLTEModelDisplayText;
 use PDO;
@@ -707,7 +708,6 @@ class AdminLTE
 		$layout = AdminLTEUserLayout::where('deleted', false)
 				->where('adminlteuser_id', $currentUser['id'])
 				->where('pagename', $pageName)
-				->orderBy('id', 'DESC')
 				->first();
 		
 		if (null == $layout)
@@ -715,19 +715,15 @@ class AdminLTE
 			return $userWidgetsFormatted;
 		} // if (null == $layout)
 
-		$userwidgets = json_decode(
-				$layout->widgets,
-				(JSON_HEX_QUOT
-				| JSON_HEX_TAG
-				| JSON_HEX_AMP
-				| JSON_HEX_APOS));
 
-		$countWidgets = count($userwidgets);
+		$userWidgets = json_decode($this->base64decode($layout->widgets), (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+
+		$countWidgets = count($userWidgets);
 		$emptyIndex = 0;
 
 		for ($i=0; $i < $countWidgets; $i++)
 		{ 
-			$widget = $userwidgets[$i];
+			$widget = $userWidgets[$i];
 			
 			$type = $widget['type'];
 			$model = $widget['model'];
