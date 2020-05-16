@@ -20,7 +20,8 @@ class AdminLTEUserGroup extends Model
 
 	protected $fillable = [
 		'enabled',
-		'title'
+		'title',
+		'widget_permission'
 	];
 
 	/* {{snippet:end_properties}} */
@@ -39,7 +40,7 @@ class AdminLTEUserGroup extends Model
 		$property_list[$index]['type'] = 'checkbox';
 		$index++;
 
-        	$property_list[$index]['name'] = 'created_at';
+        $property_list[$index]['name'] = 'created_at';
 		$property_list[$index]['type'] = 'date';
 		$index++;
 
@@ -54,6 +55,11 @@ class AdminLTEUserGroup extends Model
 		$property_list[$index]['name'] = 'title';
 		$property_list[$index]['type'] = 'text';
 		$index++;
+
+		$property_list[$index]['name'] = 'widget_permission';
+		$property_list[$index]['type'] = 'checkbox';
+		$index++;
+
 		
 		return $property_list;
 	}
