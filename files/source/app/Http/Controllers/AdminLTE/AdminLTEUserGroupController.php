@@ -84,4 +84,5 @@ class AdminLTEUserGroupController extends Controller
         } // if(isset($_SESSION[sha1('adminlteusergroup_lastid')]))
 
     }
+
 }
