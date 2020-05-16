@@ -29,7 +29,6 @@ class CreateAdminLTEUserTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->boolean('deleted')->default(0);
-            $table->bigInteger('adminlteusergroup_id', false, true);
             $table->boolean('enabled')->default(0);
             $table->string('fullname')->nullable();;
             $table->string('username')->unique();
@@ -38,23 +37,6 @@ class CreateAdminLTEUserTable extends Migration
             $table->text('menu_permission')->nullable();;
             $table->text('service_permission')->nullable();;
         });
-
-        DB::table('adminlteusertable')->insert(
-            array(
-                'id' => 1,
-                'deleted' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'adminlteusergroup_id' => 0,
-                'enabled' => 1,
-                'fullname' => 'AdminLTE Root',
-                'username' => 'root',
-                'email' => 'root',
-                'password' => bcrypt('adminlte'),
-                'menu_permission' => '',
-                'service_permission' => ''
-            )
-        );
 
         /* {{snippet:end_up_method}} */
     }
@@ -79,4 +61,4 @@ class CreateAdminLTEUserTable extends Migration
 
 }
 
-    /* {{snippet:end_class}} */
+/* {{snippet:end_class}} */
