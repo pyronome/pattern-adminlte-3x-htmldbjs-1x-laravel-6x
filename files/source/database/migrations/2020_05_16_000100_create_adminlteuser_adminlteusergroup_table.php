@@ -18,6 +18,23 @@ class CreateAdminLTEUserAdminLTEUserGroupTable extends Migration
             	$table->foreign('adminlteusergroup_id')->references('id')->on('adminlteusergrouptable');
 			}                
         });
+
+        DB::table('adminlteusertable')->insert(
+            array(
+                'id' => 1,
+                'deleted' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'adminlteusergroup_id' => 0,
+                'enabled' => 1,
+                'fullname' => 'AdminLTE Root',
+                'username' => 'root',
+                'email' => 'root',
+                'password' => bcrypt('adminlte'),
+                'menu_permission' => '',
+                'service_permission' => ''
+            )
+        );
     }
 
     /**
