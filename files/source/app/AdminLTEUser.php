@@ -27,9 +27,7 @@ class AdminLTEUser extends Authenticatable
 		'username',
 		'email',
 		'password',
-		'passwordHash',
-		'menu_permission',
-		'service_permission'
+		'passwordHash'
     ];
 
     /**
@@ -44,6 +42,11 @@ class AdminLTEUser extends Authenticatable
 	/* {{snippet:end_properties}} */
 
 	/* {{snippet:begin_methods}} */
+
+    public function adminlteusergroup_id()
+    {
+        return $this->belongsTo(AdminLTEUserGroup::class, 'adminlteusergroup_id');
+    }
     
     public function get_property_list() {
         $property_list = array();
@@ -66,7 +69,7 @@ class AdminLTEUser extends Authenticatable
         $index++;       
 
         $property_list[$index]['name'] = 'adminlteusergroup_id';
-        $property_list[$index]['type'] = 'class_selection';
+        $property_list[$index]['type'] = 'class_selection_single';
         $index++;
 
         $property_list[$index]['name'] = 'enabled';
@@ -88,15 +91,7 @@ class AdminLTEUser extends Authenticatable
         $property_list[$index]['name'] = 'password';
         $property_list[$index]['type'] = 'text';
         $index++;
-
-        $property_list[$index]['name'] = 'menu_permission';
-        $property_list[$index]['type'] = 'text';
-        $index++;
-
-        $property_list[$index]['name'] = 'service_permission';
-        $property_list[$index]['type'] = 'text';
-        $index++;
-
+        
         return $property_list;
     }
 
