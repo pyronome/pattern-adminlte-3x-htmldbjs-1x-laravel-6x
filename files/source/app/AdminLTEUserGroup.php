@@ -28,6 +28,11 @@ class AdminLTEUserGroup extends Model
 
 	/* {{snippet:begin_methods}} */
 	
+	public function AdminLTEUser_adminlteusergroup_id()
+    {
+        return $this->hasMany(AdminLTEUser::class);
+    }
+
 	public function get_property_list() {
 		$property_list = array();
 		$index = 0;
