@@ -30,10 +30,7 @@ class CreateAdminLTEUserGroupTable extends Migration
             $table->timestamps();
             $table->boolean('deleted')->default(0);
             $table->boolean('enabled')->default(0);
-            $table->string('title')->nullable();;
-			$table->text('menu_permission')->nullable();;
-			$table->text('service_permission')->nullable();;
-			$table->boolean('widget_permission')->nullable();;
+            $table->string('title')->nullable();
         });
 
         /* {{snippet:end_up_method}} */
