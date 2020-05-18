@@ -144,7 +144,7 @@
     <div id="AdminLTEUserGroupHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="0"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/get/0?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/get/list?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
