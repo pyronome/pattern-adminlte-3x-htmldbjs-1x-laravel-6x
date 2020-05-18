@@ -30,12 +30,10 @@ class CreateAdminLTEUserTable extends Migration
             $table->timestamps();
             $table->boolean('deleted')->default(0);
             $table->boolean('enabled')->default(0);
-            $table->string('fullname')->nullable();;
+            $table->string('fullname')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('password')->nullable();;
-            $table->text('menu_permission')->nullable();;
-            $table->text('service_permission')->nullable();;
+            $table->string('password')->nullable();
         });
 
         /* {{snippet:end_up_method}} */
