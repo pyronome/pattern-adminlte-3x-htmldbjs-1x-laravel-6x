@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed" data-url-prefix="" data-page-url="profile" data-main-folder="{{ config('adminlte.main_folder') }}">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-url="profile" data-main-folder="{{ config('adminlte.main_folder') }}">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
