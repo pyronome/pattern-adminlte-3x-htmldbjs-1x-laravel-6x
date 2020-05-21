@@ -25,7 +25,8 @@ class ServerInformationController extends Controller
 
         $viewData['controllerName'] = $this->controllerName;
         $viewData['user'] = $adminLTE->getUserData();
-
+        $viewData['customization'] = $adminLTE->getCustomization();
+        
         return view($viewName, $viewData);
     }
 
