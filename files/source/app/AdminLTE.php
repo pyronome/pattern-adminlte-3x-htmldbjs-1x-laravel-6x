@@ -151,6 +151,108 @@ class AdminLTE
 
 	}
 
+	public function getUserPreferences() {
+		$adminLTEUser = auth()->guard('adminlteuser')->user();
+
+		$preferences = [
+			'main-header_border-bottom-0' => 0,
+		    'body_text-sm' => 0,
+		    'main-header_text-sm' => 0,
+		    'nav-sidebar_text-sm' => 0,
+		    'main-footer_text-sm' => 0,
+		    'nav-sidebar_nav-flat' => 0,
+		    'nav-sidebar_nav-legacy' => 0,
+		    'nav-sidebar_nav-compact' => 0,
+		    'nav-sidebar_nav-child-indent' => 0,
+		    'main-sidebar_sidebar-no-expand' => 0,
+		    'brand-link_text-sm' => 0,
+		    'navbar_variants' => 'navbar-white navbar-light',
+		    'accent_variants' => '',
+		    'sidebar_variants' => 'sidebar-dark-primary',
+		    'logo_variants' => '',
+		];
+
+		if ($adminLTEUser != null) {
+			// get preferences from db
+		}
+
+		return $preferences;
+	}
+
+	public function getCustomization() {
+		$preferences = $this->getUserPreferences();
+
+		$values = array();
+		$values['main-header'] = '';
+		$values['body'] = '';
+		$values['nav-sidebar'] = '';
+		$values['main-sidebar'] = '';
+		$values['brand-link'] = '';
+		$values['main-footer'] = '';
+
+		if (1 == $preferences['main-header_border-bottom-0']) {
+			$values['main-header'] .= ' border-bottom-0 ';
+		}
+
+		if (1 == $preferences['main-header_text-sm']) {
+			$values['main-header'] .= ' text-sm ';
+		}
+
+		if ('' != $preferences['navbar_variants']) {
+			$values['main-header'] .= $preferences['navbar_variants'];
+		}
+
+		if (1 == $preferences['body_text-sm']) {
+			$values['body'] .= ' text-sm ';
+		}
+
+		if (1 == $preferences['nav-sidebar_text-sm']) {
+			$values['nav-sidebar'] .= ' text-sm ';
+		}
+
+		if (1 == $preferences['nav-sidebar_nav-flat']) {
+			$values['nav-sidebar'] .= ' nav-flat ';
+		}
+
+		if (1 == $preferences['nav-sidebar_nav-legacy']) {
+			$values['nav-sidebar'] .= ' nav-legacy ';
+		}
+
+		if (1 == $preferences['nav-sidebar_nav-compact']) {
+			$values['nav-sidebar'] .= ' nav-compact ';
+		}
+
+		if (1 == $preferences['nav-sidebar_nav-child-indent']) {
+			$values['nav-sidebar'] .= ' nav-child-indent ';
+		}
+
+		if (1 == $preferences['main-sidebar_sidebar-no-expand']) {
+			$values['main-sidebar'] .= ' sidebar-no-expand ';
+		}
+ 
+		if (1 == $preferences['brand-link_text-sm']) {
+			$values['brand-link'] .= ' text-sm ';
+		}
+
+		if ('' != $preferences['accent_variants']) {
+			$values['body'] .= $preferences['accent_variants'];
+		}
+
+		if ('' != $preferences['sidebar_variants']) {
+			$values['main-sidebar'] .= $preferences['sidebar_variants'];
+		}
+
+		if ('' != $preferences['logo_variants']) {
+			$values['brand-link'] .= $preferences['logo_variants'];
+		}
+
+		if (1 == $preferences['main-footer_text-sm']) {
+			$values['main-footer'] .= ' text-sm ';
+		}
+
+		return $values;
+	}
+
 	public function getUserData()
 	{
         $adminLTEUser = auth()->guard('adminlteuser')->user();
