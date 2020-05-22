@@ -152,7 +152,7 @@ class AdminLTE
 	}
 
 	public function getUserPreferences() {
-		$adminLTEUser = auth()->guard('adminlteuser')->user();
+		$currentUser = auth()->guard('adminlteuser')->user();
 
 		$preferences = [
 			'main-header_border-bottom-0' => 0,
@@ -172,9 +172,18 @@ class AdminLTE
 		    'logo_variants' => '',
 		];
 
-		if ($adminLTEUser != null) {
-			// get preferences from db
-		}
+		if ($currentUser != null)
+		{
+			$layout = AdminLTEUserLayout::where('deleted', false)
+					->where('adminlteuser_id', $currentUser['id'])
+					->where('pagename', 'preferences')
+					->first();
+			
+			if (null != $layout)
+			{
+				$preferences = json_decode($this->base64decode($layout->widgets), (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+			} // if (null == $layout)			
+		} // if ($currentUser != null)
 
 		return $preferences;
 	}
