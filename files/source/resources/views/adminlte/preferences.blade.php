@@ -282,8 +282,7 @@
                                         <button type="button"
                                             id="buttonSave-formPreferences"
                                             name="buttonSave-formPreferences"
-                                            class="btn btn-success btn-md btn-on-table float-right htmldb-button-save"
-                                            data-htmldb-form="formPreferences">
+                                            class="btn btn-success btn-md btn-on-table float-right">
                                             <i class="far fa-save" aria-hidden="true"></i> {{ __('Save') }}
                                         </button>
                                     </div>
@@ -297,22 +296,15 @@
     </div>
     
     @include('adminlte.footer')
-   <!--  <div id="AdminLTEUserGroupHTMLDB"
-        class="htmldb-table"
-        data-htmldb-priority="0"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteusergroup/get/list?_token={{ csrf_token() }}"
-        data-htmldb-read-only="1"
-        data-htmldb-loader="divLoader">
-    </div>
-    
     <div id="PreferenceHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="3"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteuser/get/@{{$URL.-1}}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/adminlteuser/post?_token={{ csrf_token() }}"
-        data-htmldb-redirect="/{{ config('adminlte.main_folder') }}/adminlteuser/last"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/preferences/get?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/preferences/post?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
-    </div> -->
+    </div>
+
+    <div id="divSaveMessage" class="d-none">{{ __('Your preferences saved.') }}</div>
 
     <!-- jQuery -->
     <script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
