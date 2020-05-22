@@ -4,6 +4,26 @@ $(function(){
 });
 function initializePage() {
     initializeInputs();
+
+    $("#buttonSave-formPreferences").off("click").on("click", function () {
+    	saveFormPreferences();
+    });
+
+    $("#PreferenceHTMLDB").on("htmldbmessage", function (e) {
+        if (e.detail.messageText == "UPDATED") {
+        	AdminLteHTMLDB.sweetAlert("success", document.getElementById("divSaveMessage").innerHTML);
+        	
+        	/*setTimeout(function () {
+                window.location.reload();
+            }, 1000);*/
+        }
+
+        HTMLDB.hideLoader(HTMLDB.e("PreferenceHTMLDB"));
+    });
+
+    $("#PreferenceHTMLDB").on("htmldbread", function (e) {
+    	setInputValues();
+    });
 }
 function initializeInputs() {
 	//checked: $('.main-header').hasClass('border-bottom-0')
@@ -301,4 +321,84 @@ function initializeInputs() {
 
 		$("#formPreferences-logo_variants").val("");
 	});
+}
+
+function setInputValues() {
+	var tableHTMLDB = HTMLDB.e("PreferenceHTMLDB");
+	var object = HTMLDB.get(tableHTMLDB, 1);
+	var preferences = JSON.parse(object["preferences_json"]);
+
+	if (1 == preferences["main-header_border-bottom-0"]) {
+		document.getElementById("formPreferences-main-header_border-bottom-0").checked = true;
+	}
+
+	if (1 == preferences["body_text-sm"]) {
+		document.getElementById("formPreferences-body_text-sm").checked = true;
+	}
+
+	if (1 == preferences["main-header_text-sm"]) {
+		document.getElementById("formPreferences-main-header_text-sm").checked = true;
+	}
+
+	if (1 == preferences["nav-sidebar_text-sm"]) {
+		document.getElementById("formPreferences-nav-sidebar_text-sm").checked = true;
+	}
+
+	if (1 == preferences["main-footer_text-sm"]) {
+		document.getElementById("formPreferences-main-footer_text-sm").checked = true;
+	}
+
+	if (1 == preferences["nav-sidebar_nav-flat"]) {
+		document.getElementById("formPreferences-nav-sidebar_nav-flat").checked = true;
+	}
+
+	if (1 == preferences["nav-sidebar_nav-legacy"]) {
+		document.getElementById("formPreferences-nav-sidebar_nav-legacy").checked = true;
+	}
+
+	if (1 == preferences["nav-sidebar_nav-compact"]) {
+		document.getElementById("formPreferences-nav-sidebar_nav-compact").checked = true;
+	}
+
+	if (1 == preferences["nav-sidebar_nav-child-indent"]) {
+		document.getElementById("formPreferences-nav-sidebar_nav-child-indent").checked = true;
+	}
+
+	if (1 == preferences["main-sidebar_sidebar-no-expand"]) {
+		document.getElementById("formPreferences-main-sidebar_sidebar-no-expand").checked = true;
+	}
+
+	if (1 == preferences["brand-link_text-sm"]) {
+		document.getElementById("formPreferences-brand-link_text-sm").checked = true;
+	}
+
+	document.getElementById("formPreferences-navbar_variants").value = preferences["navbar_variants"];
+	document.getElementById("formPreferences-accent_variants").value = preferences["accent_variants"];
+	document.getElementById("formPreferences-sidebar_variants").value = preferences["sidebar_variants"];
+	document.getElementById("formPreferences-logo_variants").value = preferences["logo_variants"];
+}
+function saveFormPreferences() {
+	HTMLDB.showLoader(HTMLDB.e("PreferenceHTMLDB"));
+
+	var preferences = {};
+	preferences["main-header_border-bottom-0"] = (document.getElementById("formPreferences-main-header_border-bottom-0").checked) ? 1 : 0;
+	preferences["body_text-sm"] = (document.getElementById("formPreferences-body_text-sm").checked) ? 1 : 0;
+	preferences["main-header_text-sm"] = (document.getElementById("formPreferences-main-header_text-sm").checked) ? 1 : 0;
+	preferences["nav-sidebar_text-sm"] = (document.getElementById("formPreferences-nav-sidebar_text-sm").checked) ? 1 : 0;
+	preferences["main-footer_text-sm"] = (document.getElementById("formPreferences-main-footer_text-sm").checked) ? 1 : 0;
+	preferences["nav-sidebar_nav-flat"] = (document.getElementById("formPreferences-nav-sidebar_nav-flat").checked) ? 1 : 0;
+	preferences["nav-sidebar_nav-legacy"] = (document.getElementById("formPreferences-nav-sidebar_nav-legacy").checked) ? 1 : 0;
+	preferences["nav-sidebar_nav-compact"] = (document.getElementById("formPreferences-nav-sidebar_nav-compact").checked) ? 1 : 0;
+	preferences["nav-sidebar_nav-child-indent"] = (document.getElementById("formPreferences-nav-sidebar_nav-child-indent").checked) ? 1 : 0;
+	preferences["main-sidebar_sidebar-no-expand"] = (document.getElementById("formPreferences-main-sidebar_sidebar-no-expand").checked) ? 1 : 0;
+	preferences["brand-link_text-sm"] = (document.getElementById("formPreferences-brand-link_text-sm").checked) ? 1 : 0;
+	preferences["navbar_variants"] = document.getElementById("formPreferences-navbar_variants").value;
+	preferences["accent_variants"] = document.getElementById("formPreferences-accent_variants").value;
+	preferences["sidebar_variants"] = document.getElementById("formPreferences-sidebar_variants").value;
+	preferences["logo_variants"] = document.getElementById("formPreferences-logo_variants").value;
+
+	var tableHTMLDB = HTMLDB.e("PreferenceHTMLDB");
+	var object = HTMLDB.get(tableHTMLDB, 1);
+	object["preferences_json"] = JSON.stringify(preferences);
+	HTMLDB.update(tableHTMLDB, 1, object);
 }
