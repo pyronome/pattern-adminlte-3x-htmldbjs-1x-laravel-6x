@@ -149,9 +149,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-10">
-                                        <h6>Navbar Variants</h6>
-                                        <div class="d-flex">
+                                    <div class="row">
+                                        <div class="col-lg-12"><h6>Navbar Variants</h6></div>
+                                        <div class="col-lg-12">
                                             <input type="hidden" id="formPreferences-navbar_variants" value="">
                                             <div id="container_navbar_variants" class="d-flex flex-wrap mb-3">
                                                 <div data-color="navbar-primary" data-header-type="navbar-dark" class="bg-primary elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
@@ -175,8 +175,10 @@
                                                 <div data-color="navbar-orange" data-header-type="navbar-light" class="bg-orange elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
                                             </div>
                                         </div>
-                                        <h6>Accent Color Variants</h6>
-                                        <div class="d-flex">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><h6>Accent Color Variants</h6></div>
+                                        <div class="col-lg-12">
                                             <input type="hidden" id="formPreferences-accent_variants" value="">
                                             <div id="container_accent_variants" class="d-flex flex-wrap mb-3">
                                                 <div data-color="accent-primary" class="bg-primary elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
@@ -197,8 +199,10 @@
                                                 <div data-color="accent-oliv" class="bg-olive elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
                                             </div>
                                         </div>
-                                        <h6>Dark Sidebar Variants</h6>
-                                        <div class="d-flex">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><h6>Dark Sidebar Variants</h6></div>
+                                        <div class="col-lg-12">
                                             <input type="hidden" id="formPreferences-sidebar_variants" value="">
                                             <div id="container_sidebar_variants_dark" class="d-flex flex-wrap mb-3">
                                                 <div data-color="bg-primary" class="bg-primary elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
@@ -219,8 +223,10 @@
                                                 <div data-color="bg-olive" class="bg-olive elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
                                             </div>
                                         </div>
-                                        <h6>Light Sidebar Variants</h6>
-                                        <div class="d-flex">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><h6>Light Sidebar Variants</h6></div>
+                                        <div class="col-lg-12">
                                             <div id="container_sidebar_variants_light" class="d-flex flex-wrap mb-3">
                                                 <div data-color="bg-primary" class="bg-primary elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
                                                 <div data-color="bg-warning" class="bg-warning elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
@@ -240,8 +246,10 @@
                                                 <div data-color="bg-olive" class="bg-olive elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
                                             </div>
                                         </div>
-                                        <h6>Brand Logo Variants</h6>
-                                        <div class="d-flex">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><h6>Brand Logo Variants</h6></div>
+                                        <div class="col-lg-12">
                                             <input type="hidden" id="formPreferences-logo_variants" value="">
                                             <div id="container_logo_variants" class="d-flex flex-wrap mb-3">
                                                 <div data-color="navbar-primary" class="bg-primary elevation-2" style="width: 40px; height: 20px; border-radius: 25px; margin-right: 10px; margin-bottom: 10px; opacity: 0.8; cursor: pointer;"></div>
