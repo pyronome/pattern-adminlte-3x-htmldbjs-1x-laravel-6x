@@ -50,7 +50,7 @@ class AdminLTELayoutController extends Controller
     public function get_attributes(Request $request)
     {
 
-        $this->columns = [
+        $columns = [
             'id',
             'model',
             'attribute'
@@ -94,16 +94,15 @@ class AdminLTELayoutController extends Controller
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
-        $objectHTMLDB->columns = $this->columns;
+        $objectHTMLDB->columns = $columns;
         $objectHTMLDB->printHTMLDBList();
+
         return;
 
     }
 
     public function get_widgetconfig(Request $request)
     {
-        $list = array();
-
         $parameters = $request->route()->parameters();
 
         $pagename = isset($parameters['pagename'])
@@ -113,7 +112,8 @@ class AdminLTELayoutController extends Controller
         $adminLTE = new AdminLTE();
 
         $Widgets = $adminLTE->getPageLayout($pagename);
-
+        
+        $list = array();
         $list[0]['id'] = 1;
         $list[0]['widget_json'] = json_encode($Widgets,
                 JSON_HEX_QUOT |
@@ -202,5 +202,4 @@ class AdminLTELayoutController extends Controller
         $objectHTMLDB->printResponseJSON();
         return;
     }
-
 }
