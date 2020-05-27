@@ -143,6 +143,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/profile.edit.js"></script>
+    <script src="/assets/adminlte/js/profile_edit.js"></script>
 </body>
 </html>
