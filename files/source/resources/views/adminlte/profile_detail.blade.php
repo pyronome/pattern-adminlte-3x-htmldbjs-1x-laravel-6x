@@ -39,19 +39,19 @@
                                             <div class="text-muted text-sm">
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Fullname') }}</label>
-                                                    <div data-htmldb-content="@{{fullname}}"></div>
+                                                    <div data-htmldb-content="@{{fullname/display_text}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Username') }}</label>
-                                                    <div data-htmldb-content="@{{username}}"></div>
+                                                    <div data-htmldb-content="@{{username/display_text}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Email') }}</label>
-                                                    <div data-htmldb-content="@{{email}}"></div>
+                                                    <div data-htmldb-content="@{{email/display_text}}"></div>
                                                 </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('User Group') }}</label>
-                                                    <div data-htmldb-content="@{{adminlteusergroup_idDisplayText}}"></div>
+                                                    <div data-htmldb-content="@{{adminlteusergroup_id/display_text}}"></div>
                                                 </div>
                                             </div>
                                         </div>
