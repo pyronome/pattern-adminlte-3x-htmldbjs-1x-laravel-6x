@@ -77,6 +77,7 @@ class AdminLTEWidgetController extends Controller
         $objectHTMLDB->list = $list;
         $objectHTMLDB->columns = $this->columns;
         $objectHTMLDB->printHTMLDBList();
+        return;
     }
 
 }
