@@ -5,7 +5,8 @@
             $menu = $adminLTE->getSideMenu();
             
             // Current User
-            $user_data = $adminLTE->getUserData();
+            /*::must_update:: menu izinleri çalışır hale geldğinde burası düzenlenmeli*/
+            /*$user_data = $adminLTE->getUserData();
             $is_admin = false;
             $permissions = array();
 
@@ -13,7 +14,9 @@
                 $is_admin = true;
             } else {
                 $permissions = $user_data['menu_permission'];
-            }
+            }*/
+
+            $is_admin = true;
         ?>
 
         <!-- Sidebar Menu -->
