@@ -807,4 +807,3 @@
 <!-- Menu Editor -->
 <script src="/assets/adminlte/js/widget_editor.js"></script>
 <script src="/assets/adminlte/js/main.js"></script>
-<script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
