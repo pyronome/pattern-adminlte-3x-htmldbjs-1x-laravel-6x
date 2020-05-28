@@ -48,7 +48,7 @@
                                                 <button type="button"
                                                     id="buttonBrowseprofile_imgFiles"
                                                     name="buttonBrowseprofile_imgFiles" 
-                                                    class="buttonBrowseFile btn btn-primary show_by_permission"
+                                                    class="buttonBrowseFile btn btn-primary"
                                                     data-target-file-list="ulprofile_imgFileList">
                                                     <i class="ion-ios-folder"></i>&nbsp;{{ __('Browse...') }}
                                                 </button>
