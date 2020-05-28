@@ -1,6 +1,6 @@
 
-	<div class="wrapper">
-    	<!-- Navbar -->
+    <div class="wrapper">
+        <!-- Navbar -->
         <nav class="main-header navbar navbar-expand {{ $customization['main-header'] }}">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -23,7 +23,7 @@
         <aside class="main-sidebar {{ $customization['main-sidebar'] }} elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link {{ $customization['brand-link'] }}">
-                <img src="dist/img/AdminLTELogo.png" alt="Brand Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{{ config('adminlte.brand_logo') }}" alt="Brand Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">{{ config('adminlte.project_title') }}</span>
             </a>
 

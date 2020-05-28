@@ -2,6 +2,7 @@
 
 return [
     'project_title' => env('ADMINLTE_PROJECT_TITLE', env('APP_NAME', 'AdminLTE 3.x + HTMLDB.js 1.x + Laravel 6.x')),
+    'brand_logo' => env('BRAND_LOGO', '/assets/adminlte/img/AdminLTELogo.png'),
     'main_folder' => env('ADMINLTE_MAIN_FOLDER', 'adminlte'),
     'landing_page' => env('ADMINLTE_LANDING_PAGE', 'home'),
     'default_language' => env('ADMINLTE_DEFAULT_LANGUAGE', 'en'),
@@ -10,5 +11,5 @@ return [
     'time_format' => env('ADMINLTE_TIME_FORMAT', 'H:i:s'),
     'year_month_format' => env('ADMINLTE_YEAR_MONTH_FORMAT', 'Y-m'),
     'number_format' => env('ADMINLTE_NUMBER_FORMAT', ''),
-    'google_maps_api_key' => env('ADMINLTE_GOOGLE_MAPS_API_KEY', ''),
+    'google_maps_api_key' => env('ADMINLTE_GOOGLE_MAPS_API_KEY', 'AIzaSyCePlvAIdOGpZHR8cvJN0xvK4HVuBep8Po'),
 ];
