@@ -11,5 +11,5 @@ return [
     'time_format' => env('ADMINLTE_TIME_FORMAT', 'H:i:s'),
     'year_month_format' => env('ADMINLTE_YEAR_MONTH_FORMAT', 'Y-m'),
     'number_format' => env('ADMINLTE_NUMBER_FORMAT', ''),
-    'google_maps_api_key' => env('ADMINLTE_GOOGLE_MAPS_API_KEY', 'AIzaSyCePlvAIdOGpZHR8cvJN0xvK4HVuBep8Po'),
+    'google_maps_api_key' => env('ADMINLTE_GOOGLE_MAPS_API_KEY', ''),
 ];
