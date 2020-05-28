@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\AdminLTE;
 use App\AdminLTEUser;
 use App\HTMLDB;
@@ -41,6 +42,28 @@ class ForgotPasswordController extends Controller
                 true);
 
         $result = $this->check();
+
+        if (1 == $result['messageCount'])
+        {   
+            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])->first();
+
+            $params = array();
+            $params['emailFromName'] = config('mail.from.name');
+            $params['name'] = $adminLTEUser->fullname;
+            $params['emailAddress'] = $adminLTEUser->email;
+            $params['newPassword'] = $result['lastMessage'];
+            $params['emailReplyTo'] = config('mail.from.address');
+
+            Mail::send("email.forgotpassword", $params, function ($message) use ($params) {
+               $message->to($params['emailAddress'], $params['name'])->subject("Your New Password");
+               $message->from($params['emailReplyTo'], $params['emailFromName']);
+            });
+
+            $result['errorCount'] = 0;
+            $result['lastError'] = '';
+            $result['messageCount'] = 1;
+            $result['lastMessage'] = 'UPDATED';
+        }
 
         $objectHTMLDB->errorCount = $result['errorCount'];
         $objectHTMLDB->messageCount = $result['messageCount'];
@@ -96,6 +119,10 @@ class ForgotPasswordController extends Controller
                 } // if ($result['lastError'] != '') {
 
                 $result['lastError'] .= __('Your email address is not recognized. Please check your email address and try again.');
+            } else {
+                $objectAdminLTE = new AdminLTE();
+                $result['lastMessage'] = $objectAdminLTE->resetUserPassword($adminLTEUser);
+                $result['messageCount'] = 1;
             } // if (null == $adminLTEUser)
 
         } // if ('' == $this->row['email']) {

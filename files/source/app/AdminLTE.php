@@ -150,6 +150,80 @@ class AdminLTE
 		return $isValid;
 
 	}
+	
+	public function resetUserPassword($objectAdminLTEUser) {
+		$arrCities = array("shanghai",
+				"istanbul",
+				"karachi",
+				"mumbai",
+				"beijing",
+				"moscow",
+				"saopaulo",
+				"tianjin",
+				"guangzhou",
+				"delhi",
+				"seoul",
+				"shenzhen",
+				"jakarta",
+				"tokyo",
+				"mexicocity",
+				"kinshasa",
+				"tehran",
+				"bangalore",
+				"dongguan",
+				"newyorkcity",
+				"lagos",
+				"london",
+				"lima",
+				"bogota",
+				"hochiminhcity",
+				"hongkong",
+				"bangkok",
+				"dhaka",
+				"hyderabad",
+				"cairo",
+				"hanoi",
+				"wuhan",
+				"riodejaneiro",
+				"lahore",
+				"ahmedabad",
+				"baghdad",
+				"riyadh",
+				"singapore",
+				"santiago",
+				"saintpetersburg",
+				"chennai",
+				"chongqing",
+				"kolkata",
+				"surat",
+				"yangon",
+				"ankara",
+				"alexandria",
+				"shenyang",
+				"suzhou",
+				"newtaipei",
+				"johannesburg",
+				"losangeles",
+				"yokohama",
+				"abidjan",
+				"busan",
+				"berlin",
+				"capetown",
+				"durban",
+				"jeddah",
+				"pyongyang",
+				"madrid",
+				"nairobi",
+				"pune",
+				"jaipur",
+				"casablanca");
+
+		$strNewPassword = $arrCities[rand(0, 64)] . date('si');
+		$objectAdminLTEUser->password = bcrypt($strNewPassword);
+		$objectAdminLTEUser->save();
+
+		return $strNewPassword;
+	}
 
 	public function getUserPreferences() {
 		$currentUser = auth()->guard('adminlteuser')->user();
@@ -266,6 +340,8 @@ class AdminLTE
 	{
         $adminLTEUser = auth()->guard('adminlteuser')->user();
 
+		$image_path = '/assets/adminlte/img/default-user-image.png';
+
 		$userData = [
 			'id' => 0,
 			'deleted' => false,
@@ -281,7 +357,7 @@ class AdminLTE
 			'menu_permission' => '',
 			'service_permission' => '',
 			'widget_permission' => '',
-			'image' => '/assets/adminlte/img/default-user-image.png'
+			'image' => $image_path
 		];
 
 		if ($adminLTEUser != null) {
@@ -294,7 +370,11 @@ class AdminLTE
 
 			
 			$arr_files = $adminLTEUser->get_files($adminLTEUser->id, 'profile_img');
-			$fileDetail = $arr_files[0];
+			
+			if (count($arr_files) > 0) {
+				$fileDetail = $arr_files[0];
+				$image_path = asset('storage/' . $fileDetail['path']);
+			}
 
 			$userData = [
 				'id' => $adminLTEUser->id,
@@ -311,7 +391,7 @@ class AdminLTE
 				'menu_permission' => $this->getUserMenuPermission($adminLTEUser),
 				'service_permission' => $this->getUserServicePermission($adminLTEUser),
 				'widget_permission' => '',
-				'image' => asset('storage/' . $fileDetail['path'])
+				'image' => $image_path
 			];
 
             $adminLTEUserGroup = AdminLTEUserGroup::find(
