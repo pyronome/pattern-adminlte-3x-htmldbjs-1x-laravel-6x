@@ -17,6 +17,7 @@ class ProfileController extends Controller
     public $row = [];
     public $form_columns = [
         'id',
+        'profile_img',
         'fullname',
         'username',
         'email',
@@ -221,6 +222,8 @@ class ProfileController extends Controller
             'enabled/display_text',
             'adminlteusergroup_id',
             'adminlteusergroup_id/display_text',
+            'profile_img',
+            'profile_img/display_text',
             'fullname',
             'fullname/display_text',
             'username',
@@ -246,7 +249,6 @@ class ProfileController extends Controller
             return;
         }
 
-        $adminLTE = new AdminLTE();
         $objectAdminLTEUser = NULL;
         $index = 0;
 
@@ -266,6 +268,21 @@ class ProfileController extends Controller
             $list[$index]['enabled/display_text'] = $displayTexts['enabled'];
             $list[$index]['adminlteusergroup_id'] = $objectAdminLTEUser->adminlteusergroup_id;
             $list[$index]['adminlteusergroup_id/display_text'] = $displayTexts['adminlteusergroup_id'];
+
+            $external_ids = array();
+            foreach ($objectAdminLTEUser->get_files($objectAdminLTEUser->id, 'profile_img') as $fileData) {
+                $external_ids[] = $fileData['id'];
+            }
+
+            if(empty($external_ids)){
+                $current_external_value = '';
+            } else {
+                $current_external_value = implode(',', $external_ids);
+            }
+
+            $list[$index]['profile_img'] = $current_external_value;
+            $list[$index]['profile_img/display_text'] = $displayTexts['profile_img'];
+
             $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
             $list[$index]['fullname/display_text'] = $displayTexts['fullname'];
             $list[$index]['username'] = $objectAdminLTEUser->username;
@@ -313,25 +330,19 @@ class ProfileController extends Controller
     
         $list = [];
         
-        $parameters = $request->route()->parameters();
+        $adminLTE = new AdminLTE();
+        $userData = $adminLTE->getUserData();
         
-        if (!isset($parameters['id'])) {
+        if (0 == $userData['id'])
+        {
             $objectHTMLDB = new HTMLDB();
             $objectHTMLDB->list = $list;
             $objectHTMLDB->columns = $columns;
             $objectHTMLDB->printHTMLDBList();
             return;
-        } // if (!isset($parameters['id'])) {
+        }
 
-        $object_id = intval($parameters['id']);
-
-        if (0 == $object_id) {
-            $objectHTMLDB = new HTMLDB();
-            $objectHTMLDB->list = $list;
-            $objectHTMLDB->columns = $columns;
-            $objectHTMLDB->printHTMLDBList();
-            return;
-        } // if (!isset($parameters['id'])) {
+        $object_id = $userData['id'];
         
         $objectAdminLTE = new AdminLTE();
         $files = $objectAdminLTE->getModelFiles('AdminLTEUser', $object_id);
@@ -359,53 +370,67 @@ class ProfileController extends Controller
 
     public function get_form_values(Request $request)
     {
-        $this->columns = [
-            'id',
-            'fullname',
-            'username',
-            'email',
-            'password0',
-            'password1',
-            'password2'
-        ];
+        $list = [];
 
         $adminLTE = new AdminLTE();
         $userData = $adminLTE->getUserData();
 
-        $list = [];
+        if ($userData['id'] > 0)
+        {
+            $objectAdminLTEUserList[] = AdminLTEUser::where('id', intval($userData['id']))->first();
+        } else {
+            $objectHTMLDB = new HTMLDB();
+            $objectHTMLDB->list = $list;
+            $objectHTMLDB->columns = $this->form_columns;
+            $objectHTMLDB->printHTMLDBList();
+            return;
+        }
 
-        $list[0]['id'] = $userData['id'];
-        $list[0]['fullname'] = $userData['fullname'];
-        $list[0]['username'] = $userData['username'];
-        $list[0]['email'] = $userData['email'];
-        $list[0]['password0'] = '';
-        $list[0]['password1'] = '';
-        $list[0]['password2'] = '';
+        $objectAdminLTEUser = NULL;
+        $index = 0;
+
+        foreach ($objectAdminLTEUserList as $objectAdminLTEUser)
+        {
+            $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
+
+            $list[$index]['id'] = $objectAdminLTEUser->id;
+            $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
+            $list[$index]['username'] = $objectAdminLTEUser->username;
+            $list[$index]['email'] = $objectAdminLTEUser->email;
+            $list[$index]['password0'] = '';
+            $list[$index]['password1'] = '';
+            $list[$index]['password2'] = '';
+
+            $external_ids = array();
+            foreach ($objectAdminLTEUser->get_files($objectAdminLTEUser->id, 'profile_img') as $fileData) {
+                $external_ids[] = $fileData['id'];
+            }
+
+            if(empty($external_ids)){
+                $current_external_value = '';
+            } else {
+                $current_external_value = implode(',', $external_ids);
+            }
+
+            $list[$index]['profile_img'] = $current_external_value;
+
+            $index++;
+        } // foreach ($objectAdminLTEUserList as $objectAdminLTEUser)
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
-        $objectHTMLDB->columns = $this->columns;
+        $objectHTMLDB->columns = $this->form_columns;
         $objectHTMLDB->printHTMLDBList();
         return;
     }
 
     public function post(Request $request)
     {
-        $this->columns = [
-            'id',
-            'fullname',
-            'username',
-            'email',
-            'password0',
-            'password1',
-            'password2'
-        ];
-
         $objectHTMLDB = new HTMLDB();
 
         $this->row = $objectHTMLDB->requestPOSTRow(
                 $request->all(),
-                $this->columns,
+                $this->form_columns,
                 $this->protectedColumns,
                 0,
                 true);
@@ -435,6 +460,11 @@ class ProfileController extends Controller
                 $adminLTEUser->update();
             } // if ($adminLTEUser != null)
 
+            $profile_img = $this->row['profile_img'];
+
+            $objectAdminLTE = new AdminLTE();
+            $objectAdminLTE->updateModelFileObject('AdminLTEUser', $adminLTEUser->id, 'profile_img', $profile_img);
+
             $result['messageCount'] = 1;
             $result['lastMessage'] = 'UPDATED';
         } // if (0 == $result['errorCount']) {
@@ -447,7 +477,4 @@ class ProfileController extends Controller
         return;
 
     }
-
-    
-
 }

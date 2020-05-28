@@ -37,6 +37,10 @@
                                     <div class="row">
                                         <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
                                             <div class="text-muted text-sm">
+                                                <div class="detail-container ">
+                                                    <label class="detail-label">{{ __('Profile Image') }}</label>
+                                                    <div data-htmldb-content="@{{profile_img/display_text}}"></div>
+                                                </div>
                                                 <div class="detail-container">
                                                     <label class="detail-label">{{ __('Fullname') }}</label>
                                                     <div data-htmldb-content="@{{fullname/display_text}}"></div>

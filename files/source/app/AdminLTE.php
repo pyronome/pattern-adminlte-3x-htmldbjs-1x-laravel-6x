@@ -292,6 +292,10 @@ class AdminLTE
 				$userType = 'root';
 			} // if (1 == $adminLTEUser->id) {
 
+			
+			$arr_files = $adminLTEUser->get_files($adminLTEUser->id, 'profile_img');
+			$fileDetail = $arr_files[0];
+
 			$userData = [
 				'id' => $adminLTEUser->id,
 				'deleted' => $adminLTEUser->deleted,
@@ -307,7 +311,7 @@ class AdminLTE
 				'menu_permission' => $this->getUserMenuPermission($adminLTEUser),
 				'service_permission' => $this->getUserServicePermission($adminLTEUser),
 				'widget_permission' => '',
-				'image' => '/assets/adminlte/img/default-user-image.png'
+				'image' => asset('storage/' . $fileDetail['path'])
 			];
 
             $adminLTEUserGroup = AdminLTEUserGroup::find(
