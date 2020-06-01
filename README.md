@@ -58,12 +58,7 @@ After starting webserver, open the following address on your browser:
 http://localhost:8000/adminlte/login
 ```
 
-You can use the following username and password to log in.
-
-```console
-Username: root
-Password: adminlte
-```
+You can use the following `root` for the user name and `adminlte` for the password to log in.
 
 ## Contributing
 
