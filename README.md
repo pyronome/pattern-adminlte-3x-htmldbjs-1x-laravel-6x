@@ -8,7 +8,7 @@ This repository contains Pyronome **AdminLTE 3.x + HTMLDB.js 1.x + Laravel 6.x**
 
 **Please note that you cannot directly use this repository.** To generate source code using this pattern, please visit [Pyronome Sign Up Page](https://pyronome.com/builder/signup), and create an account.
 
-Please refer to the [Getting Started](https://github.com/pyronome/pattern-express-4x#getting-started) section for step by step instructions.
+Please refer to the [Getting Started](https://github.com/pyronome/pattern-adminlte-3x-htmldbjs-1x-laravel-6x#getting-started) section for step by step instructions.
 
 ## Getting Started
 
