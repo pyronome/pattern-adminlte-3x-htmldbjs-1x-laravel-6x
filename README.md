@@ -14,8 +14,6 @@ Please refer to the [Getting Started](https://github.com/pyronome/pattern-adminl
 
 Not available for production environments. The stable version is coming soon.
 
-Latest Version: 0.0.0-dev
-
 ## Getting Started
 
 Please follow the steps below to generate source code using **AdminLTE 3.x + HTMLDB.js 1.x + Laravel 6.x** pattern:
