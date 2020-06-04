@@ -45,16 +45,16 @@
         $("#ulWidgetEditor").sortable();
         $("#ulWidgetEditor").disableSelection();
 
-        $("#buttonShowUnvisibleWidgets").off("click").on("click", function(){
+        $("#buttonShowInvisibleWidgets").off("click").on("click", function(){
             $(this).css("display", "none");
-            $("#buttonHideUnvisibleWidgets").css("display", "block");
-            $(".li_unvisible").css("display", "block");
+            $("#buttonHideInvisibleWidgets").css("display", "block");
+            $(".li_invisible").css("display", "block");
         });
 
-        $("#buttonHideUnvisibleWidgets").off("click").on("click", function(){
+        $("#buttonHideInvisibleWidgets").off("click").on("click", function(){
             $(this).css("display", "none");
-            $("#buttonShowUnvisibleWidgets").css("display", "block");
-            $(".li_unvisible").css("display", "none");
+            $("#buttonShowInvisibleWidgets").css("display", "block");
+            $(".li_invisible").css("display", "none");
         });
 
         $("#ulWidgetEditor_icon").on("click", function(){

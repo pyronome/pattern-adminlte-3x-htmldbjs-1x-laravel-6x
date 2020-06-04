@@ -24,11 +24,11 @@
                 </form>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                        <a id="buttonShowUnvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;">
-                            <span>{{ __('Show Unvisible Widgets') }}</span>
+                        <a id="buttonShowInvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;">
+                            <span>{{ __('Show Invisible Widgets') }}</span>
                         </a>
-                        <a id="buttonHideUnvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;display:none;">
-                            <span>{{ __('Hide Unvisible Widgets') }}</span>
+                        <a id="buttonHideInvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;display:none;">
+                            <span>{{ __('Hide Invisible Widgets') }}</span>
                         </a>
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12 mb-10">

@@ -413,8 +413,8 @@ transform: scale(1, 1);
 .note-editable.card-block {
     min-height: 134px;
 }
-.unvisible-input-container,
-.unvisible-property {
+.invisible-input-container,
+.invisible-property {
     display: none;
 }
 .is-invalid.htmldb-field {
@@ -672,7 +672,7 @@ label > .hint-text {
     padding: 10px;
 }
 
-.menu_item_unvisible {
+.menu_item_invisible {
     opacity: 0.6;
 }
 
@@ -857,7 +857,7 @@ label > .hint-text {
     top: 5px;
 }
 
-.li_unvisible {
+.li_invisible {
     display: none;
 }
 
