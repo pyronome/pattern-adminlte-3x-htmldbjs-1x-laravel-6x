@@ -34,6 +34,30 @@ class CreateAdminLTEUserGroupTable extends Migration
             $table->boolean('widget_permission')->default(0);
         });
 
+        DB::table('adminlteusergrouptable')->insert(
+            array(
+                'id' => 1,
+                'deleted' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'title' => 'Administrators',
+                'enabled' => 1,
+                'widget_permission' => 1
+            )
+        );
+
+        DB::table('adminlteusergrouptable')->insert(
+            array(
+                'id' => 2,
+                'deleted' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'title' => 'Users',
+                'enabled' => 1,
+                'widget_permission' => 1
+            )
+        );
+
         /* {{snippet:end_up_method}} */
 
     }

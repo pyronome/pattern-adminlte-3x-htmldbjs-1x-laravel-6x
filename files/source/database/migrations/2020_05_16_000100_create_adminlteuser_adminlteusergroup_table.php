@@ -25,7 +25,7 @@ class CreateAdminLTEUserAdminLTEUserGroupTable extends Migration
                 'deleted' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
-                'adminlteusergroup_id' => 0,
+                'adminlteusergroup_id' => 1,
                 'enabled' => 1,
                 'fullname' => 'AdminLTE Root',
                 'username' => 'root',
