@@ -1267,7 +1267,7 @@ function MenuEditor(idSelector, options) {
             
             var opacity_class = "";
             if (0 == itemObject.visibility) {
-            	opacity_class = "menu_item_unvisible";
+            	opacity_class = "menu_item_invisible";
             }
 
             var $li = $('<li>').addClass('list-group-item');
@@ -1353,9 +1353,9 @@ function MenuEditor(idSelector, options) {
         });
 
         if (0 == data["visibility"]) {
-        	$cEl.find('span.txt').first().addClass("menu_item_unvisible").text($cEl.data('text'));
+        	$cEl.find('span.txt').first().addClass("menu_item_invisible").text($cEl.data('text'));
         } else {
-        	$cEl.find('span.txt').first().removeClass("menu_item_unvisible").text($cEl.data('text'));
+        	$cEl.find('span.txt').first().removeClass("menu_item_invisible").text($cEl.data('text'));
         }
 
         $cEl.children().children('i').removeClass(oldIcon).addClass($cEl.data('icon'));
@@ -1371,7 +1371,7 @@ function MenuEditor(idSelector, options) {
 
         var opacity_class = "";
         if (0 == data["visibility"]) {
-        	opacity_class = "menu_item_unvisible";
+        	opacity_class = "menu_item_invisible";
         }
 
         var btnGroup = TButtonGroup();
