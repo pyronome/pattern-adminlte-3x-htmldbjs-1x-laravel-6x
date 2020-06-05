@@ -12,8 +12,6 @@ class EmailServerController extends Controller
 {
     public $columns = [
         'id',
-        'email_type',
-        'email_format',
         'email_from_name',
         'email_reply_to',
         'email_smtp_host',
@@ -31,8 +29,6 @@ class EmailServerController extends Controller
         $list = [];
 
         $list[0]['id'] = 1;
-        $list[0]['email_type'] = 1;
-        $list[0]['email_format'] = 0;
         $list[0]['email_from_name'] = config('mail.from.name');
         $list[0]['email_reply_to'] = config('mail.from.address');
         $list[0]['email_smtp_host'] = config('mail.host');
@@ -140,44 +136,42 @@ class EmailServerController extends Controller
 
             $result['lastError'] .= __('Please specify email reply to.');
         } // if ('' == $this-row['email_reply_to']) {
-    
-        if (0 != $this->row['email_type']) {
-            if ('' == $this->row['email_smtp_host']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Please specify SMTP server.');
-            } // if ('' == $this->row['email_smtp_host']) {
-            
-            if ('' == $this->row['email_smtp_user']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+        if ('' == $this->row['email_smtp_host']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Please specify SMTP user.');
-            } // if ('' == $this->row['email_smtp_user']) {
+            $result['lastError'] .= __('Please specify SMTP server.');
+        } // if ('' == $this->row['email_smtp_host']) {
+        
+        if ('' == $this->row['email_smtp_user']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-            if ('' == $this->row['email_smtp_host']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+            $result['lastError'] .= __('Please specify SMTP user.');
+        } // if ('' == $this->row['email_smtp_user']) {
 
-                $result['lastError'] .= __('Please specify SMTP password.');
-            } // if ('' == $this->row['email_smtp_host']) {
-            
-            if (0 == $this->row['email_smtp_port']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+        if ('' == $this->row['email_smtp_host']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Please specify SMTP port.');
-            } // if (0 == $this->row['email_smtp_port']) {
-        }
+            $result['lastError'] .= __('Please specify SMTP password.');
+        } // if ('' == $this->row['email_smtp_host']) {
+        
+        if (0 == $this->row['email_smtp_port']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Please specify SMTP port.');
+        } // if (0 == $this->row['email_smtp_port']) {
 
         /* {{snippet:end_check_values}} */
 
