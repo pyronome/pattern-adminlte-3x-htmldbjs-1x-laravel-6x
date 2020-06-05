@@ -486,7 +486,7 @@
         class="__HTMLDBCLASS__"
         data-htmldb-priority="__PRIORITY__"
         data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_session/{{ $controllerName }}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/write_session/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/post_session/{{ $controllerName }}?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     <div id="Delete__MODEL__HTMLDB"
