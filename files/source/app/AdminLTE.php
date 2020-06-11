@@ -1928,6 +1928,28 @@ class AdminLTE
 	    return $displayTexts;
 	}
 
+	public function seedModelDropdownOptions($option_data_list)
+	{
+		foreach ($option_data_list as $option_data)
+		{
+
+			$search = $option_data['model'] . $option_data['property'] . $option_data['value'];
+			$title = $option_data['title'];
+			
+			$option = DB::table('adminltemodeloptiontable')
+                ->where(DB::raw("Concat(`model`,`property`,`value`)"), '=', $search)
+                ->first();
+
+			if (null !== $option) {
+				DB::table('adminltemodeloptiontable')
+					->where('id', $option->id)
+					->update(['title' => ($title . date('H:i:s'))]); 
+			} else {
+            	DB::table('adminltemodeloptiontable')->insert($option_data);
+        	} // if (null !== $option) {	                         
+		} // foreach ($option_data_list as $option_data)  
+	}
+
 	/* {{snippet:end_methods}} */
 }
 
