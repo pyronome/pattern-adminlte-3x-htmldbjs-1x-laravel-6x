@@ -971,3 +971,6 @@ td .showBigPhoto {
 .spanSystemStatusIcon.spanSystemStatusIconError1 {
     display: block;
 }
+.unvisible-property {
+	display:none;
+}
