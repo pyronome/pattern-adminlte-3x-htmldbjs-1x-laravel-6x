@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use App\AdminLTEUser;
 use App\AdminLTELayout;
 use App\AdminLTEUserLayout;
@@ -1823,13 +1824,14 @@ class AdminLTE
 		$tablename = strtolower($className) . "__filetable";
 
 		$object_property = $arrTemp[1];
-
+		$guid = Str::uuid();
 		$lastInsertId = 0;
 		
-		$SQLText = "INSERT INTO " . $tablename . " (`id`, `object_property`, `file_name`, `path`, `media_type`)"
-			. " VALUES (0, :object_property, :file_name, :path, :media_type);";
+		$SQLText = "INSERT INTO " . $tablename . " (`id`, `guid`, `object_property`, `file_name`, `path`, `media_type`)"
+			. " VALUES (0, :guid, :object_property, :file_name, :path, :media_type);";
 
 		$objPDO = $connection->prepare($SQLText);
+		$objPDO->bindParam(':guid', $guid, PDO::PARAM_STR);
 		$objPDO->bindParam(':object_property', $object_property, PDO::PARAM_STR);
 		$objPDO->bindParam(':file_name', $file_name, PDO::PARAM_STR);
 		$objPDO->bindParam(':path', $path, PDO::PARAM_STR);
