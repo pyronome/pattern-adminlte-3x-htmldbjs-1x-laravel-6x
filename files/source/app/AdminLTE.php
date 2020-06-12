@@ -10,6 +10,7 @@ use App\AdminLTELayout;
 use App\AdminLTEUserLayout;
 use App\AdminLTEUserGroup;
 use App\AdminLTEModelDisplayText;
+use App\AdminLTEModelOption;
 use PDO;
 
 /* {{snippet:begin_class}} */
@@ -1121,58 +1122,6 @@ class AdminLTE
 				}
 
 				$partResult = date($format, $time);
-			} else if ('radio' == $type) {
-				if ($textPart[0] == $model) { // current model
-					$display_text_Property = $textPart[1];
-					$radio_value = $objectCurrent->$display_text_Property;
-					
-					$methodName = 'get_' . $display_text_Property . '_list';
-					$options = $objectCurrent->$methodName();
-			        $option_list = array();
-					$index = 0;
-
-			        foreach ($options as $key => $value)
-			        {
-			            $option_list[$index]['id'] = $index;
-			            $option_list[$index]['value'] = $key;
-			            $option_list[$index]['title'] = $value;
-
-			            $index++;
-			        } // foreach ($options as $key => $value)
-					
-					$partResult = isset($option_list[$radio_value]) ? $option_list[$radio_value]['title'] : '-';
-				}
-			} else if ('dropdown' == $type) {
-				if ($textPart[0] == $model) { // current model
-					$display_text_Property = $textPart[1];
-					$dropdown_value = $objectCurrent->$display_text_Property;
-
-					$methodName = 'get_' . $display_text_Property . '_list';
-			        $options = $objectCurrent->$methodName();
-			        $option_list = array();
-					$index = 0;
-
-			        foreach ($options as $key => $value)
-			        {
-			            $option_list[$index]['id'] = $index;
-			            $option_list[$index]['value'] = $key;
-			            $option_list[$index]['title'] = $value;
-
-			            $index++;
-			        } // foreach ($options as $key => $value)
-
-					$selections = explode(',', $dropdown_value);
-					$selectionCount = count($selections);
-
-					for ($i = 0; $i < $selectionCount; $i++) {
-
-						if ($partResult != '') {
-							$partResult .= ', ';
-						} // if ($partResult != '') {
-						
-						$partResult .= (isset($option_list[$selections[$i]]) ? $option_list[$selections[$i]]['title'] : '-');
-					} // for ($i = 0; $i < $selectionCount; $i++) {
-				}
 			} else if ('image' == $type) {
 				if ($textPart[0] == $model) { // current model
 					$arr_files = $objectCurrent->get_files($objectCurrent->id, $property);
@@ -1269,6 +1218,20 @@ class AdminLTE
 						$partResult .= $objectExternal->$display_text_Property;
 					}
 		        } // if ($textPart[0] == $model) { // current model
+			} else if ('selection_single' == $type) {
+				$id = $objectCurrent->$property;
+				$objectExternal = AdminLTEModelOption::find($id);
+				$partResult = $objectExternal->title;
+			} else if ('selection_multiple' == $type) {
+				$objectExternals = $objectCurrent->$property;
+
+				foreach ($objectExternals as $objectExternal) {
+					if ('' != $partResult) {
+						$partResult .= ', ';
+					}
+
+					$partResult .= $objectExternal->title;
+				}
 			} else {
 				if ($textPart[0] == $model) { // current model
 					$display_text_Property = $textPart[1];
