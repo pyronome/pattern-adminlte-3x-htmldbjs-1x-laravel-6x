@@ -30,7 +30,7 @@ class CreateAdminLTEModelDisplayTextTable extends Migration
             $table->timestamps();
             $table->boolean('deleted')->default(0);
             $table->string('model')->nullable();
-            $table->string('display_texts')->nullable();
+            $table->longText('display_texts')->nullable();
         });
 
         /* {{snippet:end_up_method}} */
