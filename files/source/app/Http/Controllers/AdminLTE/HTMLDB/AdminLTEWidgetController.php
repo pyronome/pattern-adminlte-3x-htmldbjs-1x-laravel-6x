@@ -41,9 +41,9 @@ class AdminLTEWidgetController extends Controller
                 ? htmlspecialchars($parameters['pageName'])
                 : '';
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $Widgets = $adminLTE->getPageLayout($pageName);
+        $Widgets = $objectAdminLTE->getPageLayout($pageName);
 
         $countWidgets = count($Widgets);
         $index = 0;

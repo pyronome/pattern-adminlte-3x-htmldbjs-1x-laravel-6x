@@ -58,9 +58,9 @@ class AdminLTELayoutController extends Controller
 
         $list = array();
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $Models = $adminLTE->getModelList();
+        $Models = $objectAdminLTE->getModelList();
 
         $countModels = count($Models);
         $index = 0;
@@ -71,7 +71,7 @@ class AdminLTELayoutController extends Controller
             $modelNameWithNamespace = ('\\App\\' . $model);
             
             $object = new $modelNameWithNamespace;
-            $property_list = $adminLTE->getModelPropertyList($object);
+            $property_list = $objectAdminLTE->getModelPropertyList($object);
             $countProperty = count($property_list);
 
             for ($j=0; $j < $countProperty; $j++) { 
@@ -109,9 +109,9 @@ class AdminLTELayoutController extends Controller
                 ? htmlspecialchars($parameters['pagename'])
                 : '';
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $Widgets = $adminLTE->getPageLayout($pagename);
+        $Widgets = $objectAdminLTE->getPageLayout($pagename);
         
         $list = array();
         $list[0]['id'] = 1;
@@ -176,19 +176,19 @@ class AdminLTELayoutController extends Controller
 
             $user_data = $objectAdminLTE->getUserData();
 
-            $adminLTEUserLayout = null;
-            $adminLTEUserLayouts = AdminLTEUserLayout::where('deleted', false)->where('adminlteuser_id', $user_data['id'])->where('pagename', $pagename)->get();
+            $objectAdminLTEUserLayout = null;
+            $objectAdminLTEUserLayouts = AdminLTEUserLayout::where('deleted', false)->where('adminlteuser_id', $user_data['id'])->where('pagename', $pagename)->get();
 
-            if (count($adminLTEUserLayouts) > 0) {
-                $adminLTEUserLayout = $adminLTEUserLayouts[0];
+            if (count($objectAdminLTEUserLayouts) > 0) {
+                $objectAdminLTEUserLayout = $objectAdminLTEUserLayouts[0];
             } else {
-                $adminLTEUserLayout = new AdminLTEUserLayout();
+                $objectAdminLTEUserLayout = new AdminLTEUserLayout();
             }
             
-            $adminLTEUserLayout->adminlteuser_id = $user_data['id'];
-            $adminLTEUserLayout->pagename = $pagename;
-            $adminLTEUserLayout->widgets = $widgets;
-            $adminLTEUserLayout->save(); 
+            $objectAdminLTEUserLayout->adminlteuser_id = $user_data['id'];
+            $objectAdminLTEUserLayout->pagename = $pagename;
+            $objectAdminLTEUserLayout->widgets = $widgets;
+            $objectAdminLTEUserLayout->save(); 
 
             $result['lastMessage'] = 'UPDATED';
             $result['messageCount'] = 1;

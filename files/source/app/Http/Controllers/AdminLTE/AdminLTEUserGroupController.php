@@ -22,11 +22,11 @@ class AdminLTEUserGroupController extends Controller
             $viewName = 'adminlte.custom.' . $this->controllerName . '_list';
         } // if (view()->exists('adminlte.custom.' . $this->controllerName . '_list'))
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         $viewData['controllerName'] = $this->controllerName;
-        $viewData['user'] = $adminLTE->getUserData();
-        $viewData['customization'] = $adminLTE->getCustomization();
+        $viewData['user'] = $objectAdminLTE->getUserData();
+        $viewData['customization'] = $objectAdminLTE->getCustomization();
         
         return view($viewName, $viewData);
 
@@ -42,11 +42,11 @@ class AdminLTEUserGroupController extends Controller
             $viewName = 'adminlte.custom.' . $this->controllerName . '_detail';
         } // if (view()->exists('adminlte.custom.' . $this->controllerName . '_detail'))
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         $viewData['controllerName'] = $this->controllerName;
-        $viewData['user'] = $adminLTE->getUserData();
-        $viewData['customization'] = $adminLTE->getCustomization();
+        $viewData['user'] = $objectAdminLTE->getUserData();
+        $viewData['customization'] = $objectAdminLTE->getCustomization();
         
         return view($viewName, $viewData);
 
@@ -62,10 +62,10 @@ class AdminLTEUserGroupController extends Controller
             $viewName = 'adminlte.custom.' . $this->controllerName . '_edit';
         } // if (view()->exists('adminlte.custom.' . $this->controllerName . '_edit'))
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         $viewData['controllerName'] = $this->controllerName;
-        $viewData['user'] = $adminLTE->getUserData();
+        $viewData['user'] = $objectAdminLTE->getUserData();
 
         return view($viewName, $viewData);
 
@@ -73,16 +73,16 @@ class AdminLTEUserGroupController extends Controller
 
     public function showLastUpdated(Request $request)
     {
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
         
         
         if ($request->session()->has(sha1('adminlteusergroup_lastid')))
         {
-            return redirect($adminLTE->getAdminLTEFolder() . $this->controllerName . '/detail/' . $request->session()->get(sha1('adminlteusergroup_lastid')));
+            return redirect($objectAdminLTE->getAdminLTEFolder() . $this->controllerName . '/detail/' . $request->session()->get(sha1('adminlteusergroup_lastid')));
         }
         else
         {
-            return redirect($adminLTE->getAdminLTEFolder() . $this->controllerName);
+            return redirect($objectAdminLTE->getAdminLTEFolder() . $this->controllerName);
         } // if(isset($_SESSION[sha1('adminlteusergroup_lastid')]))
 
     }

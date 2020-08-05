@@ -21,10 +21,10 @@ class SetupController extends Controller
             $viewName = 'adminlte.custom.' . $this->controllerName;
         } // if (view()->exists('adminlte.custom.' . $this->controllerName))
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         $viewData['controllerName'] = $this->controllerName;
-        $viewData['user'] = $adminLTE->getUserData();
+        $viewData['user'] = $objectAdminLTE->getUserData();
 
         return view($viewName, $viewData);
     }

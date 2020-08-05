@@ -38,8 +38,8 @@ class ProfileController extends Controller
 
         /* {{snippet:begin_check_values}} */
 
-        $adminLTE = new AdminLTE();
-        $userData = $adminLTE->getUserData();
+        $objectAdminLTE = new AdminLTE();
+        $userData = $objectAdminLTE->getUserData();
 
         if (0 == $userData['id'])
         {
@@ -99,7 +99,7 @@ class ProfileController extends Controller
         }
         else
         {
-            if (!$adminLTE->validateEmailAddress($this->row['email']))
+            if (!$objectAdminLTE->validateEmailAddress($this->row['email']))
             {
                 $result['errorCount']++;
                 if ($result['lastError'] != '') {
@@ -124,7 +124,7 @@ class ProfileController extends Controller
 
                     $result['lastError'] .= __('E-mail address specified belongs to another user. Please specify another e-mail address.');
                 } // if ($otherUser != null)
-            } // if (!$adminLTE->validateEmailAddress($this->row['email']))
+            } // if (!$objectAdminLTE->validateEmailAddress($this->row['email']))
         } // if ('' == $this->row['fullname'])
     
         if (($this->row['password1'] != '') || ($this->row['password2'] != ''))
@@ -235,8 +235,8 @@ class ProfileController extends Controller
     
         $list = [];
         
-        $adminLTE = new AdminLTE();
-        $userData = $adminLTE->getUserData();
+        $objectAdminLTE = new AdminLTE();
+        $userData = $objectAdminLTE->getUserData();
         
         if ($userData['id'] > 0)
         {
@@ -254,7 +254,7 @@ class ProfileController extends Controller
 
         foreach ($objectAdminLTEUserList as $objectAdminLTEUser)
         {
-            $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
+            $displayTexts = $objectAdminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
 
             $list[$index]['id'] = $objectAdminLTEUser->id;
             $list[$index]['id/display_text'] = $displayTexts['id'];
@@ -330,8 +330,8 @@ class ProfileController extends Controller
     
         $list = [];
         
-        $adminLTE = new AdminLTE();
-        $userData = $adminLTE->getUserData();
+        $objectAdminLTE = new AdminLTE();
+        $userData = $objectAdminLTE->getUserData();
         
         if (0 == $userData['id'])
         {
@@ -372,8 +372,8 @@ class ProfileController extends Controller
     {
         $list = [];
 
-        $adminLTE = new AdminLTE();
-        $userData = $adminLTE->getUserData();
+        $objectAdminLTE = new AdminLTE();
+        $userData = $objectAdminLTE->getUserData();
 
         if ($userData['id'] > 0)
         {
@@ -391,7 +391,7 @@ class ProfileController extends Controller
 
         foreach ($objectAdminLTEUserList as $objectAdminLTEUser)
         {
-            $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
+            $displayTexts = $objectAdminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
 
             $list[$index]['id'] = $objectAdminLTEUser->id;
             $list[$index]['fullname'] = $objectAdminLTEUser->fullname;
@@ -439,31 +439,31 @@ class ProfileController extends Controller
 
         if (0 == $result['errorCount']) {
 
-            $adminLTE = new AdminLTE();
-            $userData = $adminLTE->getUserData();
+            $objectAdminLTE = new AdminLTE();
+            $userData = $objectAdminLTE->getUserData();
 
-            $adminLTEUser = \App\AdminLTEUser::find($userData['id']);
+            $objectAdminLTEUser = \App\AdminLTEUser::find($userData['id']);
 
-            if ($adminLTEUser != null)
+            if ($objectAdminLTEUser != null)
             {
-                $adminLTEUser->fullname = $this->row['fullname'];
-                $adminLTEUser->username = $this->row['username'];
-                $adminLTEUser->email = $this->row['email'];
+                $objectAdminLTEUser->fullname = $this->row['fullname'];
+                $objectAdminLTEUser->username = $this->row['username'];
+                $objectAdminLTEUser->email = $this->row['email'];
 
                 if (($this->row['password0'] != '')
                         && ($this->row['password1'] != '')
                         && ($this->row['password2'] != ''))
                 {
-                    $adminLTEUser->password = bcrypt($this->row['password2']);
+                    $objectAdminLTEUser->password = bcrypt($this->row['password2']);
                 } // if (($this->row['password0'] != '')
 
-                $adminLTEUser->update();
-            } // if ($adminLTEUser != null)
+                $objectAdminLTEUser->update();
+            } // if ($objectAdminLTEUser != null)
 
             $profile_img = $this->row['profile_img'];
 
             $objectAdminLTE = new AdminLTE();
-            $objectAdminLTE->updateModelFileObject('AdminLTEUser', $adminLTEUser->id, 'profile_img', $profile_img);
+            $objectAdminLTE->updateModelFileObject('AdminLTEUser', $objectAdminLTEUser->id, 'profile_img', $profile_img);
 
             $result['messageCount'] = 1;
             $result['lastMessage'] = 'UPDATED';

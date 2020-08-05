@@ -16,9 +16,9 @@ class LogoutController extends Controller
         auth()->guard('adminlteuser')->logout();
         $request->session()->invalidate();
 
-        $adminLTE = new AdminLTE();
-        $adminLTE->getAdminLTEFolder() . 'login';
-        return redirect($adminLTE->getAdminLTEFolder() . 'login');
+        $objectAdminLTE = new AdminLTE();
+        $objectAdminLTE->getAdminLTEFolder() . 'login';
+        return redirect($objectAdminLTE->getAdminLTEFolder() . 'login');
     }
 
 }

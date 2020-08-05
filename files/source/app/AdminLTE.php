@@ -371,7 +371,7 @@ class AdminLTE
 			} // if (1 == $adminLTEUser->id) {
 
 			
-			$arr_files = $adminLTEUser->get_files($adminLTEUser->id, 'profile_img');
+			$arr_files = $this->get_model_files_by_property('AdminLTEUser', $adminLTEUser->id, 'profile_img');
 			
 			if (count($arr_files) > 0) {
 				$fileDetail = $arr_files[0];
@@ -1124,7 +1124,7 @@ class AdminLTE
 				$partResult = date($format, $time);
 			} else if ('image' == $type) {
 				if ($textPart[0] == $model) { // current model
-					$arr_files = $objectCurrent->get_files($objectCurrent->id, $property);
+					$arr_files = $this->get_model_files_by_property($model, $objectCurrent->id, $property);
 					$fileCount = count($arr_files);
 
 					if ($fileCount > 0) {
@@ -1148,7 +1148,7 @@ class AdminLTE
 				}
 			} else if ('file' == $type) {
 				if ($textPart[0] == $model) { // current model
-					$arr_files = $objectCurrent->get_files($objectCurrent->id, $property);
+					$arr_files = $this->get_model_files_by_property($model, $objectCurrent->id, $property);
 					$fileCount = count($arr_files);
 
 					if ($fileCount > 0) {
@@ -1806,7 +1806,7 @@ class AdminLTE
 		return $lastInsertId;
 	}
 
-	public function getModelFiles($model, $object_id) {
+	public function get_model_files($model, $object_id) {
 		// initialize connection
         try {
             $connection = DB::connection()->getPdo();
@@ -1841,7 +1841,43 @@ class AdminLTE
 
         return $files;
 	}
+	
+	public function get_model_files_by_property($modelName, $object_id, $object_property) {
+        // initialize connection
+        try {
+            $connection = DB::connection()->getPdo();
+        } catch (PDOException $e) {
+            print($e->getMessage());
+        }
+        
+        $files = array();
+        $index = 0;
+        $tablename = strtolower($modelName) . '__filetable';
+        
+        $selectSQL = "SELECT * FROM `" . $tablename . "` WHERE `object_id`=:object_id and `object_property`=:object_property ORDER BY file_index;";
+        $objPDO = $connection->prepare($selectSQL);
+        $objPDO->bindParam(':object_id', $object_id, PDO::PARAM_INT);
+        $objPDO->bindParam(':object_property', $object_property, PDO::PARAM_STR);
+        
+        $objPDO->execute();
+        $data = $objPDO->fetchAll();
 
+        foreach($data as $row) {
+            $files[$index]["id"] = $row["id"];
+            $files[$index]["object_property"] = $row["object_property"];
+            $files[$index]["file_name"] = $row["file_name"];
+            $files[$index]["path"] = $row["path"];
+            $files[$index]["media_type"] = $row["media_type"];
+
+            $fileNameTokens = explode('.', $row["file_name"]);
+            $files[$index]["extension"] = strtolower(end($fileNameTokens));
+
+            $index++;
+        }
+
+        return $files;
+    }
+    
 	public function getModel_DisplayTexts($model) {
 		$displayTexts = array();
 	    

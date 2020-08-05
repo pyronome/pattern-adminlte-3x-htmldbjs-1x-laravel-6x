@@ -14,12 +14,12 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 
-        $adminLTE = new AdminLTE();
-        $adminLTEUser = auth()->guard('adminlteuser')->user();
+        $objectAdminLTE = new AdminLTE();
+        $objectAdminLTEUser = auth()->guard('adminlteuser')->user();
 
-        if ($adminLTEUser != null)
+        if ($objectAdminLTEUser != null)
         {
-            return redirect($adminLTE->getAdminLTEFolder() . 'home');
+            return redirect($objectAdminLTE->getAdminLTEFolder() . 'home');
         }
         else
         {
@@ -35,7 +35,7 @@ class LoginController extends Controller
 
             return view($viewName, $viewData);
 
-        } // if ($adminLTEUser != null)
+        } // if ($objectAdminLTEUser != null)
 
     }
 

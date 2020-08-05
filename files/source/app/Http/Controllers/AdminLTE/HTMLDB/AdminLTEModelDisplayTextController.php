@@ -155,18 +155,18 @@ class AdminLTEModelDisplayTextController extends Controller
             $objectAdminLTE = new AdminLTE();
             $display_texts = $objectAdminLTE->base64encode($display_text_json);
 
-            $adminLTEModelDisplayText = null;
-            $adminLTEModelDisplayTexts = AdminLTEModelDisplayText::where('deleted', false)->where('model', $model)->get();
+            $objectAdminLTEModelDisplayText = null;
+            $objectAdminLTEModelDisplayTexts = AdminLTEModelDisplayText::where('deleted', false)->where('model', $model)->get();
 
-            if (count($adminLTEModelDisplayTexts) > 0) {
-                $adminLTEModelDisplayText = $adminLTEModelDisplayTexts[0];
+            if (count($objectAdminLTEModelDisplayTexts) > 0) {
+                $objectAdminLTEModelDisplayText = $objectAdminLTEModelDisplayTexts[0];
             } else {
-                $adminLTEModelDisplayText = new AdminLTEModelDisplayText();
+                $objectAdminLTEModelDisplayText = new AdminLTEModelDisplayText();
             }
             
-            $adminLTEModelDisplayText->model = $model;
-            $adminLTEModelDisplayText->display_texts = $display_texts;
-            $adminLTEModelDisplayText->save(); 
+            $objectAdminLTEModelDisplayText->model = $model;
+            $objectAdminLTEModelDisplayText->display_texts = $display_texts;
+            $objectAdminLTEModelDisplayText->save(); 
         }
 
         $objectHTMLDB->lastError = $result['lastError'];

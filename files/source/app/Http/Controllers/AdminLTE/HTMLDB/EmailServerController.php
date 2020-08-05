@@ -62,32 +62,32 @@ class EmailServerController extends Controller
         if (0 == $result['errorCount'])
         {
 
-            $adminLTE = new AdminLTE();
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE = new AdminLTE();
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_FROM_NAME',
                     $this->row['email_from_name']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_FROM_ADDRESS',
                     $this->row['email_reply_to']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_HOST',
                     $this->row['email_smtp_host']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_USERNAME',
                     $this->row['email_smtp_user']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_PASSWORD',
                     $this->row['email_smtp_password']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_ENCRYPTION',
                     $this->row['email_smtp_encryption']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_PORT',
                     $this->row['email_smtp_port']);
 

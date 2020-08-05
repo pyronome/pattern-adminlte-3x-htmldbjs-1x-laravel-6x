@@ -53,9 +53,9 @@ class PreferencesController extends Controller
         $list = [];
         $list[0]['id'] = 1;
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $list[0]['preferences_json'] = json_encode($adminLTE->getUserPreferences(), (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+        $list[0]['preferences_json'] = json_encode($objectAdminLTE->getUserPreferences(), (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
@@ -107,19 +107,19 @@ class PreferencesController extends Controller
 
             $user_data = $objectAdminLTE->getUserData();
 
-            $adminLTEUserLayout = null;
-            $adminLTEUserLayouts = AdminLTEUserLayout::where('deleted', false)->where('adminlteuser_id', $user_data['id'])->where('pagename', 'preferences')->get();
+            $objectAdminLTEUserLayout = null;
+            $objectAdminLTEUserLayouts = AdminLTEUserLayout::where('deleted', false)->where('adminlteuser_id', $user_data['id'])->where('pagename', 'preferences')->get();
 
-            if (count($adminLTEUserLayouts) > 0) {
-                $adminLTEUserLayout = $adminLTEUserLayouts[0];
+            if (count($objectAdminLTEUserLayouts) > 0) {
+                $objectAdminLTEUserLayout = $objectAdminLTEUserLayouts[0];
             } else {
-                $adminLTEUserLayout = new AdminLTEUserLayout();
+                $objectAdminLTEUserLayout = new AdminLTEUserLayout();
             }
             
-            $adminLTEUserLayout->adminlteuser_id = $user_data['id'];
-            $adminLTEUserLayout->pagename = 'preferences';
-            $adminLTEUserLayout->widgets = $preferences;
-            $adminLTEUserLayout->save();
+            $objectAdminLTEUserLayout->adminlteuser_id = $user_data['id'];
+            $objectAdminLTEUserLayout->pagename = 'preferences';
+            $objectAdminLTEUserLayout->widgets = $preferences;
+            $objectAdminLTEUserLayout->save();
 
             $result['messageCount'] = 1;
             $result['lastMessage'] = 'UPDATED';

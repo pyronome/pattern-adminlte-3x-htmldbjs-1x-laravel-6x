@@ -31,11 +31,11 @@ class PagePermissionController extends Controller
 
         $list = array();
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $userData = $adminLTE->getUserData();
+        $userData = $objectAdminLTE->getUserData();
 
-        $edit_permission = $adminLTE->checkUserEditPermission(
+        $edit_permission = $objectAdminLTE->checkUserEditPermission(
                 $pageName,
                 $userData);
         

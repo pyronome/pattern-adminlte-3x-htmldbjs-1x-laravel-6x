@@ -206,7 +206,7 @@ class AdminLTEUserGroupController extends Controller
             $dateFormat = config('adminlte.date_format');
             $timeFormat = config('adminlte.time_format');
             
-            $adminLTE = new AdminLTE();
+            $objectAdminLTE = new AdminLTE();
             
             $objectAdminLTEUserGroupList = AdminLTEUserGroup::where('deleted', false)
                     ->orderBy('created_at', 'asc')
@@ -221,13 +221,13 @@ class AdminLTEUserGroupController extends Controller
             return;
         }
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
         $objectAdminLTEUserGroup = NULL;
         $index = 0;
 
         foreach ($objectAdminLTEUserGroupList as $objectAdminLTEUserGroup)
         {
-            $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUserGroup', $objectAdminLTEUserGroup);
+            $displayTexts = $objectAdminLTE->getObjectDisplayTexts('AdminLTEUserGroup', $objectAdminLTEUserGroup);
 
             $list[$index]['id'] = $objectAdminLTEUserGroup->id;
             $list[$index]['id/display_text'] = $displayTexts['id'];
@@ -437,15 +437,15 @@ class AdminLTEUserGroupController extends Controller
         $yearMonthFormat = config('adminlte.year_month_format');
         $parameters = $request->route()->parameters();
         
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         $pageName = '';
         if (isset($parameters['pageName'])) {
             $pageName = htmlspecialchars($parameters['pageName']);
         } // if (isset($parameters['pageName'])) {
 
-        $Widgets = $adminLTE->getPageLayout($pageName);
-        $graphProperties = $adminLTE->getRecordGraphProperties(
+        $Widgets = $objectAdminLTE->getPageLayout($pageName);
+        $graphProperties = $objectAdminLTE->getRecordGraphProperties(
                 $Widgets,
                 'AdminLTEUserGroup');
         
@@ -533,20 +533,20 @@ class AdminLTEUserGroupController extends Controller
         $columns = [];
         $list = [];
         
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $Widgets = $adminLTE->getPageLayout($pageName);
-        $variables = $adminLTE->getRecordListValueVariables($Widgets, 'AdminLTEUserGroup');
+        $Widgets = $objectAdminLTE->getPageLayout($pageName);
+        $variables = $objectAdminLTE->getRecordListValueVariables($Widgets, 'AdminLTEUserGroup');
 
         if (0 == count($variables)) {
             $variables = array();
         } // if (0 == count($variables)) {
 
-        $bufferSize = $adminLTE->getRecordListLimit(
+        $bufferSize = $objectAdminLTE->getRecordListLimit(
                 $request,
                 $Widgets,
                 'AdminLTEUserGroup');
-        $showLastRecord = $adminLTE->getRecordListType(
+        $showLastRecord = $objectAdminLTE->getRecordListType(
                 $Widgets,
                 'AdminLTEUserGroup');
 
@@ -560,7 +560,7 @@ class AdminLTEUserGroupController extends Controller
             $searchText = '';
             $page = 0;
         } else {
-            $sessionParameters = $adminLTE->getModelSessionParameters(
+            $sessionParameters = $objectAdminLTE->getModelSessionParameters(
                     $request,
                     'AdminLTEUserGroup');
 
@@ -569,7 +569,7 @@ class AdminLTEUserGroupController extends Controller
                     : 'id';
 
             if (false !== strpos($sortingColumn, 'DisplayText')) {
-                $sortingColumn = $adminLTE->getModelForeignSortColumn(
+                $sortingColumn = $objectAdminLTE->getModelForeignSortColumn(
                         'AdminLTEUserGroup',
                         $sortingColumn);
             }
@@ -627,7 +627,7 @@ class AdminLTEUserGroupController extends Controller
 
         foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
         {
-            $displayTexts = $adminLTE->getObjectDisplayTexts('AdminLTEUserGroup', $objectAdminLTEUserGroup);
+            $displayTexts = $objectAdminLTE->getObjectDisplayTexts('AdminLTEUserGroup', $objectAdminLTEUserGroup);
 
             $list[$index]['id'] = $objectAdminLTEUserGroup->id;
         
@@ -706,12 +706,12 @@ class AdminLTEUserGroupController extends Controller
             'bufferSize'
         ];
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
         $parameters = $request->route()->parameters();
 
         $list = [];
 
-        $sessionParameters = $adminLTE->getModelSessionParameters(
+        $sessionParameters = $objectAdminLTE->getModelSessionParameters(
                 $request,
                 'AdminLTEUserGroup');
         
@@ -722,8 +722,8 @@ class AdminLTEUserGroupController extends Controller
                 $pageName = htmlspecialchars($parameters['pageName']);
             } // if (isset($parameters['pageName'])) {
 
-            $Widgets = $adminLTE->getPageLayout($pageName);
-            $bufferSize = $adminLTE->getRecordListLimit(
+            $Widgets = $objectAdminLTE->getPageLayout($pageName);
+            $bufferSize = $objectAdminLTE->getRecordListLimit(
                     $request,
                     $Widgets,
                     'AdminLTEUserGroup');
@@ -732,7 +732,7 @@ class AdminLTEUserGroupController extends Controller
                     AdminLTEUserGroup::where('deleted', false)->count()
                     / $bufferSize);
 
-            $adminLTE->setModelSessionParameters($request,
+            $objectAdminLTE->setModelSessionParameters($request,
                     'AdminLTEUserGroup',
                     [
                         'searchText' => '',
@@ -745,7 +745,7 @@ class AdminLTEUserGroupController extends Controller
             );
         }
 
-        $sessionParameters = $adminLTE->getModelSessionParameters(
+        $sessionParameters = $objectAdminLTE->getModelSessionParameters(
                 $request,
                 'AdminLTEUserGroup');
 
@@ -816,10 +816,10 @@ class AdminLTEUserGroupController extends Controller
     public function post_session(Request $request)
     {
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
         $objectHTMLDB = new HTMLDB();
 
-        $sessionParameters = $adminLTE->getModelSessionParameters(
+        $sessionParameters = $objectAdminLTE->getModelSessionParameters(
                 $request,
                 'AdminLTEUserGroup');
 
@@ -875,7 +875,7 @@ class AdminLTEUserGroupController extends Controller
                     / $sessionParameters['bufferSize']);
         } // if (0 == $sessionParameters['bufferSize'])
 
-        $adminLTE->setModelSessionParameters($request,
+        $objectAdminLTE->setModelSessionParameters($request,
                 'AdminLTEUserGroup',
                 $sessionParameters);
 

@@ -22,10 +22,10 @@ class MediaController extends Controller
             $viewName = 'adminlte.custom.' . $this->controllerName;
         } // if (view()->exists('adminlte.custom.' . $this->controllerName))
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         $viewData['controllerName'] = $this->controllerName;
-        $viewData['user'] = $adminLTE->getUserData();
+        $viewData['user'] = $objectAdminLTE->getUserData();
 
         return view($viewName, $viewData);
     }
@@ -52,14 +52,14 @@ class MediaController extends Controller
 
         $fileRealName = str_replace('.' . $extension, '', $fileOriginalName);
 
-        $adminLTE = new AdminLTE();
-        $filename = $adminLTE->convertNameToFileName($fileRealName) . '_' . time()  . '.' . $extension;
+        $objectAdminLTE = new AdminLTE();
+        $filename = $objectAdminLTE->convertNameToFileName($fileRealName) . '_' . time()  . '.' . $extension;
         
         $path = Storage::putFileAs($target_path, $file, $filename);
 
         $real_path = str_replace('public/', '', $path);
 
-        $lastInsertedId = $adminLTE->insertModelPropertyFile($target, $media_type, $filename, $real_path);
+        $lastInsertedId = $objectAdminLTE->insertModelPropertyFile($target, $media_type, $filename, $real_path);
 
         $lastMessage = $lastInsertedId . '#' . $filename . '#' . $real_path;
 

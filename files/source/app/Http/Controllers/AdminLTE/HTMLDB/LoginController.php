@@ -47,10 +47,10 @@ class LoginController extends Controller
 
         if (0 == $result['errorCount'])
         {
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
+            $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])
                     ->first();
 
-            auth()->guard('adminlteuser')->login($adminLTEUser);
+            auth()->guard('adminlteuser')->login($objectAdminLTEUser);
 
             $landingPage = config('adminlte.landing_page');
 
@@ -106,18 +106,18 @@ class LoginController extends Controller
 
         if (0 == $result['errorCount']) {
 
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
+            $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])
                     ->first();
             
             $confirmed = false;
 
-            if ($adminLTEUser != null)
+            if ($objectAdminLTEUser != null)
             {
-                if (password_verify($this->row['password'], $adminLTEUser->password))
+                if (password_verify($this->row['password'], $objectAdminLTEUser->password))
                 {
                     $confirmed = true;
                 }
-            } // if (null == $adminLTEUser)
+            } // if (null == $objectAdminLTEUser)
 
             if (!$confirmed)
             {

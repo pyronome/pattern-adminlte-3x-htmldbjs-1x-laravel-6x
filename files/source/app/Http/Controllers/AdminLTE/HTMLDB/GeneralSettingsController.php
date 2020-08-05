@@ -123,44 +123,44 @@ class GeneralSettingsController extends Controller
         if (0 == $result['errorCount'])
         {
 
-            $adminLTE = new AdminLTE();
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE = new AdminLTE();
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_PROJECT_TITLE',
                     $this->row['project_title']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_MAIN_FOLDER',
                     $this->row['main_folder']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_LANDING_PAGE',
                     $this->row['landing_page']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_DEFAULT_LANGUAGE',
                     $this->row['default_language']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_TIMEZONE',
                     $this->row['timezone']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_DATE_FORMAT',
                     $this->row['date_format']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_TIME_FORMAT',
                     $this->row['time_format']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_YEAR_MONTH_FORMAT',
                     $this->row['year_month_format']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_NUMBER_FORMAT',
                     $this->row['number_format']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'ADMINLTE_GOOGLE_MAPS_API_KEY',
                     $this->row['google_maps_api_key']);
 

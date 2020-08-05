@@ -45,12 +45,12 @@ class ForgotPasswordController extends Controller
 
         if (1 == $result['messageCount'])
         {   
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])->first();
+            $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])->first();
 
             $params = array();
             $params['emailFromName'] = config('mail.from.name');
-            $params['name'] = $adminLTEUser->fullname;
-            $params['emailAddress'] = $adminLTEUser->email;
+            $params['name'] = $objectAdminLTEUser->fullname;
+            $params['emailAddress'] = $objectAdminLTEUser->email;
             $params['newPassword'] = $result['lastMessage'];
             $params['emailReplyTo'] = config('mail.from.address');
 
@@ -84,7 +84,7 @@ class ForgotPasswordController extends Controller
             'messageCount' => 0
         ];
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
         /* {{snippet:begin_check_values}} */
 
@@ -97,7 +97,7 @@ class ForgotPasswordController extends Controller
 
             $result['lastError'] .= __('Please specify your email address.');
         }
-        else if (!$adminLTE->validateEmailAddress($this->row['email']))
+        else if (!$objectAdminLTE->validateEmailAddress($this->row['email']))
         {
             $result['errorCount']++;
             if ($result['lastError'] != '') {
@@ -109,9 +109,9 @@ class ForgotPasswordController extends Controller
         else
         {
 
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])->first();
+            $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])->first();
 
-            if (null == $adminLTEUser)
+            if (null == $objectAdminLTEUser)
             {
                 $result['errorCount']++;
                 if ($result['lastError'] != '') {
@@ -121,9 +121,9 @@ class ForgotPasswordController extends Controller
                 $result['lastError'] .= __('Your email address is not recognized. Please check your email address and try again.');
             } else {
                 $objectAdminLTE = new AdminLTE();
-                $result['lastMessage'] = $objectAdminLTE->resetUserPassword($adminLTEUser);
+                $result['lastMessage'] = $objectAdminLTE->resetUserPassword($objectAdminLTEUser);
                 $result['messageCount'] = 1;
-            } // if (null == $adminLTEUser)
+            } // if (null == $objectAdminLTEUser)
 
         } // if ('' == $this->row['email']) {
 
