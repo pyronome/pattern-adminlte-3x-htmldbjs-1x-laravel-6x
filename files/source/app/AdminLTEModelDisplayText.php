@@ -22,41 +22,42 @@ class AdminLTEModelDisplayText extends Model
 		'model',
 		'display_texts'
 	];
+	
+	public static $property_list = array(
+		array(
+            'name' => 'id',
+            'type' => 'integer'
+        ),
+
+        array(
+            'name' => 'deleted',
+            'type' => 'checkbox'
+        ),
+
+        array(
+            'name' => 'created_at',
+            'type' => 'date'
+        ),
+
+        array(
+            'name' => 'updated_at',
+            'type' => 'date'
+        ),
+		
+		array(
+            'name' => 'model',
+            'type' => 'text'
+        ),
+
+        array(
+            'name' => 'display_texts',
+            'type' => 'text'
+        )
+    );
 
 	/* {{snippet:end_properties}} */
 
 	/* {{snippet:begin_methods}} */
-	
-	public function get_property_list() {
-		$property_list = array();
-		$index = 0;
-		
-		$property_list[$index]['name'] = 'id';
-		$property_list[$index]['type'] = 'integer';
-		$index++;
-
-		$property_list[$index]['name'] = 'deleted';
-		$property_list[$index]['type'] = 'checkbox';
-		$index++;
-
-        $property_list[$index]['name'] = 'created_at';
-		$property_list[$index]['type'] = 'date';
-		$index++;
-
-		$property_list[$index]['name'] = 'updated_at';
-		$property_list[$index]['type'] = 'date';
-		$index++;		
-
-		$property_list[$index]['name'] = 'model';
-		$property_list[$index]['type'] = 'text';
-		$index++;
-
-		$property_list[$index]['name'] = 'display_texts';
-		$property_list[$index]['type'] = 'text';
-		$index++;
-
-		return $property_list;
-	}
 	
 	/* {{snippet:end_methods}} */
 }

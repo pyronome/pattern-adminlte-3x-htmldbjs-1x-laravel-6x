@@ -22,40 +22,41 @@ class AdminLTELayout extends Model
 		'widgets'
 	];
 
+	public static $property_list = array(
+		array(
+            'name' => 'id',
+            'type' => 'integer'
+        ),
+
+        array(
+            'name' => 'deleted',
+            'type' => 'checkbox'
+        ),
+
+        array(
+            'name' => 'created_at',
+            'type' => 'date'
+        ),
+
+        array(
+            'name' => 'updated_at',
+            'type' => 'date'
+        ),
+		
+		array(
+            'name' => 'pagename',
+            'type' => 'text'
+        ),
+
+        array(
+            'name' => 'widgets',
+            'type' => 'text'
+        )
+    );
+
 	/* {{snippet:end_properties}} */
 
 	/* {{snippet:begin_methods}} */
-	
-	public function get_property_list() {
-		$property_list = array();
-		$index = 0;
-		
-		$property_list[$index]['name'] = 'id';
-		$property_list[$index]['type'] = 'integer';
-		$index++;
-
-		$property_list[$index]['name'] = 'deleted';
-		$property_list[$index]['type'] = 'checkbox';
-		$index++;
-
-        $property_list[$index]['name'] = 'created_at';
-		$property_list[$index]['type'] = 'date';
-		$index++;
-
-		$property_list[$index]['name'] = 'updated_at';
-		$property_list[$index]['type'] = 'date';
-		$index++;		
-
-		$property_list[$index]['name'] = 'pagename';
-		$property_list[$index]['type'] = 'text';
-		$index++;
-
-		$property_list[$index]['name'] = 'widgets';
-		$property_list[$index]['type'] = 'text';
-		$index++;
-
-		return $property_list;
-	}
 	
 	/* {{snippet:end_methods}} */
 

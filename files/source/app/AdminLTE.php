@@ -1053,8 +1053,7 @@ class AdminLTE
 		$displayTexts = [];
 		
 		$modelNameWithNamespace = ('\\App\\' . $model);
-		$objectTemp = new $modelNameWithNamespace;
-		$property_list = $objectTemp->get_property_list();
+		$property_list = $modelNameWithNamespace::$property_list;
 
 		$countProperty = count($property_list);
 
@@ -1882,8 +1881,7 @@ class AdminLTE
 		$displayTexts = array();
 	    
 	    $modelNameWithNamespace = ('\\App\\' . $model);
-	    $objectTemp = new $modelNameWithNamespace;
-	    $property_list = $objectTemp->get_property_list();
+	    $property_list = $modelNameWithNamespace::$property_list;
 	    $countProperty = count($property_list);
 
 	    for ($j=0; $j < $countProperty; $j++) { 
