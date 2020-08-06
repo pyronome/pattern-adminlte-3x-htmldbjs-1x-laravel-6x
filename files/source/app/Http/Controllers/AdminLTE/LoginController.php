@@ -4,7 +4,7 @@ namespace App\Http\Controllers\AdminLTE;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\AdminLTE;
+use App\AdminLTE\AdminLTE;
 
 class LoginController extends Controller
 {

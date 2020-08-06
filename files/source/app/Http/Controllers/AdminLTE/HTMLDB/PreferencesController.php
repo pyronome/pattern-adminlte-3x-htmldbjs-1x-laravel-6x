@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\AdminLTEUserLayout;
-use App\AdminLTE;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\HTMLDB\HTMLDB;
 
 class PreferencesController extends Controller
 {

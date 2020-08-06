@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace App\AdminLTE;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use App\AdminLTEUser;
-use App\AdminLTELayout;
-use App\AdminLTEUserLayout;
-use App\AdminLTEUserGroup;
-use App\AdminLTEModelDisplayText;
-use App\AdminLTEModelOption;
+use App\AdminLTE\AdminLTEUser;
+use App\AdminLTE\AdminLTELayout;
+use App\AdminLTE\AdminLTEUserLayout;
+use App\AdminLTE\AdminLTEUserGroup;
+use App\AdminLTE\AdminLTEModelDisplayText;
+use App\AdminLTE\AdminLTEModelOption;
 use PDO;
 
 /* {{snippet:begin_class}} */
@@ -1052,7 +1052,12 @@ class AdminLTE
 	{
 		$displayTexts = [];
 		
-		$modelNameWithNamespace = ('\\App\\' . $model);
+		$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
+        
+        if (!class_exists($modelNameWithNamespace)) {
+        	$modelNameWithNamespace = ('\\App\\' . $model);
+        }
+
 		$property_list = $modelNameWithNamespace::$property_list;
 
 		$countProperty = count($property_list);
@@ -1183,7 +1188,12 @@ class AdminLTE
 
 					$externalModel = $textPart[0];
 
-					$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
+					$externalModelNameWithNamespace = ('\\App\\AdminLTE\\' . $externalModel);
+
+					if (!class_exists($externalModelNameWithNamespace)) {
+						$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
+					}
+
 					$objectExternal = new $externalModelNameWithNamespace;
 					$objectExternal = $objectExternal::find($id);
 
@@ -1421,7 +1431,12 @@ class AdminLTE
 			$sessionParameters['bufferSize'] = $limit;
 			$sessionParameters['page'] = 0;
 
-			$modelNameWithNamespace = ('\\App\\' . $modelName);
+			$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $modelName);
+
+			if (!class_exists($modelNameWithNamespace)) {
+				$modelNameWithNamespace = ('\\App\\' . $modelName);
+			}
+
 			$listObject = new $modelNameWithNamespace();
 
 			$listCount = $listObject->where('deleted', false)->count();
@@ -1566,7 +1581,13 @@ class AdminLTE
 		// get default display texts
 		for ($i=0; $i < $countModels; $i++) {
 			$model = $Models[$i];
-			$modelNameWithNamespace = ('\\App\\' . $model);
+
+			$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
+
+			if (!class_exists($modelNameWithNamespace)) {
+				$modelNameWithNamespace = ('\\App\\' . $model);
+			}
+
 			$object = new $modelNameWithNamespace;
 			$property_list = $this->getModelPropertyList($object);
 			$countProperty = count($property_list);
@@ -1880,7 +1901,12 @@ class AdminLTE
 	public function getModel_DisplayTexts($model) {
 		$displayTexts = array();
 	    
-	    $modelNameWithNamespace = ('\\App\\' . $model);
+	    $modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
+
+		if (!class_exists($modelNameWithNamespace)) {
+			$modelNameWithNamespace = ('\\App\\' . $model);
+		}
+
 	    $property_list = $modelNameWithNamespace::$property_list;
 	    $countProperty = count($property_list);
 

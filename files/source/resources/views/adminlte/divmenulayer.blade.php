@@ -1,6 +1,7 @@
         <?php
             // Menu
-            $adminLTE = new \App\AdminLTE();
+            $modelNameWithNamespace = ('\\App\\AdminLTE\\AdminLTE');
+            $adminLTE = new $modelNameWithNamespace();
 
             $menu = $adminLTE->getSideMenu();
             

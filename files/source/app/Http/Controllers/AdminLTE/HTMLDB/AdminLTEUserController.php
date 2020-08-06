@@ -5,9 +5,9 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\HTMLDB\HTMLDB;
 
 class AdminLTEUserController extends Controller
 {
@@ -371,7 +371,7 @@ class AdminLTEUserController extends Controller
         $list[0]['id'] = 1;
         $list[0]['model'] = 'AdminLTEUser';
         
-        $list[0]['value'] = \App\AdminLTEUser::where('deleted', false)->count();
+        $list[0]['value'] = AdminLTEUser::where('deleted', false)->count();
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
@@ -479,7 +479,7 @@ class AdminLTEUserController extends Controller
 
         $graphData = array();
 
-        $objectAdminLTEUsers = \App\AdminLTEUser::where('deleted', false)
+        $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
                 ->where('created_at', '>=', $fromDate)
                 ->orderBy('created_at', 'asc')
                 ->get();
@@ -922,7 +922,7 @@ class AdminLTEUserController extends Controller
         else
         {
             $sessionParameters['pageCount'] = ceil(
-                    \App\AdminLTEUser::where('deleted', false)->count()
+                    AdminLTEUser::where('deleted', false)->count()
                     / $sessionParameters['bufferSize']);
         } // if (0 == $sessionParameters['bufferSize'])
 

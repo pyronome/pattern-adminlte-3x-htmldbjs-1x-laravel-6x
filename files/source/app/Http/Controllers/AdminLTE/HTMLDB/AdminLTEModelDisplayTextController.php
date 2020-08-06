@@ -5,9 +5,9 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\AdminLTE;
+use App\AdminLTE\AdminLTE;
 use App\AdminLTEModelDisplayText;
-use App\HTMLDB;
+use App\HTMLDB\HTMLDB;
 
 class AdminLTEModelDisplayTextController extends Controller
 {
@@ -92,7 +92,12 @@ class AdminLTEModelDisplayTextController extends Controller
         for ($i=0; $i < $countModels; $i++) { 
             $model = $Models[$i];
             
-            $modelNameWithNamespace = ('\\App\\' . $model);
+            $modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
+
+            if (!class_exists($modelNameWithNamespace)) {
+                $modelNameWithNamespace = ('\\App\\' . $model);
+            }
+            
             $property_list = $modelNameWithNamespace::$property_list;
             $countProperty = count($property_list);
 

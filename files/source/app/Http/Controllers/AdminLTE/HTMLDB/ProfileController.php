@@ -5,10 +5,10 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\AdminLTEUserGroup;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\AdminLTE\AdminLTEUserGroup;
+use App\HTMLDB\HTMLDB;
 
 class ProfileController extends Controller
 {
@@ -72,7 +72,7 @@ class ProfileController extends Controller
         }
         else
         {
-            $otherUser = \App\AdminLTEUser::where('deleted', false)
+            $otherUser = AdminLTEUser::where('deleted', false)
                     ->where('username', $this->row['username'])
                     ->where('id', '!=', $userData['id'])
                     ->first();
@@ -110,7 +110,7 @@ class ProfileController extends Controller
             }
             else
             {
-                $otherUser = \App\AdminLTEUser::where('deleted', false)
+                $otherUser = AdminLTEUser::where('deleted', false)
                         ->where('email', $this->row['email'])
                         ->where('id', '!=', $userData['id'])
                         ->first();
@@ -140,7 +140,7 @@ class ProfileController extends Controller
             }
             else
             {
-                $currentUser = \App\AdminLTEUser::find($userData['id']);
+                $currentUser = AdminLTEUser::find($userData['id']);
 
                 if (!password_verify($this->row['password0'],
                         $currentUser->password))
@@ -442,7 +442,7 @@ class ProfileController extends Controller
             $objectAdminLTE = new AdminLTE();
             $userData = $objectAdminLTE->getUserData();
 
-            $objectAdminLTEUser = \App\AdminLTEUser::find($userData['id']);
+            $objectAdminLTEUser = AdminLTEUser::find($userData['id']);
 
             if ($objectAdminLTEUser != null)
             {
