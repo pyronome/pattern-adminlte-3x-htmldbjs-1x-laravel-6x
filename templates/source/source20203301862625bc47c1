@@ -1,0 +1,13 @@
+{{@if {{$ ../property_type/__value__}} == 'EmailAddress'}}
+		includeLibrary('validateEmailAddress');
+		if (($this->{{$ ../name/__value__}} != '')
+				&& (!validateEmailAddress($this->{{$ ../name/__value__}}))) {
+			$errors['{{$ ../name/__value__}}'][] = 'NOT_VALID_EMAIL_ADDRESS';		
+		} // if (!validateEmailAddress($this->{{$ ../name/__value__}})) {
+
+{{@elseif {{$ ../property_type/__value__}} == 'URLAddress'}}
+		if (($this->{{$ ../name/__value__}} != '') && (false === filter_var($this->{{$ ../name/__value__}}, FILTER_VALIDATE_URL))) {
+			$errors['{{$ ../name/__value__}}'][] = 'NOT_VALID_URL_ADDRESS';		
+		} // if (!validateURLAddress($this->{{$ ../name/__value__}})) {
+
+{{@endif}}

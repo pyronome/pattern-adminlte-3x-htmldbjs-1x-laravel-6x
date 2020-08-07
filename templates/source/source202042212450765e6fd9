@@ -1,0 +1,24 @@
+	<script type="text/html" 
+        id="modelEditPage_imageTemplate"
+        class="htmldb-template"
+        data-htmldb-table="{{$ ../../../name/__value__}}_FileHTMLDB"
+        data-htmldb-template-target="ul{{object_property}}FileList"
+        data-htmldb-filter="media_type/eq/2">
+        <li id="liFileListItem{{id}}"
+            class="collection-item liMediaType2"
+            data-object-id="{{id}}"
+            data-file-name="{{file_name}}"
+            data-file-path="{{path}}"
+            data-media-type="2">
+            <span class="grippy"></span>
+            <a href="../{{path}}" target="_blank" class="aFileListItemFileURL mediaImageContainer aMediaType2">
+                <img width="64" src="../{{path}}" alt="" class="imgFileListItemFileURL">
+            </a>
+            <a href="../{{path}}" target="_blank" class="aFileListItemFileURL mediaFilenameContainer text-primary aMediaType2">
+                <span class="title" class="spanFileListItemFileName">{{file_name}}</span>
+            </a>
+            <a href="JavaScript:void(0);" class="aDeleteFileListItem secondary-content text-primary float-right">
+                <i class="ion-android-close"></i>
+            </a>
+        </li>
+    </script>

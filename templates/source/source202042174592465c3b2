@@ -1,0 +1,39 @@
+{{@if {{$ ../selection_properties/property_model_multiple_selection/__value__}} == '0'}}
+								<div class="row {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_VISIBILITY_CLASS}}">
+                                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                        <label for="formObject-{{$ ../../name/__value__}}" class="detail-label"><?php echo __('{{$ ../../title/__value__}}'); ?> {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_LABEL_REQUIRED}} {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_LABEL_HINT}}</label>
+                                        <select data-placeholder="{{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_ATTRIBUTES_PLACEHOLDER}}"
+                                            id="formObject-{{$ ../../name/__value__}}"
+                                            name="formObject-{{$ ../../name/__value__}}"
+                                            class="form-control htmldb-select2 htmldb-field htmldb-select"
+                                            data-htmldb-option-table="{{$ ../../../../name/__value__}}_{{$ ../../name/__value__}}HTMLDB"
+                                            data-htmldb-option-value="{{id}}"
+                                            data-htmldb-option-title="{{name}}"
+                                            data-htmldb-field="{{$ ../../name/__value__}}"
+                                            data-htmldb-value="{{{{$ ../../name/__value__}}}}"
+                                            style="width: 100%;"
+                                            {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_ATTRIBUTES_READONLY}}>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+{{@elseif {{$ ../selection_properties/property_model_multiple_selection/__value__}} == '1'}}
+								<div class="row {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_VISIBILITY_CLASS}}">
+                                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                        <label for="formObject-{{$ ../../name/__value__}}" class="detail-label"><?php echo __('{{$ ../../title/__value__}}'); ?> {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_LABEL_REQUIRED}} {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_LABEL_HINT}}</label>
+                                        <select multiple="multiple"
+                                            data-placeholder="{{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_ATTRIBUTES_PLACEHOLDER}}"
+                                            id="formObject-{{$ ../../name/__value__}}"
+                                            name="formObject-{{$ ../../name/__value__}}"
+                                            class="form-control htmldb-select2 htmldb-field htmldb-select"
+                                            data-htmldb-option-table="{{$ ../../../../name/__value__}}_{{$ ../../name/__value__}}HTMLDB"
+                                            data-htmldb-option-value="{{id}}"
+                                            data-htmldb-option-title="{{name}}"
+                                            data-htmldb-field="{{$ ../../name/__value__}}"
+                                            data-htmldb-value="{{{{$ ../../name/__value__}}}}"
+                                            style="width: 100%;"
+                                            {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_ATTRIBUTES_READONLY}}>
+                                        </select>
+                                    </div>
+                                </div>
+{{@endif}}

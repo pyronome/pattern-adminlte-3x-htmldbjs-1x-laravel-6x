@@ -1,0 +1,105 @@
+{{@if {{$ ../property_type/__value__}} == 'Checkbox'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'ClassSelection'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Date'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'DateTime'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Selection'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'EmailAddress'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'FileList'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'HTMLEditor'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'ImageList'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Integer'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Location'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div id="{{$ ../name/__value__}}_map"
+                                                        class="googlemap"
+                                                        data-lat="{{{{$ ../name/__value__}}_latitude}}"
+                                                        data-lng="{{{{$ ../name/__value__}}_longitude}}">
+                                                    </div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'LongText'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Number'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Password'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'PhoneNumber'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Radio'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'ShortText'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Switch'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'Time'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@elseif {{$ ../property_type/__value__}} == 'URLAddress'}}
+												<div class="detail-container {{MODEL_VIEW{{$ ../../../__item_index__/__value__}}_PROPERTY{{$ ../__item_index__/__value__}}_VISIBILITY_CLASS}}">
+                                                    <label class="detail-label"><?php echo __('{{$ ../title/__value__}}'); ?></label>
+                                                    <div data-htmldb-content="{{{{$ ../name/__value__}}/display_text}}"></div>
+                                                </div>
+{{@endif}}

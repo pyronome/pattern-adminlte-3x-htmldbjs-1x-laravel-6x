@@ -1,0 +1,85 @@
+<?php
+if (strtolower(basename($_SERVER['PHP_SELF']))
+        == strtolower(basename(__FILE__))) {
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
+function delete(&$controller, &$columns, &$list, $parameters) {
+    loadLanguageFile('{{$ __value__/__lowercase_text__}}', 'adminlte');
+
+    $controller->errorCount = 0;
+    $controller->messageCount = 0;
+    $controller->lastError = '';
+    $controller->lastMessage = '';
+    
+    // start: check user delete permission
+    $directoryName = basename(dirname(__FILE__));
+    $fileName = basename(__FILE__);
+
+    includeLibrary('adminlte/checkUserDeletePermission');
+    $permissionResult = checkUserDeletePermission($directoryName, $fileName);
+
+    if ($permissionResult['error']) {
+        $controller->errorCount = 1;
+        $controller->lastError = $permissionResult['error_msg'];
+        return false;
+    }
+    // end: check user delete permission
+    
+    $idcsv = isset($_REQUEST['htmldb_row0_idcsv'])
+        ? htmlspecialchars($_REQUEST['htmldb_row0_idcsv'])
+        : '';
+
+    if ('' == $idcsv) {
+
+        $controller->errorCount++;
+        if ($controller->lastError != '') {
+            $controller->lastError .= '<br>';
+        } // if ($controller->lastError != '') {
+
+        $controller->lastError .= __('Please select records.');
+        return false;
+    } // if ('' == $idcsv) {
+
+    $ids = explode(',', $idcsv);
+    $idCount = count($ids);
+    
+    includeModel('{{$ __value__}}');
+    $object{{$ __value__}} = new {{$ __value__}}();
+
+    for ($i=0; $i < $idCount; $i++) { 
+        $object{{$ __value__}}->id = $ids[$i];
+        $object{{$ __value__}}->revert();
+        $object{{$ __value__}}->deleted = 1;
+        $object{{$ __value__}}->update();
+    }
+
+    if ($idCount > 0) {
+        includeLibrary('getModelSessionParameters');
+        $sessionParameters = getModelSessionParameters('{{$ __value__}}');
+
+        $list{{$ __value__}} = new {{$ __value__}}();
+        $list{{$ __value__}}->bufferSize = 1;
+        $list{{$ __value__}}->page = 0;
+        $list{{$ __value__}}->addFilter('deleted','==', false);
+        $list{{$ __value__}}->addSearchText($sessionParameters['searchText']);
+        $list{{$ __value__}}->find();
+
+        $sessionParameters['pageCount'] = ceil($list{{$ __value__}}->getPageCount() / $sessionParameters['bufferSize']);
+        
+        if ($sessionParameters['page'] == $sessionParameters['pageCount']) {
+            if ($sessionParameters['page'] > 0) {
+                $sessionParameters['page']--;
+            }
+        }
+
+        includeLibrary('setModelSessionParameters');
+        setModelSessionParameters('{{$ __value__}}', $sessionParameters);
+    }
+
+    $controller->messageCount = 1;
+    $controller->lastMessage = 'UPDATED';
+    return true;
+}
+?>

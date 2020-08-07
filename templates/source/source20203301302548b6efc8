@@ -1,0 +1,19 @@
+		$SQLText = ('DELETE FROM `{{$ ../../../../name/__value__/__lowercase_text__}}{{$ ../../name/__value__/__lowercase_text__}}table` '
+				. 'WHERE `{{$ ../../../../name/__value__/__lowercase_text__}}_id` = {{id}};');
+		$SQLText = str_replace('{{id}}', intval($this->id), $SQLText);
+		$this->__mySQLConnection->query($SQLText); 
+
+		$SQLTemplate = 'INSERT INTO `{{$ ../../../../name/__value__/__lowercase_text__}}{{$ ../../name/__value__/__lowercase_text__}}table` VALUES({{parameter0}},{{parameter1}},{{parameter2}});';
+		$selections = explode(',', $this->{{$ ../../name/__value__}});
+		$selectionCount = count($selections);
+		$SQLText = '';
+
+		for ($i = 0; $i < $selectionCount; $i++) {
+
+			$SQLText = $SQLTemplate;
+			$SQLText = str_replace('{{parameter0}}', ($i + 1), $SQLText);
+			$SQLText = str_replace('{{parameter1}}', intval($this->id), $SQLText);
+			$SQLText = str_replace('{{parameter2}}', intval($selections[$i]), $SQLText);
+			$this->__mySQLConnection->query($SQLText);
+
+		} // for ($i = 0; $i < $selectionCount; $i++) {

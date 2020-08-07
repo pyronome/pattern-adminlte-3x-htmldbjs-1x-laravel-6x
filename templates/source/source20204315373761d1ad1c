@@ -1,0 +1,3 @@
+{{@if {{$ __value__}} != ''}}
+placeholder="<?php echo __('{{$ __value__}}'); ?>"
+{{@endif}}

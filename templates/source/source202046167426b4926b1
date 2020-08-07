@@ -1,0 +1,13 @@
+$(function(){
+	initializeApplication();
+    initializePage();
+});
+function initializePage() {
+	$("#{{$ __value__}}HTMLDB").on("htmldbread", function (e) {
+		after{{$ __value__}}HTMLDBRead(e.target);
+	});
+}
+
+function after{{$ __value__}}HTMLDBRead(sender) {
+    {{MODEL{{$ ../__item_index__/__value__}}_DETAIL_JS_AFTERREAD_PROPERTY_PROCESS}}
+}

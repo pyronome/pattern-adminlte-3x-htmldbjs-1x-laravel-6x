@@ -1,0 +1,1 @@
+	AdminLteHTMLDB.showGoogleMap(document.getElementById("{{$ ../name/__value__}}_map"));

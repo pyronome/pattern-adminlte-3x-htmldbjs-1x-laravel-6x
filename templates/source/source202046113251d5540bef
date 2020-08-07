@@ -1,0 +1,117 @@
+<?php
+if (strtolower(basename($_SERVER['PHP_SELF']))
+        == strtolower(basename(__FILE__))) {
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
+function get_recordgraphdata(&$controller, &$columns, &$list, $parameters) {
+    // start: check user get permission
+    $directoryName = basename(dirname(__FILE__));
+    $fileName = basename(__FILE__);
+
+    includeLibrary('adminlte/checkUserGetPermission');
+    $permissionResult = checkUserGetPermission($directoryName, $fileName);
+
+    if ($permissionResult['error']) {
+        $controller->errorCount = 1;
+        $controller->lastError = $permissionResult['error_msg'];
+        return false;
+    }
+    // end: check user get permission
+
+    $columns = [
+        'id',
+        'data'
+    ];
+
+    $list = array();
+    
+    global $_SPRIT;
+    $dateFormat = (isset($_SPRIT['DATE_FORMAT'])) ? $_SPRIT['DATE_FORMAT'] : 'Y-m-d';
+    $yearmonthFormat = (isset($_SPRIT['YEARMONTH_FORMAT'])) ? $_SPRIT['YEARMONTH_FORMAT'] : 'Y-m';
+    
+    $pagename = '';
+    if (isset($parameters[0])) {
+        $pagename = htmlspecialchars($parameters[0]);
+    } // if (isset($parameters[0])) {
+
+    includeLibrary('adminlte/getPageLayout');
+    $Widgets = getPageLayout($pagename);
+
+    includeLibrary('adminlte/getRecordGraphProperties');
+    $graphProperties = getRecordGraphProperties($Widgets, '{{$ __value__}}');
+    
+    $graphType = $graphProperties['type'];
+
+    $period = (0 - $graphProperties['period']);
+    $fromdate = strtotime($period . ' month');
+
+    $graphData = array();
+
+    includeModel('{{$ __value__}}');
+    $list{{$ __value__}} = new {{$ __value__}}();
+    $list{{$ __value__}}->bufferSize = 0;
+    $list{{$ __value__}}->page = 0;
+    $list{{$ __value__}}->addFilter('deleted','==', false);
+    $list{{$ __value__}}->addFilter('creationDate','>=', $fromdate);
+    $list{{$ __value__}}->sortByProperty('creationDate', true);
+    $list{{$ __value__}}->find();
+    
+    $count{{$ __value__}} = $list{{$ __value__}}->listCount;
+    $object{{$ __value__}} = NULL;
+    $index = 0;
+        
+    if ('daily' == $graphType) {
+        for ($i = 0; $i < $count{{$ __value__}}; $i++) {
+            $object{{$ __value__}} = $list{{$ __value__}}->list[$i];
+            $creationDate = date($dateFormat, $object{{$ __value__}}->creationDate);
+
+            if (!isset($graphData[$creationDate])) {
+                $graphData[$creationDate] = 0;
+            }
+
+            $graphData[$creationDate]++;
+        } // for ($i = 0; $i < $count{{$ __value__}}; $i++) {
+    } else if ('monthly' == $graphType) {
+        for ($i = 0; $i < $count{{$ __value__}}; $i++) {
+            $object{{$ __value__}} = $list{{$ __value__}}->list[$i];
+            $creationDate = date($yearmonthFormat, $object{{$ __value__}}->creationDate);
+
+            if (!isset($graphData[$creationDate])) {
+                $graphData[$creationDate] = 0;
+            }
+
+            $graphData[$creationDate]++;
+        } // for ($i = 0; $i < $count{{$ __value__}}; $i++) {
+        } // if ('daily' == $graphType) {
+    
+    $keys = array_keys($graphData);
+    $countKeys = count($keys);
+    
+    if (0 == $countKeys) {
+        return false;
+    } // if (0 == $countKeys) {
+
+    $graphJSON = '';
+    for ($i=0; $i < $countKeys; $i++) {
+        $creationDate = $keys[$i];
+        $countRecord = $graphData[$creationDate];
+
+        if ($graphJSON != '') {
+            $graphJSON .= ',';
+        } // if ($graphJSON != '') {
+
+        $graphJSON .= '{';
+        $graphJSON .= ('"date":"' . $creationDate . '",');
+        $graphJSON .= ('"record":' . $countRecord . '');
+        $graphJSON .= '}';
+    }
+    $graphJSON = ('[' . $graphJSON . ']');
+
+
+    $list[0]['id'] = 1;
+    $list[0]['data'] = rawurlencode($graphJSON);
+    return true;
+}
+?>

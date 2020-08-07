@@ -1,0 +1,42 @@
+{{@if {{$ ../property_type/__value__}} == 'Checkbox'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'ClassSelection'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Date'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'DateTime'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Selection'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'EmailAddress'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'FileList'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'HTMLEditor'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'ImageList'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Integer'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Location'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'LongText'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Number'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Password'}}
+		$propertyValues['{{$ ../name/__value__}}'] = '';
+		$propertyValues['{{$ ../name/__value__}}Hash'] = $object->{{$ ../name/__value__}}Hash;
+{{@elseif {{$ ../property_type/__value__}} == 'PhoneNumber'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Radio'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'ShortText'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Switch'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'Time'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@elseif {{$ ../property_type/__value__}} == 'URLAddress'}}
+		$propertyValues['{{$ ../name/__value__}}'] = $object->{{$ ../name/__value__}};
+{{@endif}}

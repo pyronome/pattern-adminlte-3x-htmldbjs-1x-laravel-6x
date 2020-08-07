@@ -1,0 +1,24 @@
+			case '{{$ ../name/__value__}}':
+			case '{{$ ../name/__value__/__lowercase_text__}}':
+				$foreignTableName = '{{$ ../selection_properties/property_model/__value__/__lowercase_text__}}table';
+				$foreignTableIndex = {{$ ../__item_index__/__value__}};
+				$foreignSelectSQL = ' LEFT JOIN `'
+						. $foreignTableName
+						. '` AS `fk'
+						. $foreignTableIndex
+						. '`';
+
+				if (strpos($selectSQL, $foreignSelectSQL, 18) !== false) {
+					$foreignSelectSQL = '';
+				} else {
+					$foreignSelectSQL .= ' ON (`t0`.`{{$ ../name/__value__/__lowercase_text__}}`=`fk'
+							. $foreignTableIndex . '`.`id`)';
+				} // if (strpos($selectSQL, $foreignSelectSQL, 18) !== false) {
+
+				$foreignSortOrderSQL .= '`fk'
+						. $foreignTableIndex
+						. '`.`'
+						. strtolower($propertyNameTokens[1])
+						. '`';
+
+			break;

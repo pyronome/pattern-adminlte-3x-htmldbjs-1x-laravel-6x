@@ -1,0 +1,83 @@
+<?php
+if (strtolower(basename($_SERVER['PHP_SELF']))
+        == strtolower(basename(__FILE__))) {
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
+function get(&$controller, &$columns, &$list, $parameters) {
+    // start: check user get permission
+    $directoryName = basename(dirname(__FILE__));
+    $fileName = basename(__FILE__);
+
+    includeLibrary('adminlte/checkUserGetPermission');
+    $permissionResult = checkUserGetPermission($directoryName, $fileName);
+
+    if ($permissionResult['error']) {
+        $controller->errorCount = 1;
+        $controller->lastError = $permissionResult['error_msg'];
+        return false;
+    }
+    // end: check user get permission
+    
+    $columns = [
+		'id'
+		,'id/display_text'
+		,'deleted'
+		,'deleted/display_text'
+		,'creationDate'
+		,'creationDate/display_text'
+		,'lastUpdate'
+		,'lastUpdate/display_text'
+{{MODEL{{$ ../__item_index__/__value__}}_HTMLDB_GET_SERVICE_COLUMNS}}
+    ];
+
+    $list = array();
+
+    // is new ?
+    if (isset($parameters[0]) && ("new" == htmlspecialchars($parameters[0]))) {
+        return false;
+    } // if (isset($parameters[0]) && ("new" == htmlspecialchars($parameters[0]))) {
+    
+    $id = 0;
+    if (isset($parameters[0])) {
+        $id = (isset($parameters[0]) ? intval($parameters[0]) : 0);
+    } // if (isset($parameters[0])) {
+
+    includeLibrary('getObjectDisplayTexts');
+
+    includeModel('{{$ __value__}}');
+    $list{{$ __value__}} = new {{$ __value__}}();
+    $list{{$ __value__}}->bufferSize = 0;
+    $list{{$ __value__}}->page = 0;
+    $list{{$ __value__}}->addFilter('deleted','==', false);
+    if ($id > 0) {
+        $list{{$ __value__}}->addFilter('id','==', $id);     
+    } else {
+        $list{{$ __value__}}->sortByProperty('creationDate', false);
+    } // if ($id > 0) {
+
+    $list{{$ __value__}}->find();
+
+    $count{{$ __value__}} = $list{{$ __value__}}->listCount;
+    $object{{$ __value__}} = NULL;
+    $index = 0;
+
+    for ($i = 0; $i < $count{{$ __value__}}; $i++) {
+        $object{{$ __value__}} = $list{{$ __value__}}->list[$i];
+        $displayTexts = getObjectDisplayTexts('{{$ __value__}}', $object{{$ __value__}});
+
+        $list[$index]['id'] = $object{{$ __value__}}->id;
+        $list[$index]['id/display_text'] = $displayTexts['id'];
+        $list[$index]['deleted'] = $object{{$ __value__}}->deleted;
+        $list[$index]['deleted/display_text'] = $displayTexts['deleted'];
+        $list[$index]['creationDate'] = $object{{$ __value__}}->creationDate;
+        $list[$index]['creationDate/display_text'] = $displayTexts['creationDate'];
+        $list[$index]['lastUpdate'] = $object{{$ __value__}}->lastUpdate;
+        $list[$index]['lastUpdate/display_text'] = $displayTexts['lastUpdate'];
+        {{MODEL{{$ ../__item_index__/__value__}}_HTMLDB_GET_SERVICE_ROWS}}
+
+        $index++;
+    } // for ($i = 0; $i < $countColor; $i++) {
+}
+?>

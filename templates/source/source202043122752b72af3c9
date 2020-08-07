@@ -1,0 +1,3 @@
+{{@if {{$ __value__}} != ''}}
+<i class="fas fa-lightbulb htmldb-hint" title="<?php echo __('{{$ __value__}}'); ?>"></i>
+{{@endif}}

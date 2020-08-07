@@ -1,0 +1,41 @@
+{{@if {{$ ../property_type/__value__}} == 'Checkbox'}}
+		$criteriaSQL = generateBooleanSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'ClassSelection'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Date'}}
+		$criteriaSQL = generateDateSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'DateTime'}}
+		$criteriaSQL = generateDateTimeSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Selection'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'EmailAddress'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'FileList'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'HTMLEditor'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'ImageList'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Integer'}}
+		$criteriaSQL = generateIntegerSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Location'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'LongText'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Number'}}
+		$criteriaSQL = generateFloatSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Password'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'PhoneNumber'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Radio'}}
+		$criteriaSQL = generateBooleanSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'ShortText'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Switch'}}
+		$criteriaSQL = generateBooleanSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'Time'}}
+		$criteriaSQL = generateTimeSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@elseif {{$ ../property_type/__value__}} == 'URLAddress'}}
+		$criteriaSQL = generateStringSQLCriteria('{{$ ../name/__value__}}', $this->__filters, $this->__mySQLConnection, $criteriaSQL);
+{{@endif}}

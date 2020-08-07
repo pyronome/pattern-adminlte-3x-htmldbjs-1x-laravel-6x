@@ -1,0 +1,6 @@
+				case 'a:{{$ ../name/__value__}}':
+                    $sortOrderSQL .= '`t0`.`{{$ ../name/__value__/__lowercase_text__}}` ASC';
+                break;
+                case 'd:{{$ ../name/__value__}}':
+                    $sortOrderSQL .= '`t0`.`{{$ ../name/__value__/__lowercase_text__}}` DESC';
+                break;

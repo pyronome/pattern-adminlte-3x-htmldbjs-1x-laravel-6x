@@ -1,0 +1,1 @@
+min="{{$ min_value/__value__}}" max="{{$ max_value/__value__}}"

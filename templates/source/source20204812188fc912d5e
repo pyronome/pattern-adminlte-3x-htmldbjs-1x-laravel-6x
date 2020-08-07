@@ -1,0 +1,96 @@
+<?php
+// DOGRUDAN SALDIRI ONLEMI BASLA
+if (strtolower(basename($_SERVER['PHP_SELF']))
+		== strtolower(basename(__FILE__))) {
+	header('HTTP/1.0 403 Forbidden');
+	die();
+}
+// DOGRUDAN SALDIRI ONLEMI BITIR 
+
+function setAdminLTEDefaultLayout() {
+	// Widgets
+	if (!file_exists(ADMINLTE_CNFDIR . '/Widgets.php')) {
+		return false;
+	}
+
+	include(ADMINLTE_CNFDIR . '/Widgets.php');
+
+	$widgets = json_decode($widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+	$countWidgets = count($widgets);
+
+	global $_SPRIT; 
+	includeLibrary('adminlte/base64encode');
+
+	$SQLText = 'TRUNCATE `adminltelayouttable`;';
+	
+	// set widgets order
+	for ($w=0; $w < $countWidgets; $w++) { 
+		$widgets[$w]['order'] = ($w + 1);
+	}
+
+	// home
+	$temp_widgets = $widgets;
+	for ($w=0; $w < $countWidgets; $w++) { 
+		$temp_widgets[$w]['visibility'] = 1;
+	}
+
+	$encoded = base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+	$SQLText .= "INSERT INTO `adminltelayouttable` (`pagename`, `widgets`) VALUES ('home', '" . $encoded . "');";
+
+	// adminlteusergroup
+	$temp_widgets = $widgets;
+	for ($w=0; $w < $countWidgets; $w++) {
+		if ('AdminLTEUserGroup' == $temp_widgets[$w]['model']) {
+			$temp_widgets[$w]['visibility'] = 1;
+		}
+	}
+	
+	$encoded = base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+	$SQLText .= "INSERT INTO `adminltelayouttable` (`pagename`, `widgets`) VALUES ('adminlteusergroup', '" . $encoded . "');";
+
+	// adminlteuser
+	$temp_widgets = $widgets;
+	for ($w=0; $w < $countWidgets; $w++) {
+		if ('AdminLTEUser' == $temp_widgets[$w]['model']) {
+			$temp_widgets[$w]['visibility'] = 1;
+		}
+	}
+	
+	$encoded = base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+	$SQLText .= "INSERT INTO `adminltelayouttable` (`pagename`, `widgets`) VALUES ('adminlteuser', '" . $encoded . "');";
+
+	$models = array();
+	{{MODEL_LAYOUT_LIST}}
+	
+	$modelCount = count($models);
+	
+	for ($m=0; $m < $modelCount; $m++) { 
+		$model = $models[$m];
+		$temp_widgets = $widgets;
+		for ($w=0; $w < $countWidgets; $w++) {
+			if ($model == $temp_widgets[$w]['model']) {
+				$temp_widgets[$w]['visibility'] = 1;
+			}
+		}
+		
+		$pagename = strtolower($model);
+		$encoded = base64encode(json_encode($temp_widgets, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS)));
+		$SQLText .= "INSERT INTO `adminltelayouttable` (`pagename`, `widgets`) VALUES ('" . $pagename . "', '" . $encoded . "');";
+	}
+
+	try {
+        $connectionText = 'mysql:host=' . $_SPRIT['MYSQL_DB_SERVER'] . ';dbname=' . $_SPRIT['MYSQL_DB_NAME'] . ';charset=utf8';
+        $connection = new PDO($connectionText, $_SPRIT['MYSQL_DB_USERNAME'], $_SPRIT['MYSQL_DB_PASSWORD']);
+        $objPDO = $connection->prepare($SQLText);
+        $objPDO->execute();
+        $connection = null;
+    } catch (PDOException $e) {
+        $controller->errorCount = 1;
+        $controller->messageCount = 0;
+        $controller->lastError = $e->getMessage();
+        $controller->lastMessage = '';
+    }
+
+    return;
+}
+?>

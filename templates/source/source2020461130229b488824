@@ -1,0 +1,36 @@
+<?php
+if (strtolower(basename($_SERVER['PHP_SELF']))
+		== strtolower(basename(__FILE__))) {
+	header('HTTP/1.0 403 Forbidden');
+	die();
+}
+
+function get_infoboxvalue(&$controller, &$columns, &$list, $parameters) {
+    // start: check user get permission
+    $directoryName = basename(dirname(__FILE__));
+    $fileName = basename(__FILE__);
+
+    includeLibrary('adminlte/checkUserGetPermission');
+    $permissionResult = checkUserGetPermission($directoryName, $fileName);
+
+    if ($permissionResult['error']) {
+        $controller->errorCount = 1;
+        $controller->lastError = $permissionResult['error_msg'];
+        return false;
+    }
+    // end: check user get permission
+
+    $columns = [
+        'id',
+        'model',
+        'value'
+    ];
+
+    $list = array();   
+    $list[0]['id'] = 1;
+    $list[0]['model'] = '{{$ __value__}}';
+    
+    includeLibrary('adminlte/getModelObjectCount');
+    $list[0]['value'] = getModelObjectCount('{{$ __value__}}');
+}
+?>

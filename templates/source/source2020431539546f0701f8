@@ -1,0 +1,1 @@
+data-inputmask='"mask": "{{$ ../input_mask/__value__}}"' data-mask

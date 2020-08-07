@@ -1,0 +1,4 @@
+		includeLibrary('hashPassword');
+		if ($this->{{$ ../name/__value__}} != '') {
+			$this->{{$ ../name/__value__}}Hash = hashPassword($this->{{$ ../name/__value__}});
+		} // if ($this->{{$ ../name/__value__}} != '') {

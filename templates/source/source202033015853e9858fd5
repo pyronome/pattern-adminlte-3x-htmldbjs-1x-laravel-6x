@@ -1,0 +1,5 @@
+{{@if {{$ ../../property_type/__value__}} == 'ClassSelection'}}
+BIGINT
+{{@elseif {{$ ../../property_type/__value__}} == 'Selection'}}
+SMALLINT
+{{@endif}}

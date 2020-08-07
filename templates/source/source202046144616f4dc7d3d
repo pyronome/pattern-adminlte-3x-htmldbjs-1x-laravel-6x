@@ -1,0 +1,70 @@
+<?php
+if (strtolower(basename($_SERVER['PHP_SELF']))
+        == strtolower(basename(__FILE__))) {
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
+function post_session(&$controller, &$columns, &$list, $parameters) {
+    // start: check user post permission
+    $directoryName = basename(dirname(__FILE__));
+    $fileName = basename(__FILE__);
+
+    includeLibrary('adminlte/checkUserPostPermission');
+    $permissionResult = checkUserPostPermission($directoryName, $fileName);
+
+    if ($permissionResult['error']) {
+        $controller->errorCount = 1;
+        $controller->lastError = $permissionResult['error_msg'];
+        return false;
+    }
+    // end: check user post permission
+    
+    includeLibrary('getModelSessionParameters');
+    $sessionParameters = getModelSessionParameters('{{$ __value__}}');
+
+    $sessionParameters['searchText']
+            = isset($_REQUEST['htmldb_row0_searchText'])
+            ? htmlspecialchars($_REQUEST['htmldb_row0_searchText'])
+            : $sessionParameters['searchText'];
+
+    $sessionParameters['sortingColumn']
+            = isset($_REQUEST['htmldb_row0_sortingColumn'])
+            ? htmlspecialchars($_REQUEST['htmldb_row0_sortingColumn'])
+            : $sessionParameters['sortingColumn'];
+
+    $sessionParameters['sortingASC']
+            = isset($_REQUEST['htmldb_row0_sortingASC'])
+            ? intval($_REQUEST['htmldb_row0_sortingASC'])
+            : $sessionParameters['sortingASC'];
+
+    $sessionParameters['page']
+            = isset($_REQUEST['htmldb_row0_page'])
+            ? intval($_REQUEST['htmldb_row0_page'])
+            : $sessionParameters['page'];
+
+    $sessionParameters['bufferSize']
+            = isset($_REQUEST['htmldb_row0_bufferSize'])
+            ? intval($_REQUEST['htmldb_row0_bufferSize'])
+            : $sessionParameters['bufferSize'];
+
+    
+    if (0 == $sessionParameters['bufferSize']) {
+        $sessionParameters['pageCount'] = 0;
+    } else {
+        includeModel('{{$ __value__}}');
+        $list{{$ __value__}} = new {{$ __value__}}();
+        $list{{$ __value__}}->bufferSize = 1;
+        $list{{$ __value__}}->page = 0;
+        $list{{$ __value__}}->addFilter('deleted','==', false);
+        $list{{$ __value__}}->addSearchText($sessionParameters['searchText']);
+        $list{{$ __value__}}->find();
+
+        $sessionParameters['pageCount'] = ceil($list{{$ __value__}}->getPageCount() / $sessionParameters['bufferSize']);
+    }    
+
+    includeLibrary('setModelSessionParameters');
+    setModelSessionParameters('{{$ __value__}}', $sessionParameters);
+
+}
+?>

@@ -1,0 +1,68 @@
+<?php
+if (strtolower(basename($_SERVER['PHP_SELF']))
+        == strtolower(basename(__FILE__))) {
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
+function post(&$controller, &$columns, &$list, $parameters) {
+    loadLanguageFile('{{$ __value__/__lowercase_text__}}', 'adminlte');
+    
+    $controller->errorCount = 0;
+    $controller->messageCount = 0;
+    $controller->lastError = '';
+    $controller->lastMessage = '';
+
+    // start: check user post permission
+    $directoryName = basename(dirname(__FILE__));
+    $fileName = basename(__FILE__);
+
+    includeLibrary('adminlte/checkUserPostPermission');
+    $permissionResult = checkUserPostPermission($directoryName, $fileName);
+
+    if ($permissionResult['error']) {
+        $controller->errorCount = 1;
+        $controller->lastError = $permissionResult['error_msg'];
+        return false;
+    }
+    // end: check user post permission
+
+    includeModel('{{$ __value__}}');
+    $object{{$ __value__}} = new {{$ __value__}}();
+    $object{{$ __value__}}->request($_REQUEST, 'htmldb_row0_');
+	
+	$errors = $object{{$ __value__}}->validate();
+    $error_keys = array_keys($errors);
+    $errorCount = count($errors);
+
+    for ($e=0; $e < $errorCount; $e++) { 
+        $error_key = $error_keys[$e];
+
+    	$controller->errorCount++;
+            
+        if ($controller->lastError != '') {
+            $controller->lastError .= '<br>';
+        } // if ($controller->lastError != '') {
+
+        $error = $errors[$error_key][0];
+
+        $controller->lastError .= __('Error for ' . $error_key . ': ' . $error);
+    }
+    /* {{snippet:begin_post_service_validation}} */
+
+    if ($controller->errorCount > 0) {
+        return false;
+    } // if ($controller->errorCount > 0) {
+
+{{MODEL{{$ ../__item_index__/__value__}}_HTMLDB_POST_SERVICE_PROPERTY_PROCESS}}
+
+    /* {{snippet:before_post_service_update}} */
+    $object{{$ __value__}}->update();
+    $_SESSION[sha1('{{$ __value__/__lowercase_text__}}_lastid')] = $object{{$ __value__}}->id;
+    /* {{snippet:after_post_service_update}} */
+
+    includeLibrary('updateModelFileObject');{{MODEL{{$ ../__item_index__/__value__}}_HTMLDB_POST_SERVICE_FILE_AND_IMAGE_PROCESS}}
+
+    return;
+}
+?>

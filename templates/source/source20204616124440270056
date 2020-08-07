@@ -1,0 +1,3 @@
+	$(".showBigPhoto").off("click").on("click", function() {
+        AdminLteHTMLDB.doShowBigPhotoClick(this);
+    });

@@ -1,0 +1,24 @@
+	public function get_property_list() {
+		$property_list = array();
+		$index = 0;
+		
+		$property_list[$index]['property'] = 'id';
+		$property_list[$index]['type'] = 'integer';
+		$index++;
+
+		$property_list[$index]['property'] = 'deleted';
+		$property_list[$index]['type'] = 'checkbox';
+		$index++;
+
+        $property_list[$index]['property'] = 'creationDate';
+		$property_list[$index]['type'] = 'date';
+		$index++;
+
+		$property_list[$index]['property'] = 'lastUpdate';
+		$property_list[$index]['type'] = 'date';
+		$index++;		
+
+{{MODEL{{$ ../../__item_index__/__value__}}_GET_PROPERTY_LIST_PROPERTIES}}
+
+		return $property_list;
+	}
