@@ -4,12 +4,23 @@ function initializeMediaJS() {
     $(".buttonBrowseFile").off("click").on("click", function () {
         doBrowseButtonClick(this);
     });
+
+    $("#modelEditPage_fileTemplate").on("htmldbrender", function (event) {
+        doFileTemplateRender(this, event);
+    });
+
+    $("#modelEditPage_imageTemplate").on("htmldbrender", function (event) {
+        doFileTemplateRender(this, event);
+    });
 }
 
 function initializeDropzone() {
-    var URLPrefix = document.body.getAttribute("data-url-prefix");
-    var uploadURL = (URLPrefix + "media/formupload");
-
+    if (!document.getElementById("dropzone-data")) {
+        return;
+    }
+    
+    var uploadURL = document.getElementById("dropzone-data").getAttribute("data-action");
+    
     var dropzoneElements = $("div.divDropzone");
     var dropzoneElement = null;
     var dropzoneElementCount = dropzoneElements.length;
@@ -35,6 +46,7 @@ function initializeDropzone() {
         });
     }
 }
+
 function doFileTemplateRender(sender, event) {
     var targets = event.detail.targets;
     var target = null;
@@ -142,13 +154,13 @@ function updateFileListUL(targetFileList) {
         fileExtension = String(fileName.split('.').pop()).toLowerCase();
         
         if (imageFileExtensions.indexOf(fileExtension) != -1) {
-            src = ("../" + filePath);
+            src = (__storageURL + filePath);
         } else {
             src = getDefaultImageSRC(fileExtension);
         }
 
         $(".imgFileListItemFileURL", elementLI).attr("src", src);
-        $(".aFileListItemFileURL", elementLI).attr("href", "../" + filePath);
+        $(".aFileListItemFileURL", elementLI).attr("href", (__storageURL + filePath));
     }
 
     if (elementLIListCount > 0) {
@@ -168,7 +180,7 @@ function updateFileListUL(targetFileList) {
 }
 
 function getDefaultImageSRC(extension) {
-    return ("assets/img/" + extension + ".png");
+    return  (__publicAssetsURL + "adminlte/img/" + extension + ".png");
 }
 
 function doDeleteFileListItemLinkClick(element) {

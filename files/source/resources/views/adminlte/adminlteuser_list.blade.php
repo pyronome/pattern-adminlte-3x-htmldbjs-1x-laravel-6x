@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="adminlteuser">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-url="adminlteuser">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
@@ -26,6 +26,6 @@
         </div>
     </div>
     @include('adminlte.widgets')
-    <script src="/assets/adminlte/js/adminlte_user_list.js"></script>
+    <script src="/assets/adminlte/js/adminlteuser_list.js"></script>
 </body>
 </html>

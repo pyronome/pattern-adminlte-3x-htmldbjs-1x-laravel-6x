@@ -1536,8 +1536,8 @@ function WidgetEditor(idSelector, options) {
             var opacity_class = "";
             var li_class = "list-group-item";
             if (0 == itemObject.visibility) {
-            	opacity_class = "menu_item_unvisible";
-                li_class = "list-group-item li_unvisible";
+            	opacity_class = "menu_item_invisible";
+                li_class = "list-group-item li_invisible";
             }
             
             var widgettype = itemObject.type;
@@ -1672,11 +1672,11 @@ function WidgetEditor(idSelector, options) {
         }
 
         if (0 == data["visibility"]) {
-        	$cEl.find('span.txt').first().addClass("menu_item_unvisible").text($cEl.data('text'));
-            $cEl.addClass("li_unvisible");
+        	$cEl.find('span.txt').first().addClass("menu_item_invisible").text($cEl.data('text'));
+            $cEl.addClass("li_invisible");
         } else {
-        	$cEl.find('span.txt').first().removeClass("menu_item_unvisible").text($cEl.data('text'));
-            $cEl.removeClass("li_unvisible");
+        	$cEl.find('span.txt').first().removeClass("menu_item_invisible").text($cEl.data('text'));
+            $cEl.removeClass("li_invisible");
         }
 
         $cEl.children().children('i').removeClass(oldIcon).addClass($cEl.data('icon'));

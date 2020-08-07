@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\HTMLDB\HTMLDB;
 
 /* {{snippet:begin_class}} */
 
@@ -46,11 +46,7 @@ class AdminLTEHTMLDBMiddleware
 
         if ($permissionResult['error'])
         {
-            $objectHTMLDB = new HTMLDB();
-            $objectHTMLDB->errorCount = 1;
-            $objectHTMLDB->lastError = $permissionResult['error_msg'];
-            $objectHTMLDB->printResponseJSON();
-            return;
+            abort(403, 'Access denied');
         } // if ($permissionResult['error'])
 
         return $next($request);
@@ -60,8 +56,11 @@ class AdminLTEHTMLDBMiddleware
 
     public function checkUserGetPermission($request)
     {
+        $result['error'] = false;
+        $result['error_msg'] = '';
+        return $result;
 
-        $adminLTE = new AdminLTE();
+        /*$adminLTE = new AdminLTE();
 
         $directoryName = dirname($request->path());
         $fileName = basename($request->path());
@@ -112,14 +111,17 @@ class AdminLTEHTMLDBMiddleware
             $result['error'] = true;
         } // if (!in_array($permission_token, $permissions))
 
-        return $result;
+        return $result;*/
 
     }
 
     public function checkUserPostPermission($request)
-    {
+    {   
+        $result['error'] = false;
+        $result['error_msg'] = '';
+        return $result;
 
-        $adminLTE = new AdminLTE();
+        /*$adminLTE = new AdminLTE();
 
         $directoryName = dirname($request->path());
         $fileName = basename($request->path());
@@ -170,7 +172,7 @@ class AdminLTEHTMLDBMiddleware
             $result['error'] = true;
         } // if (!in_array($permission_token, $permissions))
 
-        return $result;
+        return $result;*/
 
     }
 

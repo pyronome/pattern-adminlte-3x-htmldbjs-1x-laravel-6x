@@ -136,7 +136,7 @@ function initializeModelPropertyDisplayTextList(display_text_json) {
 
 function get_type_sh_class(property) {
     var sh_class = "";
-    var exceptions = ["image", "file", "dropdown", "radio", "location"];
+    var exceptions = ["image", "file", "selection_multiple", "selection_single", "location"];
     var model = document.getElementById("formModelDisplayText-model").value;
     var trList = $("#PropertyListHTMLDB_reader_tbody > tr");
     var trLength = trList.length;

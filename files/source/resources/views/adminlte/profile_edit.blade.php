@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed" data-url-prefix="" data-page-url="profile" data-main-folder="{{ config('adminlte.main_folder') }}">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-url="profile" data-main-folder="{{ config('adminlte.main_folder') }}">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
@@ -30,6 +30,33 @@
                                         class="htmldb-field"
                                         data-htmldb-field="id"
                                         value=""/>
+                                    <div class="row ">
+                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                            <label for="formObject-profile_img" class="detail-label">{{ __('Profile Image') }}  </label>
+                                            <div class="input-field">
+                                                <input type="hidden"
+                                                    class="form-control htmldb-field"
+                                                    id="formObject-profile_img"
+                                                    name="formObject-profile_img"
+                                                    data-htmldb-field="profile_img"
+                                                    data-htmldb-value="@{{profile_img}}"
+                                                    data-target-field="AdminLTEUser/profile_img"
+                                                    data-media-type="2"
+                                                    data-max-file-count="1"
+                                                    
+                                                />
+                                                <button type="button"
+                                                    id="buttonBrowseprofile_imgFiles"
+                                                    name="buttonBrowseprofile_imgFiles" 
+                                                    class="buttonBrowseFile btn btn-primary"
+                                                    data-target-file-list="ulprofile_imgFileList">
+                                                    <i class="ion-ios-folder"></i>&nbsp;{{ __('Browse...') }}
+                                                </button>
+                                                <ul id="ulprofile_imgFileList" class="col s12 collection ulFileList" data-target-input-id="formObject-profile_img">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <label for="formProfile-fullname" class="detail-label">{{ __('Fullname') }}</label>
@@ -111,6 +138,67 @@
         </div>
     </div>
     @include('adminlte.footer')
+
+    <div id="AdminLTEUser_FileHTMLDB"
+        class="htmldb-table"
+        data-htmldb-priority="0"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/profile/get_files?_token={{ csrf_token() }}"
+        data-htmldb-read-only="1"
+        data-htmldb-loader="divLoader">
+    </div>
+    <div style="display:none;">
+        <div id="dropzone-data" data-target-model="AdminLTEUser" data-target-file-list="" data-media-type="" data-action="/{{ config('adminlte.main_folder') }}/media/formupload?_token={{ csrf_token() }}">
+            <form id="formUpload" name="formUpload" action="/{{ config('adminlte.main_folder') }}/media/formupload?_token={{ csrf_token() }}" onsubmit="return false;" enctype="multipart/form-data">
+                <div id="divDropzone" class="divDropzone row dz-clickable" style="min-height: 400px;">
+                    <div class="col s12">
+                        <ul id="ulUploadedFiles" class="ulUploadedFiles"></ul>
+                        <div id="divUploaderInputContainer">
+                            <input accept=".3gp,.7z,.ae,.ai,.avi,.bmp,.cdr,.csv,.divx,.doc,.docx,.dwg,.eps,.flv,.gif,.gz,.ico,.iso,.jpg,.jpeg,.mov,.mp3,.mp4,.mpeg,.pdf,.png,.ppt,.ps,.psd,.rar,.svg,.swf,.tar,.tiff,.txt,.wav,.zip" id="inputUploadMedia" multiple="multiple" name="inputUploadMedia" class="inputUploader" style="display:none;" type="file">
+                            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="5120000">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/html" id="ulFileListTemplate">
+        <span class="grippy"></span>
+        <a href="" target="_blank" class="aFileListItemFileURL mediaImageContainer aMediaType__MEDIA_TYPE__">
+            <img width="64" src="" alt="" class="imgFileListItemFileURL">
+        </a>
+        <a href="" target="_blank" class="aFileListItemFileURL mediaFilenameContainer text-primary aMediaType__MEDIA_TYPE__">
+            <span class="title" class="spanFileListItemFileName">__FILE_NAME__</span>
+        </a>
+        <a href="JavaScript:void(0);" class="aDeleteFileListItem secondary-content text-primary float-right">
+            <i class="ion-android-close"></i>
+        </a>
+    </script>
+
+    <script type="text/html" 
+        id="modelEditPage_imageTemplate"
+        class="htmldb-template"
+        data-htmldb-table="AdminLTEUser_FileHTMLDB"
+        data-htmldb-template-target="ul@{{object_property}}FileList"
+        data-htmldb-filter="media_type/eq/2">
+        <li id="liFileListItem@{{id}}"
+            class="collection-item liMediaType2"
+            data-object-id="@{{id}}"
+            data-file-name="@{{file_name}}"
+            data-file-path="@{{path}}"
+            data-media-type="2">
+            <span class="grippy"></span>
+            <a href="{{ URL::asset('/storage/') }}/@{{path}}" target="_blank" class="aFileListItemFileURL mediaImageContainer aMediaType2">
+                <img width="64" src="{{ URL::asset('/storage/') }}/@{{path}}" alt="" class="imgFileListItemFileURL">
+            </a>
+            <a href="{{ URL::asset('/storage/') }}/@{{path}}" target="_blank" class="aFileListItemFileURL mediaFilenameContainer text-primary aMediaType2">
+                <span class="title" class="spanFileListItemFileName">@{{file_name}}</span>
+            </a>
+            <a href="JavaScript:void(0);" class="aDeleteFileListItem secondary-content text-primary float-right">
+                <i class="ion-android-close"></i>
+            </a>
+        </li>
+    </script> 
+
     <div id="ProfileHTMLDB"
         class="htmldb-table"
         data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/profile/get_form_values?_token={{ csrf_token() }}"
@@ -143,6 +231,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/profile.edit.js"></script>
+    <script src="/assets/adminlte/js/profile_edit.js"></script>
 </body>
 </html>

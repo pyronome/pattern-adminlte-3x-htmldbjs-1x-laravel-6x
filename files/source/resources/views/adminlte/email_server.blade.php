@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="email_server">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-url="email_server">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
@@ -31,21 +31,6 @@
                                         data-htmldb-field="id"
                                         data-htmldb-value="@{{id}}">
                                     <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <label for="email_type" class="detail-label">{{ __('Email Type') }}</label>
-                                            <select data-placeholder=""
-                                                id="email_type"
-                                                name="email_type"
-                                                class="form-control htmldb-select2 htmldb-field select-has-option"
-                                                data-htmldb-field="email_type"
-                                                data-htmldb-value="@{{email_type}}"
-                                                style="width: 100%;">
-                                                <option value="0">{{ __('Standart Mail') }}</option>
-                                                <option value="1">{{ __('SMTP') }}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="email_from_name" class="detail-label">{{ __('Email From Name') }}</label>
                                             <input type="text"
@@ -65,75 +50,58 @@
                                                 data-htmldb-value="@{{email_reply_to}}">
                                         </div>
                                     </div>
-                                    <div class="htmldb-toggle" data-htmldb-filter="email_type/eq/1" style="display:none;">
-                                        <div class="row">
-                                            <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                                <label for="email_smtp_host" class="detail-label">{{ __('SMTP Host') }}</label>
-                                                <input type="text"
-                                                    class="form-control htmldb-field"
-                                                    id="email_smtp_host"
-                                                    name="email_smtp_host"
-                                                    data-htmldb-field="email_smtp_host"
-                                                    data-htmldb-value="@{{email_smtp_host}}">
-                                            </div>
-                                            <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                                <label for="email_smtp_user" class="detail-label">{{ __('SMTP User') }}</label>
-                                                <input type="text"
-                                                    class="form-control htmldb-field"
-                                                    id="email_smtp_user"
-                                                    name="email_smtp_user"
-                                                    data-htmldb-field="email_smtp_user"
-                                                    data-htmldb-value="@{{email_smtp_user}}">
-                                            </div>
-                                            <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                                <label for="email_smtp_password" class="detail-label">{{ __('SMTP Password') }}</label>
-                                                <input type="password"
-                                                    class="form-control htmldb-field"
-                                                    id="email_smtp_password"
-                                                    name="email_smtp_password"
-                                                    data-htmldb-field="email_smtp_password"
-                                                    data-htmldb-value="@{{email_smtp_password}}"
-                                                    autocomplete="new-password">
-                                            </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                            <label for="email_smtp_host" class="detail-label">{{ __('SMTP Host') }}</label>
+                                            <input type="text"
+                                                class="form-control htmldb-field"
+                                                id="email_smtp_host"
+                                                name="email_smtp_host"
+                                                data-htmldb-field="email_smtp_host"
+                                                data-htmldb-value="@{{email_smtp_host}}">
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label for="email_smtp_encryption" class="detail-label">{{ __('Encryption') }}</label>
-                                                <select data-placeholder=""
-                                                    id="email_smtp_encryption"
-                                                    name="email_smtp_encryption"
-                                                    class="form-control htmldb-select2 htmldb-field select-has-option"
-                                                    data-htmldb-field="email_smtp_encryption"
-                                                    data-htmldb-value="@{{email_smtp_encryption}}"
-                                                    style="width: 100%;">
-                                                    <option value="0">{{ __('TLS') }}</option>
-                                                    <option value="1">{{ __('SSL') }}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                                <label for="email_smtp_port" class="detail-label">{{ __('Port') }}</label>
-                                                <input type="text"
-                                                    class="form-control htmldb-field"
-                                                    id="email_smtp_port"
-                                                    name="email_smtp_port"
-                                                    data-htmldb-field="email_smtp_port"
-                                                    data-htmldb-value="@{{email_smtp_port}}">
-                                            </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                            <label for="email_smtp_user" class="detail-label">{{ __('SMTP User') }}</label>
+                                            <input type="text"
+                                                class="form-control htmldb-field"
+                                                id="email_smtp_user"
+                                                name="email_smtp_user"
+                                                data-htmldb-field="email_smtp_user"
+                                                data-htmldb-value="@{{email_smtp_user}}">
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                            <label for="email_smtp_password" class="detail-label">{{ __('SMTP Password') }}</label>
+                                            <input type="password"
+                                                class="form-control htmldb-field"
+                                                id="email_smtp_password"
+                                                name="email_smtp_password"
+                                                data-htmldb-field="email_smtp_password"
+                                                data-htmldb-value="@{{email_smtp_password}}"
+                                                autocomplete="new-password">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <label for="email_format" class="detail-label">{{ __('Mail Format') }}</label>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="email_smtp_encryption" class="detail-label">{{ __('Encryption') }}</label>
                                             <select data-placeholder=""
-                                                id="email_format"
-                                                name="email_format"
+                                                id="email_smtp_encryption"
+                                                name="email_smtp_encryption"
                                                 class="form-control htmldb-select2 htmldb-field select-has-option"
-                                                data-htmldb-field="email_format"
-                                                data-htmldb-value="@{{email_format}}"
+                                                data-htmldb-field="email_smtp_encryption"
+                                                data-htmldb-value="@{{email_smtp_encryption}}"
                                                 style="width: 100%;">
-                                                <option value="0">{{ __('HTML') }}</option>
-                                                <option value="1">{{ __('Text') }}</option>
+                                                <option value="tls">{{ __('TLS') }}</option>
+                                                <option value="ssl">{{ __('SSL') }}</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label for="email_smtp_port" class="detail-label">{{ __('Port') }}</label>
+                                            <input type="text"
+                                                class="form-control htmldb-field"
+                                                id="email_smtp_port"
+                                                name="email_smtp_port"
+                                                data-htmldb-field="email_smtp_port"
+                                                data-htmldb-value="@{{email_smtp_port}}">
                                         </div>
                                     </div>
                                 </form>

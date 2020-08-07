@@ -5,9 +5,9 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\HTMLDB\HTMLDB;
 
 class AdminLTEWidgetController extends Controller
 {
@@ -41,9 +41,9 @@ class AdminLTEWidgetController extends Controller
                 ? htmlspecialchars($parameters['pageName'])
                 : '';
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $Widgets = $adminLTE->getPageLayout($pageName);
+        $Widgets = $objectAdminLTE->getPageLayout($pageName);
 
         $countWidgets = count($Widgets);
         $index = 0;
@@ -77,6 +77,7 @@ class AdminLTEWidgetController extends Controller
         $objectHTMLDB->list = $list;
         $objectHTMLDB->columns = $this->columns;
         $objectHTMLDB->printHTMLDBList();
+        return;
     }
 
 }

@@ -4,16 +4,14 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\HTMLDB\HTMLDB;
 
 class EmailServerController extends Controller
 {
     public $columns = [
         'id',
-        'email_type',
-        'email_format',
         'email_from_name',
         'email_reply_to',
         'email_smtp_host',
@@ -31,8 +29,6 @@ class EmailServerController extends Controller
         $list = [];
 
         $list[0]['id'] = 1;
-        $list[0]['email_type'] = 1;
-        $list[0]['email_format'] = 0;
         $list[0]['email_from_name'] = config('mail.from.name');
         $list[0]['email_reply_to'] = config('mail.from.address');
         $list[0]['email_smtp_host'] = config('mail.host');
@@ -66,32 +62,32 @@ class EmailServerController extends Controller
         if (0 == $result['errorCount'])
         {
 
-            $adminLTE = new AdminLTE();
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE = new AdminLTE();
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_FROM_NAME',
                     $this->row['email_from_name']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_FROM_ADDRESS',
                     $this->row['email_reply_to']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_HOST',
                     $this->row['email_smtp_host']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_USERNAME',
                     $this->row['email_smtp_user']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_PASSWORD',
                     $this->row['email_smtp_password']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_ENCRYPTION',
                     $this->row['email_smtp_encryption']);
 
-            $adminLTE->updateDotEnv(
+            $objectAdminLTE->updateDotEnv(
                     'MAIL_PORT',
                     $this->row['email_smtp_port']);
 
@@ -140,44 +136,42 @@ class EmailServerController extends Controller
 
             $result['lastError'] .= __('Please specify email reply to.');
         } // if ('' == $this-row['email_reply_to']) {
-    
-        if (0 != $this->row['email_type']) {
-            if ('' == $this->row['email_smtp_host']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Please specify SMTP server.');
-            } // if ('' == $this->row['email_smtp_host']) {
-            
-            if ('' == $this->row['email_smtp_user']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+        if ('' == $this->row['email_smtp_host']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Please specify SMTP user.');
-            } // if ('' == $this->row['email_smtp_user']) {
+            $result['lastError'] .= __('Please specify SMTP server.');
+        } // if ('' == $this->row['email_smtp_host']) {
+        
+        if ('' == $this->row['email_smtp_user']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-            if ('' == $this->row['email_smtp_host']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+            $result['lastError'] .= __('Please specify SMTP user.');
+        } // if ('' == $this->row['email_smtp_user']) {
 
-                $result['lastError'] .= __('Please specify SMTP password.');
-            } // if ('' == $this->row['email_smtp_host']) {
-            
-            if (0 == $this->row['email_smtp_port']) {
-                $result['errorCount']++;
-                if ($result['lastError'] != '') {
-                    $result['lastError'] .= '<br>';
-                } // if ($result['lastError'] != '') {
+        if ('' == $this->row['email_smtp_host']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
 
-                $result['lastError'] .= __('Please specify SMTP port.');
-            } // if (0 == $this->row['email_smtp_port']) {
-        }
+            $result['lastError'] .= __('Please specify SMTP password.');
+        } // if ('' == $this->row['email_smtp_host']) {
+        
+        if (0 == $this->row['email_smtp_port']) {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Please specify SMTP port.');
+        } // if (0 == $this->row['email_smtp_port']) {
 
         /* {{snippet:end_check_values}} */
 

@@ -24,11 +24,11 @@
                 </form>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
-                        <a id="buttonShowUnvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;">
-                            <span>{{ __('Show Unvisible Widgets') }}</span>
+                        <a id="buttonShowInvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;">
+                            <span>{{ __('Show Invisible Widgets') }}</span>
                         </a>
-                        <a id="buttonHideUnvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;display:none;">
-                            <span>{{ __('Hide Unvisible Widgets') }}</span>
+                        <a id="buttonHideInvisibleWidgets" class="float-left" href="javascript:void(0);" style="padding: 7px 0px;display:none;">
+                            <span>{{ __('Hide Invisible Widgets') }}</span>
                         </a>
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12 mb-10">
@@ -486,7 +486,7 @@
         class="__HTMLDBCLASS__"
         data-htmldb-priority="__PRIORITY__"
         data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/get_session/{{ $controllerName }}?_token={{ csrf_token() }}"
-        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/write_session/{{ $controllerName }}?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__MODEL_LOWERCASE__/post_session/{{ $controllerName }}?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     <div id="Delete__MODEL__HTMLDB"
@@ -807,4 +807,3 @@
 <!-- Menu Editor -->
 <script src="/assets/adminlte/js/widget_editor.js"></script>
 <script src="/assets/adminlte/js/main.js"></script>
-<script src="/assets/adminlte/js/adminlte.htmldb.js"></script>

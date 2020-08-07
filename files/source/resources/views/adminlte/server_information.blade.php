@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-initializing="1" data-page-url="server_information">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-initializing="1" data-page-url="server_information">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">

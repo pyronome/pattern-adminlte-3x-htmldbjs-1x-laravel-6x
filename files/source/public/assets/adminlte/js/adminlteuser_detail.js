@@ -2,5 +2,4 @@ $(function(){
 	initializeApplication();
     initializePage();
 });
-function initializePage() {
-}
+function initializePage() {}

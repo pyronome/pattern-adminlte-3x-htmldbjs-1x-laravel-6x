@@ -1,6 +1,6 @@
 @include('adminlte.head')
 
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-url="adminltemodeldisplaytext">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-url="adminltemodeldisplaytext">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
@@ -196,8 +196,8 @@
     <div id="ModelDisplayTextHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
-        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/post_model_display_texts?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminltemodeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
+        data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/adminltemodeldisplaytext/post_model_display_texts?_token={{ csrf_token() }}"
         data-htmldb-loader="divLoader">
     </div>
     @verbatim
@@ -216,7 +216,7 @@
     <div id="ModelRenderHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="1"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminltemodeldisplaytext/get_model_display_texts?_token={{ csrf_token() }}"
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
@@ -251,7 +251,7 @@
     <div id="PropertyListHTMLDB"
         class="htmldb-table"
         data-htmldb-priority="2"
-        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/__modeldisplaytext/get_model_property_list?_token={{ csrf_token() }}">
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/adminltemodeldisplaytext/get_model_property_list?_token={{ csrf_token() }}">
     </div>
     @verbatim
     <script type="text/html" 
@@ -288,6 +288,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/adminlte_model_display_texts.js"></script>
+    <script src="/assets/adminlte/js/adminltemodeldisplaytext.js"></script>
 </body>
 </html>

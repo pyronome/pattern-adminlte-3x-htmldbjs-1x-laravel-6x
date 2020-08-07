@@ -4,9 +4,9 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\HTMLDB\HTMLDB;
 
 class PagePermissionController extends Controller
 {
@@ -31,11 +31,11 @@ class PagePermissionController extends Controller
 
         $list = array();
 
-        $adminLTE = new AdminLTE();
+        $objectAdminLTE = new AdminLTE();
 
-        $userData = $adminLTE->getUserData();
+        $userData = $objectAdminLTE->getUserData();
 
-        $edit_permission = $adminLTE->checkUserEditPermission(
+        $edit_permission = $objectAdminLTE->checkUserEditPermission(
                 $pageName,
                 $userData);
         

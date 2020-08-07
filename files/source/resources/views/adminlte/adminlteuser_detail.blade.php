@@ -1,5 +1,5 @@
 @include('adminlte.head')
-<body class="hold-transition sidebar-mini layout-fixed text-sm" data-url-prefix="" data-page-initializing="1" data-page-url="adminlteuser">
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-initializing="1" data-page-url="adminlteuser">
     @include('adminlte.header')
         <div class="content-wrapper">
             <div class="content-header">
@@ -61,97 +61,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <input type="hidden" id="group_menu_permission" value="@{{group_menu_permission}}">
-                                            <input type="hidden" id="menu_permission" value="@{{menu_permission}}">
-                                            <label>{{ __('Menu Permissions') }}</label>
-                                            <div class="divPermissionContainer">
-                                                <table class="table table-bordered table-permission">
-                                                    <thead>
-                                                        <tr class="table-permission-header">
-                                                            <th></th>
-                                                            <th colspan="2" class="text-center border-left-grey">{{ __('Group') }}</th>
-                                                            <th colspan="3" class="text-center border-left-grey">{{ __('User') }}</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th class="text-left border-left-grey">
-                                                                {{ __('View Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Edit Permission') }}
-                                                            </th>
-                                                            <th class="text-left border-left-grey">
-                                                                {{ __('View Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Edit Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Lock Grup Permission') }}
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbodyPermission">
-                                                        @include('adminlte.adminlteuser_permissions_detail')
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <input type="hidden" id="group_service_permission" value="@{{group_service_permission}}">
-                                            <label>{{ __('Group Service Permissions') }}</label>
-                                            <div class="divPermissionContainer">
-                                                <table class="table table-bordered table-permission">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th class="text-left">
-                                                                {{ __('Get Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Post Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Delete Permission') }}
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbodyGroupServicePermission">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                                            <input type="hidden" id="service_permission" value="@{{service_permission}}">
-                                            <label>{{ __('User Service Permissions') }}</label>
-                                            <div class="divPermissionContainer">
-                                                <table class="table table-bordered table-permission">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th class="text-left">
-                                                                {{ __('Get Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Post Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Delete Permission') }}
-                                                            </th>
-                                                            <th class="text-left">
-                                                                {{ __('Lock Group Permission') }}
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbodyUserServicePermission"></tbody>
-                                                </table>        
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -168,40 +77,7 @@
         data-htmldb-read-only="1"
         data-htmldb-loader="divLoader">
     </div>
-
-    <script type="text/html" id="trGroupServicePermission">
-        <tr>
-            <td scope="row">__DIRECTORY__/__SERVICE__</td>
-            <td class="text-left">
-                <span id="groupservicepermission-__DIRECTORY__/__SERVICE__/g" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-            <td class="text-left">
-                <span id="groupservicepermission-__DIRECTORY__/__SERVICE__/p" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-            <td class="text-left">
-                <span id="groupservicepermission-__DIRECTORY__/__SERVICE__/d" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-        </tr>
-    </script>
-
-    <script type="text/html" id="trUserServicePermission">
-        <tr>
-            <td scope="row">__DIRECTORY__/__SERVICE__</td>
-            <td class="text-left">
-                <span id="userservicepermission-__DIRECTORY__/__SERVICE__/g" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-            <td class="text-left">
-                <span id="userservicepermission-__DIRECTORY__/__SERVICE__/p" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-            <td class="text-left">
-                <span id="userservicepermission-__DIRECTORY__/__SERVICE__/d" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-            <td class="text-left">
-                <span id="userservicepermission-__DIRECTORY__/__SERVICE__/l" class="spanIcon spanIconActive0"><i class="fas fa-check-circle text-green"></i></span>
-            </td>
-        </tr>
-    </script>
-
+    
     <!-- jQuery -->
     <script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -221,6 +97,6 @@
     <script src="/assets/adminlte/js/global.js"></script>
     <script src="/assets/adminlte/js/htmldb.js"></script>
     <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
-    <script src="/assets/adminlte/js/adminlte_user_detail.js"></script>
+    <script src="/assets/adminlte/js/adminlteuser_detail.js"></script>
 </body>
 </html>

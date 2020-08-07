@@ -5,9 +5,9 @@ namespace App\Http\Controllers\AdminLTE\HTMLDB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\AdminLTE;
-use App\AdminLTEUser;
-use App\HTMLDB;
+use App\AdminLTE\AdminLTE;
+use App\AdminLTE\AdminLTEUser;
+use App\HTMLDB\HTMLDB;
 
 class LoginController extends Controller
 {
@@ -47,10 +47,10 @@ class LoginController extends Controller
 
         if (0 == $result['errorCount'])
         {
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
+            $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])
                     ->first();
 
-            auth()->guard('adminlteuser')->login($adminLTEUser);
+            auth()->guard('adminlteuser')->login($objectAdminLTEUser);
 
             $landingPage = config('adminlte.landing_page');
 
@@ -106,18 +106,18 @@ class LoginController extends Controller
 
         if (0 == $result['errorCount']) {
 
-            $adminLTEUser = AdminLTEUser::where('email', $this->row['email'])
+            $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])
                     ->first();
             
             $confirmed = false;
 
-            if ($adminLTEUser != null)
+            if ($objectAdminLTEUser != null)
             {
-                if (password_verify($this->row['password'], $adminLTEUser->password))
+                if (password_verify($this->row['password'], $objectAdminLTEUser->password))
                 {
                     $confirmed = true;
                 }
-            } // if (null == $adminLTEUser)
+            } // if (null == $objectAdminLTEUser)
 
             if (!$confirmed)
             {
