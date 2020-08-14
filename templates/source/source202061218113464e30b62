@@ -1,0 +1,23 @@
+<div id="{{$../../../name/__value__/__lowercase_text__}}_{{$ ../name/__value__/__lowercase_text__}}HTMLDB"
+        class="htmldb-table"
+        data-htmldb-priority="0"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/product/get_option_list/{{$ ../name/__value__/__lowercase_text__}}?_token={{ csrf_token() }}"
+        data-htmldb-read-only="1"
+        data-htmldb-loader="divLoader">
+    </div>
+    <script {{$ ../name/__value__/__lowercase_text__}}="text/html" 
+        id="container_radio_{{$ ../name/__value__/__lowercase_text__}}Template"
+        class="htmldb-template"
+        data-htmldb-table="{{$../../../name/__value__/__lowercase_text__}}_{{$ ../name/__value__/__lowercase_text__}}HTMLDB"
+        data-htmldb-template-target="container_radio_{{$ ../name/__value__/__lowercase_text__}}">
+        <div class="icheck-primary">
+            <input {{$ ../name/__value__/__lowercase_text__}}="radio"
+                id="formObject-{{$ ../name/__value__/__lowercase_text__}}@{{id}}"
+                name="formObject-{{$ ../name/__value__/__lowercase_text__}}"
+                class="blue-style htmldb-field"
+                data-htmldb-field="{{$ ../name/__value__/__lowercase_text__}}"
+                value="@{{id}}">
+                
+            <label for="formObject-{{$ ../name/__value__/__lowercase_text__}}@{{id}}" class="detail-label">@{{title}}</label>
+        </div>
+    </script>

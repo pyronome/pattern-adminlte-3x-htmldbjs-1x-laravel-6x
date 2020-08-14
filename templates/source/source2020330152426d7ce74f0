@@ -1,5 +1,0 @@
-{{@if {{$ ../selection_properties/property_model_multiple_selection/__value__}} == '0'}}
-0;
-{{@elseif {{$ ../selection_properties/property_model_multiple_selection/__value__}} == '1'}}
-'';
-{{@endif}}

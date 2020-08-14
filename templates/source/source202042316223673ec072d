@@ -1,0 +1,11 @@
+{{@if {{$ __value__}} == "1"}}  
+        if ('' == $this->row['{{$ ../../name/__value__/__lowercase_text__}}'])
+        {
+            $result['errorCount']++;
+            if ($result['lastError'] != '') {
+                $result['lastError'] .= '<br>';
+            } // if ($result['lastError'] != '') {
+
+            $result['lastError'] .= __('Please define {{$ ../../name/__value__/__lowercase_text__}}.');
+        } // if ('' == $this->row['{{$ ../../name/__value__/__lowercase_text__}}'])
+{{@endif}}

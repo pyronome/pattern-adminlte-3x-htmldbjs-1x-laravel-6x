@@ -1,0 +1,71 @@
+@include('adminlte.head')
+<body class="sidebar-mini layout-fixed control-sidebar-slide-open {{ $customization['body'] }}" data-url-prefix="" data-page-initializing="1" data-page-url="{{$ __value__/__lowercase_text__}}">
+    @include('adminlte.header')
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">
+                                {{ __('{{$ __value__}} Detail') }}
+                            </h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/home">{{ __('Home') }}</a></li>
+                                <li class="breadcrumb-item"><a href="/{{ config('adminlte.main_folder') }}/{{$ __value__/__lowercase_text__}}/list">{{ __('{{$ __value__}} List') }}</a></li>
+                                <li class="breadcrumb-item enabled">{{ __('{{$ __value__}} Detail') }}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="content htmldb-section" data-htmldb-table="{{$ __value__}}HTMLDB">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-xs-12">
+                            <div class="card">
+                                <div class="card-header show_by_permission">
+                                    <div class="card-tools">
+                                        <a  class="btn btn-primary btn-xs btn-on-table text-white"
+                                            href="/{{ config('adminlte.main_folder') }}/{{$ __value__/__lowercase_text__}}/edit/@{{id}}">
+                                            <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span>{{ __('Edit') }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
+                                            <div class="text-muted text-sm">
+                                                {{MODEL{{$ ../__item_index__/__value__}}_VIEW_DETAIL_PROPERTIES}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    @include('adminlte.footer')
+
+    <div id="{{$ __value__}}HTMLDB"
+        class="htmldb-table"
+        data-htmldb-priority="1"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/{{$ __value__/__lowercase_text__}}/get/@{{!$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-only="1"
+        data-htmldb-loader="divLoader">
+    </div>
+    
+    <!-- AdminLTE App -->
+    <script src="/assets/adminlte/js/adminlte.js"></script>
+    <script src="/assets/adminlte/js/global.js"></script>
+    <script src="/assets/adminlte/js/htmldb.js"></script>
+    <script src="/assets/adminlte/js/adminlte.htmldb.js"></script>
+    <script src="/assets/adminlte/js/{{$ __value__/__lowercase_text__}}_detail.js"></script>
+</body>
+</html>

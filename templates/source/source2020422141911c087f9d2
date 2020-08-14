@@ -1,0 +1,34 @@
+	<div id="{{$ ../../../name/__value__}}_FileHTMLDB"
+        class="htmldb-table"
+        data-htmldb-priority="0"
+        data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/{{$ ../../../name/__value__/__lowercase_text__}}/get_files/@{{!$URL.-1}}?_token={{ csrf_token() }}"
+        data-htmldb-read-only="1"
+        data-htmldb-loader="divLoader">
+    </div>
+    <div style="display:none;">
+        <div id="dropzone-data" data-target-model="{{$ ../../../name/__value__}}" data-target-file-list="" data-media-type="" data-action="/{{ config('adminlte.main_folder') }}/media/formupload?_token={{ csrf_token() }}">
+            <form id="formUpload" name="formUpload" action="/{{ config('adminlte.main_folder') }}/media/formupload" onsubmit="return false;" enctype="multipart/form-data">
+                <div id="divDropzone" class="divDropzone row dz-clickable" style="min-height: 400px;">
+                    <div class="col s12">
+                        <ul id="ulUploadedFiles" class="ulUploadedFiles"></ul>
+                        <div id="divUploaderInputContainer">
+                            <input accept=".3gp,.7z,.ae,.ai,.avi,.bmp,.cdr,.csv,.divx,.doc,.docx,.dwg,.eps,.flv,.gif,.gz,.ico,.iso,.jpg,.jpeg,.mov,.mp3,.mp4,.mpeg,.pdf,.png,.ppt,.ps,.psd,.rar,.svg,.swf,.tar,.tiff,.txt,.wav,.zip" id="inputUploadMedia" multiple="multiple" name="inputUploadMedia" class="inputUploader" style="display:none;" type="file">
+                            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="5120000">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/html" id="ulFileListTemplate">
+        <span class="grippy"></span>
+        <a href="" target="_blank" class="aFileListItemFileURL mediaImageContainer aMediaType__MEDIA_TYPE__">
+            <img width="64" src="" alt="" class="imgFileListItemFileURL">
+        </a>
+        <a href="" target="_blank" class="aFileListItemFileURL mediaFilenameContainer text-primary aMediaType__MEDIA_TYPE__">
+            <span class="title" class="spanFileListItemFileName">__FILE_NAME__</span>
+        </a>
+        <a href="JavaScript:void(0);" class="aDeleteFileListItem secondary-content text-primary float-right">
+            <i class="ion-android-close"></i>
+        </a>
+    </script>

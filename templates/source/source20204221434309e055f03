@@ -1,0 +1,1 @@
+{{@if {{$ __value__}} != ""}} <i class="fas fa-lightbulb htmldb-hint" title="{{ __('{{$ __value__}}') }}"></i>{{@endif}}

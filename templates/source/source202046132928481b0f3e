@@ -1,7 +1,0 @@
-		if (in_array('{{$ __value__}}', $variables)) {
-            $list[$index]['{{$ __value__}}'] = $object{{$ __value__}}->{{$ __value__}};
-        } // if (in_array('{{$ __value__}}', $variables)) {
-        
-        if (in_array('{{$ __value__}}/display_text', $variables)) {
-            $list[$index]['{{$ __value__}}/display_text'] = $displayTexts['{{$ __value__}}'];
-        } // if (in_array('{{$ __value__}}/display_text', $variables)) {

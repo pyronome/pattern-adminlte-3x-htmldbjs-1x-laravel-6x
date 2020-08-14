@@ -1,4 +1,0 @@
-
-		if (empty($this->{{$ ../../name/__value__}})) {
-			$errors['{{$ ../../name/__value__}}'][] = 'REQUIRED';
-		} // if (empty($this->{{$ ../../name/__value__}})) {

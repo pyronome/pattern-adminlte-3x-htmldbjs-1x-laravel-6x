@@ -1,7 +1,0 @@
-	<div id="{{$ ../../../name/__value__}}_{{$ ../name/__value__}}HTMLDB"
-        class="htmldb-table"
-        data-htmldb-priority="0"
-        data-htmldb-read-url="<?php echo $_SPRIT['ADMINLTE_URL_PREFIX']; ?>htmldb/{{$ ../selection_properties/property_model/__value__/__lowercase_text__}}/get"
-        data-htmldb-read-only="1"
-        data-htmldb-loader="divLoader">
-    </div>

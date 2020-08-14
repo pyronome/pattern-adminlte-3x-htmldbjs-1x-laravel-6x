@@ -1,0 +1,12 @@
+                                            <div class="icheck-primary">
+                                                <input type="radio"
+                                                    id="formObject-{{$ ../../name/__value__/__lowercase_text__}}{{$ __item_index1__/__value__}}"
+                                                    name="formObject-{{$ ../../name/__value__/__lowercase_text__}}"
+                                                    class="blue-style htmldb-field"
+                                                    data-htmldb-field="{{$ ../../name/__value__/__lowercase_text__}}"
+                                                    data-htmldb-value="@{{{{$ ../../name/__value__/__lowercase_text__}}}}"
+                                                    data-htmldb-reset-value="{{$ __item_index1__/__value__}}"
+                                                    value="{{$ __item_index1__/__value__}}">
+                                                    {{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_INPUT_ATTRIBUTES_READONLY}}
+                                                <label for="formObject-{{$ ../../name/__value__/__lowercase_text__}}{{$ __item_index1__/__value__}}" class="detail-label">{{ __('{{$ title/__value__}}') }}</label>
+                                            </div>

@@ -1,1 +1,0 @@
-	$dictionary['{{$ ../../../name/__value__}}']['{{$ ../name/__value__}}'] = '{{$ ../selection_properties/property_model_display_template/__value__}}';

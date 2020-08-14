@@ -1,5 +1,0 @@
-{{@if {{$ property_type/__value__}} == 'FileList'}}
-	updateModelFileObject('{{$ ../../../name/__value__}}', $object{{$ ../../../name/__value__}}->id, '{{$ ../name/__value__}}', ${{$ ../name/__value__}});
-{{@elseif {{$ property_type/__value__}} == 'ImageList'}}
-	updateModelFileObject('{{$ ../../../name/__value__}}', $object{{$ ../../../name/__value__}}->id, '{{$ ../name/__value__}}', ${{$ ../name/__value__}});
-{{@endif}}

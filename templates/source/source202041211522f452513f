@@ -1,6 +1,0 @@
-			case '{{$ ../../name/__value__}}':
-    			return array(
-    					'',
-{{MODEL{{$ ../../../../__item_index__/__value__}}_PROPERTY{{$ ../../__item_index__/__value__}}_OPTION_TITLES}}
-				);
-    		break;

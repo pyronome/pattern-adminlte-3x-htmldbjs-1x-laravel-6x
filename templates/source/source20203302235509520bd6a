@@ -1,1 +1,0 @@
-$SQLText = str_replace('{{parameter{{$ ../../__item_index__/__value__}}}}', intval($this->{{$ ../../name/__value__}}), $SQLText);
