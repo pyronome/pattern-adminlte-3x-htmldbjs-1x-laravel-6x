@@ -24,42 +24,36 @@ class AdminLTEUserGroup extends Model
 		'widget_permission'
 	];
 
-	public static $property_list = array(
-		array(
+	public static $property_list = [
+		[
             'name' => 'id',
             'type' => 'integer'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'deleted',
             'type' => 'checkbox'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'created_at',
             'type' => 'date'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'updated_at',
             'type' => 'date'
-        ),
-		
-		array(
+        ],
+		[
             'name' => 'enabled',
             'type' => 'checkbox'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'title',
             'type' => 'text'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'widget_permission',
             'type' => 'checkbox'
-        )
-    );
+        ]
+    ];
 
 	/* {{snippet:end_properties}} */
 

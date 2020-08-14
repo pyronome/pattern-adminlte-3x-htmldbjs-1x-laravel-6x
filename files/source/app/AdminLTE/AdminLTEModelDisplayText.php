@@ -23,37 +23,32 @@ class AdminLTEModelDisplayText extends Model
 		'display_texts'
 	];
 	
-	public static $property_list = array(
-		array(
+	public static $property_list = [
+		[
             'name' => 'id',
             'type' => 'integer'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'deleted',
             'type' => 'checkbox'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'created_at',
             'type' => 'date'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'updated_at',
             'type' => 'date'
-        ),
-		
-		array(
+        ],
+		[
             'name' => 'model',
             'type' => 'text'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'display_texts',
             'type' => 'text'
-        )
-    );
+        ]
+    ];
 
 	/* {{snippet:end_properties}} */
 

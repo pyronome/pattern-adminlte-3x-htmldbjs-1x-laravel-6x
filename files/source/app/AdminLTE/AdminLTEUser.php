@@ -2,12 +2,7 @@
 
 namespace App\AdminLTE;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use PDO;
 
 /* {{snippet:begin_class}} */
 
@@ -34,62 +29,52 @@ class AdminLTEUser extends Authenticatable
         'passwordHash'
     ];
 
-    public static $property_list = array(
-        array(
+    public static $property_list = [
+        [
             'name' => 'id',
             'type' => 'integer'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'deleted',
             'type' => 'checkbox'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'created_at',
             'type' => 'date'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'updated_at',
             'type' => 'date'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'profile_img',
             'type' => 'image'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'adminlteusergroup_id',
             'type' => 'class_selection_single'
-        ),
-        
-        array(
+        ],
+        [
             'name' => 'enabled',
             'type' => 'checkbox'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'fullname',
             'type' => 'text'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'username',
             'type' => 'text'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'email',
             'type' => 'text'
-        ),
-
-        array(
+        ],
+        [
             'name' => 'password',
             'type' => 'text'
-        )
-    );
+        ]
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
