@@ -731,7 +731,7 @@ class AdminLTE
 		$Models = array();
 		$index = 0;
 
-		$path = dirname(__FILE__);
+		$path = dirname(dirname(__FILE__));
 		if (is_dir($path))
 		{ 
 			$files = scandir($path);
