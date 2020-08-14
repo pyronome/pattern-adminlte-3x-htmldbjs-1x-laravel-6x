@@ -1599,7 +1599,7 @@ class AdminLTE
 		} // for ($i=0; $i < $countModels; $i++) {
 
 		$adminLTEModelDisplayText = null;
-		$adminLTEModelDisplayTexts = \App\AdminLTEModelDisplayText::where('deleted', false)
+		$adminLTEModelDisplayTexts = \App\AdminLTE\AdminLTEModelDisplayText::where('deleted', false)
 				->get();
 
 		foreach ($adminLTEModelDisplayTexts as $adminLTEModelDisplayText)
@@ -1918,7 +1918,7 @@ class AdminLTE
 	    } // for ($j=0; $j < $countProperty; $j++) {
 		
 		$adminLTEModelDisplayText = null;
-		$adminLTEModelDisplayTexts = \App\AdminLTEModelDisplayText::where('deleted', false)->where('model', $model)->get();
+		$adminLTEModelDisplayTexts = \App\AdminLTE\AdminLTEModelDisplayText::where('deleted', false)->where('model', $model)->get();
 
 		foreach ($adminLTEModelDisplayTexts as $adminLTEModelDisplayText)
 		{

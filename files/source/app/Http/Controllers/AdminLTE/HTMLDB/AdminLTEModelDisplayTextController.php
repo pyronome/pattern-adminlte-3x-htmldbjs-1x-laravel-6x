@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\AdminLTE\AdminLTE;
-use App\AdminLTEModelDisplayText;
+use App\AdminLTE\AdminLTEModelDisplayText;
 use App\HTMLDB\HTMLDB;
 
 class AdminLTEModelDisplayTextController extends Controller
