@@ -66,6 +66,7 @@ class AdminLTEUserGroupController extends Controller
 
         $viewData['controllerName'] = $this->controllerName;
         $viewData['user'] = $objectAdminLTE->getUserData();
+        $viewData['customization'] = $objectAdminLTE->getCustomization();
 
         return view($viewName, $viewData);
 
