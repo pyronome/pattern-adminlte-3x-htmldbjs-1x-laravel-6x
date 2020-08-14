@@ -1,5 +1,5 @@
 	public function seedModelOptions() {
-    	$adminlte = new App\AdminLTE();
+    	$adminlte = new App\AdminLTE\AdminLTE();
 		
 		$option_data_list = [];
 
