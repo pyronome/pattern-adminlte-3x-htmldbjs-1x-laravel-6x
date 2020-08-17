@@ -18,9 +18,9 @@
                     : date('Y-m-d H:i');
 {{@elseif {{$ ../property_type/__value__}} == 'Selection' }}
 {{@if {{$ ../selection_properties/property_model_multiple_selection_0/__value__}} == "0"}}
-			$object{{$ ../../../name/__value__}}->{{$ __value__/__lowercase_text__}} = ('' != $this->row['{{$ __value__/__lowercase_text__}}'])
-                    ? intval($this->row['{{$ __value__/__lowercase_text__}}'])
-                    : 0;
+            if ('' != $this->row['{{$ __value__/__lowercase_text__}}']){
+                $object{{$ ../../../name/__value__}}->{{$ __value__/__lowercase_text__}} = intval($this->row['{{$ __value__/__lowercase_text__}}']);
+            }
 {{@endif}}
 {{@elseif {{$ ../property_type/__value__}} == 'FileList' }}
             ${{$ __value__/__lowercase_text__}} = $this->row['{{$ __value__/__lowercase_text__}}'];
@@ -39,9 +39,9 @@
                 $object{{$ ../../../name/__value__}}->{{$ __value__/__lowercase_text__}} = bcrypt($this->row['{{$ __value__/__lowercase_text__}}']);
             }
 {{@elseif {{$ ../property_type/__value__}} == 'Radio' }}
-            $object{{$ ../../../name/__value__}}->{{$ __value__/__lowercase_text__}} = ('' != $this->row['{{$ __value__/__lowercase_text__}}'])
-                    ? intval($this->row['{{$ __value__/__lowercase_text__}}'])
-                    : 0;
+            if ('' != $this->row['{{$ __value__/__lowercase_text__}}']){
+                $object{{$ ../../../name/__value__}}->{{$ __value__/__lowercase_text__}} = intval($this->row['{{$ __value__/__lowercase_text__}}']);
+            }
 {{@elseif {{$ ../property_type/__value__}} == 'Switch' }}
             $object{{$ ../../../name/__value__}}->{{$ __value__/__lowercase_text__}} = ('' != $this->row['{{$ __value__/__lowercase_text__}}'])
                     ? intval($this->row['{{$ __value__/__lowercase_text__}}'])

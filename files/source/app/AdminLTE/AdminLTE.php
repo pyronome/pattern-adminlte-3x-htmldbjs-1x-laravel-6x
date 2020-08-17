@@ -1229,8 +1229,10 @@ class AdminLTE
 		        } // if ($textPart[0] == $model) { // current model
 			} else if ('selection_single' == $type) {
 				$id = $objectCurrent->$property;
-				$objectExternal = AdminLTEModelOption::find($id);
-				$partResult = $objectExternal->title;
+				if($id > 0) {
+					$objectExternal = AdminLTEModelOption::find($id);
+					$partResult = $objectExternal->title;
+				}
 			} else if ('selection_multiple' == $type) {
 				$objectExternals = $objectCurrent->$property;
 
