@@ -936,6 +936,19 @@
         "append_crlf":"0"
     },
     {
+        "base":"\/project\/model_list\/model\/property_list\/property\/option_list",
+        "enabled":"1",
+        "source":"",
+        "destination":"SNIPPET_SEED_MODEL_OPTIONS",
+        "temporary":"1",
+        "skip_empty":"0",
+        "remove_whitespace":"0",
+        "append":"1",
+        "glue":"",
+        "prepend_crlf":"",
+        "append_crlf":""
+    },
+    {
         "base":"\/project\/model_list\/model\/property_list\/property\/option_list\/option",
         "enabled":"1",
         "source":"/source/source202061111362607c4cdc",
