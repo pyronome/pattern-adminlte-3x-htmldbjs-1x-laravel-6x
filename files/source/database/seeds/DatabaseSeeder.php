@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
 
-	/* {{@snippet:begin_methods}} */
+    /* {{@snippet:begin_methods}} */
 
     /**
      * Seed the application's database.
@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
 
     	// $this->call(UsersTableSeeder::class);
 
-    	/* {{@snippet:end_run_method}} */         
+    	/* {{@snippet:end_run_method}} */
+
     }
 
     /* {{@snippet:end_methods}} */
+
 }
