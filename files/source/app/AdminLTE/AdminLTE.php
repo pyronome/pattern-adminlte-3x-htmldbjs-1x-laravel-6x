@@ -1977,6 +1977,19 @@ class AdminLTE
 		} // foreach ($option_data_list as $option_data)  
 	}
 
+	public function getSortVariable($model, $v) {
+		$property = str_replace('/display_text', '', $v);
+		$displayTextDefinitions = $this->getModelDisplayTexts($model);
+		$definition = $displayTextDefinitions[$property]['value'];
+		$sort_variable = str_replace(
+				($model . '/'),
+				'',
+				$this->getStringBetween($definition, '{{', '}}')
+			);
+
+		return $sort_variable;
+	}
+
 	/* {{snippet:end_methods}} */
 }
 
