@@ -1987,6 +1987,11 @@ class AdminLTE
 				$this->getStringBetween($definition, '{{', '}}')
 			);
 
+		if(false !== strpos($sort_variable, '/')) {
+			// class selection
+			$sort_variable = $property;
+		}
+
 		return $sort_variable;
 	}
 
