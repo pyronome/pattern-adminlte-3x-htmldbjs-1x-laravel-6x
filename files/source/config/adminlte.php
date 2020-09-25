@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'project_title' => env('ADMINLTE_PROJECT_TITLE', env('APP_NAME', 'AdminLTE 3.x + HTMLDB.js 1.x + Laravel 6.x')),
+    'project_title' => env('ADMINLTE_PROJECT_TITLE', 'AdminLTE 3.x + HTMLDB.js 1.x + Laravel 6.x'),
     'brand_logo' => env('BRAND_LOGO', '/assets/adminlte/img/AdminLTELogo.png'),
     'main_folder' => env('ADMINLTE_MAIN_FOLDER', 'adminlte'),
     'landing_page' => env('ADMINLTE_LANDING_PAGE', 'home'),
