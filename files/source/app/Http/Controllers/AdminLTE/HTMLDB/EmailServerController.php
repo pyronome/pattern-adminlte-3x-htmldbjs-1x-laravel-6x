@@ -62,34 +62,22 @@ class EmailServerController extends Controller
         if (0 == $result['errorCount'])
         {
 
+            $variables = array();
+            $variables['MAIL_HOST'] = $this->row['email_smtp_host'];
+            $variables['MAIL_PORT'] = $this->row['email_smtp_port'];
+            $variables['MAIL_FROM_ADDRESS'] = $this->row['email_reply_to'];
+            $variables['MAIL_FROM_NAME'] = $this->row['email_from_name'];
+            $variables['MAIL_ENCRYPTION'] = $this->row['email_smtp_encryption'];
+            $variables['MAIL_USERNAME'] = $this->row['email_smtp_user'];
+            $variables['MAIL_PASSWORD'] = $this->row['email_smtp_password'];
+
+            
+            $root = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+            $source_path = $root . '/config/mail.template.php';
+            $destination_path = $root . '/config/mail.php';
+        
             $objectAdminLTE = new AdminLTE();
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_FROM_NAME',
-                    $this->row['email_from_name']);
-
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_FROM_ADDRESS',
-                    $this->row['email_reply_to']);
-
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_HOST',
-                    $this->row['email_smtp_host']);
-
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_USERNAME',
-                    $this->row['email_smtp_user']);
-
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_PASSWORD',
-                    $this->row['email_smtp_password']);
-
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_ENCRYPTION',
-                    $this->row['email_smtp_encryption']);
-
-            $objectAdminLTE->updateDotEnv(
-                    'MAIL_PORT',
-                    $this->row['email_smtp_port']);
+            $objectAdminLTE->writeTemplateFileToTarget($source_path, $destination_path, $variables);
 
         } // if (0 == $result['errorCount'])
 
