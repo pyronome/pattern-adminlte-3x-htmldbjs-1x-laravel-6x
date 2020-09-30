@@ -721,15 +721,46 @@ class AdminLTE
 				'AdminLTE',
 				'AdminLTELayout',
 				'AdminLTEModelDisplayText',
+				'AdminLTEModelOption',
 				'AdminLTEUserLayout',
 				'AdminLTEVariable',
-				'HTMLDB',
 				'User'
 			];
 		} // if (0 == count($exceptions))
 		
 		$Models = array();
 		$index = 0;
+
+		$path = (dirname(__FILE__));
+		if (is_dir($path))
+		{ 
+			$files = scandir($path);
+
+			foreach ($files as $file)
+			{ 
+				if (($file != ".") && ($file != ".."))
+				{
+					$current_path = ($path . "/" . $file);
+
+					if (is_dir($current_path))
+					{
+						continue;
+					} // if (is_dir($current_path))
+
+					$file_name = basename($current_path);
+
+					$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+					$extension = '.' . $extension;
+
+					$file_name = str_replace($extension, '', $file_name);
+					
+					if (!in_array($file_name, $exceptions))
+					{
+						$Models[] = $file_name;
+					} // if (!in_array($file_name, $exceptions))
+				} // if (($file != ".") && ($file != "..")) {
+			} // foreach ($files as $file) {
+		} // if (is_dir($path))
 
 		$path = dirname(dirname(__FILE__));
 		if (is_dir($path))
