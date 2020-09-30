@@ -1232,24 +1232,20 @@ class AdminLTE
 					$partResult = $objectCurrent->$display_text_Property;
 				} else {
 					$id = $objectCurrent->$property;
-					
-					if ($id > 0) {
-						$externalModel = $textPart[0];
 
-						$externalModelNameWithNamespace = ('\\App\\AdminLTE\\' . $externalModel);
+					$externalModel = $textPart[0];
 
-						if (!class_exists($externalModelNameWithNamespace)) {
-							$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
-						}
+					$externalModelNameWithNamespace = ('\\App\\AdminLTE\\' . $externalModel);
 
-						$objectExternal = new $externalModelNameWithNamespace;
-						$objectExternal = $objectExternal::find($id);
-						
-						if (null != $objectExternal) {
-							$display_text_Property = $textPart[1];
-							$partResult = $objectExternal->$display_text_Property;
-						}
+					if (!class_exists($externalModelNameWithNamespace)) {
+						$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
 					}
+
+					$objectExternal = new $externalModelNameWithNamespace;
+					$objectExternal = $objectExternal::find($id);
+
+					$display_text_Property = $textPart[1];
+					$partResult = $objectExternal->$display_text_Property;
 				}
 			} else if ('class_selection_multiple' == $type) {
 				if ($textPart[0] == $model) { // current model
@@ -1599,16 +1595,15 @@ class AdminLTE
 		return $result;
 	}
 
-	public function getModelPropertyList($object)
+	public function getModelPropertyList($model)
 	{
-		$propertyList = $object->getFillable();
+		$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
 
-		array_unshift($propertyList,
-				'id',
-				'deleted',
-				'created_at',
-				'updated_at');
+		if (!class_exists($modelNameWithNamespace)) {
+			$modelNameWithNamespace = ('\\App\\' . $model);
+		}
 
+		$propertyList = $modelNameWithNamespace::$property_list;
 		return $propertyList;
 	}
 
@@ -1621,9 +1616,9 @@ class AdminLTE
 			'AdminLTE',
 			'AdminLTELayout',
 			'AdminLTEModelDisplayText',
+			'AdminLTEModelOption',
 			'AdminLTEUserLayout',
 			'AdminLTEVariable',
-			'HTMLDB',
 			'User'
 		];
 
@@ -1634,19 +1629,11 @@ class AdminLTE
 		// get default display texts
 		for ($i=0; $i < $countModels; $i++) {
 			$model = $Models[$i];
-
-			$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
-
-			if (!class_exists($modelNameWithNamespace)) {
-				$modelNameWithNamespace = ('\\App\\' . $model);
-			}
-
-			$object = new $modelNameWithNamespace;
-			$property_list = $this->getModelPropertyList($object);
+			$property_list = $this->getModelPropertyList($model);
 			$countProperty = count($property_list);
 
 			for ($j=0; $j < $countProperty; $j++) { 
-				$property = $property_list[$j];
+				$property = $property_list[$j]['name'];
 				$displayTexts[$model][$property] = '{{' . $model . '/' . $property . '}}';
 			} // for ($j=0; $j < $countProperty; $j++) { 
 		} // for ($i=0; $i < $countModels; $i++) {

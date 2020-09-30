@@ -44,7 +44,7 @@ class AdminLTEModelDisplayTextController extends Controller
     {
         $list = array();
         
-        $exceptions = ['AdminLTE', 'AdminLTELayout', 'AdminLTEModelDisplayText', 'AdminLTEUserLayout', 'AdminLTEVariable', 'HTMLDB', 'User'];
+        $exceptions = ['AdminLTE', 'AdminLTELayout', 'AdminLTEModelDisplayText', 'AdminLTEModelOption', 'AdminLTEUserLayout', 'AdminLTEVariable', 'HTMLDB', 'User'];
 
         $objectAdminLTE = new AdminLTE();
         $Models = $objectAdminLTE->getModelList($exceptions);
