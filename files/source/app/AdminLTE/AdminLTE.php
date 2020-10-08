@@ -24,6 +24,11 @@ class AdminLTE
 
 	/* {{snippet:begin_methods}} */
 	
+	public function __construct()
+    {
+		$this->initConfig();              
+	}
+	
 	public function convertNameToFileName($strName) {
 
 	    $urlbrackets    = '\[\]\(\)';
@@ -721,46 +726,15 @@ class AdminLTE
 				'AdminLTE',
 				'AdminLTELayout',
 				'AdminLTEModelDisplayText',
-				'AdminLTEModelOption',
 				'AdminLTEUserLayout',
 				'AdminLTEVariable',
+				'HTMLDB',
 				'User'
 			];
 		} // if (0 == count($exceptions))
 		
 		$Models = array();
 		$index = 0;
-
-		$path = (dirname(__FILE__));
-		if (is_dir($path))
-		{ 
-			$files = scandir($path);
-
-			foreach ($files as $file)
-			{ 
-				if (($file != ".") && ($file != ".."))
-				{
-					$current_path = ($path . "/" . $file);
-
-					if (is_dir($current_path))
-					{
-						continue;
-					} // if (is_dir($current_path))
-
-					$file_name = basename($current_path);
-
-					$extension = pathinfo($file_name, PATHINFO_EXTENSION);
-					$extension = '.' . $extension;
-
-					$file_name = str_replace($extension, '', $file_name);
-					
-					if (!in_array($file_name, $exceptions))
-					{
-						$Models[] = $file_name;
-					} // if (!in_array($file_name, $exceptions))
-				} // if (($file != ".") && ($file != "..")) {
-			} // foreach ($files as $file) {
-		} // if (is_dir($path))
 
 		$path = dirname(dirname(__FILE__));
 		if (is_dir($path))
@@ -1063,8 +1037,8 @@ class AdminLTE
 			$strReplace = $variables[$arrKeys[$i]];
 			$strContent = str_replace($strFind, $strReplace, $strContent);
 		} // for ($i=0; $i < $lCountKeys; $i++) {
-
-		file_put_contents($destination_path, $strContent);
+		
+		Storage::disk('local')->put($destination_path, $strContent);
 	}
 	
 	public function getObjectDisplayTexts($model, $objectCurrent)
@@ -1595,15 +1569,16 @@ class AdminLTE
 		return $result;
 	}
 
-	public function getModelPropertyList($model)
+	public function getModelPropertyList($object)
 	{
-		$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
+		$propertyList = $object->getFillable();
 
-		if (!class_exists($modelNameWithNamespace)) {
-			$modelNameWithNamespace = ('\\App\\' . $model);
-		}
+		array_unshift($propertyList,
+				'id',
+				'deleted',
+				'created_at',
+				'updated_at');
 
-		$propertyList = $modelNameWithNamespace::$property_list;
 		return $propertyList;
 	}
 
@@ -1616,9 +1591,9 @@ class AdminLTE
 			'AdminLTE',
 			'AdminLTELayout',
 			'AdminLTEModelDisplayText',
-			'AdminLTEModelOption',
 			'AdminLTEUserLayout',
 			'AdminLTEVariable',
+			'HTMLDB',
 			'User'
 		];
 
@@ -1629,11 +1604,19 @@ class AdminLTE
 		// get default display texts
 		for ($i=0; $i < $countModels; $i++) {
 			$model = $Models[$i];
-			$property_list = $this->getModelPropertyList($model);
+
+			$modelNameWithNamespace = ('\\App\\AdminLTE\\' . $model);
+
+			if (!class_exists($modelNameWithNamespace)) {
+				$modelNameWithNamespace = ('\\App\\' . $model);
+			}
+
+			$object = new $modelNameWithNamespace;
+			$property_list = $this->getModelPropertyList($object);
 			$countProperty = count($property_list);
 
 			for ($j=0; $j < $countProperty; $j++) { 
-				$property = $property_list[$j]['name'];
+				$property = $property_list[$j];
 				$displayTexts[$model][$property] = '{{' . $model . '/' . $property . '}}';
 			} // for ($j=0; $j < $countProperty; $j++) { 
 		} // for ($i=0; $i < $countModels; $i++) {
@@ -2033,6 +2016,38 @@ class AdminLTE
 		return $sort_variable;
 	}
 
+	public function getBrandData()
+	{
+		if (Storage::disk('local')->exists('config/brand.json')) {
+			$brandJSON = Storage::disk('local')->get('config/brand.json');
+			$brand_data = json_decode($brandJSON, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+			$brand_data['logo'] = asset('storage/' . $brand_data['logo']);
+		} else {
+			$brandJSON = config('brand_json');
+			$brand_data = json_decode($brandJSON, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+		}
+		
+		return $brand_data;
+	}
+
+	public function initConfig() {
+
+		if (Storage::disk('local')->exists('config/adminlte.json')) {
+			$contentJSON = Storage::disk('local')->get('config/adminlte.json');
+			$data = json_decode($contentJSON, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+			foreach ($data as $key => $value) {
+				config([$key => $value]);
+			}
+		}
+
+		if (Storage::disk('local')->exists('config/mail.json')) {
+			$contentJSON = Storage::disk('local')->get('config/mail.json');
+			$data = json_decode($contentJSON, (JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS));
+			foreach ($data as $key => $value) {
+				config([$key => $value]);
+			}
+		}
+	}
 	/* {{snippet:end_methods}} */
 }
 

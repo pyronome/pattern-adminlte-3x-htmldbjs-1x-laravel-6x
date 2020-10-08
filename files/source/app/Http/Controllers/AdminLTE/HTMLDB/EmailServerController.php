@@ -63,18 +63,17 @@ class EmailServerController extends Controller
         {
 
             $variables = array();
-            $variables['MAIL_HOST'] = $this->row['email_smtp_host'];
-            $variables['MAIL_PORT'] = $this->row['email_smtp_port'];
-            $variables['MAIL_FROM_ADDRESS'] = $this->row['email_reply_to'];
-            $variables['MAIL_FROM_NAME'] = $this->row['email_from_name'];
-            $variables['MAIL_ENCRYPTION'] = $this->row['email_smtp_encryption'];
-            $variables['MAIL_USERNAME'] = $this->row['email_smtp_user'];
-            $variables['MAIL_PASSWORD'] = $this->row['email_smtp_password'];
+            $variables['mail.from.name'] = $this->row['email_from_name'];
+            $variables['mail.from.address'] = $this->row['email_reply_to'];
+            $variables['mail.host'] = $this->row['email_smtp_host'];
+            $variables['mail.username'] = $this->row['email_smtp_user'];
+            $variables['mail.password'] = $this->row['email_smtp_password'];
+            $variables['mail.encryption'] = $this->row['email_smtp_encryption'];
+            $variables['mail.port'] = $this->row['email_smtp_port'];
 
-            
             $root = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
-            $source_path = $root . '/config/mail.template.php';
-            $destination_path = $root . '/config/mail.php';
+            $source_path = $root . '/config/mail.template.json';
+            $destination_path = 'config/mail.json';
         
             $objectAdminLTE = new AdminLTE();
             $objectAdminLTE->writeTemplateFileToTarget($source_path, $destination_path, $variables);

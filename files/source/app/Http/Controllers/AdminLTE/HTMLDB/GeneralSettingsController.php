@@ -122,24 +122,22 @@ class GeneralSettingsController extends Controller
 
         if (0 == $result['errorCount'])
         {
-
             $variables = array();
-            $variables['ADMINLTE_PROJECT_TITLE'] = $this->row['project_title'];
-            $variables['ADMINLTE_MAIN_FOLDER'] = $this->row['main_folder'];
-            $variables['ADMINLTE_LANDING_PAGE'] = $this->row['landing_page'];
-            $variables['ADMINLTE_DEFAULT_LANGUAGE'] = $this->row['default_language'];
-            $variables['ADMINLTE_TIMEZONE'] = $this->row['timezone'];
-            $variables['ADMINLTE_DATE_FORMAT'] = $this->row['date_format'];
-            $variables['ADMINLTE_TIME_FORMAT'] = $this->row['time_format'];
-            $variables['ADMINLTE_YEAR_MONTH_FORMAT'] = $this->row['year_month_format'];
-            $variables['ADMINLTE_NUMBER_FORMAT'] = $this->row['number_format'];
-            $variables['ADMINLTE_GOOGLE_MAPS_API_KEY'] = $this->row['google_maps_api_key'];
-    
-            
+            $variables['adminlte.project_title'] = $this->row['project_title'];
+            $variables['adminlte.main_folder'] = $this->row['main_folder'];
+            $variables['adminlte.landing_page'] = $this->row['landing_page'];
+            $variables['adminlte.default_language'] = $this->row['default_language'];
+            $variables['adminlte.timezone'] = $this->row['timezone'];
+            $variables['adminlte.date_format'] = $this->row['date_format'];
+            $variables['adminlte.time_format'] = $this->row['time_format'];
+            $variables['adminlte.year_month_format'] = $this->row['year_month_format'];
+            $variables['adminlte.number_format'] = $this->row['number_format'];
+            $variables['adminlte.google_maps_api_key'] = $this->row['google_maps_api_key'];
+
             $root = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
-            $source_path = $root . '/config/adminlte.template.php';
-            $destination_path = $root . '/config/adminlte.php';
-           
+            $source_path = $root . '/config/adminlte.template.json';
+            $destination_path = 'config/adminlte.json';
+        
             $objectAdminLTE = new AdminLTE();
             $objectAdminLTE->writeTemplateFileToTarget($source_path, $destination_path, $variables);
         } // if (0 == $result['errorCount'])

@@ -285,6 +285,7 @@
         data-htmldb-priority="5"
         data-htmldb-read-url="/{{ config('adminlte.main_folder') }}/htmldb/general_settings/get?_token={{ csrf_token() }}"
         data-htmldb-write-url="/{{ config('adminlte.main_folder') }}/htmldb/general_settings/post?_token={{ csrf_token() }}"
+        data-htmldb-redirect="/{{ config('adminlte.main_folder') }}/general_settings"
         data-htmldb-loader="divLoader">
     </div>
     
