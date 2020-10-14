@@ -199,4 +199,6 @@ class AdminLTELayoutController extends Controller
         $objectHTMLDB->printResponseJSON();
         return;
     }
+
+    
 }
