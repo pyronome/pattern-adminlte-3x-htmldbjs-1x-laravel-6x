@@ -726,15 +726,46 @@ class AdminLTE
 				'AdminLTE',
 				'AdminLTELayout',
 				'AdminLTEModelDisplayText',
+				'AdminLTEModelOption',
 				'AdminLTEUserLayout',
 				'AdminLTEVariable',
-				'HTMLDB',
 				'User'
 			];
 		} // if (0 == count($exceptions))
 		
 		$Models = array();
 		$index = 0;
+
+		$path = (dirname(__FILE__));
+		if (is_dir($path))
+		{ 
+			$files = scandir($path);
+
+			foreach ($files as $file)
+			{ 
+				if (($file != ".") && ($file != ".."))
+				{
+					$current_path = ($path . "/" . $file);
+
+					if (is_dir($current_path))
+					{
+						continue;
+					} // if (is_dir($current_path))
+
+					$file_name = basename($current_path);
+
+					$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+					$extension = '.' . $extension;
+
+					$file_name = str_replace($extension, '', $file_name);
+					
+					if (!in_array($file_name, $exceptions))
+					{
+						$Models[] = $file_name;
+					} // if (!in_array($file_name, $exceptions))
+				} // if (($file != ".") && ($file != "..")) {
+			} // foreach ($files as $file) {
+		} // if (is_dir($path))
 
 		$path = dirname(dirname(__FILE__));
 		if (is_dir($path))
@@ -1208,20 +1239,19 @@ class AdminLTE
 					$partResult = $objectCurrent->$display_text_Property;
 				} else {
 					$id = $objectCurrent->$property;
+					if ($id > 0) {
+						$externalModel = $textPart[0];
 
-					$externalModel = $textPart[0];
+						$externalModelNameWithNamespace = $this->getModelNameWithNamespace($externalModel);
 
-					$externalModelNameWithNamespace = ('\\App\\AdminLTE\\' . $externalModel);
-
-					if (!class_exists($externalModelNameWithNamespace)) {
-						$externalModelNameWithNamespace = ('\\App\\' . $externalModel);
+						$objectExternal = new $externalModelNameWithNamespace;
+						$objectExternal = $objectExternal::find($id);
+						
+						if (null != $objectExternal) {
+							$display_text_Property = $textPart[1];
+							$partResult = $objectExternal->$display_text_Property;
+						}
 					}
-
-					$objectExternal = new $externalModelNameWithNamespace;
-					$objectExternal = $objectExternal::find($id);
-
-					$display_text_Property = $textPart[1];
-					$partResult = $objectExternal->$display_text_Property;
 				}
 			} else if ('class_selection_multiple' == $type) {
 				if ($textPart[0] == $model) { // current model
@@ -2262,6 +2292,9 @@ class AdminLTE
 
 		// Sort
 		if ('' != $sort_variable) {
+			if(false !== strpos($sort_variable, '/display_text')) {
+				$sort_variable = str_replace('/display_text', '__displaytext__', $sort_variable);
+			}
 			$query = $query->orderBy($sort_variable, $sort_direction);
 		}
 

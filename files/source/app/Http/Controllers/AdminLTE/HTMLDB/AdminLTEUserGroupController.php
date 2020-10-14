@@ -456,7 +456,7 @@ class AdminLTEUserGroupController extends Controller
 
         $graphData = array();
 
-        $objectAdminLTEUserGroups = AdminLTEUserGroup::where('deleted', false)
+        $listAdminLTEUserGroup = AdminLTEUserGroup::where('deleted', false)
                 ->where('created_at', '>=', $fromDate)
                 ->orderBy('created_at', 'asc')
                 ->get();
@@ -465,7 +465,7 @@ class AdminLTEUserGroupController extends Controller
         $index = 0;
             
         if ('daily' == $graphType) {
-            foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
+            foreach ($listAdminLTEUserGroup as $objectAdminLTEUserGroup)
             {
                 $created_at = $objectAdminLTEUserGroup->created_at->format($dateFormat);
 
@@ -476,7 +476,7 @@ class AdminLTEUserGroupController extends Controller
                 $graphData[$created_at]++;
             } // for ($i = 0; $i < $countAdminLTEUserGroup; $i++) {
         } else if ('monthly' == $graphType) {
-            foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
+            foreach ($listAdminLTEUserGroup as $objectAdminLTEUserGroup)
             {
                 $created_at = $objectAdminLTEUserGroup->created_at->format($yearMonthFormat);
 
@@ -568,11 +568,11 @@ class AdminLTEUserGroupController extends Controller
                     ? htmlspecialchars($sessionParameters['sortingColumn'])
                     : 'id';
 
-            if (false !== strpos($sortingColumn, 'DisplayText')) {
+            /* if (false !== strpos($sortingColumn, 'DisplayText')) {
                 $sortingColumn = $objectAdminLTE->getModelForeignSortColumn(
                         'AdminLTEUserGroup',
                         $sortingColumn);
-            }
+            } */
 
             $sortingAscending = isset($sessionParameters['sortingASC'])
                     ? (1 == intval($sessionParameters['sortingASC']))
@@ -619,13 +619,16 @@ class AdminLTEUserGroupController extends Controller
             } // if (in_array($defaultColumn, $variables)) {
         } // for ($i=0; $i < $countDefaultColumns; $i++) {
         
-        $objectAdminLTEUserGroups = AdminLTEUserGroup::where('deleted', false)
+        /* $listAdminLTEUserGroup = AdminLTEUserGroup::where('deleted', false)
                 ->orderBy($sortingColumn, (($sortingAscending) ? 'asc' : 'desc'))
-                ->get();
+                ->get(); */
+        $listAdminLTEUserGroup = AdminLTEUserGroup::defaultQuery($searchText, $sortingColumn, ($sortingAscending ? 'asc' : 'desc'))
+                ->paginate($bufferSize, ['*'], 'page', $page);
+
         $objectAdminLTEUserGroup = NULL;
         $index = 0;
 
-        foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
+        foreach ($listAdminLTEUserGroup as $objectAdminLTEUserGroup)
         {
             $displayTexts = $objectAdminLTE->getObjectDisplayTexts('AdminLTEUserGroup', $objectAdminLTEUserGroup);
 
@@ -684,7 +687,7 @@ class AdminLTEUserGroupController extends Controller
             } // if (in_array('title/display_text', $variables)) {
 
             $index++;
-        } // foreach ($objectAdminLTEUserGroups as $objectAdminLTEUserGroup)
+        } // foreach ($listAdminLTEUserGroup as $objectAdminLTEUserGroup)
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;

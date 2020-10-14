@@ -479,7 +479,7 @@ class AdminLTEUserController extends Controller
 
         $graphData = array();
 
-        $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
+        $listAdminLTEUser = AdminLTEUser::where('deleted', false)
                 ->where('created_at', '>=', $fromDate)
                 ->orderBy('created_at', 'asc')
                 ->get();
@@ -488,7 +488,7 @@ class AdminLTEUserController extends Controller
         $index = 0;
             
         if ('daily' == $graphType) {
-            foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+            foreach ($listAdminLTEUser as $objectAdminLTEUser)
             {
                 $created_at = $objectAdminLTEUser->created_at->format($dateFormat);
 
@@ -499,7 +499,7 @@ class AdminLTEUserController extends Controller
                 $graphData[$created_at]++;
             } // for ($i = 0; $i < $countAdminLTEUser; $i++) {
         } else if ('monthly' == $graphType) {
-            foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+            foreach ($listAdminLTEUser as $objectAdminLTEUser)
             {
                 $created_at = $objectAdminLTEUser->created_at->format($yearMonthFormat);
 
@@ -591,11 +591,11 @@ class AdminLTEUserController extends Controller
                     ? htmlspecialchars($sessionParameters['sortingColumn'])
                     : 'id';
 
-            if (false !== strpos($sortingColumn, 'DisplayText')) {
+            /* if (false !== strpos($sortingColumn, 'DisplayText')) {
                 $sortingColumn = $objectAdminLTE->getModelForeignSortColumn(
                         'AdminLTEUser',
                         $sortingColumn);
-            }
+            } */
 
             $sortingAscending = isset($sessionParameters['sortingASC'])
                     ? (1 == intval($sessionParameters['sortingASC']))
@@ -646,13 +646,13 @@ class AdminLTEUserController extends Controller
             } // if (in_array($defaultColumn, $variables)) {
         } // for ($i=0; $i < $countDefaultColumns; $i++) {
         
-        $objectAdminLTEUsers = AdminLTEUser::where('deleted', false)
-                ->orderBy($sortingColumn, (($sortingAscending) ? 'asc' : 'desc'))
-                ->get();
+        $listAdminLTEUser = AdminLTEUser::defaultQuery($searchText, $sortingColumn, ($sortingAscending ? 'asc' : 'desc'))
+            ->paginate($bufferSize, ['*'], 'page', $page);
+
         $objectAdminLTEUser = NULL;
         $index = 0;
 
-        foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+        foreach ($listAdminLTEUser as $objectAdminLTEUser)
         {
             $displayTexts = $objectAdminLTE->getObjectDisplayTexts('AdminLTEUser', $objectAdminLTEUser);
 
@@ -725,7 +725,7 @@ class AdminLTEUserController extends Controller
             } // if (in_array('email/display_text', $variables)) {
 
             $index++;
-        } // foreach ($objectAdminLTEUsers as $objectAdminLTEUser)
+        } // foreach ($listAdminLTEUser as $objectAdminLTEUser)
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
