@@ -873,9 +873,8 @@ class AdminLTEUserGroupController extends Controller
         }
         else
         {
-            $sessionParameters['pageCount'] = ceil(
-                    AdminLTEUserGroup::where('deleted', false)->count()
-                    / $sessionParameters['bufferSize']);
+            $objectList = AdminLTEUserGroup::defaultQuery($sessionParameters['searchText'], '', '')->paginate($sessionParameters['bufferSize'], ['*'], 'page', $sessionParameters['page']);
+            $sessionParameters['pageCount'] = ceil($objectList->total() / $sessionParameters['bufferSize']);
         } // if (0 == $sessionParameters['bufferSize'])
 
         $objectAdminLTE->setModelSessionParameters($request,
