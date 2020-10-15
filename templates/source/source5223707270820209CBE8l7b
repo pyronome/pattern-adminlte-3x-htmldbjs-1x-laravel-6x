@@ -444,7 +444,7 @@ class {{$ __value__}}Controller extends Controller
 
         $graphData = array();
 
-        $object{{$ __value__}}s = {{$ __value__}}::where('deleted', false)
+        $list{{$ __value__}} = {{$ __value__}}::where('deleted', false)
                 ->where('created_at', '>=', $fromDate)
                 ->orderBy('created_at', 'asc')
                 ->get();
@@ -453,7 +453,7 @@ class {{$ __value__}}Controller extends Controller
         $index = 0;
             
         if ('daily' == $graphType) {
-            foreach ($object{{$ __value__}}s as $object{{$ __value__}})
+            foreach ($list{{$ __value__}} as $object{{$ __value__}})
             {
                 $created_at = $object{{$ __value__}}->created_at->format($dateFormat);
 
@@ -464,7 +464,7 @@ class {{$ __value__}}Controller extends Controller
                 $graphData[$created_at]++;
             } // for ($i = 0; $i < $count{{$ __value__}}; $i++) {
         } else if ('monthly' == $graphType) {
-            foreach ($object{{$ __value__}}s as $object{{$ __value__}})
+            foreach ($list{{$ __value__}} as $object{{$ __value__}})
             {
                 $created_at = $object{{$ __value__}}->created_at->format($yearMonthFormat);
 
@@ -548,9 +548,9 @@ class {{$ __value__}}Controller extends Controller
                     ? htmlspecialchars($sessionParameters['sortingColumn'])
                     : 'id';
 
-            if (false !== strpos($sortingColumn, 'display_text')) {
-                $sortingColumn = $objectAdminLTE->getModelForeignSortColumn('{{$ __value__}}', $sortingColumn);
-            }
+            /*if ('id' != $sortingColumn) {
+                $sortingColumn = $objectAdminLTE->getSortVariable('{{$ __value__}}', $sortingColumn);
+            }*/
 
             $sortingAscending = isset($sessionParameters['sortingASC'])
                     ? (1 == intval($sessionParameters['sortingASC']))
@@ -589,18 +589,16 @@ class {{$ __value__}}Controller extends Controller
                 $this->columns[] = $defaultColumns[$i];
             } // if (in_array($defaultColumn, $variables)) {
         } // for ($i=0; $i < $countDefaultColumns; $i++) {
-        
-        $object{{$ __value__}}s = {{$ __value__}}::where('deleted', false)
-                ->whereLike({{$ __value__}}::$searchable, $searchText)
-                ->orderBy($sortingColumn, ($sortingAscending ? 'asc' : 'desc'))
-                ->paginate($bufferSize, ['*'], 'page', $page);
+
+		$list{{$ __value__}} = {{$ __value__}}::defaultQuery($searchText, $sortingColumn, ($sortingAscending ? 'asc' : 'desc'))
+				->paginate($bufferSize, ['*'], 'page', $page);
 
         $sessionObject = [
             'searchText' => '',
             'sortingColumn' => $sortingColumn,
             'sortingASC' => ($sortingAscending ? 1 : 0),
-            'page' => ($object{{$ __value__}}s->currentPage() - 1),
-            'pageCount' => $object{{$ __value__}}s->lastPage(),
+            'page' => ($list{{$ __value__}}->currentPage() - 1),
+            'pageCount' => $list{{$ __value__}}->lastPage(),
             'bufferSize' => $bufferSize
         ];
 
@@ -610,7 +608,7 @@ class {{$ __value__}}Controller extends Controller
         $object{{$ __value__}} = NULL;
         $index = 0;
 
-        foreach ($object{{$ __value__}}s as $object{{$ __value__}})
+        foreach ($list{{$ __value__}} as $object{{$ __value__}})
         {
             $displayTexts = $objectAdminLTE->getObjectDisplayTexts('{{$ __value__}}', $object{{$ __value__}});
 
@@ -646,7 +644,7 @@ class {{$ __value__}}Controller extends Controller
     {{MODEL{{$ ../__item_index__/__value__}}_HTMLDB_GETRECORDLIST_SERVICE_ROWS}}
 
             $index++;
-        } // foreach ($object{{$ __value__}}s as $object{{$ __value__}})
+        } // foreach ($list{{$ __value__}} as $object{{$ __value__}})
 
         $objectHTMLDB = new HTMLDB();
         $objectHTMLDB->list = $list;
@@ -816,8 +814,9 @@ class {{$ __value__}}Controller extends Controller
         }
         else
         {
-            $record_count = {{$ __value__}}::where('deleted', false)->whereLike({{$ __value__}}::$searchable, $sessionParameters['searchText'])->count();
-            $sessionParameters['pageCount'] = ceil($record_count / $sessionParameters['bufferSize']);
+			$objectList = {{$ __value__}}::defaultQuery($sessionParameters['searchText'], '', '')
+				->paginate($sessionParameters['bufferSize'], ['*'], 'page', $sessionParameters['page']);
+            $sessionParameters['pageCount'] = ceil($objectList->total() / $sessionParameters['bufferSize']);
         } // if (0 == $sessionParameters['bufferSize'])
         
         $objectAdminLTE->setModelSessionParameters($request, '{{$ __value__}}', $sessionParameters);
