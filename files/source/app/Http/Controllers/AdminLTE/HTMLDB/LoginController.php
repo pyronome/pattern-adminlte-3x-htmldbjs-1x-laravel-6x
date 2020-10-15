@@ -50,7 +50,8 @@ class LoginController extends Controller
             $objectAdminLTEUser = AdminLTEUser::where('email', $this->row['email'])
                     ->first();
 
-            auth()->guard('adminlteuser')->login($objectAdminLTEUser);
+            $remember = $this->row['remember'];
+            auth()->guard('adminlteuser')->login($objectAdminLTEUser, $remember);
 
             $landingPage = config('adminlte.landing_page');
 
