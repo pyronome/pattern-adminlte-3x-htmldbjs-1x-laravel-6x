@@ -767,7 +767,10 @@ var AdminLteHTMLDB = {
 			$(".show_by_permission").remove();
 		}
 
-		var widgetPermission = parseInt(HTMLDB.e("__pagepermissionHTMLDB_reader_td1widget_permission").innerHTML);
+		var widgetPermission = 0;
+		if (document.getElementById("widgetContainer")) {
+			widgetPermission = parseInt(HTMLDB.e("__pagepermissionHTMLDB_reader_td1widget_permission").innerHTML);
+		}
 
 		if (0 == widgetPermission) {
 			$("#buttonWidgetConfig").detach();
